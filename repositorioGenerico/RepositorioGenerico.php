@@ -1,17 +1,9 @@
 <?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of RepositorioGenerico
  *
  * @author Daniele
  */
-
-
 class RepositorioGenerico extends Conexao 
 {
        
@@ -24,11 +16,16 @@ class RepositorioGenerico extends Conexao
     {
         $sql = "INSERT INTO pessoa values(null,'";
         $sql .= $pessoa->getNome()."','";
-        $sql .= $pessoa->getCpf()."')";
+        $sql .= $pessoa->getCpf()."','";
+        $sql .= $pessoa->getEndereco()."','";
+        $sql .= $pessoa->getSenha()."','";
+        $sql .= $pessoa->getTelefone()."','";
+        $sql .= $pessoa->getLogin()."','";
+        $sql .= $pessoa->getEmail()."')";
 
         if( mysqli_query($this->getConexao(), $sql))
         {return TRUE;}
-            else
+        else
         {return FALSE;}
     }
  

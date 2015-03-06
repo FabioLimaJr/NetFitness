@@ -1,24 +1,25 @@
 <?php
 
  include('classesBasicas/Pessoa.php');
- include('classesBasicas/Aluno.php'); 
- include('classesBasicas/Professor.php');
+ //include('classesBasicas/Aluno.php'); 
+ include('classesBasicas/Instrutor.php');
+ include('classesBasicas/Coordenador.php');
  
- include('controlador/ControladorProfessor.php');
- include('controlador/ControladorAluno.php');
+ include('controlador/ControladorInstrutor.php');
+ //include('controlador/ControladorAluno.php');
 
  include('conexao/Conexao.php');
  include('interfaceRepositorio/IRepositorioGenerico.php');
  include('repositorioGenerico/RepositorioGenerico.php');
  
- include('interfaceRepositorio/IRepositorioAluno.php');
- include('repositorio/RepositorioAluno.php');
+ //include('interfaceRepositorio/IRepositorioAluno.php');
+ //include('repositorio/RepositorioAluno.php');
  
- include('interfaceRepositorio/IRepositorioProfessor.php');
- include('repositorio/RepositorioProfessor.php');
+ include('interfaceRepositorio/IRepositorioInstrutor.php');
+ include('repositorio/RepositorioInstrutor.php');
  
  include('excecoes/Excecoes.php');
- 
+ include('expressoesRegulares/ExpressoesRegulares.php');
  
  //Teste excluir professor
  /*
@@ -72,17 +73,14 @@
     echo $exc->getMessage();
  }
 */
-
-
- $professor = new Professor();
- $professor->setSalario(1500);
- $professor->setCpf('12345678912');
- $professor->setNome('Ricardo');
+$coordenador = new Coordenador(3, array(), array(), array(), "", "", "", "", "", "", "");
+$instrutor = new Instrutor(null, $coordenador, array(), array(), array(), "Marcelooooooo", "123456", "Rua teste", "123", "81-1234-1234", "marcelomlopes2@gmail.com", "Marcelo Lopes");
  
- $controladorProfessor = new ControladorProfessor();
+ 
+ $controladorInstrutor = new ControladorInstrutor();
  try 
  {
-   $professor->setIdPessoa($controladorProfessor->inserir($professor));
+   $instrutor = $controladorInstrutor->inserir($instrutor);
    echo "Professor inserido\n";
  } 
  catch (Exception $exc) 
@@ -90,24 +88,5 @@
     echo $exc->getMessage();
  }
  
- $aluno = new Aluno();
- $aluno->setProfessor($professor);
-
- $aluno->setCpf('12379fj');
- $aluno->setNome('Marcos');
- $aluno->setOpiniao('Opinião Marcos');
- 
- $controladorAluno = new ControladorAluno();
- try
- {
-   $controladorAluno->inserir($aluno);
-   echo "Aluno inserido\n";
- }
- catch (Exception $e)
- {
-     echo $e->getMessage();
- }
- 
-  
          
 ?>

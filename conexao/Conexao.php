@@ -15,10 +15,10 @@
 
 class Conexao {
  
- const nomeBanco = 'projeto';   
+ const nomeBanco = 'netfitness';   
  const nomeServidor = 'localhost';
  const nomeUsuario = 'root';
- const senhaUsuario = '123456';
+ const senhaUsuario = '';
 
  
  public $conexao;
@@ -63,7 +63,7 @@ class Conexao {
    
    if($this->getConexao()->connect_error)
    {
-       throw  new Exception (Excecoes::excecaoConexao(""));
+       throw  new Exception (Excecoes::conexaoInvalida(""));
    }
   
  }
