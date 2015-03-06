@@ -1,23 +1,15 @@
 <?php
 
  include('classesBasicas/Pessoa.php');
- include('classesBasicas/Aluno.php'); 
- include('classesBasicas/Professor.php');
  
- include('controlador/ControladorProfessor.php');
- include('controlador/ControladorAluno.php');
-
  include('conexao/Conexao.php');
  include('interfaceRepositorio/IRepositorioGenerico.php');
  include('repositorioGenerico/RepositorioGenerico.php');
  
- include('interfaceRepositorio/IRepositorioAluno.php');
- include('repositorio/RepositorioAluno.php');
+ include('interfaceRepositorio/IRepositorioSecretaria.php');
+ include('repositorio/RepositorioSecretaria.php');
  
- include('interfaceRepositorio/IRepositorioProfessor.php');
- include('repositorio/RepositorioProfessor.php');
- 
- include('excecoes/Excecoes.php');
+ //include('excecoes/Excecoes.php');
  
  
  //Teste excluir professor
@@ -73,40 +65,10 @@
  }
 */
 
+$RepositorioSecretaria = new RepositorioSecretaria();
+$RepositorioSecretaria->listar();
 
- $professor = new Professor();
- $professor->setSalario(1500);
- $professor->setCpf('12345678912');
- $professor->setNome('Ricardo');
  
- $controladorProfessor = new ControladorProfessor();
- try 
- {
-   $professor->setIdPessoa($controladorProfessor->inserir($professor));
-   echo "Professor inserido\n";
- } 
- catch (Exception $exc) 
- {
-    echo $exc->getMessage();
- }
- 
- $aluno = new Aluno();
- $aluno->setProfessor($professor);
-
- $aluno->setCpf('12379fj');
- $aluno->setNome('Marcos');
- $aluno->setOpiniao('Opinião Marcos');
- 
- $controladorAluno = new ControladorAluno();
- try
- {
-   $controladorAluno->inserir($aluno);
-   echo "Aluno inserido\n";
- }
- catch (Exception $e)
- {
-     echo $e->getMessage();
- }
  
   
          
