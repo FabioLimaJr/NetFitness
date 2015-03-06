@@ -15,8 +15,8 @@ class Instrutor extends Pessoa {
 
     //parent:: (Construtor que passa os valores dos atributos para a super classe Pessoa)
     function __construct($idInstrutor, $coordenador, $listaTreinos, $listaExamesFisicos, $listaDicas, 
-            $nome, $cpf, $endereco, $senha, $telefone, $email, $login) {
-        parent::__construct($nome, $cpf, $endereco, $senha, $telefone, $email, $login);
+            $nome, $cpf, $endereco, $senha, $telefone, $login, $email) {
+        parent::__construct($nome, $cpf, $endereco, $senha, $telefone, $login, $email);
         $this->idInstrutor = $idInstrutor;
         $this->coordenador = $coordenador;
         $this->listaTreinos = array();

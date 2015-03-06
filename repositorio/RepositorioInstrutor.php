@@ -103,25 +103,27 @@ class RepositorioInstrutor extends RepositorioGenerico implements IRepositorioIn
         }
     }
 
-    public function excluir($professor) 
+    public function excluir($instrutor) 
     {
         $sql = "USE " . $this->getNomeBanco();
 
         if (@$this->getConexao()->query($sql) === TRUE) 
         {
-            $id = $professor->getIdPessoa();
-            $sql = "DELETE FROM pessoa WHERE idPessoa IN (SELECT idAluno FROM aluno WHERE idProfessor = '" . $id . "')";
+            $id = $instrutor->getIdInstrutor();
+            //$sql = "DELETE FROM pessoa WHERE idPessoa IN (SELECT idAluno FROM aluno WHERE idInstrutor = '" . $id . "')";
 
+            $sql = "DELETE FROM instrutor where idInstrutor = '".$id."'";
+            
             if (!mysqli_query($this->getConexao(), $sql)) 
             {
-                throw new Exception(Excecoes::excecaoExcluirObjetosRelacionados("Professor: " . mysqli_error($this->getConexao())));
+                throw new Exception(Excecoes::excluirObjetosRelacionados("Instrutor: " . mysqli_error($this->getConexao())));
             }
 
             $sql = "DELETE FROM pessoa WHERE idPessoa = '" . $id . "'";
 
             if (!mysqli_query($this->getConexao(), $sql)) 
             {
-                throw new Exception(Excecoes::excecaoExcluirObjeto("Professor: " . mysqli_error($this->getConexao())));
+                throw new Exception(Excecoes::excluirObjeto("Professor: " . mysqli_error($this->getConexao())));
             }
             else 
             {
@@ -131,7 +133,7 @@ class RepositorioInstrutor extends RepositorioGenerico implements IRepositorioIn
         } 
         else 
         {
-            throw new Exception(Excecoes::excecaoSelecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
         }
 
     }

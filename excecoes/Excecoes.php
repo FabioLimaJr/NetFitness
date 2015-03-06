@@ -74,7 +74,7 @@ class Excecoes
         return $mensagem."Login Invalido,Favor Verifique o Login do Instrutor antes da inclusão\n";
     }
     
-    public static  function senhaInvalido($mensagem){
+    public static  function senhaInvalida($mensagem){
         return $mensagem."Senha Invalido,Favor Verifique a Senha do Instrutor antes da inclusão\n";
     }
     
