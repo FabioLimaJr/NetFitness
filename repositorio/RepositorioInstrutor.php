@@ -142,8 +142,46 @@ class RepositorioInstrutor extends RepositorioGenerico implements IRepositorioIn
         
     }
     
-    public function listar($instrutor) {
+    public function listar() 
+    {
+        $listaInstrutores = array();
         
+        $sql = "USE " . $this->getNomeBanco();
+    
+        
+        if($this->getConexao()->query($sql) === TRUE)
+        {
+        
+            
+            $sql = "SELECT * FROM pessoa,instrutor WHERE pessoa.idPessoa = instrutor.idInstrutor";
+            $result = mysqli_query($this->getConexao(), $sql);
+            
+            while ($row = mysqli_fetch_array($result)) 
+            {
+                
+                $instrutor = new Instrutor($row['idPessoa'], null/*coordenador*/,null/*listaTreinos*/,null/*listaExamesFisicos*/,null/*listaDicas*/,
+                $row['nome'], $row['cpf'], $row['endereco'], $row['senha'], $row['telefone'],
+                $row['email'], $row['login']);
+                
+                //echo ($row['idCoordenador']);
+                
+                $sql2 = "SELECT * FROM  pessoa WHERE idPessoa = '".$row['idCoordenador']."'";
+                $result2 = mysqli_query($this->getConexao(), $sql2); 
+                $row2 = mysqli_fetch_assoc($result2);
+                
+                $coordenador = new Coordenador(null, null/*listaInstrutores*/, null/*listaSecretarias*/, null/*listaNutricionistas*/, $row2['nome'], $row2['cpf'], 
+                                               $row2['endereco'], $row2['senha'], $row2['telefone'], $row2['email'], $row2['login']);
+                
+                $instrutor->setCoordenador($coordenador);
+                
+                array_push($listaInstrutores, $instrutor);
+                
+            }
+            
+            return($listaInstrutores);
+            
+           //Falta incluir as listas: listaTreinos, listaExamesFisicos, ListaDicas                
+         }
     }
 }
 ?>    
