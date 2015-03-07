@@ -12,7 +12,7 @@ class Fachada implements IFachada{
             
     function __construct() {
         $this->controladorAluno = new ControladorAluno();
-        $this->controladorInstrutor = new ControladorInstrudor();
+        $this->controladorInstrutor = new ControladorInstrutor();
     }
     
     public static function getInstance(){
