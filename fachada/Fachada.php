@@ -16,10 +16,10 @@ class Fachada implements IFachada{
     }
     
     public static function getInstance(){
-        if($this->instance === null){
-             $this->instance = new Fachada();
+        if(self::$instance === null){
+            self::$instance = new Fachada();
         }
-        return $this->instance;
+        return self::$instance;
     }
     
     public function alterarAluno($aluno) {
