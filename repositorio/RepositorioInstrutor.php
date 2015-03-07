@@ -69,27 +69,22 @@ class RepositorioInstrutor extends RepositorioGenerico implements IRepositorioIn
 
         if (@$this->getConexao()->query($sql) === TRUE) 
         {
-            $id = $instrutor->getIdPessoa();
 
-            $sql = "UPDATE Pessoa SET nome='" . $instrutor->getNome() . "',";
-            $sql.= "cpf='" . $instrutor->getCpf();
-            $sql.= "' WHERE idPessoa='" . $id . "'";
-
-            if (!mysqli_query($this->getConexao(), $sql)) 
+            if (!$this->alterarPessoa($instrutor)) 
             {
-                throw new Exception(Excecoes::excecaoAlterarObjeto("Instrutor: " . mysqli_error($this->getConexao())));
+                throw new Exception(Excecoes::alterarObjeto("Instrutor: " . mysqli_error($this->getConexao())));
             } 
             else 
             {
 
-                $sql = "UPDATE instrutor SET salario='" . $instrutor->getSalario();
-                $sql.= "' WHERE idInstrutor='" . $id . "'";
-                //falta alterar lista alunos
+                $sql = "UPDATE instrutor SET idCoordenador='" . $instrutor->getCoordenador()->getIdCoordenador();
+                $sql.= "' WHERE idInstrutor='" . $instrutor->getIdInstrutor() . "'";
+                //falta alterar as demais listas atreladas se for preciso
 
 
                 if (!mysqli_query($this->getConexao(), $sql)) 
                 {
-                    throw new Exception(Excecoes::excecaoAlterarObjeto("Instrutor: " . mysqli_error($this->getConexao())));
+                    throw new Exception(Excecoes::alterarObjeto("Instrutor: " . mysqli_error($this->getConexao())));
                 }
                 else
                 {
@@ -99,7 +94,7 @@ class RepositorioInstrutor extends RepositorioGenerico implements IRepositorioIn
         } 
         else 
         {
-            throw new Exception(Excecoes::excecaoSelecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
         }
     }
 
