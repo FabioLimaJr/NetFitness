@@ -62,12 +62,12 @@ class Fachada implements IFachada{
         $this->controladorInstrutor->incluir($instrutor);
     }
 
-    public function listarAluno() {
+    public function listarAlunos() {
         
         return $this->controladorAluno->listar();
     }
 
-    public function listarInstrutor() {
+    public function listarInstrutores() {
         
         return $this->controladorInstrutor->listar();
     }

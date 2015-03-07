@@ -164,7 +164,7 @@ class RepositorioInstrutor extends RepositorioGenerico implements IRepositorioIn
                 $result2 = mysqli_query($this->getConexao(), $sql2); 
                 $row2 = mysqli_fetch_assoc($result2);
                 
-                $coordenador = new Coordenador(null, null/*listaInstrutores*/, null/*listaSecretarias*/, null/*listaNutricionistas*/, $row2['nome'], $row2['cpf'], 
+                $coordenador = new Coordenador($row['idCoordenador'], null/*listaInstrutores*/, null/*listaSecretarias*/, null/*listaNutricionistas*/, $row2['nome'], $row2['cpf'], 
                                                $row2['endereco'], $row2['senha'], $row2['telefone'], $row2['email'], $row2['login']);
                 
                 $instrutor->setCoordenador($coordenador);
