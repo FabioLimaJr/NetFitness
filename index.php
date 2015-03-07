@@ -3,8 +3,10 @@
  include('classesBasicas/Pessoa.php');
  include('classesBasicas/Instrutor.php');
  include('classesBasicas/Coordenador.php');
+ include('classesBasicas/Secretaria.php');
  
  include('controlador/ControladorInstrutor.php');
+ include('controlador/ControladorSecretaria.php');
 
  include('conexao/Conexao.php');
  include('interfaceRepositorio/IRepositorioGenerico.php');
@@ -72,7 +74,7 @@
  }
 */
 //Teste Incluir Instrutor 
-$coordenador = new Coordenador(1, array(), array(), array(), "", "", "", "", "", "", "");
+/*$coordenador = new Coordenador(1, array(), array(), array(), "", "", "", "", "", "", "");
 $instrutor = new Instrutor(null, $coordenador, array(), array(), array(), "Marcelo Lopes", "123.456.654-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MarceloLopes22", "marcelo_m.lopes2@hotmail.com");
  
  $controladorInstrutor = new ControladorInstrutor();
@@ -84,7 +86,7 @@ $instrutor = new Instrutor(null, $coordenador, array(), array(), array(), "Marce
  catch (Exception $exc) 
  {
     echo $exc->getMessage();
- }
+ }*/
  /*
  $RepositorioSecretaria = new RepositorioSecretaria();
  $RepositorioSecretaria->listar();
@@ -117,7 +119,20 @@ $instrutor = new Instrutor(null, $coordenador, array(), array(), array(), "Marce
     echo $exc->getMessage();
 }*/
 
+ // Teste Incluir secretaria
+ // $idSecretaria, $nome, $cpf, $endereco, $senha, $telefone, $login, $email, $coordenador
  
+ $coordenador = new Coordenador(2, null, null, null, null, null, null, null, null, null, null);
+ $secretaria = new Secretaria(null, "maria joana da silva", "092.747.544-85", "rua de joana da silva", "myP@ssord01", "(81) 3341-6893", "majosi123", "mariajoana@hotmail.com", $coordenador);
+ //$repSecretaria = new RepositorioSecretaria();
+ $contSecretaria = new ControladorSecretaria();
  
+ if($contSecretaria->inserir($secretaria)){
+     echo 'Secretaria Inserida';
+ }else{
+     echo 'Secretaria não inserida';
+ }
+ 
+ // myP@ssord01
 ?>
 

@@ -19,7 +19,7 @@ class Secretaria extends Pessoa{
     
     public function __construct($idSecretaria, $nome, $cpf, $endereco, $senha, $telefone, $login, $email, $coordenador) {
         
-        parent::__construct($idSecretaria, $nome, $cpf, $endereco, $senha, $telefone, $login, $email);
+        parent::__construct($nome, $cpf, $endereco, $senha, $telefone, $login, $email);
         $this->coordenador = $coordenador;
         $this->idSecretaria = $idSecretaria;
         

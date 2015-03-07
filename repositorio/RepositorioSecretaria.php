@@ -31,11 +31,24 @@ class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioS
                 
                 $id = mysqli_insert_id($this->getConexao());
                 $idReturn = $id;
+                //echo $id . "\n";
+                // INSERT INTO `secretaria`(`idSecretaria`, `idCoordenador`) VALUES ([value-1],[value-2])
+                $sql = "INSERT INTO secretaria(idSecretaria, idCoordenador) VALUES(";
+                $sql.= $id . ",";
+                $sql.= $secretaria->getCoordenador()->getIdCoordenador() . ")";
                 
-                $sql = "INSERT INTO secretaria values('";
-                $sql.= $id . "','";
-                $sql.= $secretaria->getCoordenador()->getIdCoordenador() . "')";
-            }
+                if( mysqli_query($this->getConexao(), $sql)){
+                    return TRUE;
+                    
+                }else{
+                    throw new Exception(Excecoes::inserirObjeto("Secretaria: ".mysqli_error($this->getConexao())));
+                    
+                }
+                //echo $sql . "\n";
+            }else 
+                {
+                    throw new Exception(Excecoes::inserirObjeto("Secretaria: ".mysqli_error($this->getConexao())));
+                }
         }
     }
     
