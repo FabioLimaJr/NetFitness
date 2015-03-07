@@ -139,4 +139,9 @@ class ControladorInstrutor {
            
         return $this->repositorioInstrutor->excluir($instrutor);
     }
+    
+    public function listar()
+    {
+        return $this->getRepositorioInstrutor()->listar();
+    }
 }
