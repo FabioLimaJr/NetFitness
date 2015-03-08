@@ -30,6 +30,7 @@ class ControladorSecretaria {
 
     public function inserir($secretaria){
         
+        // essas validações tbm servem para o alterar.
         if(($secretaria != "") && ($secretaria != NULL))
         {
             
@@ -84,7 +85,13 @@ class ControladorSecretaria {
             throw new Exception(Excecoes::objetoNulo(""));
         }
         
-           
-        return $this->repositorioSecretaria->inserir($secretaria);
+        // se for um novo registro o id vai ser nulo ou 0, se o id for maior que 0 então o registro esta sendo alterado.
+        if($secretaria->getIdSecretaria() == null || $secretaria->getIdSecretaria() <= 0){
+            return $this->repositorioSecretaria->inserir($secretaria);
+        }else{
+            return $this->repositorioSecretaria->alterar($secretaria);
+        }
+        
     }
+    
 }
