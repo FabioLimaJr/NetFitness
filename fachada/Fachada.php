@@ -8,11 +8,13 @@ class Fachada implements IFachada{
     
     private $controladorAluno;
     private $controladorInstrutor;
+    private $controladorSecretaria;
     private static $instance = null;
             
     function __construct() {
         $this->controladorAluno = new ControladorAluno();
         $this->controladorInstrutor = new ControladorInstrutor();
+        $this->controladorSecretaria = new ControladorSecretaria();
     }
     
     public static function getInstance(){
@@ -72,4 +74,8 @@ class Fachada implements IFachada{
         return $this->controladorInstrutor->listar();
     }
 
+    public function incluirSecretaria($secretaria){
+        
+        $this->controladorSecretaria->inserir($secretaria);
+    }
 }
