@@ -3,8 +3,10 @@
  include('classesBasicas/Pessoa.php');
  include('classesBasicas/Instrutor.php');
  include('classesBasicas/Coordenador.php');
+ include('classesBasicas/Secretaria.php');
  
  include('controlador/ControladorInstrutor.php');
+ include('controlador/ControladorSecretaria.php');
 
  include('conexao/Conexao.php');
  include('interfaceRepositorio/IRepositorioGenerico.php');
@@ -18,6 +20,9 @@
  
  include('excecoes/Excecoes.php');
  include('expressoesRegulares/ExpressoesRegulares.php');
+ 
+ include('fachada/IFachada.php');
+ include('fachada/Fachada.php');
  
  //Teste excluir professor
  /*
@@ -74,6 +79,7 @@
 //Teste Incluir Instrutor 
 /*$coordenador = new Coordenador(1, array(), array(), array(), "", "", "", "", "", "", "");
   $instrutor = new Instrutor(null, $coordenador, array(), array(), array(), "Marcelo Lopes", "123.456.654-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MarceloLopes22", "marcelo_m.lopes2@hotmail.com");
+$instrutor = new Instrutor(null, $coordenador, array(), array(), array(), "Marcelo Lopes", "123.456.654-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MarceloLopes22", "marcelo_m.lopes2@hotmail.com");
  
  $controladorInstrutor = new ControladorInstrutor();
  try 
@@ -115,6 +121,21 @@
 } catch (Exception $exc) {
     echo $exc->getMessage();
 }*/
+//<<<<<<< HEAD
+
+ // Teste Incluir secretaria
+ // $idSecretaria, $nome, $cpf, $endereco, $senha, $telefone, $login, $email, $coordenador
  
+ //$coordenador = new Coordenador(2, null, null, null, null, null, null, null, null, null, null);
+ //$secretaria = new Secretaria(22, "maria da penha", "123.456.789-10", "rua de maria da penha", "myP@ssord03", "(81) 1234-5678", "mariapenha123", "mariapenha@hotmail.com", $coordenador);
+ //$secretaria = new Secretaria(26, "julianas gomess", "111.222.333-44", "rua de juliana", "myP@ssord02", "(81) 1111-2222", "juli1234", "juliana@hotmail.com", $coordenador);
+ //$repSecretaria = new RepositorioSecretaria();
+ //$contSecretaria = new ControladorSecretaria();
+ //$contSecretaria->inserir($secretaria);
+//>>>>>>> origin/master
+ 
+ //$fachada = Fachada::getInstance();
+ //$fachada->incluirSecretaria($secretaria);
+ // myP@ssord01
 ?>
 

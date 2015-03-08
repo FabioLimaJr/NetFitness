@@ -12,7 +12,8 @@ class Conexao {
  const nomeBanco = 'netfitness';   
  const nomeServidor = 'localhost';
  const nomeUsuario = 'root';
- const senhaUsuario = '';
+ //const senhaUsuario = '';
+ const senhaUsuario = '123456';
 
  
  public $conexao;

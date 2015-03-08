@@ -59,7 +59,15 @@ class ControladorAluno
             throw new Exception(Excecoes::excecaoObjetoNulo("Impossível inserir o aluno"));
         }
     }
-   
+    
+    public function listar()
+    {
+
+        return $this->getRepositorioAluno()->listar();
+
+    }
+
+
     //Completar com os demais controles
  
 }
