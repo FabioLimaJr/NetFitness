@@ -72,8 +72,8 @@
  }
 */
 //Teste Incluir Instrutor 
-$coordenador = new Coordenador(1, array(), array(), array(), "", "", "", "", "", "", "");
-$instrutor = new Instrutor(null, $coordenador, array(), array(), array(), "Marcelo Lopes", "123.456.654-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MarceloLopes22", "marcelo_m.lopes2@hotmail.com");
+/*$coordenador = new Coordenador(1, array(), array(), array(), "", "", "", "", "", "", "");
+  $instrutor = new Instrutor(null, $coordenador, array(), array(), array(), "Marcelo Lopes", "123.456.654-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MarceloLopes22", "marcelo_m.lopes2@hotmail.com");
  
  $controladorInstrutor = new ControladorInstrutor();
  try 
@@ -84,7 +84,7 @@ $instrutor = new Instrutor(null, $coordenador, array(), array(), array(), "Marce
  catch (Exception $exc) 
  {
     echo $exc->getMessage();
- }
+ }*/
  /*
  $RepositorioSecretaria = new RepositorioSecretaria();
  $RepositorioSecretaria->listar();
@@ -103,21 +103,18 @@ $instrutor = new Instrutor(null, $coordenador, array(), array(), array(), "Marce
  catch (Exception $exc) 
  {
     echo $exc->getMessage();
- }
-  
+ }*/
  
- $controladorInstrutor = new ControladorInstrutor();
+ /*$controladorInstrutor = new ControladorInstrutor();
  $coordenador = new Coordenador(1, array(), array(), array(), "", "", "", "", "", "", "");
- $instrutor = new Instrutor(6, $coordenador, array(), array(), array(), "Marcelo", "123456789", "rua teste", "123", "1111-1111", "marcelo", "marcelomlopes2@gmail.com");
- 
+ $instrutor = new Instrutor(10, $coordenador, array(), array(), array(), "Marcelo Lopes", "123.456.654-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MarceloLopes22", "marcelo_m.lopes2@hotmail.com");
+
  try {
     $controladorInstrutor->excluir($instrutor);
     echo 'instrutor excluido';
 } catch (Exception $exc) {
     echo $exc->getMessage();
 }*/
-
- 
  
 ?>
 
