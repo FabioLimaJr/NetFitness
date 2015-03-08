@@ -16,7 +16,8 @@ class Pessoa {
     private $login;
     private $email;
     
-    function __construct($nome, $cpf, $endereco, $senha, $telefone, $login,$email) {
+    function __construct($idPessoa, $nome, $cpf, $endereco, $senha, $telefone, $login,$email) {
+        $this->idPessoa = $idPessoa;
         $this->nome = $nome;
         $this->cpf = $cpf;
         $this->endereco = $endereco;
