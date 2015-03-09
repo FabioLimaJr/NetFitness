@@ -16,7 +16,7 @@ class Fachada implements IFachada{
         $this->controladorInstrutor = new ControladorInstrutor();
         $this->controladorSecretaria = new ControladorSecretaria();
     }
-    
+    //self:: serve para chamar um atributo statico da propria classe
     public static function getInstance(){
         if(self::$instance === null){
             self::$instance = new Fachada();
