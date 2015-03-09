@@ -94,4 +94,9 @@ class ControladorSecretaria {
         
     }
     
+    public function excluir($secretaria){
+        
+        $this->repositorioSecretaria->excluir($secretaria);
+        
+    }
 }
