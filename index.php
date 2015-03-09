@@ -126,16 +126,20 @@ $instrutor = new Instrutor(null, $coordenador, array(), array(), array(), "Marce
  // Teste Incluir secretaria
  // $idSecretaria, $nome, $cpf, $endereco, $senha, $telefone, $login, $email, $coordenador
  
- //$coordenador = new Coordenador(2, null, null, null, null, null, null, null, null, null, null);
+ $coordenador = new Coordenador(2, null, null, null, null, null, null, null, null, null, null);
  //$secretaria = new Secretaria(22, "maria da penha", "123.456.789-10", "rua de maria da penha", "myP@ssord03", "(81) 1234-5678", "mariapenha123", "mariapenha@hotmail.com", $coordenador);
- //$secretaria = new Secretaria(26, "julianas gomess", "111.222.333-44", "rua de juliana", "myP@ssord02", "(81) 1111-2222", "juli1234", "juliana@hotmail.com", $coordenador);
+ $secretaria = new Secretaria(23, "julianas gomess", "111.222.333-44", "rua de juliana", "myP@ssord02", "(81) 1111-2222", "juli1234", "juliana@hotmail.com", $coordenador);
  //$repSecretaria = new RepositorioSecretaria();
  //$contSecretaria = new ControladorSecretaria();
  //$contSecretaria->inserir($secretaria);
 //>>>>>>> origin/master
  
- //$fachada = Fachada::getInstance();
+ $fachada = Fachada::getInstance();
  //$fachada->incluirSecretaria($secretaria);
  // myP@ssord01
+ 
+ // Testar o excluir secretaria
+ 
+ $fachada->excluirSecretaria($secretaria);
 ?>
 

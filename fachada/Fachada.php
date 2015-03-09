@@ -87,4 +87,9 @@ class Fachada implements IFachada{
          */
         $this->controladorSecretaria->inserir($secretaria);
     }
+    
+    public function excluirSecretaria($secretaria){
+        
+        $this->controladorSecretaria->excluir($secretaria);
+    }
 }

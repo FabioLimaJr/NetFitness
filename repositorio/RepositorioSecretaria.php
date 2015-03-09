@@ -77,6 +77,20 @@ class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioS
     
     public function excluir($secretaria){
         
+        $sql = "USE " . $this->getNomeBanco();
+        
+        if(@$this->getConexao()->query($sql) === TRUE){
+            
+            $sql = "DELETE FROM pessoa WHERE pessoa.idPessoa = " . $secretaria->getIdSecretaria();
+            
+            if(!mysqli_query($this->getConexao(), $sql)){
+                throw new Exception(Excecoes::excluirObjeto("Secretaria: " . mysqli_error($this->getConexao())));
+            }else{
+                $this->fecharConexao();
+            }
+        }else{
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+        }
     }
     
     public function listar(){
