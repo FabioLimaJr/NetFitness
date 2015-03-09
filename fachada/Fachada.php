@@ -80,12 +80,8 @@ class Fachada implements IFachada{
     }
     
     public function alterarSecretaria($secretaria){
-        /*
-         * como no alterar os campos passam pelas mesmas validações do inserir
-         * eu usei o mesmo metodo para validar os campos e lá fiz uma validação
-         * para ver se é um inserir ou alterar.
-         */
-        $this->controladorSecretaria->inserir($secretaria);
+        
+        $this->controladorSecretaria->alterar($secretaria);
     }
     
     public function excluirSecretaria($secretaria){
