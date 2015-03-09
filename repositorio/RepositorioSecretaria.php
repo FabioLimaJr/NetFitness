@@ -93,43 +93,37 @@ class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioS
         }
     }
     
-    public function listar(){
+     public function listar(){
         $listaSecretarias = array();
         
         $sql = "USE " . $this->getNomeBanco();
-        
-        /*
-         * $loop = mysql_query("SELECT * FROM members")
-         or die (mysql_error());
-
-        while ($row = mysql_fetch_array($loop))
-        {
-             echo $row['id'] . " " . $row['name'] . " " . $row['email'] . " "  . $row['logged_on'] . "<br/>";
-}
-         */
         
         if(@$this->getConexao()->query($sql) === TRUE){
             
             $sql = "SELECT * FROM pessoa,secretaria WHERE pessoa.idPessoa = secretaria.idSecretaria";
             $result = mysqli_query($this->getConexao(), $sql);
             
-            while ($row = mysqli_fetch_array($result)) {
-                $secretaria = new Secretaria($row['idSecretaria'], $row['nome'],
-                        $row['cpf'], $row['endereco'], $row['senha'], $row['telefone'],
-                        $row['login'], $row['email'], NULL);
+            while ($row = mysqli_fetch_array($result)){
+                
+                $secretaria = new Secretaria($row['idPessoa'], $row['nome'], $row['cpf'], $row['endereco'], 
+                                             $row['senha'], $row['telefone'],$row['login'], $row['email'], NULL);
+                
+                $sql2 = "SELECT * FROM  pessoa WHERE idPessoa = '".$row['idCoordenador']."'";
+                $result2 = mysqli_query($this->getConexao(), $sql2); 
+                $row2 = mysqli_fetch_assoc($result2);
+                
+                $coordenador = new Coordenador($row['idCoordenador'], null/*listaInstrutores*/, null/*listaSecretarias*/, 
+                                               null/*listaNutricionistas*/, $row2['nome'], $row2['cpf'], 
+                                               $row2['endereco'], $row2['senha'], $row2['telefone'], $row2['email'], 
+                                               $row2['login']);
+                                
+                $secretaria->setCoordenador($coordenador);                
                 
                 array_push($listaSecretarias, $secretaria);
                 
             }
-            var_dump($listaSecretarias);
             
-          //(mysqli_num_rows($result) > 0 )
-                    
-                                 
-                
-            
-            
-            
+            return $listaSecretarias;                  
         }
     }
 }
