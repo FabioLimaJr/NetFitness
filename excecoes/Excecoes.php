@@ -49,31 +49,31 @@ class Excecoes
     //Metodos Referentes as Expressoes Regulares
     
     public static  function nomeInvalido($mensagem){
-        return $mensagem."Nome Invalido,Favor Verifique o Nome do Instrutor antes da inclusão\n";
+        return "Nome Invalido,Favor Verifique o Nome do ".$mensagem."antes da inclusão\n";
     }
     
     public static  function cpfInvalido($mensagem){
-        return $mensagem."Cpf Invalido,Favor Verifique o Cpf do Instrutor antes da inclusão\n";
+        return "Cpf Invalido,Favor Verifique o Cpf do ".$mensagem." antes da inclusão\n";
     }
     
     public static  function emailInvalido($mensagem){
-        return $mensagem."Email Invalido,Favor Verifique o Email do Instrutor antes da inclusão\n";
+        return "Email Invalido,Favor Verifique o Email do ".$mensagem." antes da inclusão\n";
     }
     
     public static  function telefoneInvalido($mensagem){
-        return $mensagem."Telefone Invalido,Favor Verifique o Telefone do Instrutor antes da inclusão\n";
+        return "Telefone Invalido,Favor Verifique o Telefone do ".$mensagem." antes da inclusão\n";
     }
     
     public static  function loginInvalido($mensagem){
-        return $mensagem."Login Invalido,Favor Verifique o Login do Instrutor antes da inclusão\n";
+        return "Login Invalido,Favor Verifique o Login do ".$mensagem." antes da inclusão\n";
     }
     
     public static  function senhaInvalida($mensagem){
-        return $mensagem."Senha Invalido,Favor Verifique a Senha do Instrutor antes da inclusão\n";
+        return "Senha Invalido,Favor Verifique a Senha do ".$mensagem." antes da inclusão\n";
     }
     
     public static  function enderecoInvalido($mensagem){
-        return $mensagem."Endereço Invalido,Favor Verifique o Endereço do Instrutor antes da inclusão\n";
+        return "Endereço Invalido,Favor Verifique o Endereço do ".$mensagem." antes da inclusão\n";
     }
 }
 
