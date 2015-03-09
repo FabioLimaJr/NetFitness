@@ -126,4 +126,8 @@ class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioS
             return $listaSecretarias;                  
         }
     }
+    
+    public function detalharSecretaria(){
+        
+    }
 }
