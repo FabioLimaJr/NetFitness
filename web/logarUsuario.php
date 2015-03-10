@@ -45,7 +45,14 @@
                  $pessoa = new Pessoa(null, null, null, null, $_POST['senha'], null, $_POST['login'], null);
            
                 
-                $fachada->logarCoordenador($pessoa); 
+                if($fachada->logarCoordenador($pessoa)!=null)
+                {
+                    echo ("Usuário logado: ".  get_class($pessoa));
+                }
+                else
+                {
+                    echo ("Usuário não existe");
+                }
                
             ?>
          </div>
