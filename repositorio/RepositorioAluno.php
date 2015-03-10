@@ -119,8 +119,9 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
             
             while ($row = mysqli_fetch_array($result)) 
             {
-                 $aluno = new Aluno($row['idPessoa'], $row['nome'], $row['cpf'], $row['endereco'], $row['senha'], $row['telefone'], $row['login'], $row['email'], 
-                        $row['sexo'], $row['opiniao'], null/*secretaria*/);
+                 $aluno = new Aluno($row['idPessoa'], $row['nome'], $row['cpf'], $row['endereco'], $row['senha'], $row['telefone'], 
+                                   $row['login'], $row['email'], $row['sexo'], $row['opiniao'], null/*secretaria*/, null/*musica*/, 
+                                   null/*$dieta*/, null/*$listaPagamentos*/, null/*$listaTreinos*/);
                 
                 
                 $sql2 = "SELECT * FROM  pessoa WHERE idPessoa = '".$row['idSecretaria']."'";
@@ -130,6 +131,34 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                 $secretaria = new Secretaria($row['idSecretaria'], $row2['nome'], $row2['cpf'], $row2['endereco'], $row2['senha'], $row2['telefone'], $row2['login'], $row2['email'], null/*$coordenador*/);
                 
                 $aluno->setSecretaria($secretaria);
+                
+                
+                $sql3 = "SELECT * FROM musica WHERE idMusica ='".$row['idMusica']."'";
+                $result3 = mysqli_query($this->getConexao(), $sql3); 
+                $row3 = mysqli_fetch_assoc($result3);
+                
+                $musica = new Musica($row['idMusica'], $row3['titulo'], null/*$secretaria*/);
+                
+                $aluno->setMusica($musica);
+                
+                
+                $sql4 = "SELECT * FROM dieta WHERE idAluno ='".$row['idAluno']."'";
+                $result4 = mysqli_query($this->getConexao(), $sql4); 
+                $row4 = mysqli_fetch_assoc($result4);
+                
+                $dieta = new Dieta($row4['idDieta'], $row4['descricao'], null/*$nutricionista*/, null/*aluno*/);
+                
+                $aluno->setDieta($dieta);
+                
+                
+                
+                
+                $listaPagamentos = Array();
+                
+                
+                
+                
+                
             }
         }
     }
@@ -154,7 +183,7 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
               
                 
                 $aluno = new Aluno($row['idPessoa'], $row['nome'], $row['cpf'], $row['endereco'], $row['senha'], $row['telefone'], 
-                                   $row['login'], $row['email'], $row['sexo'], $row['opiniao'], null/*secretaria*/, null/*$musica*/, 
+                                   $row['login'], $row['email'], $row['sexo'], $row['opiniao'], null/*secretaria*/, $row['idMusica'], 
                                    null/*$dieta*/, null/*$listaPagamentos*/, null/*$listaTreinos*/);
                 
                 
