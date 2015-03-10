@@ -266,32 +266,36 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                 $query = "SELECT * FROM aluno WHERE idAluno = '".$pessoa->getIdPessoa()."' LIMIT 0,1";
                 
                 $result = mysqli_query($this->getConexao(), $query);                
-                /*
-                
-                while ($row = mysqli_fetch_array($result)){
-                    
-                   $alunoReturn = new Aluno($idAluno
-                           ,$nome
-                           ,$cpf
-                           ,$endereco
-                           ,$senha
-                           ,$telefone
-                           ,$login
-                           ,$email
-                           ,$sexo
-                           ,$opiniao
-                           ,$secretaria
-                           ,$musica
-                           ,$dieta
-                           ,$listaPagamentos
-                           ,$listaTreinos)
+                                
+                while ($row = mysqli_fetch_array($result))
+                {    
+                   $alunoReturn = new Aluno($pessoa->getIdPessoa(),
+                                            $pessoa->getNome(),
+                                            $pessoa->getcpf(),
+                                            $pessoa->getEndereco(),
+                                            $pessoa->getSenha(),
+                                            $pessoa->getTelefone(),
+                                            $pessoa->getLogin(),
+                                            $pessoa->getEmail(),
+                                            $pessoa->getSexo(),
+                                            $pessoa->getOpiniao(),
+                                            $row['idSecretaria']);
+                                            /*$row['idMusica'],
+                                            $row['dieta'],
+                                            $row['listaPagamentos'],
+                                            $row['listaTreinos']);
+                                             * 
+                                             */
                     
                 }
-             */   
+                
+                return $alunoReturn;
+                
             }
             
-        }
-        
+        }else{
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+        }  
     }
 }
 ?>

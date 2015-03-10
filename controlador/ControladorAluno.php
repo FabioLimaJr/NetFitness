@@ -55,6 +55,11 @@ class ControladorAluno
     {
         return $this->getRepositorioAluno()->detalhar($aluno);
     }
+    
+    public function logar($aluno)
+    {
+        return $this->getRepositorioAluno()->logar($aluno);
+    }
  
 }
 ?>

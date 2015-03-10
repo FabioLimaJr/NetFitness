@@ -19,5 +19,6 @@ interface IFachada {
     
     public function logarCoordenador($coordenador);
     public function logarSecretaria($secretaria);
+    public function logarAluno($aluno);
     
 }

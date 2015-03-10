@@ -220,10 +220,10 @@ $aluno = new Aluno(4,"Fabio Lima junior", "111.111.111-11", "Rua da aurora", "my
  }
 */
  
- $pessoa = new Pessoa(null, null, null, null, "myP@ssord02", null, "juli1234", null);
+ $pessoa = new Pessoa(null, null, null, null, "2424", null, "igor123", null);
            
-                   $fachada = Fachada::getInstance();
-                 $usuarioLogado = $fachada->logarSecretaria($pessoa);
+                 $fachada = Fachada::getInstance();
+                 $usuarioLogado = $fachada->logarAluno($pessoa);
                  
                 if($usuarioLogado!=null)
                 {

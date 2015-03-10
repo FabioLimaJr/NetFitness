@@ -98,4 +98,8 @@ class Fachada implements IFachada{
     public function logarSecretaria($secretaria){
         return $this->controladorSecretaria->logar($secretaria);
     }
+    
+    public function logarAluno($aluno){
+        return $this->controladorAluno->logar($aluno);
+    }
 }
