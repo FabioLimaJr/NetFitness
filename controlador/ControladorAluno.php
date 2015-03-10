@@ -51,9 +51,9 @@ class ControladorAluno
         return $this->getRepositorioAluno()->listar();
     }
     
-    public function detalhar()
+    public function detalhar($aluno)
     {
-        return $this->getRepositorioAluno()->detalhar();
+        return $this->getRepositorioAluno()->detalhar($aluno);
     }
  
 }

@@ -14,6 +14,7 @@
  include('controlador/ControladorInstrutor.php');
  include('controlador/ControladorSecretaria.php');
  include('controlador/ControladorAluno.php');
+ include('controlador/ControladorCoordenador.php');
 
  include('conexao/Conexao.php');
  include('interfaceRepositorio/IRepositorioGenerico.php');
@@ -28,11 +29,19 @@
  include('interfaceRepositorio/IRepositorioAluno.php');
  include('repositorio/RepositorioAluno.php');
  
- include('interfaceRepositorio/IRepositorioAluno.php');
- include('repositorio/RepositorioAluno.php');
+ include('interfaceRepositorio/IRepositorioCoordenador.php');
+ include('repositorio/RepositorioCoordenador.php');
+
  
  include('excecoes/Excecoes.php');
  include('expressoesRegulares/ExpressoesRegulares.php');
+ 
+ $fachada = new Fachada();
+ $fachada = Fachada::getInstance();
+ 
+ $aluno = new Aluno(7, null, null, null, null, null, null, null, null, null, 
+                    null, null, null, null, null);
+ $aluno = $fachada->detalharAluno($aluno);
  
 /*
  

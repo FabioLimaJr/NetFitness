@@ -155,9 +155,39 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                 
                 $listaPagamentos = Array();
                 
+                $sql5 = "SELECT * FROM pagamento WHERE idAluno ='".$row['idAluno']."'";
+                $result5 = mysqli_query($this->getConexao(), $sql5); 
+                while ($row5 = mysqli_fetch_array($result5)) 
+                {
+                    $pagamento = new Pagamento($row5['idPagamento'], $row5['valor'], 
+                                               $row5['dataVencimento'], $row5['dataPagamento'], 
+                                               null/*$secretaria*/, null/*$aluno*/);
+                    array_push($listaPagamentos, $pagamento);
+                }
+                
+                $aluno->setListaPagamentos($listaPagamentos);
                 
                 
                 
+                var_dump($aluno);
+                /*
+                $listaTreinos = Array();
+                
+                $sql6 = "SELECT * FROM alunotreino WHERE idAluno ='".$row['idAluno']."'";
+                $result6 = mysqli_query($this->getConexao(), $sql6); 
+                while ($row6 = mysqli_fetch_array($result6)) 
+                {
+                    $idTreino = $row6['idTreino'];
+                    
+                    $sql6B = "SELECT * FROM treino WHERE idTreino = '".$idTreino."'";
+                    
+                    
+                    array_push($listaTreinos, $treino);
+                }
+                
+                $aluno->setListaTreinos($listaTreinos);
+                 */ 
+                 
                 
             }
         }
