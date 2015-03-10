@@ -44,10 +44,12 @@
                 
                  $pessoa = new Pessoa(null, null, null, null, $_POST['senha'], null, $_POST['login'], null);
            
-                
-                if($fachada->logarCoordenador($pessoa)!=null)
+                 $usuarioLogado = $fachada->logarCoordenador($pessoa);
+                 
+                if($usuarioLogado!=null)
                 {
-                    echo ("Usuário logado: ".  get_class($pessoa));
+                    echo ("Usuário logado: ".  get_class($usuarioLogado));
+                    var_dump($usuarioLogado);
                 }
                 else
                 {
