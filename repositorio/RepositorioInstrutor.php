@@ -105,8 +105,7 @@ class RepositorioInstrutor extends RepositorioGenerico implements IRepositorioIn
         if (@$this->getConexao()->query($sql) === TRUE) 
         {
             $id = $instrutor->getIdInstrutor();
-            //$sql = "DELETE FROM pessoa WHERE idPessoa IN (SELECT idAluno FROM aluno WHERE idInstrutor = '" . $id . "')";
-
+            
             $sql = "DELETE FROM instrutor where idInstrutor = '".$id."'";
             
             if (!mysqli_query($this->getConexao(), $sql)) 
@@ -118,7 +117,7 @@ class RepositorioInstrutor extends RepositorioGenerico implements IRepositorioIn
 
             if (!mysqli_query($this->getConexao(), $sql)) 
             {
-                throw new Exception(Excecoes::excluirObjeto("Professor: " . mysqli_error($this->getConexao())));
+                throw new Exception(Excecoes::excluirObjeto("Instrutor: " . mysqli_error($this->getConexao())));
             }
             else 
             {

@@ -12,10 +12,7 @@
  include('fachada/Fachada.php');
  
  include('controlador/ControladorInstrutor.php');
-
-
  include('controlador/ControladorSecretaria.php');
-
  include('controlador/ControladorAluno.php');
 
  include('conexao/Conexao.php');
@@ -109,7 +106,6 @@
 */
  /*
 //Teste Incluir Instrutor 
-$coordenador = new Coordenador(2, array(), array(), array(), "", "", "", "", "", "", "");
 $instrutor = new Instrutor(2, $coordenador, array(), array(), array(), "Marcelooo Lopes", "444.444.444-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MarceloLopes22", "marcelo_m.lopes2@hotmail.com");
 //$instrutor = new Instrutor(2, $coordenador, array(), array(), array(), "Marcelo Lopes", "123.456.654-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MarceloLopes22", "marcelo_m.lopes2@hotmail.com");
  
@@ -124,7 +120,7 @@ $instrutor = new Instrutor(2, $coordenador, array(), array(), array(), "Marceloo
  catch (Exception $exc) 
  {
     echo $exc->getMessage();
- }
+ }*/
  /*
  $RepositorioSecretaria = new RepositorioSecretaria();
  $RepositorioSecretaria->listar();
@@ -155,7 +151,11 @@ $instrutor = new Instrutor(2, $coordenador, array(), array(), array(), "Marceloo
 } catch (Exception $exc) {
     echo $exc->getMessage();
 }*//*
-//<<<<<<< HEAD
+
+ 
+$coordenador = new Coordenador(2, array(), array(), array(), "", "", "", "", "", "", "");
+ 
+ ?>
 
  // Teste Incluir secretaria
  // $idSecretaria, $nome, $cpf, $endereco, $senha, $telefone, $login, $email, $coordenador
@@ -166,7 +166,6 @@ $instrutor = new Instrutor(2, $coordenador, array(), array(), array(), "Marceloo
  //$repSecretaria = new RepositorioSecretaria();
  //$contSecretaria = new ControladorSecretaria();
  //$contSecretaria->inserir($secretaria);
-//>>>>>>> origin/master
  
  $fachada = Fachada::getInstance();
  //$fachada->incluirSecretaria($secretaria);
@@ -180,7 +179,6 @@ $instrutor = new Instrutor(2, $coordenador, array(), array(), array(), "Marceloo
 /*$coordenador = new Coordenador(2, array(), array(), array(), "qualquer","444.444.444-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MariaOsvalda22", "maria_m.osvalda2@hotmail.com"); 
 $secretaria = new Secretaria(19,"Maria Osvalda", "444.444.444-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MariaOsvalda22", "maria_m.osvalda2@hotmail.com", "feminino", "opniao teste", $coordenador);
 $aluno = new Aluno(null,"Fabio Lima", "111.111.111-11", "Rua da aurora", "myP@ssword01", "(81) 1111-1111", "FabioLima2", "fabio_l.lima2@hotmail.com", "masculino", "opniao teste", $secretaria);
-//$instrutor = new Instrutor(2, $coordenador, array(), array(), array(), "Marcelo Lopes", "123.456.654-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MarceloLopes22", "marcelo_m.lopes2@hotmail.com");
  
  $controladorAluno = new ControladorAluno();
  try 
@@ -194,18 +192,3 @@ $aluno = new Aluno(null,"Fabio Lima", "111.111.111-11", "Rua da aurora", "myP@ss
  {
     echo $exc->getMessage();
  }*/
-
-$fachada = Fachada::getInstance();
-
-$secretarias = array();
-
-$secretarias = $fachada->listarSecretarias();
-
-for($i = 0; $i < count($secretarias); $i++){
-    
-    echo 'Nome: ' . $secretarias[$i]->getNome();
-}
-
-
- ?>
-

@@ -41,62 +41,16 @@ class ControladorAluno
             throw Excecoes::alterarObjeto($aluno);
         }
     }
-
-
+    
     public function excluir($aluno){
                   
-        return $this->getRepositorioInstrutor()->excluir($aluno);
+        return $this->getRepositorioAluno()->excluir($aluno);
     }
     
     public function listar()
     {
-        return $this->getRepositorioInstrutor()->listar();
-    }
-
-    /*public function alterar($aluno) 
-    {
-        if($aluno!=NULL)
-        {
-            $this->getRepositorioAluno()->alterar($aluno);
-        }
-        else
-        {
-            throw new Exception(Excecoes::excecaoObjetoNulo("Impossível alterar o aluno"));
-        }
-    }
-
-    public function excluir($aluno) 
-    {
-        if($aluno!=NULL)
-        {
-            $this->getRepositorioAluno()->excluir($aluno);
-        }
-        else
-        {
-            throw new Exception(Excecoes::excecaoObjetoNulo("Impossível excluir o aluno"));
-        }
-    }
-
-    public function inserir($aluno) 
-    {
-        if($aluno!=NULL)
-        {
-           return $this->getRepositorioAluno()->inserir($aluno);
-        }
-        else
-        {
-            throw new Exception(Excecoes::excecaoObjetoNulo("Impossível inserir o aluno"));
-        }
-    }
-    
-    public function listar()
-    {
-
         return $this->getRepositorioAluno()->listar();
-
-    }*/
-    //Completar com os demais controles
- 
+    }
 }
 
 ?>
