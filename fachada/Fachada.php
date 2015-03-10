@@ -14,10 +14,10 @@ class Fachada implements IFachada{
     private static $instance = null;
             
     function __construct() {
-        //$this->controladorAluno = new ControladorAluno();
+        $this->controladorAluno = new ControladorAluno();
         $this->controladorInstrutor = new ControladorInstrutor();
         $this->controladorSecretaria = new ControladorSecretaria();
-         $this->controladorCoordenador = new controladorCoordenador();
+        $this->controladorCoordenador = new controladorCoordenador();
     }
     //self:: serve para chamar um atributo statico da propria classe
     public static function getInstance(){

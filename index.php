@@ -4,6 +4,9 @@
  include('classesBasicas/Pessoa.php');
  include('classesBasicas/Instrutor.php');
  include('classesBasicas/Coordenador.php');
+ include('classesBasicas/Musica.php');
+ include('classesBasicas/Dieta.php');
+ include('classesBasicas/Pagamento.php');
 
  include('classesBasicas/Aluno.php');
  include('classesBasicas/Secretaria.php');
@@ -36,7 +39,7 @@
  include('excecoes/Excecoes.php');
  include('expressoesRegulares/ExpressoesRegulares.php');
  
- $fachada = new Fachada();
+
  $fachada = Fachada::getInstance();
  
  $aluno = new Aluno(7, null, null, null, null, null, null, null, null, null, 

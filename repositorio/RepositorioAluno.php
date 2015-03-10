@@ -113,7 +113,7 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
         if($this->getConexao()->query($sql) === TRUE)
         {
             $sql = "SELECT * FROM pessoa,aluno WHERE pessoa.idPessoa = aluno.idAluno AND "
-                    ."aluno.idAluno = '".$aluno->getIdAluno."'";
+                    ."aluno.idAluno = '".$aluno->getIdPessoa()."'";
             
             $result = mysqli_query($this->getConexao(), $sql);
             
@@ -169,7 +169,7 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                 
                 
                 
-                var_dump($aluno);
+                
                 /*
                 $listaTreinos = Array();
                 
@@ -188,7 +188,7 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                 $aluno->setListaTreinos($listaTreinos);
                  */ 
                  
-                
+                var_dump($aluno);
             }
         }
     }
