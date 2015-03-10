@@ -55,8 +55,8 @@ class RepositorioGenerico extends Conexao
         
         echo $query."<br>";
         
-        $result = mysql_query($query);
-        $row = mysql_fetch_assoc( $result );
+        $result = mysqli_query($query);
+        $row = mysqli_fetch_assoc( $result );
         
         if($row=="")
         {
