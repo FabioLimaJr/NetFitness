@@ -41,6 +41,8 @@ class RepositorioCoordenador extends RepositorioGenerico implements IRepositorio
                             null/*$listaSecretarias*/, null/*$listaNutricionistas*/, $pessoa->getNome(), 
                             $pessoa->getCpf(), $pessoa->getEndereco(), $pessoa->getSenha(), $pessoa->getTelefone(),
                             $pessoa->getEmail(), $pessoa->getLogin());
+                    
+                    //falta incluir as demais listas. Vai ser feito depois que será implementado o métod detalharCoordenador
                 }    
             }
             
