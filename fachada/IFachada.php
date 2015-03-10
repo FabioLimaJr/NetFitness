@@ -26,4 +26,3 @@ interface IFachada {
     public function listarSecretaria();
     public function detalharSecretaria($secretaria);
 }
-
