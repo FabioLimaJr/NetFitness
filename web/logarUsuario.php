@@ -28,6 +28,10 @@
                 include("../interfaceRepositorio/IRepositorioCoordenador.php");
                 include("../repositorio/RepositorioCoordenador.php");
                 
+                include("../controlador/ControladorAluno.php");
+                include("../repositorio/RepositorioAluno.php");
+                include("../interfaceRepositorio/IRepositorioAluno.php");
+                
                 include("../interfaceRepositorio/IRepositorioInstrutor.php");
                 include("../repositorio/RepositorioInstrutor.php");
                 
