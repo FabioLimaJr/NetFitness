@@ -17,4 +17,10 @@ interface IFachada {
     public function listarInstrutores();
     public function detalharInstrutor($instrutor);
     
+    public function incluirSecretaria($secretaria);
+    public function alterarSecretaria($secretaria);    
+    public function excluirSecretaria($secretaria);
+    public function listarSecretaria();
+    public function detalharSecretaria($secretaria);
+    
 }

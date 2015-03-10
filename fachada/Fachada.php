@@ -92,8 +92,12 @@ class Fachada implements IFachada{
         $this->controladorSecretaria->excluir($secretaria);
     }
     
-    public function listarSecretarias(){
+    public function listarSecretaria(){
         return  $this->controladorSecretaria->listar();
+    }
+    
+    public function detalharSecretaria($secretaria) {
+        
     }
     
      public function logarCoordenador($coordenador)
