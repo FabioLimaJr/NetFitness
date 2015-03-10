@@ -269,6 +269,15 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                 
                 while ($row = mysqli_fetch_array($result)){
                     
+                   $alunoReturn = new Aluno($idAluno
+                           ,$nome
+                           ,$cpf
+                           ,$endereco
+                           ,$senha
+                           ,$telefone
+                           ,$login
+                           ,$email
+                           ,$sexo, $opiniao, $secretaria, $musica, $dieta, $listaPagamentos, $listaTreinos)
                     
                 }
                 

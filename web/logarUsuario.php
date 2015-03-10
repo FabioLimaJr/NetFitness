@@ -29,8 +29,9 @@
                 include("../repositorio/RepositorioCoordenador.php");
                 
                 include("../controlador/ControladorAluno.php");
-                include("../repositorio/RepositorioAluno.php");
                 include("../interfaceRepositorio/IRepositorioAluno.php");
+                include("../repositorio/RepositorioAluno.php");
+                
                 
                 include("../interfaceRepositorio/IRepositorioInstrutor.php");
                 include("../repositorio/RepositorioInstrutor.php");
@@ -48,7 +49,7 @@
                 
                  $pessoa = new Pessoa(null, null, null, null, $_POST['senha'], null, $_POST['login'], null);
            
-                 $usuarioLogado = $fachada->logarCoordenador($pessoa);
+                 $usuarioLogado = $fachada->logarSecretaria($pessoa);
                  
                 if($usuarioLogado!=null)
                 {

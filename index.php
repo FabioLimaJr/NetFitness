@@ -13,35 +13,33 @@
 
  include('classesBasicas/Aluno.php');
  include('classesBasicas/Secretaria.php');
- 
- include('fachada/IFachada.php');
- include('fachada/Fachada.php');
- 
- include('controlador/ControladorInstrutor.php');
- include('controlador/ControladorSecretaria.php');
- include('controlador/ControladorAluno.php');
- include('controlador/ControladorCoordenador.php');
+                 
+ include("../fachada/IFachada.php");
+ include("../fachada/Fachada.php");
 
- include('conexao/Conexao.php');
- include('interfaceRepositorio/IRepositorioGenerico.php');
- include('repositorioGenerico/RepositorioGenerico.php');
- 
- include('interfaceRepositorio/IRepositorioSecretaria.php');
- include('repositorio/RepositorioSecretaria.php');
- 
- include('interfaceRepositorio/IRepositorioInstrutor.php');
- include('repositorio/RepositorioInstrutor.php');
+ include("../interfaceRepositorio/IRepositorioGenerico.php");
 
- include('interfaceRepositorio/IRepositorioAluno.php');
- include('repositorio/RepositorioAluno.php');
- 
- include('interfaceRepositorio/IRepositorioCoordenador.php');
- include('repositorio/RepositorioCoordenador.php');
+ include("../conexao/Conexao.php");
+ include("../repositorioGenerico/RepositorioGenerico.php");
+ include("../repositorioGenerico/ConexaoBanco.php");
 
+ include("../interfaceRepositorio/IRepositorioCoordenador.php");
+ include("../repositorio/RepositorioCoordenador.php");
+
+ include("../controlador/ControladorAluno.php");
+ include("../interfaceRepositorio/IRepositorioAluno.php");
+ include("../repositorio/RepositorioAluno.php");
  
- include('excecoes/Excecoes.php');
- include('expressoesRegulares/ExpressoesRegulares.php');
- 
+ include("../interfaceRepositorio/IRepositorioInstrutor.php");
+ include("../repositorio/RepositorioInstrutor.php");
+
+ include("../interfaceRepositorio/IRepositorioSecretaria.php");
+ include("../repositorio/RepositorioSecretaria.php");
+
+ include("../controlador/controladorCoordenador.php");
+ include("../controlador/controladorInstrutor.php");
+ include("../controlador/controladorSecretaria.php");
+
 /*
  $fachada = Fachada::getInstance();
  
@@ -52,7 +50,7 @@
  var_dump($alunoRet);
  */
  
- 
+ /*
  $fachada = Fachada::getInstance();
  
  $instrutor = new Instrutor(3,null, null, null, null, null, null, null, null, null, null, null);
@@ -203,6 +201,7 @@ $coordenador = new Coordenador(2, array(), array(), array(), "", "", "", "", "",
  $fachada->excluirSecretaria($secretaria);*/
  
  //Teste Incluir Aluno 
+ /*
 $coordenador = new Coordenador(2, array(), array(), array(), "qualquer","444.444.444-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MariaOsvalda22", "maria_m.osvalda2@hotmail.com"); 
 $secretaria = new Secretaria(3,"Maria Osvalda", "444.444.444-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MariaOsvalda22", "maria_m.osvalda2@hotmail.com", "feminino", "opniao teste", $coordenador);
 $aluno = new Aluno(4,"Fabio Lima junior", "111.111.111-11", "Rua da aurora", "myP@ssword01", "(81) 1111-1111", "FabioLima2", "fabio_l.lima2@hotmail.com", "masculino", "opniao teste", $secretaria);
@@ -219,3 +218,18 @@ $aluno = new Aluno(4,"Fabio Lima junior", "111.111.111-11", "Rua da aurora", "my
  {
     echo $exc->getMessage();
  }
+*/
+ 
+ $pessoa = new Pessoa(null, null, null, null, $_POST['senha'], null, $_POST['login'], null);
+           
+                 $usuarioLogado = $fachada->logarSecretaria($pessoa);
+                 
+                if($usuarioLogado!=null)
+                {
+                    echo ("Usuário logado: ".  get_class($usuarioLogado));
+                    var_dump($usuarioLogado);
+                }
+                else
+                {
+                    echo ("Usuário não existe");
+                }
