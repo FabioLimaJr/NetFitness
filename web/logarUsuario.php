@@ -15,6 +15,7 @@
                
                 include("../classesBasicas/Pessoa.php");
                 include("../classesBasicas/Coordenador.php");
+                include("../classesBasicas/Secretaria.php");
                 
                 include("../fachada/IFachada.php");
                 include("../fachada/Fachada.php");

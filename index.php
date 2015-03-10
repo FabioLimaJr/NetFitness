@@ -14,31 +14,31 @@
  include('classesBasicas/Aluno.php');
  include('classesBasicas/Secretaria.php');
                  
- include("../fachada/IFachada.php");
- include("../fachada/Fachada.php");
+ include("fachada/IFachada.php");
+ include("fachada/Fachada.php");
 
- include("../interfaceRepositorio/IRepositorioGenerico.php");
+ include("interfaceRepositorio/IRepositorioGenerico.php");
 
- include("../conexao/Conexao.php");
- include("../repositorioGenerico/RepositorioGenerico.php");
- include("../repositorioGenerico/ConexaoBanco.php");
+ include("conexao/Conexao.php");
+ include("repositorioGenerico/RepositorioGenerico.php");
+ include("repositorioGenerico/ConexaoBanco.php");
 
- include("../interfaceRepositorio/IRepositorioCoordenador.php");
- include("../repositorio/RepositorioCoordenador.php");
+ include("interfaceRepositorio/IRepositorioCoordenador.php");
+ include("repositorio/RepositorioCoordenador.php");
 
- include("../controlador/ControladorAluno.php");
- include("../interfaceRepositorio/IRepositorioAluno.php");
- include("../repositorio/RepositorioAluno.php");
+ include("controlador/ControladorAluno.php");
+ include("interfaceRepositorio/IRepositorioAluno.php");
+ include("repositorio/RepositorioAluno.php");
  
- include("../interfaceRepositorio/IRepositorioInstrutor.php");
- include("../repositorio/RepositorioInstrutor.php");
+ include("interfaceRepositorio/IRepositorioInstrutor.php");
+ include("repositorio/RepositorioInstrutor.php");
 
- include("../interfaceRepositorio/IRepositorioSecretaria.php");
- include("../repositorio/RepositorioSecretaria.php");
+ include("interfaceRepositorio/IRepositorioSecretaria.php");
+ include("repositorio/RepositorioSecretaria.php");
 
- include("../controlador/controladorCoordenador.php");
- include("../controlador/controladorInstrutor.php");
- include("../controlador/controladorSecretaria.php");
+ include("controlador/controladorCoordenador.php");
+ include("controlador/controladorInstrutor.php");
+ include("controlador/controladorSecretaria.php");
 
 /*
  $fachada = Fachada::getInstance();
@@ -220,8 +220,9 @@ $aluno = new Aluno(4,"Fabio Lima junior", "111.111.111-11", "Rua da aurora", "my
  }
 */
  
- $pessoa = new Pessoa(null, null, null, null, $_POST['senha'], null, $_POST['login'], null);
+ $pessoa = new Pessoa(null, null, null, null, "myP@ssord02", null, "juli1234", null);
            
+                   $fachada = Fachada::getInstance();
                  $usuarioLogado = $fachada->logarSecretaria($pessoa);
                  
                 if($usuarioLogado!=null)

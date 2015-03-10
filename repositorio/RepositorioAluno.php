@@ -265,7 +265,8 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
             {
                 $query = "SELECT * FROM aluno WHERE idAluno = '".$pessoa->getIdPessoa()."' LIMIT 0,1";
                 
-                $result = mysqli_query($this->getConexao(), $query);
+                $result = mysqli_query($this->getConexao(), $query);                
+                /*
                 
                 while ($row = mysqli_fetch_array($result)){
                     
@@ -277,10 +278,16 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                            ,$telefone
                            ,$login
                            ,$email
-                           ,$sexo, $opiniao, $secretaria, $musica, $dieta, $listaPagamentos, $listaTreinos)
+                           ,$sexo
+                           ,$opiniao
+                           ,$secretaria
+                           ,$musica
+                           ,$dieta
+                           ,$listaPagamentos
+                           ,$listaTreinos)
                     
                 }
-                
+             */   
             }
             
         }
