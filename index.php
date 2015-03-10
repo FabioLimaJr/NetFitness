@@ -148,5 +148,18 @@ $instrutor = new Instrutor(2, $coordenador, array(), array(), array(), "Marceloo
  $coordenador = new Coordenador(1, null, null, null, null, null, null, null, null, null, null);
  $secretaria = new Secretaria(5, "julianas", "111.222.333-44", "rua de juliana", "myP@ssord02", "(81) 1111-2222", "juli1234", "juliana@hotmail.com", $coordenador);
  $fachada->alterarSecretaria($secretaria);*/
+ 
+$fachada = Fachada::getInstance();
+
+$secretarias = array();
+
+$secretarias = $fachada->listarSecretarias();
+
+for($i = 0; $i < count($secretarias); $i++){
+    
+    echo 'Nome: ' . $secretarias[$i]->getNome();
+}
+
+
  ?>
 
