@@ -63,7 +63,7 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                 $sql.= ", opiniao = '".$aluno->getOpiniao();
                 $sql.= "' WHERE idAluno= '".$aluno->getIdAluno();*/
                 
-                $sql = "UPDATE aluno SETsexo = '".$aluno->getSexo()."'";
+                $sql = "UPDATE aluno SET sexo = '".$aluno->getSexo()."'";
                 $sql.= ", opiniao = '".$aluno->getOpiniao()."'";
                 $sql.= "' WHERE idAluno= '".$aluno->getIdAluno()." and ". "'idSecretaria= '".$aluno->getSecretaria()->getIdSecretaria();
                 //falta alterar as demais listas atreladas se for preciso
