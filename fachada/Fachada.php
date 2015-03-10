@@ -98,7 +98,7 @@ class Fachada implements IFachada{
     
      public function logarCoordenador($coordenador)
     {
-        $this->controladorCoordenador->logar($coordenador);
+        return $this->controladorCoordenador->logar($coordenador);
     }
 }
 
