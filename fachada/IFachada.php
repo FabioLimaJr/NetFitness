@@ -17,4 +17,6 @@ interface IFachada {
     public function listarInstrutores();
     public function detalharInstrutor($instrutor);
     
+    public function logarCoordenador($coordenador);
+    
 }
