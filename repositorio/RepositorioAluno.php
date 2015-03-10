@@ -106,9 +106,25 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
         }
     }
     
-    public function detalhar($aluno) {
-        
+    public function detalhar($aluno) 
+    {
+        $sql = "USE " . $this->getNomeBanco();
+
+        if($this->getConexao()->query($sql) === TRUE)
+        {
+            $sql = "SELECT * FROM pessoa,aluno WHERE pessoa.idPessoa = aluno.idAluno AND "
+                    ."aluno.idAluno = '".$aluno->getIdAluno."'";
+            
+            $result = mysqli_query($this->getConexao(), $sql);
+            
+            while ($row = mysqli_fetch_array($result)) 
+            {
+            
+            }
+        }
     }
+    
+    
     public function listar() 
     {
         $listaAlunos = array();
