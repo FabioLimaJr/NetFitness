@@ -49,16 +49,18 @@
                     null, null, null, null, null);
  $alunoRet = $fachada->detalharAluno($aluno);
  
- var_dump($alunoRet);
- */
+ var_dump($alunoRet);*/
  
- $fachada = Fachada::getInstance();
+ //Teste Detalhar Secretaria
+ $repositorio = new RepositorioSecretaria();
  
- $instrutor = new Instrutor(3,null, null, null, null, null, null, null, null, null, null, null);
+ //$coordenador = new Coordenador($idCoordenador, $listaInstrutores, $listaSecretarias, $listaNutricionistas, $nome, $cpf, $endereco, $senha, $telefone, $email, $login)
+ $secretaria = new Secretaria(19, "", "", "", "", "", "", "", null);
+ //$instrutor = new Instrutor(3,null, null, null, null, null, null, null, null, null, null, null);
  
- $instrutorRet = $fachada->detalharInstrutor($instrutor);
+ $secretariaRet = $repositorio->detalharSecretaria($secretaria);
  
- var_dump($instrutorRet);
+ var_dump($secretariaRet);
  
 /*
  
@@ -201,7 +203,7 @@ $coordenador = new Coordenador(2, array(), array(), array(), "", "", "", "", "",
  
  $fachada->excluirSecretaria($secretaria);*/
  
- //Teste Incluir Aluno 
+/* //Teste Incluir Aluno 
 $coordenador = new Coordenador(2, array(), array(), array(), "qualquer","444.444.444-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MariaOsvalda22", "maria_m.osvalda2@hotmail.com"); 
 $secretaria = new Secretaria(3,"Maria Osvalda", "444.444.444-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MariaOsvalda22", "maria_m.osvalda2@hotmail.com", "feminino", "opniao teste", $coordenador);
 $aluno = new Aluno(4,"Fabio Lima junior", "111.111.111-11", "Rua da aurora", "myP@ssword01", "(81) 1111-1111", "FabioLima2", "fabio_l.lima2@hotmail.com", "masculino", "opniao teste", $secretaria);
@@ -217,4 +219,4 @@ $aluno = new Aluno(4,"Fabio Lima junior", "111.111.111-11", "Rua da aurora", "my
  catch (Exception $exc) 
  {
     echo $exc->getMessage();
- }
+ }*/
