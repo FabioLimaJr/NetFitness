@@ -17,7 +17,8 @@ class Aluno extends Pessoa
     private $listaTreinos; 
  
     
-    public function __construct($idAluno, $nome, $cpf, $endereco, $senha, $telefone, $login, $email, $sexo, $opiniao, $secretaria) 
+    public function __construct($idAluno, $nome, $cpf, $endereco, $senha, $telefone, $login, $email, $sexo, $opiniao, $secretaria,
+                                $musica, $dieta, $listaPagamentos, $listaTreinos) 
     {
         parent::__construct($idAluno, $nome, $cpf, $endereco, $senha, $telefone, $login, $email);
         
@@ -25,6 +26,10 @@ class Aluno extends Pessoa
         $this->setSexo($sexo);
         $this->setOpiniao($opiniao);
         $this->setSecretaria($secretaria);
+        $this->setDieta($dieta);
+        $this->setMusica($musica);
+        $this->setListaPagamentos($listaPagamentos);
+        $this->setListaTreinos($listaTreinos);
         
     }
     
