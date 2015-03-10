@@ -77,15 +77,17 @@
  }
 */
 //Teste Incluir Instrutor 
-/*$coordenador = new Coordenador(1, array(), array(), array(), "", "", "", "", "", "", "");
-  $instrutor = new Instrutor(null, $coordenador, array(), array(), array(), "Marcelo Lopes", "123.456.654-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MarceloLopes22", "marcelo_m.lopes2@hotmail.com");
-$instrutor = new Instrutor(null, $coordenador, array(), array(), array(), "Marcelo Lopes", "123.456.654-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MarceloLopes22", "marcelo_m.lopes2@hotmail.com");
+/*$coordenador = new Coordenador(2, array(), array(), array(), "", "", "", "", "", "", "");
+$instrutor = new Instrutor(2, $coordenador, array(), array(), array(), "Marcelooo Lopes", "444.444.444-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MarceloLopes22", "marcelo_m.lopes2@hotmail.com");
+//$instrutor = new Instrutor(2, $coordenador, array(), array(), array(), "Marcelo Lopes", "123.456.654-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MarceloLopes22", "marcelo_m.lopes2@hotmail.com");
  
  $controladorInstrutor = new ControladorInstrutor();
  try 
  {
-   $instrutor = $controladorInstrutor->inserir($instrutor);
-   echo "Professor inserido\n";
+   //$instrutor = $controladorInstrutor->inserir($instrutor);
+   $instrutor = $controladorInstrutor->alterar($instrutor);
+   //echo "Professor inserido\n";
+   echo "Professor alterado\n";
  } 
  catch (Exception $exc) 
  {
@@ -112,15 +114,15 @@ $instrutor = new Instrutor(null, $coordenador, array(), array(), array(), "Marce
  }*/
  
  /*$controladorInstrutor = new ControladorInstrutor();
- $coordenador = new Coordenador(1, array(), array(), array(), "", "", "", "", "", "", "");
- $instrutor = new Instrutor(10, $coordenador, array(), array(), array(), "Marcelo Lopes", "123.456.654-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MarceloLopes22", "marcelo_m.lopes2@hotmail.com");
+ $coordenador = new Coordenador(2, array(), array(), array(), "", "", "", "", "", "", "");
+ $instrutor = new Instrutor(1, $coordenador, array(), array(), array(), "Marcelo Lopes", "123.456.654-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MarceloLopes22", "marcelo_m.lopes2@hotmail.com");
 
  try {
     $controladorInstrutor->excluir($instrutor);
     echo 'instrutor excluido';
 } catch (Exception $exc) {
     echo $exc->getMessage();
-}*/
+}*//*
 //<<<<<<< HEAD
 
  // Teste Incluir secretaria
@@ -140,6 +142,24 @@ $instrutor = new Instrutor(null, $coordenador, array(), array(), array(), "Marce
  
  // Testar o excluir secretaria
  
- $fachada->excluirSecretaria($secretaria);
-?>
+ $fachada->excluirSecretaria($secretaria);*/
+ /*$fachada = Fachada::getInstance();
+ 
+ $coordenador = new Coordenador(1, null, null, null, null, null, null, null, null, null, null);
+ $secretaria = new Secretaria(5, "julianas", "111.222.333-44", "rua de juliana", "myP@ssord02", "(81) 1111-2222", "juli1234", "juliana@hotmail.com", $coordenador);
+ $fachada->alterarSecretaria($secretaria);*/
+ 
+$fachada = Fachada::getInstance();
+
+$secretarias = array();
+
+$secretarias = $fachada->listarSecretarias();
+
+for($i = 0; $i < count($secretarias); $i++){
+    
+    echo 'Nome: ' . $secretarias[$i]->getNome();
+}
+
+
+ ?>
 

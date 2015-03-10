@@ -10,14 +10,14 @@ class Fachada implements IFachada{
     private $controladorInstrutor;
     private $controladorSecretaria;
     private $controladorCoordenador;
-            
+    
     private static $instance = null;
             
     function __construct() {
         //$this->controladorAluno = new ControladorAluno();
         $this->controladorInstrutor = new ControladorInstrutor();
         $this->controladorSecretaria = new ControladorSecretaria();
-        $this->controladorCoordenador = new controladorCoordenador();
+         $this->controladorCoordenador = new controladorCoordenador();
     }
     //self:: serve para chamar um atributo statico da propria classe
     public static function getInstance(){
@@ -83,12 +83,8 @@ class Fachada implements IFachada{
     }
     
     public function alterarSecretaria($secretaria){
-        /*
-         * como no alterar os campos passam pelas mesmas validações do inserir
-         * eu usei o mesmo metodo para validar os campos e lá fiz uma validação
-         * para ver se é um inserir ou alterar.
-         */
-        $this->controladorSecretaria->inserir($secretaria);
+        
+        $this->controladorSecretaria->alterar($secretaria);
     }
     
     public function excluirSecretaria($secretaria){
@@ -96,8 +92,13 @@ class Fachada implements IFachada{
         $this->controladorSecretaria->excluir($secretaria);
     }
     
-    public function logarCoordenador($coordenador)
+    public function listarSecretarias(){
+        return  $this->controladorSecretaria->listar();
+    }
+    
+     public function logarCoordenador($coordenador)
     {
         $this->controladorCoordenador->logar($coordenador);
     }
 }
+
