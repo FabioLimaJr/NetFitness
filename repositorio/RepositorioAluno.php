@@ -4,9 +4,6 @@
  *
  * @author Daniele
  */
-
-
-
 class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
 {
     
@@ -14,19 +11,16 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
     {
        parent::__construct();
     }
-
     public function inserir($aluno){
         
         $idReturn = -1;
         $sql = "USE " . $this->getNomeBanco();
-
         if (@$this->getConexao()->query($sql) === TRUE) 
         {
             if ($this->inserirPessoa($aluno)) 
             {
                 $id = mysqli_insert_id($this->getConexao());
                 $idReturn = $id;
-
                 $sql = "INSERT INTO aluno values('";
                 $sql.= $id ."','";
                 $sql.= $aluno->getSexo()."','";
@@ -54,61 +48,16 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
         {
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error).")");
         }
-
-    }  
-        
-        /*if (@$this->getConexao()->query($sql) === TRUE) 
-        {
-            $id = $aluno->getProfessor()->getIdPessoa();
-            $sql = "SELECT idProfessor FROM professor WHERE idProfessor = '$id'";
-            $result = mysqli_query($this->getConexao(), $sql);
-
-            if (mysqli_num_rows($result) > 0) 
-            {
-                $id = mysqli_insert_id($this->getConexao());
-                $idReturn = $id;
-
-                $sql = "INSERT INTO aluno values('";
-                $sql.= $id ."','";
-                $sql.= $aluno->getSexo()."','";
-                $sql.= $aluno->getOpiniao()."','";                
-                $sql.= $aluno->getSecretaria()->getIdSecretaria()."')";
-                
-                if (mysqli_query($this->getConexao(), $sql)) 
-                {
-                    $this->fecharConexao();
-                    $aluno->setIdAluno($idReturn);
-                    return $aluno;
-                    //return $idReturn;
-                } 
-                else 
-                {
-                    throw new Exception(Excecoes::inserirObjeto("Aluno: ".mysqli_error($this->getConexao())));
-                }
-            } 
-            else 
-            {
-                throw new Exception(Excecoes::inserirObjeto("Aluno: ".mysqli_error($this->getConexao())));
-            }
-        } 
-        else 
-        {
-            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error).")");
-        }
-
     }
     
     public function alterar($aluno){
         
         $sql = "USE " . $this->getNomeBanco();
-
         if (@$this->getConexao()->query($sql) === TRUE){
-
             if (!$this->alterarPessoa($aluno)){
                 throw new Exception(Excecoes::alterarObjeto("Aluno: " . mysqli_error($this->getConexao())));
             } 
             else{
-
                 /*$sql = "UPDATE aluno SET idSecretaria= '".$aluno->getSecretaria()->getIdSecretaria() . "'";
                 $sql.= ", sexo = '".$aluno->getSexo();
                 $sql.= ", opiniao = '".$aluno->getOpiniao();
@@ -117,7 +66,6 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                 $sql = "UPDATE aluno SETsexo = '".$aluno->getSexo()."'";
                 $sql.= ", opiniao = '".$aluno->getOpiniao()."'";
                 $sql.= "' WHERE idAluno= '".$aluno->getIdAluno()." and ". "'idSecretaria= '".$aluno->getSecretaria()->getIdSecretaria();
-
                 //falta alterar as demais listas atreladas se for preciso
                 
                 if (!mysqli_query($this->getConexao(), $sql)){
@@ -136,20 +84,16 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
     public function excluir($aluno){
         
         $sql = "USE " . $this->getNomeBanco();
-
         if (@$this->getConexao()->query($sql) === TRUE){
             
             $id = $aluno->getIdAluno();
             //$sql = "DELETE FROM pessoa WHERE idPessoa IN (SELECT idAluno FROM aluno WHERE idInstrutor = '" . $id . "')";
-
             $sql = "DELETE FROM aluno where idAluno = '".$id."'";
             
             if (!mysqli_query($this->getConexao(), $sql)){
                 throw new Exception(Excecoes::excluirObjetosRelacionados("Aluno: " . mysqli_error($this->getConexao())));
             }
-
             $sql = "DELETE FROM pessoa WHERE idPessoa = '" . $id . "'";
-
             if (!mysqli_query($this->getConexao(), $sql)){
                 throw new Exception(Excecoes::excluirObjeto("Aluno: " . mysqli_error($this->getConexao())));
             }
@@ -165,7 +109,6 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
     public function detalhar($aluno) {
         
     }
-
     public function listar() 
     {
         $listaAlunos = array();
@@ -204,7 +147,5 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
            //Falta incluir as listas: listaTreinos, mas é preciso ligar no banco a tabela aluno com a tabela treino           
          }
     }
-
 }
-
 ?>
