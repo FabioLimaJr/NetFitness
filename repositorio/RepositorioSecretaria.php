@@ -133,7 +133,7 @@ class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioS
         
     }
     // esse metodo retorna nulo caso o usuario encontrado em pessoa n seja uma secretaria
-    public function logar($secretaria){
+    public function logar($usuario){
         
         $secretariaReturn = null;
         
@@ -141,9 +141,9 @@ class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioS
         
         if(@$this->getConexao()->query($sql) === TRUE){
         
-            $secretaria = $this->logarPessoa($secretaria);
+            $pessoa = $this->logarPessoa($usuario);
             
-            if($secretaria == NULL){
+            if($pessoa == NULL){
                 
                 throw new Exception(Excecoes::usuarioInvalido());
                 
@@ -152,7 +152,7 @@ class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioS
                 * por enquanto coloquei apenas os campos da secretaria, se for preciso dps coloca para puxar o coordenador tbm.
                 */
                 
-                $sql = "SELECT * FROM secretaria WHERE secretaria.idSecretaria = ".$secretaria->getIdSecretaria();
+                $sql = "SELECT * FROM secretaria WHERE secretaria.idSecretaria = ".$pessoa->getPessoa();
                 $result = mysqli_query($this->getConexao(), $sql);
 
                 while($row = mysqli_fetch_array($result)){
@@ -160,14 +160,14 @@ class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioS
                      * $pessoaReturn = new Pessoa($row['idPessoa'], $row['nome'], $row['cpf'], $row['cpf'], 
                                      $row['senha'], $row['telefone'], $row['login'], $row['email']);
                      */
-                    $secretariaReturn = new Secretaria($secretaria->getIdSecretaria()
-                                                        ,$secretaria->getNome()
-                                                        ,$secretaria->getCpf()
-                                                        ,$secretaria->getEndereco()
-                                                        ,$secretaria->getSenha()
-                                                        ,$secretaria->getTelefone()
-                                                        ,$secretaria->getLogin()
-                                                        ,$secretaria->getEmail()
+                    $secretariaReturn = new Secretaria($pessoa->getPessoa()
+                                                        ,$pessoa->getNome()
+                                                        ,$pessoa->getCpf()
+                                                        ,$pessoa->getEndereco()
+                                                        ,$pessoa->getSenha()
+                                                        ,$pessoa->getTelefone()
+                                                        ,$pessoa->getLogin()
+                                                        ,$pessoa->getEmail()
                                                         ,$row['idCoordenador']);
 
                 }
