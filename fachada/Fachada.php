@@ -41,7 +41,7 @@ class Fachada implements IFachada{
     }
     public function detalharInstrutor($instrutor) {
         
-        $this->controladorInstrutor->detalhar($instrutor);
+        return $this->controladorInstrutor->detalhar($instrutor);
     }
     public function excluirAluno($aluno) {
         

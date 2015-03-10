@@ -8,6 +8,8 @@
  include('classesBasicas/Dieta.php');
  include('classesBasicas/Pagamento.php');
  include('classesBasicas/Treino.php');
+ include('classesBasicas/ExameFisico.php');
+ include('classesBasicas/Dica.php');
 
  include('classesBasicas/Aluno.php');
  include('classesBasicas/Secretaria.php');
@@ -40,7 +42,7 @@
  include('excecoes/Excecoes.php');
  include('expressoesRegulares/ExpressoesRegulares.php');
  
-
+/*
  $fachada = Fachada::getInstance();
  
  $aluno = new Aluno(7, null, null, null, null, null, null, null, null, null, 
@@ -48,6 +50,15 @@
  $alunoRet = $fachada->detalharAluno($aluno);
  
  var_dump($alunoRet);
+ */
+ 
+ $fachada = Fachada::getInstance();
+ 
+ $instrutor = new Instrutor(3,null, null, null, null, null, null, null, null, null, null, null);
+ 
+ $instrutorRet = $fachada->detalharInstrutor($instrutor);
+ 
+ var_dump($instrutorRet);
  
 /*
  

@@ -48,4 +48,9 @@ class ControladorInstrutor {
     {
         return $this->getRepositorioInstrutor()->listar();
     }
+    
+    public function detalhar($instrutor)
+    {
+        return $this->getRepositorioInstrutor()->detalhar($instrutor);
+    }
 }

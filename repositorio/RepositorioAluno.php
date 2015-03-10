@@ -198,6 +198,10 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
             $this->fecharConexao();
             return $aluno;
         }
+        else 
+        {
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+        }
     }
     
     
@@ -240,6 +244,10 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
             
            //Falta incluir as listas: listaTreinos, mas é preciso ligar no banco a tabela aluno com a tabela treino           
          }
+         else 
+        {
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+        }
     }
 }
 ?>
