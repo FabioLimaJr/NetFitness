@@ -46,25 +46,21 @@ class RepositorioGenerico extends Conexao
         {return FALSE;}
     }
     
-    public function logar($pessoa)
+    public function logarPessoa($pessoa)
     {
-
-        $query = "SELECT * FROM pessoa WHERE login = '".$pessoa->getLogin()."' AND senha = '".$pessoa->getSenha()."' LIMIT 0,1";
-        
-        
-        if(!$result = mysqli_query($this->getConexao(), $query))
-        {
-            echo "none";
-        }
-        else 
-        {
+        $pessoaReturn = null;
             
-            $row = mysqli_fetch_assoc($result);
+        $query = "SELECT * FROM pessoa WHERE login = '".$pessoa->getLogin()."' AND senha = '".$pessoa->getSenha()."' LIMIT 0,1";
+
+        $result = mysqli_query($this->getConexao(), $query);
         
-            echo $row['nome'];
-        }
+        while ($row = mysqli_fetch_array($result)) 
+        {
+            $pessoaReturn = new Pessoa($row['idPessoa'], $row['nome'], $row['cpf'], $row['cpf'], 
+                                 $row['senha'], $row['telefone'], $row['login'], $row['email']);
+        }        
         
-       
+        return $pessoaReturn;
     }
 }
 
