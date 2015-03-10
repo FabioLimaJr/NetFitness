@@ -7,6 +7,7 @@
  include('classesBasicas/Musica.php');
  include('classesBasicas/Dieta.php');
  include('classesBasicas/Pagamento.php');
+ include('classesBasicas/Treino.php');
 
  include('classesBasicas/Aluno.php');
  include('classesBasicas/Secretaria.php');
@@ -44,7 +45,9 @@
  
  $aluno = new Aluno(7, null, null, null, null, null, null, null, null, null, 
                     null, null, null, null, null);
- $aluno = $fachada->detalharAluno($aluno);
+ $alunoRet = $fachada->detalharAluno($aluno);
+ 
+ var_dump($alunoRet);
  
 /*
  

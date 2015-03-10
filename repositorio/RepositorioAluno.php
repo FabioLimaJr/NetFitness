@@ -123,6 +123,8 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                                    $row['login'], $row['email'], $row['sexo'], $row['opiniao'], null/*secretaria*/, null/*musica*/, 
                                    null/*$dieta*/, null/*$listaPagamentos*/, null/*$listaTreinos*/);
                 
+                  
+                
                 
                 $sql2 = "SELECT * FROM  pessoa WHERE idPessoa = '".$row['idSecretaria']."'";
                 $result2 = mysqli_query($this->getConexao(), $sql2); 
@@ -167,10 +169,8 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                 
                 $aluno->setListaPagamentos($listaPagamentos);
                 
+
                 
-                
-                
-                /*
                 $listaTreinos = Array();
                 
                 $sql6 = "SELECT * FROM alunotreino WHERE idAluno ='".$row['idAluno']."'";
@@ -180,16 +180,23 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                     $idTreino = $row6['idTreino'];
                     
                     $sql6B = "SELECT * FROM treino WHERE idTreino = '".$idTreino."'";
+                    $result6B = mysqli_query($this->getConexao(), $sql6B);
                     
+                    while ($row6B = mysqli_fetch_array($result6B))
+                    {
+                         $treino = new Treino($idTreino, $row6B['nome'], $row6B['descricao'], null/*$instrutor*/);
+                         array_push($listaTreinos, $treino);
+                    }
                     
-                    array_push($listaTreinos, $treino);
+                    $aluno->setListaTreinos($listaTreinos);
+                    
                 }
-                
-                $aluno->setListaTreinos($listaTreinos);
-                 */ 
-                 
-                var_dump($aluno);
+           
+               
             }
+            
+            $this->fecharConexao();
+            return $aluno;
         }
     }
     
