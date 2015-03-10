@@ -70,4 +70,3 @@ class Conexao {
 }
 
 ?>
->>>>>>> origin/master

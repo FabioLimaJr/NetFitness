@@ -48,25 +48,23 @@ class RepositorioGenerico extends Conexao
     
     public function logar($pessoa)
     {
-        //$query = "SELECT * FROM pessoa WHERE login = '".$pessoa->getLogin."' AND senha = '".$pessoa->getSenha."' LIMIT 0,1";
-        
-      
+
         $query = "SELECT * FROM pessoa WHERE login = '".$pessoa->getLogin()."' AND senha = '".$pessoa->getSenha()."' LIMIT 0,1";
         
-        echo $query."<br>";
         
-        $result = mysqli_query($query);
-        $row = mysqli_fetch_assoc( $result );
-        
-        if($row=="")
+        if(!$result = mysqli_query($this->getConexao(), $query))
         {
-            echo ('ok');
+            echo "none";
         }
-        else
+        else 
         {
-            echo('nope');
+            
+            $row = mysqli_fetch_assoc($result);
+        
+            echo $row['nome'];
         }
         
+       
     }
 }
 
