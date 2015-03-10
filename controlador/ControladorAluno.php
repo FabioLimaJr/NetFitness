@@ -50,7 +50,11 @@ class ControladorAluno
     {
         return $this->getRepositorioAluno()->listar();
     }
-    //Completar com os demais controles
+    
+    public function detalhar()
+    {
+        return $this->getRepositorioAluno()->detalhar();
+    }
  
 }
 ?>
