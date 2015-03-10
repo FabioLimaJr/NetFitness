@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 
  include('classesBasicas/Pessoa.php');
@@ -167,5 +168,18 @@ $aluno = new Aluno(null,"Fabio Lima", "111.111.111-11", "Rua da aurora", "myP@ss
  {
     echo $exc->getMessage();
  }*/
-?>
+
+$fachada = Fachada::getInstance();
+
+$secretarias = array();
+
+$secretarias = $fachada->listarSecretarias();
+
+for($i = 0; $i < count($secretarias); $i++){
+    
+    echo 'Nome: ' . $secretarias[$i]->getNome();
+}
+
+
+ ?>
 
