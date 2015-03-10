@@ -21,9 +21,10 @@ class Aluno extends Pessoa
         parent::__construct($idAluno, $nome, $cpf, $endereco, $senha, $telefone, $login, $email);
         
         $this->setIdAluno($idAluno);
+        $this->setSexo($sexo);
         $this->setOpiniao($opiniao);
         $this->setSecretaria($secretaria);
-        $this->setSexo($sexo);
+        
     }
     
     

@@ -84,8 +84,43 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
 
         if (@$this->getConexao()->query($sql) === TRUE) 
         {
-            echo "Banco '" . $this->getNomeBanco() . "' foi selecionado\n";
+            if ($this->inserirPessoa($aluno)) 
+            {
+                $id = mysqli_insert_id($this->getConexao());
+                $idReturn = $id;
 
+                $sql = "INSERT INTO aluno values('";
+                $sql.= $id ."','";
+                $sql.= $aluno->getSexo()."','";
+                $sql.= $aluno->getOpiniao()."','";                
+                $sql.= $aluno->getSecretaria()->getIdSecretaria()."')";
+                
+                if (mysqli_query($this->getConexao(), $sql)) 
+                {
+                    $this->fecharConexao();
+                    $aluno->setIdAluno($idReturn);
+                    return $aluno;
+                    //return $idReturn;
+                } 
+                else 
+                {
+                    throw new Exception(Excecoes::inserirObjeto("Aluno: ".mysqli_error($this->getConexao())));
+                }
+            } 
+            else 
+            {
+                throw new Exception(Excecoes::inserirObjeto("Aluno: ".mysqli_error($this->getConexao())));
+            }
+        } 
+        else 
+        {
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error).")");
+        }
+
+    }  
+        
+        /*if (@$this->getConexao()->query($sql) === TRUE) 
+        {
             $id = $aluno->getProfessor()->getIdPessoa();
             $sql = "SELECT idProfessor FROM professor WHERE idProfessor = '$id'";
             $result = mysqli_query($this->getConexao(), $sql);
@@ -128,8 +163,8 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
         else 
         {
             throw new Exception(Excecoes::excecaoSelecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error).")");
-        }
-    }
+        }*/
+    //}
 
     public function detalhar($aluno) {
         

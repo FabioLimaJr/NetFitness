@@ -49,7 +49,7 @@ class Excecoes
     //Metodos Referentes as Expressoes Regulares
     
     public static  function nomeInvalido($mensagem){
-        return "Nome Invalido,Favor Verifique o Nome do ".$mensagem."antes da inclusão\n";
+        return "Nome Invalido,Favor Verifique o Nome do ".$mensagem." antes da inclusão\n";
     }
     
     public static  function cpfInvalido($mensagem){
