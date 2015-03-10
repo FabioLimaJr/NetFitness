@@ -151,9 +151,11 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
             
             while ($row = mysqli_fetch_array($result)) 
             {
+              
                 
-                $aluno = new Aluno($row['idPessoa'], $row['nome'], $row['cpf'], $row['endereco'], $row['senha'], $row['telefone'], $row['login'], $row['email'], 
-                        $row['sexo'], $row['opiniao'], null/*secretaria*/);
+                $aluno = new Aluno($row['idPessoa'], $row['nome'], $row['cpf'], $row['endereco'], $row['senha'], $row['telefone'], 
+                                   $row['login'], $row['email'], $row['sexo'], $row['opiniao'], null/*secretaria*/, null/*$musica*/, 
+                                   null/*$dieta*/, null/*$listaPagamentos*/, null/*$listaTreinos*/);
                 
                 
                 $sql2 = "SELECT * FROM  pessoa WHERE idPessoa = '".$row['idSecretaria']."'";
