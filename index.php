@@ -188,14 +188,14 @@ $coordenador = new Coordenador(2, array(), array(), array(), "", "", "", "", "",
  $fachada->excluirSecretaria($secretaria);*/
  
  //Teste Incluir Aluno 
-/*$coordenador = new Coordenador(2, array(), array(), array(), "qualquer","444.444.444-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MariaOsvalda22", "maria_m.osvalda2@hotmail.com"); 
-$secretaria = new Secretaria(19,"Maria Osvalda", "444.444.444-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MariaOsvalda22", "maria_m.osvalda2@hotmail.com", "feminino", "opniao teste", $coordenador);
-$aluno = new Aluno(null,"Fabio Lima", "111.111.111-11", "Rua da aurora", "myP@ssword01", "(81) 1111-1111", "FabioLima2", "fabio_l.lima2@hotmail.com", "masculino", "opniao teste", $secretaria);
+$coordenador = new Coordenador(2, array(), array(), array(), "qualquer","444.444.444-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MariaOsvalda22", "maria_m.osvalda2@hotmail.com"); 
+$secretaria = new Secretaria(3,"Maria Osvalda", "444.444.444-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MariaOsvalda22", "maria_m.osvalda2@hotmail.com", "feminino", "opniao teste", $coordenador);
+$aluno = new Aluno(4,"Fabio Lima junior", "111.111.111-11", "Rua da aurora", "myP@ssword01", "(81) 1111-1111", "FabioLima2", "fabio_l.lima2@hotmail.com", "masculino", "opniao teste", $secretaria);
  
  $controladorAluno = new ControladorAluno();
  try 
  {
-   $aluno = $controladorAluno->inserir($aluno);
+   $aluno = $controladorAluno->alterar($aluno);
    //$aluno = $controladorAluno->alterar($aluno);
    echo "Aluno inserido\n";
    //echo "Aluno alterado\n";
@@ -203,4 +203,4 @@ $aluno = new Aluno(null,"Fabio Lima", "111.111.111-11", "Rua da aurora", "myP@ss
  catch (Exception $exc) 
  {
     echo $exc->getMessage();
- }*/
+ }
