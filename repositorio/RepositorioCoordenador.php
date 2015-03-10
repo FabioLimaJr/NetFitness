@@ -18,5 +18,37 @@ class RepositorioCoordenador extends RepositorioGenerico implements IRepositorio
     {
        parent::__construct();
     }
+
+    public function logar($coordenador) {
+         
+        $sql = "USE " . $this->getNomeBanco();
+        
+        $coordenadorReturn = null;
+        
+        if($this->getConexao()->query($sql) === TRUE)
+        {
+            $pessoa = $this->logarPessoa($coordenador);
+            
+            if($pessoa!=null)
+            {
+                $query = "SELECT * FROM coordenador WHERE idCoordenador = '".$pessoa->getIdPessoa()."' LIMIT 0,1";
+
+                $result = mysqli_query($this->getConexao(), $query);
+        
+                while ($row = mysqli_fetch_array($result)) 
+                {
+                    $coordenadorReturn = new Coordenador($pessoa->getIdPessoa(), null/*$listaInstrutores*/, 
+                            null/*$listaSecretarias*/, null/*$listaNutricionistas*/, $pessoa->getNome(), 
+                            $pessoa->getCpf(), $pessoa->getEndereco(), $pessoa->getSenha(), $pessoa->getTelefone(),
+                            $pessoa->getEmail(), $pessoa->getLogin());
+                }    
+            }
+            
+            $this->fecharConexao();
+ 
+            return $coordenadorReturn;
+        }
+    }
+
 //put your code here
 }
