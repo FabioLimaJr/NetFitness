@@ -6,6 +6,63 @@
  */
 class  ExpressoesRegulares {
     
+    public static function validarTodosOsCampos($objeto){
+        if(($objeto != "") && ($objeto != NULL))
+        {
+            
+            if(!self::conferirNome($objeto->getNome()))
+            {
+
+                throw new Exception(Excecoes::nomeInvalido($objeto->getNome()));
+            }
+
+            if(!self::conferirCpf($objeto->getCpf()))
+            {
+
+                throw new Exception(Excecoes::cpfInvalido($objeto->getCpf()));
+            }
+
+            if(!self::conferirEmail($objeto->getEmail()))
+            {
+                throw new Exception(Excecoes::emailInvalido($objeto->getEmail()));
+            }
+
+            /** 
+             * <?php // VALIDAR TELEFONE NO SEGUINTE FORMATO: (DDD) 3333-3333 
+             * $telefone = "(014) 3236-3810";   
+             * if (!eregi("^\([0-9]{3}\) [0-9]{4}-[0-9]{4}$", $telefone)) 
+             * { echo "Telefone inválido"; 
+             * }
+             * ?> 
+             */
+
+            if(!self::conferirTelefone($objeto->getTelefone()))
+            {
+                throw new Exception(Excecoes::telefoneInvalido($objeto->getTelefone()));
+            }
+
+            if(!self::conferirLogin($objeto->getLogin()))
+            {
+                throw new Exception(Excecoes::loginInvalido($objeto->getLogin()));
+            }
+
+            if(!self::conferirSenha($objeto->getSenha()))
+            {
+                throw new Exception(Excecoes::senhaInvalida($objeto->getSenha()));
+            }
+
+            if(($objeto->getEndereco() === null) && ($objeto->getEndereco() === ""))
+            {
+                throw new Exception(Excecoes::enderecoInvalido($objeto->getEndereco()));
+            }
+
+        }else
+        {
+            throw new Exception(Excecoes::objetoNulo(""));
+        }
+        return true;
+    }
+    
     public static function conferirNome($nome){                    
         //$regularNome = "(^[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$";        
         //$regularNome = "^[aA-zZ]+((\s[aA-zZ]+)+)?$";

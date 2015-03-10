@@ -60,7 +60,7 @@ class RepositorioInstrutor extends RepositorioGenerico implements IRepositorioIn
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error).")");
         }
 
-}
+    } 
     
     public function alterar($instrutor) 
     {

@@ -8,13 +8,18 @@ class Fachada implements IFachada{
     
     private $controladorAluno;
     private $controladorInstrutor;
+    private $controladorSecretaria;
+    private $controladorCoordenador;
+    
     private static $instance = null;
             
     function __construct() {
-        $this->controladorAluno = new ControladorAluno();
+        //$this->controladorAluno = new ControladorAluno();
         $this->controladorInstrutor = new ControladorInstrutor();
+        $this->controladorSecretaria = new ControladorSecretaria();
+         $this->controladorCoordenador = new controladorCoordenador();
     }
-    
+    //self:: serve para chamar um atributo statico da propria classe
     public static function getInstance(){
         if(self::$instance === null){
             self::$instance = new Fachada();
@@ -72,4 +77,28 @@ class Fachada implements IFachada{
         return $this->controladorInstrutor->listar();
     }
 
+    public function incluirSecretaria($secretaria){
+        
+        $this->controladorSecretaria->inserir($secretaria);
+    }
+    
+    public function alterarSecretaria($secretaria){
+        
+        $this->controladorSecretaria->alterar($secretaria);
+    }
+    
+    public function excluirSecretaria($secretaria){
+        
+        $this->controladorSecretaria->excluir($secretaria);
+    }
+    
+    public function listarSecretarias(){
+        return  $this->controladorSecretaria->listar();
+    }
+    
+     public function logarCoordenador($coordenador)
+    {
+        $this->controladorCoordenador->logar($coordenador);
+    }
 }
+

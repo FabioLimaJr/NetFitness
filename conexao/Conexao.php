@@ -1,10 +1,4 @@
 <?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of Conexao
  *
@@ -18,9 +12,8 @@ class Conexao {
  const nomeBanco = 'netfitness';   
  const nomeServidor = 'localhost';
  const nomeUsuario = 'root';
+ //const senhaUsuario = '';
  const senhaUsuario = '123456';
-
- 
  public $conexao;
  public $nomeBanco;
 
@@ -77,3 +70,4 @@ class Conexao {
 }
 
 ?>
+>>>>>>> origin/master
