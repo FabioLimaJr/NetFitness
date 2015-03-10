@@ -3,8 +3,14 @@
  include('classesBasicas/Pessoa.php');
  include('classesBasicas/Instrutor.php');
  include('classesBasicas/Coordenador.php');
+ include('classesBasicas/Aluno.php');
+ include('classesBasicas/Secretaria.php');
+ 
+ include('fachada/IFachada.php');
+ include('fachada/Fachada.php');
  
  include('controlador/ControladorInstrutor.php');
+ include('controlador/ControladorAluno.php');
 
  include('conexao/Conexao.php');
  include('interfaceRepositorio/IRepositorioGenerico.php');
@@ -16,8 +22,28 @@
  include('interfaceRepositorio/IRepositorioInstrutor.php');
  include('repositorio/RepositorioInstrutor.php');
  
+ include('interfaceRepositorio/IRepositorioAluno.php');
+ include('repositorio/RepositorioAluno.php');
+ 
  include('excecoes/Excecoes.php');
  include('expressoesRegulares/ExpressoesRegulares.php');
+ 
+ 
+ //Teste Listar Alunos
+ $fachada = new Fachada();
+ 
+ $fachada = Fachada::getInstance();
+ 
+ try {
+    $listaAlunos = $fachada->listarAlunos();
+    var_dump($listaAlunos);
+} catch (Exception $exc) {
+    echo $exc->getMessage();
+}
+
+
+
+ 
  
  //Teste excluir professor
  /*
@@ -71,6 +97,7 @@
     echo $exc->getMessage();
  }
 */
+ /*
 //Teste Incluir Instrutor 
 $coordenador = new Coordenador(1, array(), array(), array(), "", "", "", "", "", "", "");
 $instrutor = new Instrutor(null, $coordenador, array(), array(), array(), "Marcelo Lopes", "123.456.654-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MarceloLopes22", "marcelo_m.lopes2@hotmail.com");
