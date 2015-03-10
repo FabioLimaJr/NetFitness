@@ -32,6 +32,6 @@ class controladorCoordenador
     
     public function logar($coordenador)
     {
-        $this->getRepositorioCoordenador()->logar($coordenador);
+       return $this->getRepositorioCoordenador()->logar($coordenador);
     }
 }
