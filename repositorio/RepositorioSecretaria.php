@@ -124,10 +124,59 @@ class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioS
             }
             
             return $listaSecretarias;                  
+        }else{
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
         }
     }
     
     public function detalharSecretaria(){
         
+    }
+    // esse metodo retorna nulo caso o usuario encontrado em pessoa n seja uma secretaria
+    public function logar($secretaria){
+        
+        $secretariaReturn = null;
+        
+        $sql = "USE " . $this->getNomeBanco();
+        
+        if(@$this->getConexao()->query($sql) === TRUE){
+        
+            $secretaria = $this->logarPessoa($secretaria);
+            
+            if($secretaria == NULL){
+                
+                throw new Exception(Excecoes::usuarioInvalido());
+                
+            }else{
+                /*
+                * por enquanto coloquei apenas os campos da secretaria, se for preciso dps coloca para puxar o coordenador tbm.
+                */
+                
+                $sql = "SELECT * FROM secretaria WHERE secretaria.idSecretaria = ".$secretaria->getIdSecretaria();
+                $result = mysqli_query($this->getConexao(), $sql);
+
+                while($row = mysqli_fetch_array($result)){
+                    /*
+                     * $pessoaReturn = new Pessoa($row['idPessoa'], $row['nome'], $row['cpf'], $row['cpf'], 
+                                     $row['senha'], $row['telefone'], $row['login'], $row['email']);
+                     */
+                    $secretariaReturn = new Secretaria($secretaria->getIdSecretaria()
+                                                        ,$secretaria->getNome()
+                                                        ,$secretaria->getCpf()
+                                                        ,$secretaria->getEndereco()
+                                                        ,$secretaria->getSenha()
+                                                        ,$secretaria->getTelefone()
+                                                        ,$secretaria->getLogin()
+                                                        ,$secretaria->getEmail()
+                                                        ,$row['idCoordenador']);
+
+                }
+
+                return $secretariaReturn;
+                
+            }
+        }else{
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+        }
     }
 }

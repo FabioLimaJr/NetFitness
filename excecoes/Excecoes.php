@@ -75,6 +75,10 @@ class Excecoes
     public static  function enderecoInvalido($mensagem){
         return "Endereço Invalido,Favor Verifique o Endereço do ".$mensagem." antes da inclusão\n";
     }
+    
+    public static function usuarioInvalido(){
+        return "Login e Senha Invalidos.";
+    }
 }
 
 ?>
