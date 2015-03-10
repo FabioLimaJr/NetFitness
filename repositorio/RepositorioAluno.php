@@ -249,5 +249,49 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
         }
     }
+    
+    public function logar($aluno)
+    {
+        
+        $sql = "USE " . $this->getNomeBanco();
+        
+        $alunoReturn = null;
+        
+        if($this->getConexao()->query($sql) === TRUE)
+        {
+            $pessoa-> $this->logarPessoa($aluno);
+            
+            if($pessoa != NULL)
+            {
+                $query = "SELECT * FROM aluno WHERE idAluno = '".$pessoa->getIdPessoa()."' LIMIT 0,1";
+                
+                $result = mysqli_query($this->getConexao(), $query);                
+                /*
+                
+                while ($row = mysqli_fetch_array($result)){
+                    
+                   $alunoReturn = new Aluno($idAluno
+                           ,$nome
+                           ,$cpf
+                           ,$endereco
+                           ,$senha
+                           ,$telefone
+                           ,$login
+                           ,$email
+                           ,$sexo
+                           ,$opiniao
+                           ,$secretaria
+                           ,$musica
+                           ,$dieta
+                           ,$listaPagamentos
+                           ,$listaTreinos)
+                    
+                }
+             */   
+            }
+            
+        }
+        
+    }
 }
 ?>

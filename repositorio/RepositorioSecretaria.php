@@ -165,7 +165,7 @@ class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioS
       
     }
     // esse metodo retorna nulo caso o usuario encontrado em pessoa n seja uma secretaria
-    public function logar($usuario){
+    public function logar($secretaria){
         
         $secretariaReturn = null;
         
@@ -173,7 +173,7 @@ class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioS
         
         if(@$this->getConexao()->query($sql) === TRUE){
         
-            $pessoa = $this->logarPessoa($usuario);
+            $pessoa = $this->logarPessoa($secretaria);
             
             if($pessoa == NULL){
                 
@@ -184,7 +184,7 @@ class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioS
                 * por enquanto coloquei apenas os campos da secretaria, se for preciso dps coloca para puxar o coordenador tbm.
                 */
                 
-                $sql = "SELECT * FROM secretaria WHERE secretaria.idSecretaria = ".$pessoa->getPessoa();
+                $sql = "SELECT * FROM secretaria WHERE secretaria.idSecretaria = ".$pessoa->getIdPessoa();
                 $result = mysqli_query($this->getConexao(), $sql);
 
                 while($row = mysqli_fetch_array($result)){
@@ -192,7 +192,7 @@ class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioS
                      * $pessoaReturn = new Pessoa($row['idPessoa'], $row['nome'], $row['cpf'], $row['cpf'], 
                                      $row['senha'], $row['telefone'], $row['login'], $row['email']);
                      */
-                    $secretariaReturn = new Secretaria($pessoa->getPessoa()
+                    $secretariaReturn = new Secretaria($pessoa->getIdPessoa()
                                                         ,$pessoa->getNome()
                                                         ,$pessoa->getCpf()
                                                         ,$pessoa->getEndereco()
