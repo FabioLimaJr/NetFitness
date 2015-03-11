@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Description of Fachada
@@ -87,10 +88,10 @@ class Fachada implements IFachada{
     }
     
     public function detalharSecretaria($secretaria) {
-        
+        return  $this->controladorSecretaria->listar();
     }
     
-     public function logarCoordenador($coordenador)
+    public function logarCoordenador($coordenador)
     {
        return $this->controladorCoordenador->logar($coordenador);
     }
