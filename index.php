@@ -219,7 +219,6 @@ $aluno = new Aluno(4,"Fabio Lima junior", "111.111.111-11", "Rua da aurora", "my
     echo $exc->getMessage();
  }
 */
- 
  $pessoa = new Pessoa(null, null, null, null, "2424", null, "igor123", null);
            
                  $fachada = Fachada::getInstance();

@@ -259,7 +259,7 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
         
         if($this->getConexao()->query($sql) === TRUE)
         {
-            $pessoa-> $this->logarPessoa($aluno);
+            $pessoa = $this->logarPessoa($aluno);
             
             if($pessoa != NULL)
             {
@@ -277,15 +277,14 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                                             $pessoa->getTelefone(),
                                             $pessoa->getLogin(),
                                             $pessoa->getEmail(),
-                                            $pessoa->getSexo(),
-                                            $pessoa->getOpiniao(),
-                                            $row['idSecretaria']);
-                                            /*$row['idMusica'],
-                                            $row['dieta'],
-                                            $row['listaPagamentos'],
-                                            $row['listaTreinos']);
-                                             * 
-                                             */
+                                            $row['sexo'],
+                                            $row['opiniao'],
+                                            $row['idSecretaria'],
+                                            NULL,
+                                            NULL,
+                                            array(),
+                                            array());
+                                             
                     
                 }
                 
