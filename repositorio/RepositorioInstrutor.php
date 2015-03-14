@@ -5,6 +5,10 @@
  *
  * @author Marcelo
  */
+
+include('interfaceRepositorio/IRepositorioInstrutor.php');
+include_once('repositorioGenerico/RepositorioGenerico.php');
+
 class RepositorioInstrutor extends RepositorioGenerico implements IRepositorioInstrutor{
     
     public function __construct() 

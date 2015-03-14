@@ -4,6 +4,9 @@
  *
  * @author Daniele
  */
+
+include ('repositorio/RepositorioAluno.php');
+
 class ControladorAluno 
 {
     //put your code here

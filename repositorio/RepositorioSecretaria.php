@@ -4,6 +4,10 @@
  *
  * @author Fábio
  */
+
+include('interfaceRepositorio/IRepositorioSecretaria.php');
+
+
 class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioSecretaria {
     //put your code here
     

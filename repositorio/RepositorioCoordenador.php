@@ -11,6 +11,10 @@
  *
  * @author aluno
  */
+
+include('interfaceRepositorio/IRepositorioCoordenador.php');
+include_once('repositorioGenerico/RepositorioGenerico.php');
+
 class RepositorioCoordenador extends RepositorioGenerico implements IRepositorioCoordenador{
    
  

@@ -5,6 +5,9 @@
  *
  * @author Daniele
  */
+
+include_once('Pessoa.php');
+
 class Aluno extends Pessoa
 {
     private $idAluno;

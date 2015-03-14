@@ -4,6 +4,9 @@
  *
  * @author Marcelo
  */
+
+include ('repositorio/RepositorioInstrutor.php');
+
 class ControladorInstrutor {
    
     private $repositorioInstrutor;

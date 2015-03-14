@@ -4,6 +4,9 @@
  *
  * @author Daniele
  */
+
+include ('conexao/Conexao.php');
+
 class RepositorioGenerico extends Conexao 
 {
        

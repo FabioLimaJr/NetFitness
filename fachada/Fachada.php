@@ -5,6 +5,14 @@
  *
  * @author Marcelo
  */
+
+include('IFachada.php');
+include('controlador/ControladorAluno.php');
+include('controlador/ControladorCoordenador.php');
+include('controlador/ControladorInstrutor.php');
+include('controlador/ControladorSecretaria.php');
+
+
 class Fachada implements IFachada{
     
     private $controladorAluno;

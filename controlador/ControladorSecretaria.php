@@ -4,6 +4,9 @@
  *
  * @author Schmitz
  */
+
+include ('repositorio/RepositorioSecretaria.php');
+
 class ControladorSecretaria {
     //put your code here
     

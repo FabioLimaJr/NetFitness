@@ -11,6 +11,9 @@
  *
  * @author Igor
  */
+
+include_once('Pessoa.php');
+
 class Secretaria extends Pessoa{
     //put your code here
     

@@ -4,6 +4,10 @@
  *
  * @author Daniele
  */
+
+include('interfaceRepositorio/IRepositorioAluno.php');
+include_once('repositorioGenerico/RepositorioGenerico.php');
+
 class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
 {
     
