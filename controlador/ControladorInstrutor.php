@@ -5,7 +5,7 @@
  * @author Marcelo
  */
 
-include ('repositorio/RepositorioInstrutor.php');
+include ($serverPath.'repositorio/RepositorioInstrutor.php');
 
 class ControladorInstrutor {
    

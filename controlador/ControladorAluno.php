@@ -5,7 +5,7 @@
  * @author Daniele
  */
 
-include ('repositorio/RepositorioAluno.php');
+include ($serverPath.'repositorio/RepositorioAluno.php');
 
 class ControladorAluno 
 {

@@ -5,7 +5,7 @@
  * @author Daniele
  */
 
-include ('conexao/Conexao.php');
+include ($serverPath.'conexao/Conexao.php');
 
 class RepositorioGenerico extends Conexao 
 {

@@ -5,8 +5,8 @@
  * @author Daniele
  */
 
-include('interfaceRepositorio/IRepositorioAluno.php');
-include_once('repositorioGenerico/RepositorioGenerico.php');
+include($serverPath.'interfaceRepositorio/IRepositorioAluno.php');
+include_once($serverPath.'repositorioGenerico/RepositorioGenerico.php');
 
 class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
 {

@@ -5,12 +5,12 @@
  *
  * @author Marcelo
  */
-
+include('../serverPath.php');
 include('IFachada.php');
-include('controlador/ControladorAluno.php');
-include('controlador/ControladorCoordenador.php');
-include('controlador/ControladorInstrutor.php');
-include('controlador/ControladorSecretaria.php');
+include($serverPath.'controlador/ControladorAluno.php');
+include($serverPath.'controlador/ControladorCoordenador.php');
+include($serverPath.'controlador/ControladorInstrutor.php');
+include($serverPath.'controlador/ControladorSecretaria.php');
 
 
 class Fachada implements IFachada{

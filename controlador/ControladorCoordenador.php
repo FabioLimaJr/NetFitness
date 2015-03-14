@@ -12,7 +12,7 @@
  * @author aluno
  */
 
-include ('repositorio/RepositorioCoordenador.php');
+include ($serverPath.'repositorio/RepositorioCoordenador.php');
 
 class controladorCoordenador 
 {

@@ -5,7 +5,7 @@
  * @author Fábio
  */
 
-include('interfaceRepositorio/IRepositorioSecretaria.php');
+include($serverPath.'interfaceRepositorio/IRepositorioSecretaria.php');
 
 
 class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioSecretaria {

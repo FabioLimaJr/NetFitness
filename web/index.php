@@ -1,27 +1,28 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<?php include ('componentes/header.php') ?>
 
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="css/netFitness.css">
 
-        <meta charset="UTF-8">
-        <title>NetFitness : Login</title>
-    </head>
+<body>
+<div id="wrapper">
     
+  <div id="sidebar">
     
-    <body>
-        <div id="boxLogin">
-            
-            <form enctype="multipart/form-data" name="loginUsuario" method="post"  action="logarUsuario.php">
-                Informar Login:<br>
-                <input type="text" name="login">
-                <br/><br/>  
-                Informar Senha:<br>
-                <input type="text" name="senha"><br/><br/>  
-                <input type="submit" value="Logar">
-            </form>
-          
-         </div>
-        
-    </body>
+    <div id="logo"><a href="index.php"><img src="images/logo.png" alt=""></a></div>
+
+    <?php include ('componentes/menu.php') ?>  
+    <?php include ('componentes/leftIcons.php') ?>
+    <?php include ('componentes/signature.php'); ?>   
+    
+  </div><!-- end sidebar -->
+     
+  <div id="content">
+  
+     <?php include('conteudo/indexConteudo.php'); ?>
+    
+  </div><!-- end content -->
+  
+</div><!-- end wrapper -->
+    
+<?php include ('componentes/clear.php'); ?> 
+
+</body>
 </html>

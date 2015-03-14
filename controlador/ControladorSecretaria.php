@@ -5,7 +5,7 @@
  * @author Schmitz
  */
 
-include ('repositorio/RepositorioSecretaria.php');
+include ($serverPath.'repositorio/RepositorioSecretaria.php');
 
 class ControladorSecretaria {
     //put your code here
