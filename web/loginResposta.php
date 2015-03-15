@@ -2,6 +2,7 @@
 
 include ('../fachada/Fachada.php');
 include ('../classesBasicas/Aluno.php');
+include ('../classesBasicas/Coordenador.php');
 include ('componentes/header.php') 
 
 ?>

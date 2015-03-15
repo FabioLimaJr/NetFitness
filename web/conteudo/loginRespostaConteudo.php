@@ -7,24 +7,34 @@
     $mensagem = "";
     $tipoDiv = "warning-box";
     $tipoUsuario = "";
+    $usuarioLogado = null;
+    $arrayMetodosLogar = ['logarAluno','logarCoordenador'];
     
     try
     {
-        $usuarioLogado = $fachada->logarAluno($pessoa);
-
-        if($usuarioLogado!=null)
+        foreach ($arrayMetodosLogar as $metodoLogar)
         {
-           $tipoUsuario =  get_class($usuarioLogado);
-           $tipoDiv = "info-box";
-           ob_start();
-           var_dump($usuarioLogado);
-           $mensagem = ob_get_clean();
+            $usuarioLogado = $fachada->{$metodoLogar}($pessoa);
+            
+            if($usuarioLogado!=null)
+            {
+               $tipoUsuario =  get_class($usuarioLogado);
+               $tipoDiv = "info-box";
+               ob_start();
+               var_dump($usuarioLogado);
+               $mensagem = ob_get_clean();
+               break;
+            }
+            
         }
-        else
+        
+        if($usuarioLogado == null)
         {
            $tipoUsuario = "Desconhecido";
-           $mensagem = "O usuário não existe";
+           $mensagem = "O usuário não existe"; 
         }
+        
+        
     }
     catch (Exception $ex)
     {
