@@ -79,6 +79,10 @@ class Excecoes
     public static function usuarioInvalido(){
         return "Login e Senha inválidos.";
     }
+    
+    public static  function descricaoInvalida($mensagem){
+        return "Descrição Invalida,Favor Verifique a Descrição do ".$mensagem." antes da inclusão\n";
+    }
 }
 
 ?>

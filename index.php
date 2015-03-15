@@ -108,7 +108,7 @@
     echo $exc->getMessage();
  }
 */
- $coordenador = new Coordenador(2, null, null, null, null, null, null, 
+ /*$coordenador = new Coordenador(2, null, null, null, null, null, null, 
          null, null, null, null);
 //Teste Incluir Instrutor 
 $instrutor = new Instrutor(null, $coordenador, array(), array(), array(), "Marcelooo Lopes", "444.444.444-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MarceloLopes22", "marcelo_m.lopes2@hotmail.com");
@@ -125,7 +125,7 @@ $instrutor = new Instrutor(null, $coordenador, array(), array(), array(), "Marce
  catch (Exception $exc) 
  {
     echo $exc->getMessage();
- }
+ }*/
  /*
  $RepositorioSecretaria = new RepositorioSecretaria();
  $RepositorioSecretaria->listar();
@@ -160,5 +160,10 @@ $instrutor = new Instrutor(null, $coordenador, array(), array(), array(), "Marce
  
 $coordenador = new Coordenador(2, array(), array(), array(), "", "", "", "", "", "", "");*/
  
+ $exercicio = new Exercicio(NULL, "Supino Reto", "Peito", "Na posição deitada em um banco plano, faça uma pegada na barra com o dorso das mãos voltado para cima e o afastamento entre elas igual à distância entre os ombros.");
+ 
+ $fachada = Fachada::getInstance();
+ 
+ $fachada->incluirExercicio($exercicio);
  ?>
 

@@ -43,11 +43,12 @@ class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioS
                     throw new Exception(Excecoes::inserirObjeto("Secretaria: ".mysqli_error($this->getConexao())));
                     
                 }
-                //echo $sql . "\n";
             }else 
                 {
                     throw new Exception(Excecoes::inserirObjeto("Secretaria: ".mysqli_error($this->getConexao())));
                 }
+        }else{
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
         }
     }
     

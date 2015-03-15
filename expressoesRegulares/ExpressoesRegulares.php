@@ -139,4 +139,17 @@ class  ExpressoesRegulares {
             return false;
         }  
     }
+    
+    public static function conferirDescricao($descricao){                    
+        //$regularNome = "(^[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$";        
+        //$regularNome = "^[aA-zZ]+((\s[aA-zZ]+)+)?$";
+        
+        $regularDescricao = "/[a-zA-Z ]{0,500}$/";
+        
+        if(preg_match($regularDescricao, $descricao)){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
