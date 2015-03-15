@@ -49,7 +49,7 @@
     
     
     
-    <h3>Tipode usuario: <?php echo $tipoUsuario ?></h3>
+    <h3>Tipo de usuário: <?php echo $tipoUsuario ?></h3>
    
     <div class="clear"></div>
     <div class="line"></div>
