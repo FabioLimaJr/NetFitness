@@ -27,17 +27,11 @@
             }
             
         }
-        
-        if($usuarioLogado == null)
-        {
-           $tipoUsuario = "Desconhecido";
-           $mensagem = "O usuário não existe"; 
-        }
-        
-        
+       
     }
     catch (Exception $ex)
     {
+       $tipoUsuario = "Desconhecido";
        $mensagem= $ex->getMessage();
     }
     

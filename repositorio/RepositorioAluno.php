@@ -7,6 +7,7 @@
 
 include($serverPath.'interfaceRepositorio/IRepositorioAluno.php');
 include_once($serverPath.'repositorioGenerico/RepositorioGenerico.php');
+include_once($serverPath.'excecoes/Excecoes.php');
 
 class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
 {
@@ -292,11 +293,20 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                     
                 }
                 
+                $this->fecharConexao();
                 return $alunoReturn;
                 
             }
+            else
+            {
+                $this->fecharConexao();
+                throw new Exception(Excecoes::usuarioInvalido(""));
+            }
             
-        }else{
+        }
+        else
+        {
+            $this->fecharConexao();
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
         }  
     }

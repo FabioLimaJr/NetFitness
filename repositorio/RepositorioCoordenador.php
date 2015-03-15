@@ -14,6 +14,7 @@
 
 include($serverPath.'interfaceRepositorio/IRepositorioCoordenador.php');
 include_once($serverPath.'repositorioGenerico/RepositorioGenerico.php');
+include_once($serverPath.'excecoes/Excecoes.php');
 
 class RepositorioCoordenador extends RepositorioGenerico implements IRepositorioCoordenador{
    
@@ -49,10 +50,19 @@ class RepositorioCoordenador extends RepositorioGenerico implements IRepositorio
                     //falta incluir as demais listas. Vai ser feito depois que será implementado o métod detalharCoordenador
                 }    
             }
+            else
+            {
+                $this->fecharConexao();
+                throw new Exception(Excecoes::usuarioInvalido(""));
+            }
             
             $this->fecharConexao();
- 
             return $coordenadorReturn;
+        }
+        else
+        {
+            $this->fecharConexao();
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
         }
     }
 

@@ -4,9 +4,9 @@
  *
  * @author Fábio
  */
-
 include($serverPath.'interfaceRepositorio/IRepositorioSecretaria.php');
-
+include_once($serverPath.'repositorioGenerico/RepositorioGenerico.php');
+include_once($serverPath.'excecoes/Excecoes.php');
 
 class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioSecretaria {
     //put your code here

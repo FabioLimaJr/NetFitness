@@ -77,7 +77,7 @@ class Excecoes
     }
     
     public static function usuarioInvalido(){
-        return "Login e Senha Invalidos.";
+        return "Login e Senha inválidos.";
     }
 }
 

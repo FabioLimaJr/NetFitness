@@ -8,6 +8,7 @@
 
 include($serverPath.'interfaceRepositorio/IRepositorioInstrutor.php');
 include_once($serverPath.'repositorioGenerico/RepositorioGenerico.php');
+include_once($serverPath.'excecoes/Excecoes.php');
 
 class RepositorioInstrutor extends RepositorioGenerico implements IRepositorioInstrutor{
     
