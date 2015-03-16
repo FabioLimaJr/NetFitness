@@ -19,8 +19,8 @@ class ControladorExercicio {
     
     private $repositorioExercicio;
     
-    function __construct($repositorioExercicio) {
-        $this->repositorioExercicio = $repositorioExercicio;
+    function __construct() {
+        $this->repositorioExercicio = new RepositorioExercicio();
     }
 
     function getRepositorioExercicio() {
@@ -33,11 +33,11 @@ class ControladorExercicio {
 
     public function inserir($exercicio){
         
-        if(ExpressoesRegulares::conferirNome($exercicio->getNome())){
+        if(!ExpressoesRegulares::conferirNome($exercicio->getNome())){
             
             throw new Exception(Excecoes::nomeInvalido($exercicio->getNome()));
             
-        }else if(ExpressoesRegulares::conferirDescricao($exercicio->getDescricao())){
+        }else if(!ExpressoesRegulares::conferirDescricao($exercicio->getDescricao())){
             
             throw new Exception(Excecoes::descricaoInvalida($exercicio->getDescricao()));
             

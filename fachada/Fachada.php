@@ -5,7 +5,7 @@
  *
  * @author Marcelo
  */
-include('../serverPath.php');
+include('serverPath.php');
 include('IFachada.php');
 include($serverPath.'controlador/ControladorAluno.php');
 include($serverPath.'controlador/ControladorCoordenador.php');

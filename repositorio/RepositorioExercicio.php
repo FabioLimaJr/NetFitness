@@ -26,9 +26,9 @@ class RepositorioExercicio extends RepositorioGenerico implements IRepositorioEx
         
         if(@$this->getConexao()->query($sql) === TRUE){
             
-            $sql = "INSERT INTO exercicio VALUES (NULL, ".$exercicio->getNome()
-                                                         .",".$exercicio->getMusculo()
-                                                         .",".$exercicio->getDescricao().")";
+            $sql = "INSERT INTO exercicio VALUES (NULL, '".$exercicio->getNome()
+                                                         ."','".$exercicio->getMusculo()
+                                                         ."','".$exercicio->getDescricao()."')";
             
             if( mysqli_query($this->getConexao(), $sql)){
                 

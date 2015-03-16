@@ -11,6 +11,7 @@
  include('classesBasicas/Dica.php');
  include('classesBasicas/Aluno.php');
  include('classesBasicas/Secretaria.php');
+ include('classesBasicas/Exercicio.php');
  
  include('expressoesRegulares/ExpressoesRegulares.php');
  include('excecoes/Excecoes.php');
@@ -160,7 +161,7 @@ $instrutor = new Instrutor(null, $coordenador, array(), array(), array(), "Marce
  
 $coordenador = new Coordenador(2, array(), array(), array(), "", "", "", "", "", "", "");*/
  
- $exercicio = new Exercicio(NULL, "Supino Reto", "Peito", "Na posição deitada em um banco plano, faça uma pegada na barra com o dorso das mãos voltado para cima e o afastamento entre elas igual à distância entre os ombros.");
+ $exercicio = new Exercicio(NULL, "Supino reto", "Peito", "Na posicaoo deitada em um banco plano, faca uma pegada na barra com o dorso das maos voltado.");
  
  $fachada = Fachada::getInstance();
  
