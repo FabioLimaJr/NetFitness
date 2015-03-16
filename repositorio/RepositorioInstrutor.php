@@ -272,5 +272,46 @@ class RepositorioInstrutor extends RepositorioGenerico implements IRepositorioIn
            //Falta incluir as listas: listaTreinos, listaExamesFisicos, ListaDicas                
          }
     }
+    
+    public function logar($instrutor)
+    {    
+        $sql = "USE " . $this->getNomeBanco();
+        
+        $instrutorReturn = null;
+        
+        if($this->getConexao()->query($sql) === TRUE)
+        {
+            $pessoa = $this->logarPessoa($instrutor);
+        
+            if($pessoa != NULL)
+            {
+                $query = "SELECT * FROM instrutor WHERE instrutor.idInstrutor = '".$pessoa->getIdPessoa()."' LIMIT 0,1";
+               
+                $result = mysqli_query($this->getConexao(), $query);
+                
+                    while($row = mysqli_fetch_array($result))
+                    {                  
+                                              
+                        $instrutorReturn = new Instrutor($pessoa->getIdPessoa(),
+                                                         $row['idCoordenador'],
+                                                         array(),//listaTreinos
+                                                         array(),//listaExamesFisicos
+                                                         array(),//listaDicas
+                                                         $pessoa->getNome(),
+                                                         $pessoa->getCpf(),
+                                                         $pessoa->getEndereco(),
+                                                         $pessoa->getSenha(),
+                                                         $pessoa->getTelefone(),
+                                                         $pessoa->getEmail(),
+                                                         $pessoa->getLogin());
+                    }
+                
+                return $instrutorReturn;
+            }
+            
+        }else{
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+        }           
+    }
 }
 ?>    
