@@ -4,6 +4,8 @@
  *
  * @author Marcelo
  */
+include_once('Pessoa.php');
+
 class Coordenador extends Pessoa {
 
     private $idCoordenador;

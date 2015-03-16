@@ -4,6 +4,9 @@
  *
  * @author Daniele
  */
+
+include ($serverPath.'repositorio/RepositorioAluno.php');
+
 class ControladorAluno 
 {
     //put your code here

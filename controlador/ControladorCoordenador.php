@@ -11,6 +11,9 @@
  *
  * @author aluno
  */
+
+include ($serverPath.'repositorio/RepositorioCoordenador.php');
+
 class controladorCoordenador 
 {
    private $repositorioCoordenador;

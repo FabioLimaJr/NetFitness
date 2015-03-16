@@ -4,6 +4,10 @@
  *
  * @author Fábio
  */
+include($serverPath.'interfaceRepositorio/IRepositorioSecretaria.php');
+include_once($serverPath.'repositorioGenerico/RepositorioGenerico.php');
+include_once($serverPath.'excecoes/Excecoes.php');
+
 class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioSecretaria {
     //put your code here
     
@@ -39,11 +43,12 @@ class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioS
                     throw new Exception(Excecoes::inserirObjeto("Secretaria: ".mysqli_error($this->getConexao())));
                     
                 }
-                //echo $sql . "\n";
             }else 
                 {
                     throw new Exception(Excecoes::inserirObjeto("Secretaria: ".mysqli_error($this->getConexao())));
                 }
+        }else{
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
         }
     }
     
