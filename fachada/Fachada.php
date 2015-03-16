@@ -103,4 +103,8 @@ class Fachada implements IFachada{
     public function logarAluno($aluno){
         return $this->controladorAluno->logar($aluno);
     }
+    
+    public function logarInstrutor($instrutor) {
+        return $this->controladorInstrutor->logar($instrutor);
+    }
 }

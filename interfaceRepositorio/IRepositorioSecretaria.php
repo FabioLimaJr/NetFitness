@@ -12,5 +12,6 @@ interface IRepositorioSecretaria {
   public function excluir($secretaria);
   public function alterar($secretaria);
   public function listar();
+  public function logar($secretaria);
   
 }

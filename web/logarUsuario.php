@@ -17,6 +17,7 @@
                 include("../classesBasicas/Coordenador.php");
                 include("../classesBasicas/Secretaria.php");
                 include("../classesBasicas/Aluno.php");
+                include("../classesBasicas/Instrutor.php");
                 
                 
                 include("../fachada/IFachada.php");
@@ -52,7 +53,7 @@
                 
                  $pessoa = new Pessoa(null, null, null, null, $_POST['senha'], null, $_POST['login'], null);
            
-                 $usuarioLogado = $fachada->logarAluno($pessoa);
+                 $usuarioLogado = $fachada->logarInstrutor($pessoa);
                  
                 if($usuarioLogado!=null)
                 {

@@ -53,4 +53,9 @@ class ControladorInstrutor {
     {
         return $this->getRepositorioInstrutor()->detalhar($instrutor);
     }
+    
+    public function logar($instrutor)
+    {
+        return $this->getRepositorioInstrutor()->logar($instrutor);
+    }
 }

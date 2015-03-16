@@ -12,4 +12,5 @@ interface IRepositorioInstrutor {
     public function excluir($instrutor);
     public function listar();
     public function detalhar($instrutor);
+    public function logar($instrutor);
 }
