@@ -29,17 +29,3 @@ interface IFachada {
     public function logarInstrutor($instrutor);
     
 }
-    public function listarSecretarias();
-    public function detalharSecretaria($secretaria);
-    
-    public function incluirExercicio($exercicio);
-    public function alterarExercicio($exercicio);
-    public function excluirExercicio($exercicio);
-    public function listarExercicios();
-    public function detalharExercicio($exercicio);
-    
-    public function logarCoordenador($coordenador);
-    public function logarSecretaria($secretaria);
-    public function logarAluno($aluno);
-    
-}
