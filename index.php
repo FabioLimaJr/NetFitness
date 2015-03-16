@@ -161,10 +161,11 @@ $instrutor = new Instrutor(null, $coordenador, array(), array(), array(), "Marce
  
 $coordenador = new Coordenador(2, array(), array(), array(), "", "", "", "", "", "", "");*/
  
- $exercicio = new Exercicio(NULL, "Supino reto", "Peito", "Na posicaoo deitada em um banco plano, faca uma pegada na barra com o dorso das maos voltado.");
+ $exercicio = new Exercicio(5, "Supino inclinado", "Peito", "Na posicaoo deitada em um banco inclinado, faca uma pegada na barra com o dorso das maos voltado.");
  
  $fachada = Fachada::getInstance();
  
- $fachada->incluirExercicio($exercicio);
+ $fachada->alterarExercicio($exercicio);
+ 
  ?>
 

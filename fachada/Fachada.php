@@ -5,7 +5,7 @@
  *
  * @author Marcelo
  */
-include('serverPath.php');
+include('../serverPath.php');
 include('IFachada.php');
 include($serverPath.'controlador/ControladorAluno.php');
 include($serverPath.'controlador/ControladorCoordenador.php');
@@ -119,7 +119,7 @@ class Fachada implements IFachada{
     }
     
     public function alterarExercicio($exercicio) {
-        
+        return $this->controladorExercicio->alterar($exercicio);
     }
 
     public function excluirExercicio($exercicio) {
