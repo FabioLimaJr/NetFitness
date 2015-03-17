@@ -367,7 +367,6 @@ $coordenador = new Coordenador(2, array(), array(), array(), "", "", "", "", "",
  
  $fachada = Fachada::getInstance();
  
- $fachada->alterarExercicio($exercicio);*/
  
  ?>
 
