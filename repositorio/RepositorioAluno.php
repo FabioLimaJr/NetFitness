@@ -29,7 +29,7 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                 $sql = "INSERT INTO aluno values('";
                 $sql.= $id ."','";
                 $sql.= $aluno->getSexo()."','";
-                $sql.= $aluno->getOpiniao()."','";                
+                $sql.= $aluno->getDataNascimento()."','";                
                 $sql.= $aluno->getSecretaria()->getIdSecretaria()."')";
                 
                 if (mysqli_query($this->getConexao(), $sql)) 
@@ -69,7 +69,7 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                 $sql.= "' WHERE idAluno= '".$aluno->getIdAluno();*/
                 
                 $sql = "UPDATE aluno SET sexo = '".$aluno->getSexo()."'";
-                $sql.= ", opiniao = '".$aluno->getOpiniao()."'";
+                $sql.= ", dataNascimento = '".$aluno->getDataNascimento()."'";
                 $sql.= "' WHERE idAluno= '".$aluno->getIdAluno()." and ". "'idSecretaria= '".$aluno->getSecretaria()->getIdSecretaria();
                 //falta alterar as demais listas atreladas se for preciso
                 
@@ -125,7 +125,7 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
             while ($row = mysqli_fetch_array($result)) 
             {
                  $aluno = new Aluno($row['idPessoa'], $row['nome'], $row['cpf'], $row['endereco'], $row['senha'], $row['telefone'], 
-                                   $row['login'], $row['email'], $row['sexo'], $row['opiniao'], null/*secretaria*/, null/*musica*/, 
+                                   $row['login'], $row['email'], $row['sexo'], $row['dataNascimento'], null/*secretaria*/, null/*musica*/, 
                                    null/*$dieta*/, null/*$listaPagamentos*/, null/*$listaTreinos*/);
                 
                   
@@ -229,7 +229,7 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
               
                 
                 $aluno = new Aluno($row['idPessoa'], $row['nome'], $row['cpf'], $row['endereco'], $row['senha'], $row['telefone'], 
-                                   $row['login'], $row['email'], $row['sexo'], $row['opiniao'], null/*secretaria*/, $row['idMusica'], 
+                                   $row['login'], $row['email'], $row['sexo'], $row['dataNascimento'], null/*secretaria*/, $row['idMusica'], 
                                    null/*$dieta*/, null/*$listaPagamentos*/, null/*$listaTreinos*/);
                 
                 
@@ -283,7 +283,7 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                                             $pessoa->getLogin(),
                                             $pessoa->getEmail(),
                                             $row['sexo'],
-                                            $row['opiniao'],
+                                            $row['dataNascimento'],
                                             $row['idSecretaria'],
                                             NULL,
                                             NULL,

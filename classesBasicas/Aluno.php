@@ -12,7 +12,7 @@ class Aluno extends Pessoa
 {
     private $idAluno;
     private $sexo;
-    private $opiniao;
+    private $dataNascimento;
     private $secretaria;
     private $musica;
     private $dieta;
@@ -20,14 +20,14 @@ class Aluno extends Pessoa
     private $listaTreinos; 
  
     
-    public function __construct($idAluno, $nome, $cpf, $endereco, $senha, $telefone, $login, $email, $sexo, $opiniao, $secretaria,
+    public function __construct($idAluno, $nome, $cpf, $endereco, $senha, $telefone, $login, $email, $sexo, $dataNascimento, $secretaria,
                                 $musica, $dieta, $listaPagamentos, $listaTreinos) 
     {
         parent::__construct($idAluno, $nome, $cpf, $endereco, $senha, $telefone, $login, $email);
         
         $this->setIdAluno($idAluno);
         $this->setSexo($sexo);
-        $this->setOpiniao($opiniao);
+        $this->setdataNascimento($dataNascimento);
         $this->setSecretaria($secretaria);
         $this->setDieta($dieta);
         $this->setMusica($musica);
@@ -45,8 +45,8 @@ class Aluno extends Pessoa
         return $this->sexo;
     }
 
-    function getOpiniao() {
-        return $this->opiniao;
+    function getdataNascimento() {
+        return $this->dataNascimento;
     }
 
     function getSecretaria() {
@@ -61,8 +61,8 @@ class Aluno extends Pessoa
         $this->sexo = $sexo;
     }
 
-    function setOpiniao($opiniao) {
-        $this->opiniao = $opiniao;
+    function setdataNascimento($dataNascimento) {
+        $this->dataNascimento = $dataNascimento;
     }
 
     function setSecretaria($secretaria) {

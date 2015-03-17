@@ -44,68 +44,70 @@ class Fachada implements IFachada{
         return self::$instance;
     }
     
-    public function alterarAluno($aluno) {
-        
+    public function alterarAluno($aluno) { 
         $this->controladorAluno->alterar($aluno);
     }
-    public function alterarInstrutor($instrutor) {
-        
+    
+    public function alterarInstrutor($instrutor) {  
         $this->controladorInstrutor->alterar($instrutor);
     }
+    
     public function detalharAluno($aluno) {
-        
         return $this->controladorAluno->detalhar($aluno);
     }
+    
     public function detalharInstrutor($instrutor) {
-        
         return $this->controladorInstrutor->detalhar($instrutor);
     }
-    public function excluirAluno($aluno) {
-        
+   
+    public function excluirAluno($aluno) { 
         $this->controladorAluno->excluir($aluno);
     }
-    public function excluirInstrutor($instrutor) {
-        
+    
+    public function excluirInstrutor($instrutor) { 
         $this->controladorInstrutor->alterar($instrutor);
     }
-    public function incluirAluno($aluno) {
-        
+    
+    public function incluirAluno($aluno) { 
         $this->controladorAluno->incluir($aluno);
     }
-    public function incluirInstrutor($instrutor) {
-        
+    
+    public function incluirInstrutor($instrutor) { 
         $this->controladorInstrutor->incluir($instrutor);
     }
-    public function listarAlunos() {
-        
+   
+    public function listarAlunos() { 
         return $this->controladorAluno->listar();
     }
-    public function listarInstrutores() {
-        
+    
+    public function listarInstrutores() { 
         return $this->controladorInstrutor->listar();
     }
-    public function incluirSecretaria($secretaria){
-        
+    
+    public function incluirSecretaria($secretaria){ 
         $this->controladorSecretaria->inserir($secretaria);
     }
+    
     public function alterarSecretaria($secretaria){
-        
         $this->controladorSecretaria->alterar($secretaria);
     }
+    
     public function excluirSecretaria($secretaria){
-        
         $this->controladorSecretaria->excluir($secretaria);
     }
-    public function listarSecretarias(){
+    
+    public function listarSecretaria(){
         return  $this->controladorSecretaria->listar();
-    }   
+    } 
+    
     public function detalharSecretaria($secretaria) {
         return  $this->controladorSecretaria->listar();
     }
-    public function logarCoordenador($coordenador)
-    {
+    
+    public function logarCoordenador($coordenador){
        return $this->controladorCoordenador->logar($coordenador);
     }
+    
     public function logarSecretaria($secretaria){
         return $this->controladorSecretaria->logar($secretaria);
     }
@@ -137,13 +139,8 @@ class Fachada implements IFachada{
     public function logarInstrutor($instrutor) {
         return $this->controladorInstrutor->logar($instrutor);
     }
-
-    public function listarSecretaria() {
-        
-    }
     
-    public function logarNutricionista($nutricionista)
-    {
+    public function logarNutricionista($nutricionista) {
         return $this->controladorNutricionista->logar($nutricionista);        
     }
     
@@ -166,5 +163,4 @@ class Fachada implements IFachada{
     public function detalharTreino($treino) {
         return $this->controladorTreino->detalhar($treino);
     }
-
 }
