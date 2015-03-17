@@ -310,5 +310,6 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
         }  
     }
+    
 }
 ?>

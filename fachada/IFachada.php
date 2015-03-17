@@ -20,18 +20,13 @@ interface IFachada {
     public function incluirSecretaria($secretaria);
     public function alterarSecretaria($secretaria);
     public function excluirSecretaria($secretaria);
-    public function listarSecretarias();
+    public function listarSecretaria();
     public function detalharSecretaria($secretaria);
-    
-    public function incluirExercicio($exercicio);
-    public function alterarExercicio($exercicio);
-    public function excluirExercicio($exercicio);
-    public function listarExercicios();
-    public function detalharExercicio($exercicio);
     
     public function logarCoordenador($coordenador);
     public function logarSecretaria($secretaria);
     public function logarAluno($aluno);
+    public function logarInstrutor($instrutor);
     
     public function incluirTreino($treino);
     public function alterarTreino($treino);
