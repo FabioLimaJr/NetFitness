@@ -157,4 +157,12 @@ class Fachada implements IFachada{
         return $this->controladorTreino->detalhar($treino);
     }
 
+    public function listarSecretaria() {
+        
+    }
+
+    public function logarInstrutor($instrutor) {
+        
+    }
+
 }
