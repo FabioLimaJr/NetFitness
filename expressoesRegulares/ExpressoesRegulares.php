@@ -55,7 +55,22 @@ class  ExpressoesRegulares {
             {
                 throw new Exception(Excecoes::enderecoInvalido($objeto->getEndereco()));
             }
+            
+        }else
+        {
+            throw new Exception(Excecoes::objetoNulo(""));
+        }
+        return true;
+    }
+    
+    public static function validarTreino($objeto){
+        if(($objeto != "") && ($objeto != NULL))
+        {
+            if(!self::conferirDescricao($objeto->getDescricao()))
+            {
 
+                throw new Exception(Excecoes::descricaoInvalida($objeto->getDescricao()));
+            }
         }else
         {
             throw new Exception(Excecoes::objetoNulo(""));

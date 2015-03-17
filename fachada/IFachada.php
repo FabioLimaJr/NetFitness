@@ -33,4 +33,10 @@ interface IFachada {
     public function logarSecretaria($secretaria);
     public function logarAluno($aluno);
     
+    public function incluirTreino($treino);
+    public function alterarTreino($treino);
+    public function excluirTreino($treino);
+    public function listarTreino();
+    public function detalharTreino($treino);
+    
 }

@@ -1,22 +1,22 @@
 
 <?php
 
- include('classesBasicas/Instrutor.php');
- include('classesBasicas/Coordenador.php');
- include('classesBasicas/Musica.php');
- include('classesBasicas/Dieta.php');
- include('classesBasicas/Pagamento.php');
- include('classesBasicas/Treino.php');
- include('classesBasicas/ExameFisico.php');
- include('classesBasicas/Dica.php');
- include('classesBasicas/Aluno.php');
- include('classesBasicas/Secretaria.php');
- include('classesBasicas/Exercicio.php');
+ include('../classesBasicas/Instrutor.php');
+ include('../classesBasicas/Coordenador.php');
+ include('../classesBasicas/Musica.php');
+ include('../classesBasicas/Dieta.php');
+ include('../classesBasicas/Pagamento.php');
+ include('../classesBasicas/Treino.php');
+ include('../classesBasicas/ExameFisico.php');
+ include('../classesBasicas/Dica.php');
+ include('../classesBasicas/Aluno.php');
+ include('../classesBasicas/Secretaria.php');
+ include('../classesBasicas/Exercicio.php');
  
- include('expressoesRegulares/ExpressoesRegulares.php');
- include('excecoes/Excecoes.php');
+ include('../expressoesRegulares/ExpressoesRegulares.php');
+ include('../excecoes/Excecoes.php');
                  
- include("fachada/Fachada.php");
+ include("../fachada/Fachada.php");
 
  
 
@@ -161,10 +161,34 @@ $instrutor = new Instrutor(null, $coordenador, array(), array(), array(), "Marce
  
 $coordenador = new Coordenador(2, array(), array(), array(), "", "", "", "", "", "", "");*/
  
- $exercicio = new Exercicio(NULL, "Supino reto", "Peito", "Na posicaoo deitada em um banco plano, faca uma pegada na barra com o dorso das maos voltado.");
+ /*$exercicio = new Exercicio(NULL, "Supino reto", "Peito", "Na posicaoo deitada em um banco plano, faca uma pegada na barra com o dorso das maos voltado.");
  
  $fachada = Fachada::getInstance();
  
- $fachada->incluirExercicio($exercicio);
- ?>
+ $fachada->incluirExercicio($exercicio);*/
+ 
+ //Teste Incluir Treino
+$instrutor = new Instrutor(7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+//$treino = new Treino(null, "corrida", "corrida na istera", $instrutor);
+$treino = new Treino(null, "corridor", "corridorrrrrrr na pista", $instrutor);
+//$instrutor = new Instrutor(2, $coordenador, array(), array(), array(), "Marcelo Lopes", "123.456.654-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MarceloLopes22", "marcelo_m.lopes2@hotmail.com");
+ 
+//$fachada = new Fachada();
+
+$fachada = Fachada::getInstance();
+
+//$controladorTreino = new ControladorTreino();
+ try 
+ {
+     $fachada->incluirTreino($treino);
+   //$treino = $controladorTreino->inserir($treino);
+   //$instrutor = $controladorInstrutor->alterar($instrutor);
+   echo "Treino inserido\n";
+   //echo "Professor alterado\n";
+ } 
+ catch (Exception $exc) 
+ {
+    echo $exc->getMessage();
+ }                
+ 
 

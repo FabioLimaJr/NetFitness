@@ -5,12 +5,13 @@
  *
  * @author Marcelo
  */
-include('serverPath.php');
+include('../serverPath.php');
 include('IFachada.php');
 include($serverPath.'controlador/ControladorAluno.php');
 include($serverPath.'controlador/ControladorCoordenador.php');
 include($serverPath.'controlador/ControladorInstrutor.php');
 include($serverPath.'controlador/ControladorSecretaria.php');
+include($serverPath.'controlador/ControladorTreino.php');
 include($serverPath.'controlador/ControladorExercicio.php');
 
 class Fachada implements IFachada{
@@ -20,6 +21,7 @@ class Fachada implements IFachada{
     private $controladorSecretaria;
     private $controladorCoordenador;
     private $controladorExercicio;
+    private $controladorTreino;
     
     private static $instance = null;
             
@@ -29,6 +31,7 @@ class Fachada implements IFachada{
         $this->controladorSecretaria = new ControladorSecretaria();
         $this->controladorCoordenador = new controladorCoordenador();
         $this->controladorExercicio = new ControladorExercicio();
+        $this->controladorTreino = new ControladorTreino();
     }
     //self:: serve para chamar um atributo statico da propria classe
     public static function getInstance(){
@@ -132,6 +135,26 @@ class Fachada implements IFachada{
     
     public function detalharExercicio($exercicio) {
         
+    }
+    
+    public function incluirTreino($treino) {
+        return $this->controladorTreino->inserir($treino);
+    }
+    
+    public function alterarTreino($treino) {
+        return $this->controladorTreino->alterar($treino);
+    }
+    
+    public function excluirTreino($treino) {
+        return $this->controladorTreino->excluir($treino);
+    }
+    
+    public function listarTreino() {
+        return $this->controladorTreino->listar();
+    }
+    
+    public function detalharTreino($treino) {
+        return $this->controladorTreino->detalhar($treino);
     }
 
 }
