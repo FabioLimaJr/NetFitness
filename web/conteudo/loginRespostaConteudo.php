@@ -8,7 +8,7 @@
     $tipoDiv = "warning-box";
     $tipoUsuario = "";
     $usuarioLogado = null;
-    $arrayMetodosLogar = ['logarAluno','logarCoordenador','logarNutricionista','logarInstrutor'];
+    $arrayMetodosLogar = ['logarAluno','logarCoordenador','logarNutricionista','logarInstrutor','logarSecretaria'];
     
     try
     {
