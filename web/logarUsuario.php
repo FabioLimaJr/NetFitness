@@ -18,6 +18,7 @@
                 include("../classesBasicas/Secretaria.php");
                 include("../classesBasicas/Aluno.php");
                 include("../classesBasicas/Instrutor.php");
+                include '../classesBasicas/Nutricionista.php';
                 
                 
                 include("../fachada/IFachada.php");
@@ -43,9 +44,13 @@
                 include("../interfaceRepositorio/IRepositorioSecretaria.php");
                 include("../repositorio/RepositorioSecretaria.php");
                 
+                include("../interfaceRepositorio/IRepositorioNutricionista.php");
+                include("../repositorio/RepositorioNutricionista.php");
+                
                 include("../controlador/controladorCoordenador.php");
                 include("../controlador/controladorInstrutor.php");
                 include("../controlador/controladorSecretaria.php");
+                include("../controlador/controladorNutricionista.php");
                 
                 $fachada = Fachada::getInstance();
                 

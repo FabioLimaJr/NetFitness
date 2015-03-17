@@ -4,12 +4,16 @@
  *
  * @author Erick
  */
+
+include ($serverPath.'repositorio/RepositorioNutricionista.php');
+//include ($serverPath.'interfaceRepositorio/IRepositorioNutricionista.php');
+
 class ControladorNutricionista {
    
     private $repositorioNutricionista;
     
     function __construct() {
-        $this->setRepositorioNutricionista(new RepositorioNutricionista());
+        $this->repositorioNutricionista = new RepositorioNutricionista();
     }
     
     function getRepositorioNutricionista() {
@@ -48,5 +52,10 @@ class ControladorNutricionista {
     public function detalhar($nutricionista)
     {
         return $this->getRepositorioNutricionista()->detalhar($nutricionista);
+    }
+    
+    public function logar($nutricionista)
+    {
+        return $this->getRepositorioNutricionista()->logar($nutricionista);
     }
 }

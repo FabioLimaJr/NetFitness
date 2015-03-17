@@ -11,4 +11,5 @@ interface IRepositorioNutricionista {
     public function excluir($nutricionista);
     public function listar();
     public function detalhar($nutricionista);
+    public function logar($nutricionista);
 }

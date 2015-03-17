@@ -28,4 +28,7 @@ interface IFachada {
     public function logarAluno($aluno);
     public function logarInstrutor($instrutor);
     
+    public function logarNutricionista($nutricionista);
+    public function logarInstrutor($instrutor);
+    
 }

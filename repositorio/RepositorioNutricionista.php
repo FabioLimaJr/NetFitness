@@ -4,6 +4,11 @@
  *
  * @author Erick
  */
+
+include($serverPath.'interfaceRepositorio/IRepositorioNutricionista.php');
+include_once($serverPath.'repositorioGenerico/RepositorioGenerico.php');
+include_once($serverPath.'excecoes/Excecoes.php');
+
 class RepositorioNutricionista extends RepositorioGenerico implements IRepositorioNutricionista{
     
     public function __construct() 
@@ -117,8 +122,6 @@ class RepositorioNutricionista extends RepositorioGenerico implements IRepositor
         if($this->getConexao()->query($sql) === TRUE)
         {
 
-
-
             $sql = "SELECT * FROM pessoa,nutricionista WHERE pessoa.idPessoa = nutricionista.idNutricionista AND "
                     ."nutricionista.idNutricionista = '".$nutricionista->getIdPessoa()."'";
             
@@ -231,6 +234,46 @@ class RepositorioNutricionista extends RepositorioGenerico implements IRepositor
             
            //Falta incluir as listas: listaTreinos, listaExamesFisicos, ListaDicas                
          }
+    }
+    
+    public function logar($nutricionista)
+    {
+        $sql = "USE " . $this->getNomeBanco();
+        
+        $nutricionistaReturn = null;
+        
+        if($this->getConexao()->query($sql) === TRUE)
+        {
+            $pessoa = $this->logarPessoa($nutricionista);
+            
+            if($pessoa != NULL)
+            {
+                $query = "SELECT * FROM nutricionista WHERE nutricionista.idNutricionista = '".$pessoa->getIdPessoa()."' LIMIT 0,1";
+                
+                $result = mysqli_query($this->getConexao(), $query);
+                
+                while($row = mysqli_fetch_array($result))
+                    { 
+               
+                    $nutricionistaReturn = new Nutricionista($pessoa->getIdPessoa(), 
+                                                             $row['idCoordenador'],
+                                                             $row['crn'], 
+                                                             array(),//$listaDietas
+                                                             array(),//$listaDicas
+                                                             $pessoa->getNome(),
+                                                             $pessoa->getCpf(),
+                                                             $pessoa->getEndereco(),
+                                                             $pessoa->getSenha(),
+                                                             $pessoa->getTelefone(),
+                                                             $pessoa->getEmail(),
+                                                             $pessoa->getLogin());
+                }
+                
+                return $nutricionistaReturn;
+            }
+        }else{
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+        }       
     }
 }
 ?>    
