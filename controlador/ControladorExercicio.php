@@ -45,4 +45,19 @@ class ControladorExercicio {
             return $this->repositorioExercicio->inserir($exercicio);
         }
     }
+    
+    public function alterar($exercicio){
+        
+        if(!ExpressoesRegulares::conferirNome($exercicio->getNome())){
+            
+            throw new Exception(Excecoes::nomeInvalido($exercicio->getNome()));
+            
+        }else if(!ExpressoesRegulares::conferirDescricao($exercicio->getDescricao())){
+            
+            throw new Exception(Excecoes::descricaoInvalida($exercicio->getDescricao()));
+            
+        }else{
+            return $this->repositorioExercicio->alterar($exercicio);
+        }
+    }
 }

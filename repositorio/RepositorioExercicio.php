@@ -44,6 +44,25 @@ class RepositorioExercicio extends RepositorioGenerico implements IRepositorioEx
 
     public function alterar($exercicio) {
         
+        $sql = "USE " . $this->getNomeBanco();
+        
+        if(@$this->getConexao()->query($sql) === TRUE){
+            
+            $sql = "UPDATE exercicio SET nome = '".$exercicio->getNome()
+                                                 ."', musculo = '".$exercicio->getMusculo()
+                                                 ."', descricao = '".$exercicio->getDescricao()
+                                                 ."' WHERE idExercicio = ".$exercicio->getIdExercicio();
+            
+            if( mysqli_query($this->getConexao(), $sql)){
+                
+                $this->fecharConexao();
+                return TRUE;
+            }else{
+                throw new Exception(Excecoes::alterarObjeto("Exercício: ".mysqli_error($this->getConexao())));
+            }
+        }else{
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+        }
     }
 
     public function excluir($exercicio) {

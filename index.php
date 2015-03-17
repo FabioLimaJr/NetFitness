@@ -201,7 +201,7 @@ $aluno = new Aluno(4,"Fabio Lima junior", "111.111.111-11", "Rua da aurora", "my
     echo $exc->getMessage();
  }
 */
- $pessoa = new Pessoa(null, null, null, null, "design1234", null, "designinstrutor", null);
+ /*$pessoa = new Pessoa(null, null, null, null, "design1234", null, "designinstrutor", null);
            
                  $fachada = Fachada::getInstance();
                  $usuarioLogado = $fachada->logarInstrutor($pessoa);
@@ -219,7 +219,7 @@ $aluno = new Aluno(4,"Fabio Lima junior", "111.111.111-11", "Rua da aurora", "my
  include('excecoes/Excecoes.php');
                  
  include("fachada/Fachada.php");
-
+*/
  
 
 /*
@@ -363,10 +363,10 @@ $instrutor = new Instrutor(null, $coordenador, array(), array(), array(), "Marce
  
 $coordenador = new Coordenador(2, array(), array(), array(), "", "", "", "", "", "", "");*/
  
- $exercicio = new Exercicio(NULL, "Supino reto", "Peito", "Na posicaoo deitada em um banco plano, faca uma pegada na barra com o dorso das maos voltado.");
+ /*$exercicio = new Exercicio(5, "Supino inclinado", "Peito", "Na posicaoo deitada em um banco inclinado, faca uma pegada na barra com o dorso das maos voltado.");
  
  $fachada = Fachada::getInstance();
  
- $fachada->incluirExercicio($exercicio);
+ 
  ?>
 
