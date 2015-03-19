@@ -60,4 +60,8 @@ class ControladorExercicio {
             return $this->repositorioExercicio->alterar($exercicio);
         }
     }
+    
+    public function excluir($exercicio){
+        return $this->repositorioExercicio->excluir($exercicio);
+    }
 }

@@ -122,11 +122,11 @@ class Fachada implements IFachada {
     }
 
     public function alterarExercicio($exercicio) {
-        
+        return $this->controladorExercicio->alterar($exercicio);
     }
 
     public function excluirExercicio($exercicio) {
-        
+        return $this->controladorExercicio->excluir($exercicio);
     }
 
     public function listarExercicios() {
