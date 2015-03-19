@@ -13,15 +13,15 @@
  */
 class Pagamento 
 {
-    private $idPagameto;
+    private $idPagamento;
     private $valor;
     private $dataVencimento;
     private $dataPagamento;
     private $secretaria;
     private $aluno;
     
-    function __construct($idPagameto, $valor, $dataVencimento, $dataPagamento, $secretaria, $aluno) {
-        $this->idPagameto = $idPagameto;
+    function __construct($idPagamento, $valor, $dataVencimento, $dataPagamento, $secretaria, $aluno) {
+        $this->idPagamento = $idPagamento;
         $this->valor = $valor;
         $this->dataVencimento = $dataVencimento;
         $this->dataPagamento = $dataPagamento;
@@ -30,8 +30,8 @@ class Pagamento
     }
 
     
-    function getIdPagameto() {
-        return $this->idPagameto;
+    function getIdPagamento() {
+        return $this->idPagamento;
     }
 
     function getValor() {
@@ -54,8 +54,8 @@ class Pagamento
         return $this->aluno;
     }
 
-    function setIdPagameto($idPagameto) {
-        $this->idPagameto = $idPagameto;
+    function setIdPagamento($idPagamento) {
+        $this->idPagamento = $idPagamento;
     }
 
     function setValor($valor) {
