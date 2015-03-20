@@ -1,7 +1,6 @@
 <?php
- //$secretaria = new Secretaria();
  $secretaria = $_SESSION['Secretaria'];
- $mensagem = "Selecione no meu na esquerda a opção escolhida."
+ $mensagem = "Selecione no menu na esquerda a opção a ser escolhida."
 ?>
 
 <h1 class="title">Página usuário</h1>

@@ -6,6 +6,15 @@ include ('../classesBasicas/Instrutor.php');
 include ('../classesBasicas/Secretaria.php');
 session_start();
 
+if(isset($_SESSION['Secretaria']))
+{
+    $secretaria = $_SESSION['Secretaria'];
+}
+else
+{
+    header('location: erroAcesso.php');
+}
+
 include ('../fachada/Fachada.php');
 include ('componentes/header.php');
 ?>
