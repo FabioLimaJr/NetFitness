@@ -70,7 +70,7 @@ class Fachada implements IFachada {
     }
 
     public function incluirAluno($aluno) {
-        $this->controladorAluno->incluir($aluno);
+        $this->controladorAluno->inserir($aluno);
     }
 
     public function incluirInstrutor($instrutor) {
