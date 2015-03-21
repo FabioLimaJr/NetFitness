@@ -35,4 +35,6 @@ interface IFachada {
     public function listarTreino();
     public function detalharTreino($treino);
     
+    public function listarOpinioes();
+    
 }

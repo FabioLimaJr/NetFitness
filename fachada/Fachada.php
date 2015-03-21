@@ -14,6 +14,7 @@ include($serverPath . 'controlador/ControladorSecretaria.php');
 include($serverPath . 'controlador/ControladorExercicio.php');
 include($serverPath . 'controlador/ControladorNutricionista.php');
 include($serverPath . 'controlador/ControladorTreino.php');
+include($serverPath . 'controlador/ControladorOpiniao.php');
 
 class Fachada implements IFachada {
 
@@ -24,6 +25,7 @@ class Fachada implements IFachada {
     private $controladorExercicio;
     private $controladorNutricionista;
     private $controladorTreino;
+    private $controladorOpiniao;
     private static $instance = null;
 
     function __construct() {
@@ -34,6 +36,8 @@ class Fachada implements IFachada {
         $this->controladorExercicio = new ControladorExercicio();
         $this->controladorNutricionista = new ControladorNutricionista();
         $this->controladorTreino = new ControladorTreino();
+        $this->controladorOpiniao = new ControladorOpiniao();
+        
     }
 
 //self:: serve para chamar um atributo statico da propria classe
@@ -163,6 +167,10 @@ class Fachada implements IFachada {
 
     public function detalharTreino($treino) {
         return $this->controladorTreino->detalhar($treino);
+    }
+    
+    public function listarOpinioes() {
+        return $this->controladorOpiniao->listar();
     }
 
 }
