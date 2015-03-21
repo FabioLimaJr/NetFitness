@@ -1,5 +1,5 @@
 <?php
- $secretaria = $_SESSION['Coordenador'];
+ $coordenador = $_SESSION['Coordenador'];
  $mensagem = "Selecione no menu na esquerda a opção a ser escolhida."
 ?>
 
