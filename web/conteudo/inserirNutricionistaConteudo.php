@@ -3,7 +3,6 @@
  $fachada = Fachada::getInstance();
  $mensagem = "";
  
-  
  if($_SERVER['REQUEST_METHOD'] == 'POST')
  {
      $camposPreenchidos = true;
@@ -16,7 +15,7 @@
 
 <h1 class="title">Página usuário</h1>
     <div class="line"></div>
-        Nome: <?php echo $secretaria->getNome() ?> | Telefone:<?php echo $secretaria->getTelefone() ?> | Email:<?php echo $secretaria->getEmail() ?> | Endereço:<?php echo $secretaria->getEndereco() ?>
+        Nome: <?php echo $secretaria->getNome() ?> | Telefone:<?php echo $secretaria->getTelefone() ?> | Email:<?php echo $secretaria->getEmail() ?>
      
     <div class="intro" style="margin-bottom:50px">
          
@@ -121,7 +120,6 @@
              }
     }
   
-   
    
    ?> 
     
