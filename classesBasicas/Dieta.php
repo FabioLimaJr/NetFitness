@@ -15,12 +15,14 @@ class Dieta
 {
     private $idDieta;
     private $descricao;
+    private $listaAlimentos;
     private $nutricionista;
     private $aluno;
     
-    function __construct($idDieta, $descricao, $nutricionista, $aluno) {
+    function __construct($idDieta, $descricao, $listaAlimentos, $nutricionista, $aluno) {
         $this->idDieta = $idDieta;
         $this->descricao = $descricao;
+        $this->listaAlimentos = $listaAlimentos;
         $this->nutricionista = $nutricionista;
         $this->aluno = $aluno;
     }
@@ -33,7 +35,18 @@ class Dieta
     function getDescricao() {
         return $this->descricao;
     }
+    
+    function getListaAlimentos()
+    {
+        return $this->listaAlimentos;
+    }
 
+    function setListaAlimentos($listaAlimentos)
+    {
+        $this->listaAlimentos = $listaAlimentos;
+    }
+
+    
     function getNutricionista() {
         return $this->nutricionista;
     }

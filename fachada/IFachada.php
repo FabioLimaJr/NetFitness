@@ -35,4 +35,17 @@ interface IFachada {
     public function listarTreino();
     public function detalharTreino($treino);
     
+    
+    public function inserirAlimento($alimento);
+    public function alterarAlimento($alimento);
+    public function excluirAlimento($alimento);
+    public function listarAlimentos();
+    public function detalharAlimento($alimento);
+    
+    public function inserirDieta($dieta);
+    public function alterarDieta($dieta);
+    public function excluirDieta($dieta);
+    public function listarDietas();
+    public function detalharDieta($dieta);
+    
 }

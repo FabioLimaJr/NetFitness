@@ -14,8 +14,11 @@ include($serverPath . 'controlador/ControladorSecretaria.php');
 include($serverPath . 'controlador/ControladorExercicio.php');
 include($serverPath . 'controlador/ControladorNutricionista.php');
 include($serverPath . 'controlador/ControladorTreino.php');
+include($serverPath . 'controlador/ControladorAlimento.php');
+include($serverPath . 'controlador/ControladorDieta.php');
 
-class Fachada implements IFachada {
+class Fachada implements IFachada 
+{
 
     private $controladorAluno;
     private $controladorInstrutor;
@@ -24,9 +27,13 @@ class Fachada implements IFachada {
     private $controladorExercicio;
     private $controladorNutricionista;
     private $controladorTreino;
+    private $controladorAlimento;
+    private $controladorDieta;
+    
     private static $instance = null;
 
-    function __construct() {
+    function __construct() 
+    {
         $this->controladorAluno = new ControladorAluno();
         $this->controladorInstrutor = new ControladorInstrutor();
         $this->controladorSecretaria = new ControladorSecretaria();
@@ -34,6 +41,8 @@ class Fachada implements IFachada {
         $this->controladorExercicio = new ControladorExercicio();
         $this->controladorNutricionista = new ControladorNutricionista();
         $this->controladorTreino = new ControladorTreino();
+        $this->controladorAlimento = new ControladorAlimento();
+        $this->controladorDieta = new ControladorDieta();
     }
 
 //self:: serve para chamar um atributo statico da propria classe
@@ -163,6 +172,56 @@ class Fachada implements IFachada {
 
     public function detalharTreino($treino) {
         return $this->controladorTreino->detalhar($treino);
+    }
+
+    public function alterarAlimento($alimento) 
+    {
+        
+    }
+
+    public function detalharAlimento($alimento) 
+    {
+        
+    }
+
+    public function excluirAlimento($alimento) 
+    {
+        
+    }
+
+    public function inserirAlimento($alimento) 
+    {
+        
+    }
+
+    public function listarAlimentos() 
+    {
+        return $this->controladorAlimento->listar();
+    }
+
+    public function alterarDieta($dieta)
+    {
+        
+    }
+
+    public function detalharDieta($dieta)
+    {
+        
+    }
+
+    public function excluirDieta($dieta)
+    {
+        
+    }
+
+    public function inserirDieta($dieta)
+    {
+        $this->controladorDieta->inserir($dieta);
+    }
+
+    public function listarDietas()
+    {
+        
     }
 
 }

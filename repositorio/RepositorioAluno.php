@@ -153,7 +153,7 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                 $result4 = mysqli_query($this->getConexao(), $sql4); 
                 $row4 = mysqli_fetch_assoc($result4);
                 
-                $dieta = new Dieta($row4['idDieta'], $row4['descricao'], null/*$nutricionista*/, null/*aluno*/);
+                $dieta = new Dieta($row4['idDieta'], $row4['descricao'],null/*listaAlimentos*/, null/*$nutricionista*/, null/*aluno*/);
                 
                 $aluno->setDieta($dieta);
                 
