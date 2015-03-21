@@ -54,7 +54,7 @@ interface IFachada {
     public function alterarNutricionista($nutricionista);
     public function excluirNutricionista($nutricionista);
     public function listarNutricionistas($nutricionista);
-    public function detalharNutricionista($nutricionista);
+    public function detalharNutricionistas($nutricionista);
     
     
 }
