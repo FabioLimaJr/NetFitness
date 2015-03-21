@@ -10,8 +10,6 @@
          
     </div>
     
-    
-    
     <h3>Usuário logado: <?php echo $coordenador->getNome() ?></h3>
    
     <div class="clear"></div>
