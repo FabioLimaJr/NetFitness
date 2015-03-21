@@ -32,8 +32,11 @@ class ControladorDieta
     
     function inserir($dieta)
     {
-        //conferir campos (alimentos selecionados, descrição etc..)
-        $this->getRepositorioDieta()->inserir($dieta);
+        
+        if(ExpressoesRegulares::validarDieta($dieta))
+        {
+            $this->getRepositorioDieta()->inserir($dieta);
+        }
     }
 
 
