@@ -150,11 +150,7 @@ class Fachada implements IFachada
         return $this->controladorInstrutor->logar($instrutor);
     }
 
-    public function logarNutricionista($nutricionista) {
-        return $this->controladorNutricionista->logar($nutricionista);
-    }
-
-    public function incluirTreino($treino) {
+       public function incluirTreino($treino) {
         return $this->controladorTreino->inserir($treino);
     }
 
@@ -223,5 +219,35 @@ class Fachada implements IFachada
     {
         
     }
+    
+    //Nutricionista
+     public function logarNutricionista($nutricionista) {
+        return $this->controladorNutricionista->logar($nutricionista);
+    }
+    
+    public function inserirNutricionista($nutricionista)
+    {
+        $this->controladorNutricionista->inserir($nutricionista);
+    }
+    
+     public function alterarNutricionista($nutricionista)
+    {
+        $this->controladorNutricionista->alterar($nutricionista);
+    }
+    
+    public function excluirNutricionista($nutricionista)
+    {
+        $this->controladorNutricionista->excluir($nutricionista);
+    }
 
+    public function listarNutricionista()
+    {
+        $this->controladorNutricionista->listar();
+    }
+    
+    public function detalharNutricionista($nutricionista)
+    {
+        $this->controladorNutricionista->detalhar($nutricionista);
+    }
+    
 }
