@@ -17,8 +17,6 @@
 <h1 class="title">Página usuário</h1>
     <div class="line"></div>
     
-    Nome: <?php echo $coordenador->getNome() ?>
-    
     <div class="intro" style="margin-bottom:50px">
          
     </div>
@@ -29,12 +27,7 @@
    
     <div class="clear"></div>
     <div class="line"></div>
-    
-    <!--
-     ($idAluno, $nome, $cpf, $endereco, $senha, $telefone, $login, $email, $sexo, $dataNascimento, $secretaria,
-                                $musica, $dieta, $listaPagamentos, $listaTreinos) 
-    -->
-    
+       
    <?php 
    
     if(!$camposPreenchidos)
@@ -57,7 +50,7 @@
              </li>
 
              <li class="form-row text-input-row">
-               <label>Cpf</label>
+               <label>CPF</label>
                <input type="text" name="cpf" value="<?php if(isset($nutricionista)) echo $nutricionista->getCpf() ?>" class="text-input" style="width: 300px">
              </li>
 
@@ -104,18 +97,19 @@
     } 
     else
     {
+             
         $nutricionista = new Nutricionista(null, $_POST['nome'], $_POST['cpf'], 
                         $_POST['endereco'], $_POST['senha'], 
                         $_POST['telefone'], $_POST['login'], 
                         $_POST['email'],$_POST['crn'], 
-                        $coordenador,null/*$dieta*/, null/*$dica*/);
+                        $coordenador, null/*$dieta*/, null/*$dica*/);
 
              $_SESSION['Nutricionista'] = $nutricionista; 
-            // var_dump($_SESSION['Nutricionista']);
+            var_dump($_SESSION['Nutricionista']);
 
              try
              {
-                $fachada->incluirAluno($nutricionista);
+                $fachada->inserirNutricionista($nutricionista);
                 $mensagem = "Parabéns, o(a) nutricionista ".$_POST['nome']." foi inserido(a)  com sucesso!";
                 unset($_SESSION['Nutricionista']);
 
