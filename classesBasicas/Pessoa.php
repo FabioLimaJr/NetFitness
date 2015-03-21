@@ -16,7 +16,23 @@ class Pessoa {
     private $login;
     private $email;
     
-    function __construct($idPessoa, $nome, $cpf, $endereco, $senha, $telefone, $login,$email) {
+    
+    public function __construct() 
+    {
+        $get_arguments       = func_get_args();
+        $number_of_arguments = func_num_args();
+
+        if (method_exists($this, $method_name = '__constructPai'.$number_of_arguments)) {
+            call_user_func_array(array($this, $method_name), $get_arguments);
+        }
+    }
+    
+    function __constructPai1($idPessoa)
+    {
+        $this->idPessoa = $idPessoa;
+    }
+    
+    function __constructPai8($idPessoa, $nome, $cpf, $endereco, $senha, $telefone, $login,$email) {
         $this->idPessoa = $idPessoa;
         $this->nome = $nome;
         $this->cpf = $cpf;

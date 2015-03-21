@@ -30,11 +30,11 @@ class RepositorioTreino extends Conexao implements IRepositorioTreino{
             if(mysqli_query($this->getConexao(), $sql)){
                 $this->fecharConexao();
             }else{
-                throw new Exception(Excecoes::inserirObjeto("Treino: ".  mysql_errno($this->getConexao())));
+                throw new Exception(Excecoes::inserirObjeto("Treino: ".  mysqli_error($this->getConexao())));
             }
             
         }  else {
-            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco()."(".$this->getConexao()->erro.")"));
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco()."(".$this->getConexao()->error.")"));
         }
     }
     

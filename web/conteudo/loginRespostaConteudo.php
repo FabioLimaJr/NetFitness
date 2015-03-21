@@ -20,9 +20,10 @@
             {
                $tipoUsuario =  get_class($usuarioLogado);
                $tipoDiv = "info-box";
-               ob_start();
-               var_dump($usuarioLogado);
-               $mensagem = ob_get_clean();
+               $_SESSION[$tipoUsuario] = $usuarioLogado;
+               $_SESSION['tipoUsuario'] = $tipoUsuario;
+               $mensagem = "<span style=\"color:black\">O usuário ".$usuarioLogado->getNome()." efetuou o login com sucesso.</span><br/><br/>";
+               $mensagem .= "<a href=\"".lcfirst($tipoUsuario).".php\">Clique aqui para acessar à sua pagina</a>";
                break;
             }
             

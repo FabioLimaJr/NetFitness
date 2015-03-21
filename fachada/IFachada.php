@@ -37,4 +37,25 @@ interface IFachada {
     
     public function listarOpinioes();
     
+    public function inserirAlimento($alimento);
+    public function alterarAlimento($alimento);
+    public function excluirAlimento($alimento);
+    public function listarAlimentos();
+    public function detalharAlimento($alimento);
+    
+    public function inserirDieta($dieta);
+    public function alterarDieta($dieta);
+    public function excluirDieta($dieta);
+    public function listarDietas();
+    public function detalharDieta($dieta);
+    
+    
+    //Nutricionista
+    public function inserirNutricionista($nutricionista);
+    public function alterarNutricionista($nutricionista);
+    public function excluirNutricionista($nutricionista);
+    public function listarNutricionistas($nutricionista);
+    public function detalharNutricionista($nutricionista);
+    
+    
 }

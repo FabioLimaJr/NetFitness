@@ -67,6 +67,22 @@ class RepositorioExercicio extends RepositorioGenerico implements IRepositorioEx
 
     public function excluir($exercicio) {
         
+        $sql = "USE " . $this->getNomeBanco();
+        
+        if(@$this->getConexao()->query($sql) === TRUE){
+            
+            $sql = "DELETE FROM exercicio WHERE idExercicio = ".$exercicio->getIdExercicio();
+            
+            if( mysqli_query($this->getConexao(), $sql)){
+                
+                $this->fecharConexao();
+                return TRUE;
+            }else{
+                throw new Exception(Excecoes::alterarObjeto("Exercício: ".mysqli_error($this->getConexao())));
+            }
+        }else{
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+        }
     }
 
     public function listar() {

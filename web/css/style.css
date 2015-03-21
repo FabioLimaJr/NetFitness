@@ -1462,6 +1462,11 @@ table td.center {
 table td.last {
 	background: none;
 }
+
+table.th{
+    font-weight: bold;
+}
+
 table th.center {
 	text-align: center;
 }
@@ -1500,6 +1505,8 @@ table.price td h4 sup {
 	line-height: 18px;
 	font-style: normal;
 }
+
+
 .check-icon {
 	background: transparent url(../images/check-table.png) no-repeat center left;
 	width: 12px;

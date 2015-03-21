@@ -15,8 +15,11 @@ include($serverPath . 'controlador/ControladorExercicio.php');
 include($serverPath . 'controlador/ControladorNutricionista.php');
 include($serverPath . 'controlador/ControladorTreino.php');
 include($serverPath . 'controlador/ControladorOpiniao.php');
+include($serverPath . 'controlador/ControladorAlimento.php');
+include($serverPath . 'controlador/ControladorDieta.php');
 
-class Fachada implements IFachada {
+class Fachada implements IFachada 
+{
 
     private $controladorAluno;
     private $controladorInstrutor;
@@ -26,9 +29,13 @@ class Fachada implements IFachada {
     private $controladorNutricionista;
     private $controladorTreino;
     private $controladorOpiniao;
+    private $controladorAlimento;
+    private $controladorDieta;
+    
     private static $instance = null;
 
-    function __construct() {
+    function __construct() 
+    {
         $this->controladorAluno = new ControladorAluno();
         $this->controladorInstrutor = new ControladorInstrutor();
         $this->controladorSecretaria = new ControladorSecretaria();
@@ -36,8 +43,9 @@ class Fachada implements IFachada {
         $this->controladorExercicio = new ControladorExercicio();
         $this->controladorNutricionista = new ControladorNutricionista();
         $this->controladorTreino = new ControladorTreino();
+        $this->controladorAlimento = new ControladorAlimento();
+        $this->controladorDieta = new ControladorDieta();
         $this->controladorOpiniao = new ControladorOpiniao();
-        
     }
 
 //self:: serve para chamar um atributo statico da propria classe
@@ -74,7 +82,7 @@ class Fachada implements IFachada {
     }
 
     public function incluirAluno($aluno) {
-        $this->controladorAluno->incluir($aluno);
+        $this->controladorAluno->inserir($aluno);
     }
 
     public function incluirInstrutor($instrutor) {
@@ -126,11 +134,11 @@ class Fachada implements IFachada {
     }
 
     public function alterarExercicio($exercicio) {
-        
+        return $this->controladorExercicio->alterar($exercicio);
     }
 
     public function excluirExercicio($exercicio) {
-        
+        return $this->controladorExercicio->excluir($exercicio);
     }
 
     public function listarExercicios() {
@@ -145,11 +153,7 @@ class Fachada implements IFachada {
         return $this->controladorInstrutor->logar($instrutor);
     }
 
-    public function logarNutricionista($nutricionista) {
-        return $this->controladorNutricionista->logar($nutricionista);
-    }
-
-    public function incluirTreino($treino) {
+       public function incluirTreino($treino) {
         return $this->controladorTreino->inserir($treino);
     }
 
@@ -171,6 +175,90 @@ class Fachada implements IFachada {
     
     public function listarOpinioes() {
         return $this->controladorOpiniao->listar();
+    }
+
+    public function alterarAlimento($alimento) 
+    {
+        
+    }
+
+    public function detalharAlimento($alimento) 
+    {
+        
+    }
+
+    public function excluirAlimento($alimento) 
+    {
+        
+    }
+
+    public function inserirAlimento($alimento) 
+    {
+        
+    }
+
+    public function listarAlimentos() 
+    {
+        return $this->controladorAlimento->listar();
+    }
+
+    public function alterarDieta($dieta)
+    {
+        
+    }
+
+    public function detalharDieta($dieta)
+    {
+        
+    }
+
+    public function excluirDieta($dieta)
+    {
+        
+    }
+
+    public function inserirDieta($dieta)
+    {
+        $this->controladorDieta->inserir($dieta);
+    }
+
+    public function listarDietas()
+    {
+        
+    }
+    
+    //Nutricionista
+     public function logarNutricionista($nutricionista) {
+        return $this->controladorNutricionista->logar($nutricionista);
+    }
+    
+    public function inserirNutricionista($nutricionista)
+    {
+        $this->controladorNutricionista->inserir($nutricionista);
+    }
+    
+     public function alterarNutricionista($nutricionista)
+    {
+        $this->controladorNutricionista->alterar($nutricionista);
+    }
+    
+    public function excluirNutricionista($nutricionista)
+    {
+        $this->controladorNutricionista->excluir($nutricionista);
+    }
+
+    public function listarNutricionista()
+    {
+        $this->controladorNutricionista->listar();
+    }
+    
+    public function detalharNutricionista($nutricionista)
+    {
+        $this->controladorNutricionista->detalhar($nutricionista);
+    }
+
+    public function listarNutricionistas($nutricionista) {
+        
     }
 
 }

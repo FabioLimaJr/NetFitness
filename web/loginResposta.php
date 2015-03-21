@@ -1,11 +1,12 @@
-<?php 
-
-include ('../fachada/Fachada.php');
+<?php
 include ('../classesBasicas/Aluno.php');
 include ('../classesBasicas/Coordenador.php');
 include ('../classesBasicas/Nutricionista.php');
 include ('../classesBasicas/Instrutor.php');
 include ('../classesBasicas/Secretaria.php');
+session_start();
+
+include ('../fachada/Fachada.php');
 include ('componentes/header.php') 
 
 ?>

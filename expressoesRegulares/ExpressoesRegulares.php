@@ -78,6 +78,38 @@ class  ExpressoesRegulares {
         return true;
     }
     
+    public static function validarDieta($objeto)
+    {
+        if(($objeto != "") && ($objeto != NULL))
+        {
+            if( !self::conferirDescricao($objeto->getDescricao())|| $objeto->getDescricao()=="")
+            {
+
+                throw new Exception(Excecoes::descricaoInvalida($objeto->getDescricao()));
+            }
+            
+            if($objeto->getListaAlimentos()==null)
+            {
+                throw new Exception(Excecoes::objetoNulo("A lista de alimentos é vazia"));
+            }
+            
+            if($objeto->getNutricionista()==null)
+            {
+                throw new Exception(Excecoes::objetoNulo("Nutricionista não inicializada"));
+            }
+            if($objeto->getAluno()==null)
+            {
+                throw new Exception(Excecoes::objetoNulo("Aluno não inicializado"));
+            }
+            
+        }
+        else
+        {
+            throw new Exception(Excecoes::objetoNulo("Dieta não inicializada"));
+        }
+        return true;
+    }
+    
     public static function conferirNome($nome){                    
         //$regularNome = "(^[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$";        
         //$regularNome = "^[aA-zZ]+((\s[aA-zZ]+)+)?$";
