@@ -16,7 +16,8 @@
 
 <h1 class="title">Página usuário</h1>
     <div class="line"></div>
-    
+        Nome: <?php echo $secretaria->getNome() ?> | Telefone:<?php echo $secretaria->getTelefone() ?> | Email:<?php echo $secretaria->getEmail() ?> | Endereço:<?php echo $secretaria->getEndereco() ?>
+     
     <div class="intro" style="margin-bottom:50px">
          
     </div>
