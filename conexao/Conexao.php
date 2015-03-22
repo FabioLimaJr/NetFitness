@@ -4,19 +4,15 @@
  *
  * @author Daniele
  */
-
-
-
 class Conexao {
  
  const nomeBanco = 'netfitness';   
  const nomeServidor = 'localhost';
  const nomeUsuario = 'root';
- const senhaUsuario = '';
- //const senhaUsuario = '123456';
+ //const senhaUsuario = '';
+ const senhaUsuario = '123456';
  //public $conexao;
  public $nomeBanco;
-
  
  public function __construct() 
  {
@@ -31,25 +27,19 @@ class Conexao {
          echo $exc->getMessage();
      }
   }
-
  public function getNomeBanco() {
      return $this->nomeBanco;
  }
-
  public function setNomeBanco() {
      $this->nomeBanco = self::nomeBanco;
  }
-
  
  public function getConexao() {
      return $this->conexao;
  }
-
  public function setConexao($conexao) {
      $this->conexao = $conexao;
  }
-
-
  private function criarConexao()
  {
    @$this->setConexao(new mysqli(self::nomeServidor, self::nomeUsuario, self::senhaUsuario));
@@ -65,6 +55,5 @@ class Conexao {
  {
      $this->getConexao()->close();
  }
-
 }
 ?>
