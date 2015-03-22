@@ -247,7 +247,7 @@ class Fachada implements IFachada
         $this->controladorNutricionista->excluir($nutricionista);
     }
 
-    public function listarNutricionista()
+    public function listarNutricionistas()
     {
         $this->controladorNutricionista->listar();
     }
