@@ -22,6 +22,26 @@ class ControladorOpiniao {
         $this->repositorioOpiniao = $repositorioOpiniao;
     }
     
+    public function inserir($opiniao){        
+        if((!ExpressoesRegulares::conferirDescricao($opiniao->getDescricao()))){
+            throw Excecoes::inserirObjeto($opiniao);
+        }else{
+            return $this->getRepositorioOpiniao()->inserir($Opiniao);
+        }
+    }
+    
+    public function alterar($opiniao){        
+        if((!ExpressoesRegulares::conferirDescricao($opiniao->getDescricao()))){
+            throw Excecoes::inserirObjeto($opiniao);
+        }else{
+            return $this->getRepositorioTreino()->inserir($opiniao);
+        }        
+    }
+    
+    public function excluir($opiniao){
+        return $this->getRepositorioOpiniao()->excluir($opiniao);
+    }
+    
     public function listar(){
         return $this->repositorioOpiniao->listar(); 
     }

@@ -109,4 +109,8 @@ class RepositorioOpiniao extends RepositorioGenerico implements IRepositorioOpin
         }
         
     }
+    
+    public function detalhar(){
+        
+    }
 }
