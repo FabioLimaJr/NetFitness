@@ -17,6 +17,7 @@ include($serverPath . 'controlador/ControladorTreino.php');
 include($serverPath . 'controlador/ControladorOpiniao.php');
 include($serverPath . 'controlador/ControladorAlimento.php');
 include($serverPath . 'controlador/ControladorDieta.php');
+include($serverPath . 'controlador/ControladorPagamento.php');
 
 class Fachada implements IFachada 
 {
