@@ -6,7 +6,7 @@ $mensagem ="";
 
 try
 {
-    $listaDietas = $fachada->listarDietas();
+    $listaDietas = $fachada->listarDietas($_SESSION['Nutricionista']);
     //var_dump($listaDietas);
 } 
 catch (Exception $exc)

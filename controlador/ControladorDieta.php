@@ -25,9 +25,10 @@ class ControladorDieta
         $this->repositorioDieta = $repositorioDieta;
     }
     
-    function listar()
-    {
-        return $this->getRepositorioDieta()->listar();
+    function listar($nutricionista)
+    {   
+        //falta conferir nutricionista nulo
+        return $this->getRepositorioDieta()->listar($nutricionista);
     }
     
     function inserir($dieta)
