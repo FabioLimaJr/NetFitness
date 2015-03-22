@@ -38,6 +38,18 @@ class ControladorDieta
             $this->getRepositorioDieta()->inserir($dieta);
         }
     }
+    
+    function excluir($dieta)
+    {
+        if($dieta!=null || $dieta!="")
+        {
+            $this->repositorioDieta()->excluir($dieta);
+        }
+        else
+        {
+            throw Excecoes::excluirObjeto("Dieta");
+        }
+    }
 
 
 }

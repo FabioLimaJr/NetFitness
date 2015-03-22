@@ -15,6 +15,7 @@
             <li><a href="prescreverDieta.php">Prescrever</a></li>
             <li><a href="excluirDieta.php">Excluir</a></li>
             <li><a href="alterarDieta.php">Alterar</a></li>
+            <li><a href="listarDietas.php">Listar</a></li>
             <li><a href="detalharDieta.php">Detalhar</a></li>
             
           </ul>

@@ -207,7 +207,7 @@ class Fachada implements IFachada
 
     public function excluirDieta($dieta)
     {
-        
+        $this->controladorDieta->excluir($dieta);
     }
 
     public function inserirDieta($dieta)
@@ -217,7 +217,7 @@ class Fachada implements IFachada
 
     public function listarDietas()
     {
-        
+        return $this->controladorDieta->listar();
     }
     
     //Nutricionista
