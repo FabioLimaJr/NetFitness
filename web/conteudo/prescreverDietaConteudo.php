@@ -1,6 +1,7 @@
 <?php
  $camposPreenchidos = false;
  $fachada = Fachada::getInstance();
+ $listaAlunosSemDieta = array();
  $mensagem = "";
  
   
@@ -41,6 +42,19 @@
    
     if(!$camposPreenchidos)
     {   
+        
+        
+        foreach($listaAlunos as $aluno)
+        {
+          
+            if($aluno->getDieta()->getIdDieta()==null)
+            {
+                array_push($listaAlunosSemDieta, $aluno);
+            }
+        }
+        
+        if(count($listaAlunosSemDieta)!=0)
+        {
         ?> 
          <div class="form-container" style="margin-bottom:50px">
          <form class="forms" action="prescreverDieta.php" method="post" >
@@ -62,7 +76,7 @@
                    <?php
                    $primeiro = true;
                    $selecionado = "selected=\"selected\"";
-                   foreach ($listaAlunos as $aluno) 
+                   foreach ($listaAlunosSemDieta as $aluno) 
                    {     
                       ?>  
                         <option <?php echo $selecionado ?> value="<?php echo $aluno->getIdAluno() ?>"><?php echo $aluno->getNome() ?></option>
@@ -117,7 +131,12 @@
        </form>
        <div class="response"></div>
      </div>
-        <?php 
+        <?php
+        }
+        else
+        {
+            $mensagem = "Todos os alunos já têm uma dieta prescrita";
+        }
     } 
     else
     {
@@ -159,35 +178,11 @@
            $mensagem = $exc->getMessage();
        }
 
-
-       /*
-
-           $aluno = new Aluno(null, $_POST['nome'], $_POST['cpf'], 
-                                $_POST['endereco'], $_POST['senha'], 
-                                $_POST['telefone'], $_POST['login'], 
-                                $_POST['email'],$_POST['sexo'], 
-                                $_POST['dataNascimento'], $secretaria, 
-                               
-
-             $_SESSION['Aluno'] = $aluno; 
-            // var_dump($_SESSION['Aluno']);
-
-             try
-             {
-                $fachada->incluirAluno($aluno);
-                $mensagem = "Parabéns, o aluno ".$_POST['nome']." foi incluido com sucesso!";
-                unset($_SESSION['Aluno']);
-
-             }
-             catch(Exception $exc)
-             {
-                $mensagem = $exc->getMessage();
-             }*/
     }
   
    
    
-   if($camposPreenchidos) { ?>
+   if($camposPreenchidos || count($listaAlunosSemDieta)==0) { ?>
     
         <h3>Mensagem</h3>
         <p><?php echo $mensagem ?></p>

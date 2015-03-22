@@ -44,7 +44,7 @@ class ControladorDieta
     {
         if($dieta!=null || $dieta!="")
         {
-            $this->repositorioDieta()->excluir($dieta);
+            $this->getRepositorioDieta()->excluir($dieta);
         }
         else
         {

@@ -113,6 +113,7 @@ class RepositorioDieta extends Conexao implements IRepositorioDieta
         
             
             $sql = "SELECT * FROM dieta WHERE idNutricionista ='".$nutricionista->getIdNutricionista()."'";
+            //$sql = "SELECT * FROM dieta";
             $result = mysqli_query($this->getConexao(), $sql);
             
             while ($row = mysqli_fetch_array($result)) 

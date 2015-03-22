@@ -19,7 +19,22 @@ class Dieta
     private $nutricionista;
     private $aluno;
     
-    function __construct($idDieta, $descricao, $listaAlimentos, $nutricionista, $aluno) {
+    public function __construct() 
+    {
+        $get_arguments       = func_get_args();
+        $number_of_arguments = func_num_args();
+
+        if (method_exists($this, $method_name = '__construct'.$number_of_arguments)) {
+            call_user_func_array(array($this, $method_name), $get_arguments);
+        }
+    }
+    
+    function __construct1($idDieta)
+    {
+        $this->setIdDieta($idDieta);
+    }
+    
+    function __construct5($idDieta, $descricao, $listaAlimentos, $nutricionista, $aluno) {
         $this->idDieta = $idDieta;
         $this->descricao = $descricao;
         $this->listaAlimentos = $listaAlimentos;
