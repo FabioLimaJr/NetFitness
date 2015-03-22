@@ -1454,7 +1454,7 @@ table th {
 	padding: 10px;
 	text-align: left;
 	border-right:1px solid #dedede;
-	font-weight: normal;
+	font-weight: bold;
 }
 table td.center {
 	text-align: center;

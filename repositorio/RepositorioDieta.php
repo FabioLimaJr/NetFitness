@@ -30,7 +30,29 @@ class RepositorioDieta extends Conexao implements IRepositorioDieta
 
     public function excluir($dieta) 
     {
+        $sql = "USE " . $this->getNomeBanco();
         
+        if($this->getConexao()->query($sql) === true)
+        {
+            
+            $id = $dieta->getIdDieta();
+            
+            $sql = "DELETE FROM dieta where idDieta = '".$id."'";
+            
+            if(mysqli_query($this->getConexao(), $sql))
+            {               
+                $this->fecharConexao();
+            }
+            else
+            {
+                throw new Exception(Excecoes::inserirObjeto("Dieta: ".  mysqli_error($this->getConexao())));
+            }
+            
+        }  
+        else 
+        {
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco()."(".$this->getConexao()->error.")"));
+        }
     }
 
     public function inserir($dieta) 
@@ -79,9 +101,50 @@ class RepositorioDieta extends Conexao implements IRepositorioDieta
         }
     }
 
-    public function listar() 
+    public function listar($nutricionista) 
     {
+        $listaDietas = array();
         
+        $sql = "USE " . $this->getNomeBanco();
+    
+        
+        if($this->getConexao()->query($sql) === TRUE)
+        {
+        
+            
+            $sql = "SELECT * FROM dieta WHERE idNutricionista ='".$nutricionista->getIdNutricionista()."'";
+            $result = mysqli_query($this->getConexao(), $sql);
+            
+            while ($row = mysqli_fetch_array($result)) 
+            {
+              
+                $dieta = new Dieta($row['idDieta'], $row['descricao'], null/*$listaAlimentos*/, null/*$nutricionista*/, null/*$aluno*/);
+                
+                $repositorioNutricionista = new RepositorioNutricionista;
+                $nutricionista = new Nutricionista($row['idNutricionista']);
+                $nutricionistaRetornado = $repositorioNutricionista->detalhar($nutricionista);
+                
+                $repositorioAluno = new RepositorioAluno;
+                $aluno = new Aluno($row['idAluno']);
+                $alunoRetornado = $repositorioAluno->detalhar($aluno);
+                
+                $dieta->setAluno($alunoRetornado);
+                $dieta->setNutricionista($nutricionistaRetornado);
+                
+                //falta incluir a lista de alimentos (esperando que seja implementada detalharAlimento)
+                //ler de alimentodieta os alimentos incluidos e, por cada um chamar o detalharAlimento
+                
+                array_push($listaDietas, $dieta);
+                
+            }
+            
+            return($listaDietas);        
+          
+         }
+         else 
+        {
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+        }
     }
 
 }

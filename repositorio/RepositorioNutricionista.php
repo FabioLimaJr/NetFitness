@@ -130,8 +130,8 @@ class RepositorioNutricionista extends RepositorioGenerico implements IRepositor
             while ($row = mysqli_fetch_array($result)) 
             {
 
-                 function __construct($idNutricionista, $coordenador, $crn, $listaDietas, $listaDicas, 
-                         $nome, $cpf, $endereco, $senha, $telefone, $email, $login){ 
+                 //function __construct($idNutricionista, $coordenador, $crn, $listaDietas, $listaDicas, 
+                         //$nome, $cpf, $endereco, $senha, $telefone, $email, $login){ 
 
 
 
@@ -156,7 +156,7 @@ class RepositorioNutricionista extends RepositorioGenerico implements IRepositor
                 $result3 = mysqli_query($this->getConexao(), $sql3); 
                 while ($row3 = mysqli_fetch_array($result3)) 
                 {
-                    $dieta = new Dieta($row3['idDieta'], $row3['descricao'], null/*$aluno*/, null/*$nutricionista*/);                
+                    $dieta = new Dieta($row3['idDieta'], $row3['descricao'], null/*listaAlimentos*/,null/*$aluno*/, null/*$nutricionista*/);                
                     array_push($listaDietas, $dieta); 
                     
                 }
@@ -186,7 +186,7 @@ class RepositorioNutricionista extends RepositorioGenerico implements IRepositor
                 
             }
             return $nutricionista;
-        }
+        
         }
         else 
         {

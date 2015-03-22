@@ -65,7 +65,7 @@ class Nutricionista extends Pessoa {
     function setCrn($crn) {
         $this->crn = $crn;
     }
-    function setDietas($listaDietas) {
+    function setListaDietas($listaDietas) {
         $this->listaDietas = $listaDietas;
     }
     function setListaDicas($listaDicas) {

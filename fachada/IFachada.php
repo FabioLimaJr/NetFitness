@@ -50,7 +50,7 @@ interface IFachada {
     public function inserirDieta($dieta);
     public function alterarDieta($dieta);
     public function excluirDieta($dieta);
-    public function listarDietas();
+    public function listarDietas($nutricionista);
     public function detalharDieta($dieta);
     
     //Nutricionista
