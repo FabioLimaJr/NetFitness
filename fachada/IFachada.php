@@ -35,6 +35,11 @@ interface IFachada {
     public function listarTreino();
     public function detalharTreino($treino);
     
+    //Opinião
+    public function inserirOpiniao($opiniao);
+    public function alterarOpiniao($opiniao);
+    public function excluirOpiniao($opiniao);
+    public function listarOpinioes();
     
     public function inserirAlimento($alimento);
     public function alterarAlimento($alimento);
@@ -48,13 +53,18 @@ interface IFachada {
     public function listarDietas($nutricionista);
     public function detalharDieta($dieta);
     
-    
     //Nutricionista
     public function inserirNutricionista($nutricionista);
     public function alterarNutricionista($nutricionista);
     public function excluirNutricionista($nutricionista);
     public function listarNutricionistas();
     public function detalharNutricionista($nutricionista);
+    
+    //pagamento
+    public function inserirPagamento($pagamento);
+    public function alterarPagamento($pagamento);
+    public function excluirPagamento($pagamento);
+    public function ListarPagamento();
     
     
 }

@@ -14,6 +14,7 @@ include($serverPath . 'controlador/ControladorSecretaria.php');
 include($serverPath . 'controlador/ControladorExercicio.php');
 include($serverPath . 'controlador/ControladorNutricionista.php');
 include($serverPath . 'controlador/ControladorTreino.php');
+include($serverPath . 'controlador/ControladorOpiniao.php');
 include($serverPath . 'controlador/ControladorAlimento.php');
 include($serverPath . 'controlador/ControladorDieta.php');
 
@@ -27,8 +28,10 @@ class Fachada implements IFachada
     private $controladorExercicio;
     private $controladorNutricionista;
     private $controladorTreino;
+    private $controladorOpiniao;
     private $controladorAlimento;
     private $controladorDieta;
+    private $controladorPagamento;
     
     private static $instance = null;
 
@@ -43,6 +46,8 @@ class Fachada implements IFachada
         $this->controladorTreino = new ControladorTreino();
         $this->controladorAlimento = new ControladorAlimento();
         $this->controladorDieta = new ControladorDieta();
+        $this->controladorOpiniao = new ControladorOpiniao();
+        $this->controladorPagamento = new ControladorPagamento();
     }
 
 //self:: serve para chamar um atributo statico da propria classe
@@ -169,6 +174,23 @@ class Fachada implements IFachada
     public function detalharTreino($treino) {
         return $this->controladorTreino->detalhar($treino);
     }
+    
+    //Opinião
+    public function inserirOpiniao($opiniao) {
+        return $this->controladorOpiniao->inserir($opiniao);
+    }
+    
+    public function alterarOpiniao($opiniao) {
+        return $this->controladorOpiniao->alterar($opiniao);
+    }
+    
+    public function excluirOpiniao($opiniao) {
+        return $this->controladorOpiniao->excluir($opiniao);
+    }
+
+    public function listarOpinioes() {
+        return $this->controladorOpiniao->listar();
+    }
 
     public function alterarAlimento($alimento) 
     {
@@ -250,4 +272,20 @@ class Fachada implements IFachada
         $this->controladorNutricionista->detalhar($nutricionista);
     }
     
+    //pagamento
+    public function inserirPagamento($pagamento) {
+        $this->controladorPagamento->inserir($pagamento);
+    }
+    
+    public function alterarPagamento($pagamento) {
+        $this->controladorPagamento->alterar($pagamento);
+    }
+    
+    public function excluirPagamento($pagamento) {
+        $this->controladorPagamento->excluir($pagamento);
+    }
+    
+    public function ListarPagamento() {
+        $this->controladorPagamento->listar();
+    }
 }

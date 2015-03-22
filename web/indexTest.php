@@ -12,6 +12,7 @@
  include('../classesBasicas/Aluno.php');
  include('../classesBasicas/Secretaria.php');
  include('../classesBasicas/Exercicio.php');
+ include('../classesBasicas/Opiniao.php');
  
  include('../expressoesRegulares/ExpressoesRegulares.php');
  include('../excecoes/Excecoes.php');
@@ -168,17 +169,17 @@ $coordenador = new Coordenador(2, array(), array(), array(), "", "", "", "", "",
  $fachada->incluirExercicio($exercicio);*/
  
  //Teste Incluir Treino
-$instrutor = new Instrutor(7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+//$instrutor = new Instrutor(7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 //$treino = new Treino(null, "corrida", "corrida na istera", $instrutor);
-$treino = new Treino(null, "corridor", "corridorrrrrrr na pista", $instrutor);
+//$treino = new Treino(null, "corridor", "corridorrrrrrr na pista", $instrutor);
 //$instrutor = new Instrutor(2, $coordenador, array(), array(), array(), "Marcelo Lopes", "123.456.654-23", "Rua teste", "myP@ssword01", "(81) 3438-3481", "MarceloLopes22", "marcelo_m.lopes2@hotmail.com");
  
 //$fachada = new Fachada();
 
-$fachada = Fachada::getInstance();
+//$fachada = Fachada::getInstance();
 
 //$controladorTreino = new ControladorTreino();
- try 
+ /*try 
  {
      $fachada->incluirTreino($treino);
    //$treino = $controladorTreino->inserir($treino);
@@ -190,5 +191,18 @@ $fachada = Fachada::getInstance();
  {
     echo $exc->getMessage();
  }                
+ */
+ 
+  //Teste Listar Alunos
+ $fachada = new Fachada();
+ 
+ $fachada = Fachada::getInstance();
+ 
+ try {
+    $listaOpinioes = $fachada->listarOpinioes();
+    var_dump($listaOpinioes);
+} catch (Exception $exc) {
+    echo $exc->getMessage();
+}
  
 
