@@ -101,6 +101,9 @@ class Aluno extends Pessoa
         return $this->listaTreinos;
     }
 
+     function getFoto() {
+        return $this->foto;
+    }
     function setMusica($musica) {
         $this->musica = $musica;
     }
@@ -117,9 +120,7 @@ class Aluno extends Pessoa
         $this->listaTreinos = $listaTreinos;
     }
 
-    function getFoto() {
-        return $this->foto;
-    }
+   
 
     function setFoto($foto) {
         $this->foto = $foto;
