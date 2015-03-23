@@ -36,6 +36,11 @@ class Excecoes
         return "Impossível alterar o objeto ".$message."\n";
     }
     
+    public static function detalharObjeto($message)
+    {
+        return "Impossível detalhar o objeto ".$message."\n";
+    }
+    
     public static function parentInvalido($message1,$message2)
     {
         return "Impossível alterar o objeto ".$message1.". O objeto ".$message2." não existe no banco\n";

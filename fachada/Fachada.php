@@ -220,12 +220,12 @@ class Fachada implements IFachada
 
     public function alterarDieta($dieta)
     {
-        
+        $this->controladorDieta->alterar($dieta);
     }
 
     public function detalharDieta($dieta)
     {
-        
+        return $this->controladorDieta->detalhar($dieta);
     }
 
     public function excluirDieta($dieta)

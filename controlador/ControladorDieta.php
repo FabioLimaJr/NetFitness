@@ -51,6 +51,30 @@ class ControladorDieta
             throw Excecoes::excluirObjeto("Dieta");
         }
     }
+    
+    function detalhar($dieta)
+    {
+        if($dieta == null || $dieta == "")
+        {
+            throw Excecoes::detalharObjeto("Dieta");
+        }
+        else
+        {
+            return $this->getRepositorioDieta()->detalhar($dieta);
+        }
+    }
+    
+    function alterar($dieta)
+    {
+        if($dieta == null || $dieta == "")
+        {
+            throw Excecoes::alterarObjeto("Dieta");
+        }
+        else
+        {
+            $this->getRepositorioDieta()->alterar($dieta);
+        }
+    }
 
 
 }

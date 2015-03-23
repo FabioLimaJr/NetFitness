@@ -20,12 +20,113 @@ class RepositorioDieta extends Conexao implements IRepositorioDieta
     
     public function alterar($dieta) 
     {
+        $sql = "USE " . $this->getNomeBanco();
+        $idDieta = $dieta->getIdDieta();
+        $descricaoDieta = $dieta->getDescricao();
         
+        if($this->getConexao()->query($sql) === true)
+        {
+            
+            $sql = "UPDATE dieta SET descricao='".$descricaoDieta."' WHERE idDieta ='".$idDieta."'";;        
+            
+            if(mysqli_query($this->getConexao(), $sql))
+            {
+                
+                $sql2 = "DELETE FROM dietaalimento WHERE idDieta ='".$idDieta."'";
+                
+                if(mysqli_query($this->getConexao(), $sql2))
+                {
+                
+                    foreach($dieta->getListaAlimentos() as $alimento)
+                    {
+                        $sql3 = "INSERT INTO dietaalimento VALUES('";
+                        $sql3.= $idDieta."','";
+                        $sql3.= $alimento->getIdAlimento()."')";
+
+                        if(!mysqli_query($this->getConexao(), $sql3))
+                        {
+                            //remover dieta inserida e os elementos de deitaalimento jà inseridos 
+                            //ou usar autocommit false(preferido) e fazer o commit final
+
+                            $this->fecharConexao();
+                            throw new Exception(Excecoes::inserirObjeto("Dieta: ".  mysqli_error($this->getConexao())));
+                        }
+                    }
+                }
+                else
+                {
+                    $this->fecharConexao();
+                   throw new Exception(Excecoes::alterarObjeto("Dieta: ".  mysqli_error($this->getConexao()))); 
+                }
+                
+                $this->fecharConexao();
+               
+            }
+            else
+            {
+                $this->fecharConexao();
+                throw new Exception(Excecoes::inserirObjeto("Dieta: ".  mysqli_error($this->getConexao())));
+            }
+            
+        }  else {
+            $this->fecharConexao();
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco()."(".$this->getConexao()->error.")"));
+        }
     }
 
     public function detalhar($dieta) 
     {
+        $sql = "USE " . $this->getNomeBanco();
         
+        if($this->getConexao()->query($sql) === true)
+        { 
+            $sql = "SELECT * FROM dieta WHERE idDieta = '".$dieta->getIdDieta()."'";   
+            $result = mysqli_query($this->getConexao(), $sql);
+            $row = mysqli_fetch_assoc($result);
+            
+            $dietaRetornada = new Dieta($row['idDieta'], $row['descricao'], null/*$listaAlimentos*/, 
+                               null/*$nutricionista*/, null/*$aluno*/);
+            
+             
+            
+            $listaAlimentos = array();
+            
+            $sql2 = "SELECT * FROM dietaalimento WHERE idDieta = '".$dieta->getIdDieta()."'";
+            $result2 = mysqli_query($this->getConexao(), $sql2);
+            
+            while ($row2 = mysqli_fetch_array($result2)) 
+            {
+               
+                $idAlimento = $row2['idAlimento'];
+                
+                $sql3 = "SELECT * FROM alimento WHERE idAlimento = '".$idAlimento."'";
+                $result3 = mysqli_query($this->getConexao(), $sql3);
+                
+                while ($row3 = mysqli_fetch_array($result3))
+                {
+                     $alimento = new Alimento($row3['idAlimento'], $row3['descricao'], 
+                                              $row3['caloria'], $row3['proteina'], 
+                                              $row3['carboidrato'], $row3['gordura'], null/*$nutricionista*/);
+                     array_push($listaAlimentos, $alimento);
+                }
+                
+            }
+            
+            $dietaRetornada->setListaAlimentos($listaAlimentos);
+            
+            $repositorioAluno = new RepositorioAluno();
+            $aluno = new Aluno($row['idAluno']);
+            $dietaRetornada->setAluno($repositorioAluno->detalhar($aluno));
+            
+            $this->fecharConexao();
+            
+            return $dietaRetornada;
+        }  
+        else 
+        {
+            $this->fecharConexao();
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco()."(".$this->getConexao()->error.")"));
+        }
     }
 
     public function excluir($dieta) 
