@@ -18,7 +18,9 @@ class Aluno extends Pessoa
     private $dieta;
     private $listaPagamentos;
     private $listaTreinos; 
- 
+    private $foto;
+
+
     public function __construct() 
     {
         $get_arguments       = func_get_args();
@@ -35,7 +37,7 @@ class Aluno extends Pessoa
     }
     
     public function __construct15($idAluno, $nome, $cpf, $endereco, $senha, $telefone, $login, $email, $sexo, $dataNascimento, $secretaria,
-                                $musica, $dieta, $listaPagamentos, $listaTreinos) 
+                                $musica, $dieta, $listaPagamentos, $listaTreinos, $foto) 
     {
         parent::__construct($idAluno, $nome, $cpf, $endereco, $senha, $telefone, $login, $email);
         
@@ -113,6 +115,14 @@ class Aluno extends Pessoa
 
     function setListaTreinos($listaTreinos) {
         $this->listaTreinos = $listaTreinos;
+    }
+
+    function getFoto() {
+        return $this->foto;
+    }
+
+    function setFoto($foto) {
+        $this->foto = $foto;
     }
 
 
