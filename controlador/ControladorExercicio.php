@@ -68,4 +68,8 @@ class ControladorExercicio {
     public function listar(){
         return $this->repositorioExercicio->listar();
     }
+    
+    public function detalhar($exercicio) {
+        return $this->repositorioExercicio->detalhar($exercicio);
+    }
 }

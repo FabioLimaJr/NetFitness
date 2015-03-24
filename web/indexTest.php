@@ -198,8 +198,9 @@ $coordenador = new Coordenador(2, array(), array(), array(), "", "", "", "", "",
  
  $fachada = Fachada::getInstance();
  
+ $exercicio = new Exercicio(2, "", "", "");
  try {
-    $listaExercicios = $fachada->listarExercicios();
+    $listaExercicios = $fachada->detalharExercicio($exercicio);
     var_dump($listaExercicios);
 } catch (Exception $exc) {
     echo $exc->getMessage();

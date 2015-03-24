@@ -102,7 +102,7 @@ class RepositorioExercicio extends RepositorioGenerico implements IRepositorioEx
                 
                 array_push($listaExercicios, $exercicio);
             }
-            
+            $this->fecharConexao();
             return $listaExercicios;
         }else{
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
@@ -111,5 +111,23 @@ class RepositorioExercicio extends RepositorioGenerico implements IRepositorioEx
 
     public function detalhar($exercicio) {
         
+        $sql = "USE " . $this->getNomeBanco();
+        
+        if($this->getConexao()->query($sql) === TRUE){
+            
+            $sql = "SELECT * FROM exercicio WHERE exercicio.idExercicio = " . $exercicio->getIdExercicio();
+            $result = mysqli_query($this->getConexao(), $sql);
+            
+            while($row = mysqli_fetch_array($result)){
+                
+                $exercicioDetalhado = new Exercicio($row['idExercicio'], $row['nome'], $row['musculo'], $row['descricao']);
+                
+            }
+            $this->fecharConexao();
+            return $exercicioDetalhado;
+            
+        }else{
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+        }
     }
 }
