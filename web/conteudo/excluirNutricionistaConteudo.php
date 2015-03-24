@@ -25,10 +25,10 @@ catch (Exception $exc)
 
 <h1 class="title">Excluir Nutricionista</h1>
     <div class="line"></div>
-    Telefone:<?php //echo $coordenador->getTelefone() ?> | Email:<?php //echo $coordenador->getEmail() ?> | Endereço:<?php //echo $coordenador->getEndereco() ?>
+    Telefone:<?php //echo $coordenador->getTelefone() ?> | Email:<?php// echo $coordenador->getEmail() ?> | Endereço:<?php //echo $coordenador->getEndereco() ?>
     <div class="intro" style="margin-bottom:50px"></div>
     
-    <h3>Usuário logado: <?php //echo $coordenador->getNome() ?></h3>
+    <h3>Usuário logado: <?php// echo $coordenador->getNome() ?></h3>
    
     <div class="clear"></div>
     <div class="line"></div>
@@ -40,27 +40,27 @@ catch (Exception $exc)
  
         <div class="form-container" style="margin-bottom:50px">
          
-        <form class="forms" action="excluirDieta.php" method="post" >
+            <form class="forms" action="excluirNutricionista.php" method="post" >
          <fieldset>
             <ol>
 
 
              <li class="form-row text-input-row">
-               <label>Dietas</label>
+               <label>Nutricionistas</label>
                <table style="width:100%">
                     <tr>
-                      <th>Nome Aluno</th> 
-                      <th>Descrição Dieta</th>
+                      <th>Nome da Nutricionista</th> 
+                      <th>CRN</th>
                       <th>Selecionar</th>
                     </tr>
                     
-                    <?php foreach ($listaDietas as $dieta){ ?>
+                    <?php foreach ($listaNutricionistas as $nutricionista){ ?>
                     <tr>
-                        <td><?php echo $dieta->getAluno()->getNome() ?></td> 
-                        <td><?php echo $dieta->getDescricao() ?></td>  
-                        <td><input type="radio" name="idDieta" value="<?php echo $dieta->getIdDieta() ?>"></td>  
+                        <td><?php echo $nutricionista->getNome() ?></td> 
+                        <td><?php echo $nutricionista->getCrn() ?></td>  
+                        <td><input type="radio" name="idNutricionista" value="<?php echo $nutricionista->getIdNutricionista() ?>"></td>  
                     </tr>
-                    <input type="hidden" name="nomeAluno<?php echo $dieta->getIdDieta() ?>" value="<?php echo $dieta->getAluno()->getNome() ?>">
+                    <input type="hidden" name="nomeNutricionista<?php echo $nutricionista->getIdNutricionista() ?>" value="<?php echo $nutricionista->getNome() ?>">
                     <?php } ?>
                     
                 </table>
@@ -84,9 +84,9 @@ catch (Exception $exc)
     { 
         try
         {
-            $dieta = new Dieta($_POST['idDieta']);
-            $fachada->excluirDieta($dieta);
-            $mensagem = "A dieta do aluno ".$_POST['nomeAluno'.$dieta->getIdDieta()]." foi excluida com sucesso.";
+            $nutricionista = new Nutricionista($_POST['idNutricionista']);
+            $fachada->excluirNutricionista($nutricionista);
+            $mensagem = "A Nutricionista ".$_POST['nomeNutricionista'.$nutricionista->getIdNutricionista()]." foi excluida com sucesso.";
         } 
         catch (Exception $exc)
         {
