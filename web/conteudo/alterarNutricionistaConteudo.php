@@ -12,8 +12,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
 try
 {
-    $listaNutricionistas = $fachada->listarNutricionistas($_SESSION['Coordenador']);
-    $listaDietas = $fachada->listarDietas();
+    $listaNutricionistas = $fachada->listarNutricionistas();
 } 
 catch (Exception $exc)
 {
@@ -61,8 +60,7 @@ catch (Exception $exc)
                              <td><?php echo $nutricionista->getCpf() ?></td>  
                              <td><?php echo $nutricionista->getCrn() ?></td>
                              <td><?php echo $nutricionista->getTelefone() ?></td>
-                             <td>Falta lista Dietas</td>  
-                             <td><input type="radio" name="idDieta" value="<?php echo $dieta->getIdDieta() ?>"></td>
+                             <td><input type="radio" name="idNutricionista" value="<?php echo $nutricionista->getIdNutricionista() ?>"></td>
                          </tr>
 
                          <?php 
@@ -85,10 +83,10 @@ catch (Exception $exc)
     }
     else
     {
-         if(isset($_POST['idDieta']))
+         if(isset($_POST['idNutricionista']))
          {
-             $dieta = new Dieta($_POST['idDieta']);
-             $dietaRetornada = $fachada->detalharDieta($dieta);
+             $nutricionista = new Nutricionista($_POST['idNutricionista']);
+             $nutricionistaRetornada = $fachada->detalharDieta($dieta);
              
              $listaAlimentosNaoSelecionados = array();
              $listaAlimentosSelecionados = $dietaRetornada->getListaAlimentos();
