@@ -29,8 +29,10 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                 $sql = "INSERT INTO aluno values('";
                 $sql.= $id ."','";
                 $sql.= $aluno->getSexo()."','";
-                $sql.= $aluno->getDataNascimento()."','";                
-                $sql.= $aluno->getSecretaria()->getIdSecretaria()."')";
+                $sql.= $aluno->getDataNascimento()."',";  
+                $sql.= "'foto que falta','"; //foto
+                $sql.= $aluno->getSecretaria()->getIdSecretaria()."',";  
+                $sql.= "null)"; //musica
                 
                 if (mysqli_query($this->getConexao(), $sql)) 
                 {
@@ -240,6 +242,12 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                 $secretaria = new Secretaria($row['idSecretaria'], $row2['nome'], $row2['cpf'], $row2['endereco'], $row2['senha'], $row2['telefone'], $row2['login'], $row2['email'], null/*$coordenador*/);
                 
                 $aluno->setSecretaria($secretaria);
+                
+                $sql3 = "SELECT * FROM dieta WHERE idAluno = '".$row['idPessoa']."'";
+                $result3 = mysqli_query($this->getConexao(), $sql3);
+                $row3 = mysqli_fetch_assoc($result3);
+                $dieta = new Dieta($row3['idDieta']);
+                $aluno->setDieta($dieta);
                 
                 array_push($listaAlunos, $aluno);
                 
