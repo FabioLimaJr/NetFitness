@@ -20,4 +20,6 @@ interface IRepositorioExercicio {
     public function excluir($exercicio);
     
     public function listar();
+    
+    public function detalhar($exercicio);
 }

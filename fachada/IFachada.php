@@ -66,5 +66,10 @@ interface IFachada {
     public function excluirPagamento($pagamento);
     public function ListarPagamento();
     
-    
+    //Exercicio
+    public function incluirExercicio($exercicio);
+    public function alterarExercicio($exercicio);
+    public function excluirExercicio($exercicio);
+    public function listarExercicios();
+    public function detalharExercicio($exercicio);
 }

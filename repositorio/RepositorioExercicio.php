@@ -87,6 +87,29 @@ class RepositorioExercicio extends RepositorioGenerico implements IRepositorioEx
 
     public function listar() {
         
+        $listaExercicios = array();
+        
+        $sql = "USE " . $this->getNomeBanco();
+        
+        if(@$this->getConexao()->query($sql) === TRUE){
+            
+            $sql = "SELECT * FROM exercicio";
+            $result = mysqli_query($this->getConexao(), $sql);
+            
+            while($row = mysqli_fetch_array($result)){
+                
+                $exercicio = new Exercicio($row['idExercicio'], $row['nome'], $row['musculo'], $row['descricao']);
+                
+                array_push($listaExercicios, $exercicio);
+            }
+            
+            return $listaExercicios;
+        }else{
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+        }
     }
 
+    public function detalhar($exercicio) {
+        
+    }
 }
