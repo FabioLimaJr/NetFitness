@@ -4,10 +4,10 @@
     <div id="slider">
       <div class="flexslider">
         <ul class="slides">
-          <li><img src="images/art/slide1.jpg" alt=""></li>
-          <li><img src="images/art/slide2.jpg" alt=""></li>
-          <li><img src="images/art/slide3.jpg" alt=""></li>
-          <li><img src="images/art/slide4.jpg" alt=""></li>
+          <li><img src="images/art/slide11.jpg" alt=""></li>
+          <li><img src="images/art/slide22.jpg" alt=""></li>
+          <li><img src="images/art/slide33.jpg" alt=""></li>
+          <li><img src="images/art/slide44.jpg" alt=""></li>
         </ul>
       </div>
     </div>
