@@ -15,7 +15,7 @@
 
 <h1 class="title">Página usuário</h1>
     <div class="line"></div>
-        Nome: <?php echo $secretaria->getNome() ?> | Telefone:<?php echo $secretaria->getTelefone() ?> | Email:<?php echo $secretaria->getEmail() ?>
+        Nome: <?php echo $coordenador->getNome() ?> | Telefone:<?php echo $coordenador->getTelefone() ?> | Email:<?php echo $coordenador->getEmail() ?>
      
     <div class="intro" style="margin-bottom:50px">
          
@@ -58,7 +58,7 @@
                <label>Endereço</label>
                <input type="text" name="endereco" value="<?php if(isset($nutricionista)) echo $nutricionista->getEndereco() ?>" class="text-input" style="width: 300px">
              </li>
-
+            
              <li class="form-row text-input-row">
                <label>Telefone</label>
                <input type="text" name="telefone" value="<?php if(isset($nutricionista)) echo $nutricionista->getTelefone() ?>" class="text-input" style="width: 300px">
@@ -97,15 +97,16 @@
     } 
     else
     {
-             
-        $nutricionista = new Nutricionista(null, $_POST['nome'], $_POST['cpf'], 
+        // $idNutricionista, $coordenador, $crn, $listaDietas, $listaDicas, 
+          //               $nome, $cpf, $endereco, $senha, $telefone, $email, $login)
+        $nutricionista = new Nutricionista(null, $coordenador,$_POST['crn'],
+                        null/*$dieta*/,null/*$dica*/, $_POST['nome'], $_POST['cpf'], 
                         $_POST['endereco'], $_POST['senha'], 
-                        $_POST['telefone'], $_POST['login'], 
-                        $_POST['email'],$_POST['crn'], 
-                        $coordenador, null/*$dieta*/, null/*$dica*/);
+                        $_POST['telefone'], $_POST['email'],
+                        $_POST['login']);
 
              $_SESSION['Nutricionista'] = $nutricionista; 
-            var_dump($_SESSION['Nutricionista']);
+           // var_dump($_SESSION['Nutricionista']);
 
              try
              {

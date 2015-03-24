@@ -113,7 +113,7 @@
                                 $_POST['email'],$_POST['sexo'], 
                                 $_POST['dataNascimento'], $secretaria, 
                                 null/*$musica*/, null/*$dieta*/, null/*$listaPagamentos*/, 
-                                null/*$listaTreinos*/);
+                                null/*$listaTreinos*/, $_POST['foto'] );
 
              $_SESSION['Aluno'] = $aluno; 
             // var_dump($_SESSION['Aluno']);
