@@ -94,7 +94,7 @@ class RepositorioOpiniao extends RepositorioGenerico implements IRepositorioOpin
             {
                 $aluno = new Aluno($row['idPessoa'], $row['nome'], $row['cpf'], $row['endereco'], $row['senha'], $row['telefone'], 
                                    $row['login'], $row['email'], $row['sexo'], $row['dataNascimento'], null/*secretaria*/, $row['idMusica'], 
-                                   null/*$dieta*/, null/*$listaPagamentos*/, null/*$listaTreinos*/);
+                                   null/*$dieta*/, null/*$listaPagamentos*/, null/*$listaTreinos*/, $row['foto']);
                 
                 $opiniao = new Opiniao($row['idOpiniao'],
                                        $row['descricao'],

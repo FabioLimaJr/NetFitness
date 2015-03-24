@@ -116,7 +116,8 @@ class RepositorioPagamento extends RepositorioGenerico implements IRepositorioPa
                                    $row['idMusica'], 
                                    null/*$dieta*/, 
                                    null/*$listaPagamentos*/, 
-                                   null/*$listaTreinos*/);
+                                   null/*$listaTreinos*/,
+                                   $row['foto']);
                  
                 $secretaria = new Secretaria($row['idPessoa'], 
                                              $row['nome'], 

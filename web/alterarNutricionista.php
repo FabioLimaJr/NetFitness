@@ -1,20 +1,22 @@
 <?php 
 include ('../classesBasicas/Aluno.php');
-include ('../classesBasicas/Coordenador.php');
+include ('../classesBasicas/Musica.php');
 include ('../classesBasicas/Nutricionista.php');
-include ('../classesBasicas/Instrutor.php');
+include ('../classesBasicas/Coordenador.php');
 include ('../classesBasicas/Secretaria.php');
+include ('../classesBasicas/Dieta.php');
+include ('../classesBasicas/Alimento.php');
 session_start();
 
 if(isset($_SESSION['Coordenador']))
 {
-    $secretaria = $_SESSION['Coordenador'];
+    $nutricionista = $_SESSION['Coordenador'];
 }
 else
 {
     header('location: erroAcesso.php');
 }
-
+include ('../expressoesRegulares/ExpressoesRegulares.php');
 include ('../fachada/Fachada.php');
 include ('componentes/header.php');
 ?>
@@ -35,7 +37,7 @@ include ('componentes/header.php');
      
   <div id="content">
   
-     <?php include('conteudo/coordenadorConteudo.php'); ?>
+     <?php include('conteudo/alterarNutricionistaConteudo.php'); ?>
     
   </div><!-- end content -->
   

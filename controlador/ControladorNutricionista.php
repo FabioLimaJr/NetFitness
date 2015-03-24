@@ -23,12 +23,16 @@ class ControladorNutricionista {
         $this->repositorioNutricionista = $repositorioNutricionista;
     }
     public function inserir($nutricionista){
-         
+         /*
         if(ExpressoesRegulares::validarTodosOsCampos($nutricionista)){
             return $this->getRepositorioNutricionista()->inserir($nutricionista);
         }else{
             throw Excecoes::inserirObjeto($nutricionista);
         }
+           */
+          $this->getRepositorioNutricionista()->inserir($nutricionista);
+        
+        
     }
     
     public function alterar($nutricionista){

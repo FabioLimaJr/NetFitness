@@ -128,7 +128,7 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
             {
                  $aluno = new Aluno($row['idPessoa'], $row['nome'], $row['cpf'], $row['endereco'], $row['senha'], $row['telefone'], 
                                    $row['login'], $row['email'], $row['sexo'], $row['dataNascimento'], null/*secretaria*/, null/*musica*/, 
-                                   null/*$dieta*/, null/*$listaPagamentos*/, null/*$listaTreinos*/);
+                                   null/*$dieta*/, null/*$listaPagamentos*/, null/*$listaTreinos*/, $row['foto']);
                 
                   
                 
@@ -232,7 +232,7 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                 
                 $aluno = new Aluno($row['idPessoa'], $row['nome'], $row['cpf'], $row['endereco'], $row['senha'], $row['telefone'], 
                                    $row['login'], $row['email'], $row['sexo'], $row['dataNascimento'], null/*secretaria*/, $row['idMusica'], 
-                                   null/*$dieta*/, null/*$listaPagamentos*/, null/*$listaTreinos*/);
+                                   null/*$dieta*/, null/*$listaPagamentos*/, null/*$listaTreinos*/, $row['foto']);
                 
                 
                 $sql2 = "SELECT * FROM  pessoa WHERE idPessoa = '".$row['idSecretaria']."'";
@@ -282,6 +282,8 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                                 
                 while ($row = mysqli_fetch_array($result))
                 {    
+                 //   $idAluno, $nome, $cpf, $endereco, $senha, $telefone, $login, $email, $sexo, $dataNascimento, $secretaria,
+                              //  $musica, $dieta, $listaPagamentos, $listaTreinos, $foto) 
                    $alunoReturn = new Aluno($pessoa->getIdPessoa(),
                                             $pessoa->getNome(),
                                             $pessoa->getcpf(),
@@ -293,12 +295,13 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                                             $row['sexo'],
                                             $row['dataNascimento'],
                                             $row['idSecretaria'],
-                                            NULL,
-                                            NULL,
-                                            array(),
-                                            array());
+                                            $row['idMusica'],
+                                            /*dieta*/null,
+                                            /*listaPagamentos*/null,
+                                            /*listaTreinos*/null,
+                                            $row['foto']);
                                              
-                    
+                 
                 }
                 
                 $this->fecharConexao();

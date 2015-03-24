@@ -265,7 +265,7 @@ class Fachada implements IFachada
 
     public function listarNutricionistas()
     {
-        $this->controladorNutricionista->listar();
+        return $this->controladorNutricionista->listar();
     }
     
     public function detalharNutricionista($nutricionista)
