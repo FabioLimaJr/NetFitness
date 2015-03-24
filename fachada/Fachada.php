@@ -145,7 +145,7 @@ class Fachada implements IFachada
     }
 
     public function listarExercicios() {
-        
+        return $this->controladorExercicio->listar();
     }
 
     public function detalharExercicio($exercicio) {
