@@ -12,16 +12,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
 try
 {
-    $listaNutricionistas = $fachada->listarNutricionistas($_SESSION['Coordenador']);
+    $listaNutricionistas = $fachada->listarNutricionistas();
 } 
 catch (Exception $exc)
 {
     $mensagem = $exc->getMessage();
 }   
-    
-    
-   
- 
     
 ?>
 
@@ -63,8 +59,7 @@ catch (Exception $exc)
                              <td><?php echo $nutricionista->getCrn() ?></td>
                              <td><?php echo $nutricionista->getTelefone() ?></td>
                              <td><?php echo $nutricionista->getEmail() ?></td>
-                             <td>Falta lista Dietas</td>  
-                             <td><input type="radio" name="idDieta" value="<?php echo $dieta->getIdDieta() ?>"></td>
+                             <td><input type="radio" name="idNutricionista" value="<?php echo $nutricionista->getIdNutricionista() ?>"></td>
                          </tr>
 
                          <?php 
@@ -91,62 +86,34 @@ catch (Exception $exc)
             //Detalhar
             try
             {
-                $dieta = new Dieta($_POST['idDieta']);
-                $dietaRetornada = $fachada->detalharDieta($dieta);
+                $nutricionista = new Nutricionista($_POST['idNutricionista']);
+                $nutricionistaRetornada = $fachada->detalharNutricionista($nutricionista);
                // var_dump($dietaRetornada);
                 ?>
                      <div style="margin-bottom: 50px">
         
                         <table style="width:100%">
                                     <tr>
-                                        <td>Nome Aluno</td>
-                                        <td>Descrição Dieta</td>
-                                        <td>Alimentos</td>
-                                        <td>Cal.(%)</td>
-                                        <td>Prot.(%)</td>
-                                        <td>Carb.(%)</td>
-                                        <td>Gord.(%)</td>
+                                        <td>Nome da Nutricionista</td>
+                                        <td>CNR</td>
+                                        <td>Telefone</td>
+                                        <td>Email</td>
+                                      
                                     </tr>
-                                    <?php if($dietaRetornada->getListaAlimentos()!=null)
-                                    { ?>
-                                     <tr>
-                                         <td rowspan="<?php echo count($dietaRetornada->getListaAlimentos()) ?>"><?php echo $dietaRetornada->getAluno()->getNome() ?></td>
-                                        <td rowspan="<?php echo count($dietaRetornada->getListaAlimentos()) ?>"><?php echo $dietaRetornada->getDescricao() ?></td>
-                                
-                                            <td><?php echo $dietaRetornada->getListaAlimentos()[0]->getDescricao() ?></td>
-                                            <td><?php echo $dietaRetornada->getListaAlimentos()[0]->getCaloria() ?></td>
-                                            <td><?php echo $dietaRetornada->getListaAlimentos()[0]->getProteina() ?></td>
-                                            <td><?php echo $dietaRetornada->getListaAlimentos()[0]->getCarboidrato() ?></td>
-                                            <td><?php echo $dietaRetornada->getListaAlimentos()[0]->getGordura() ?></td>
-          
-                                      </tr>
-                                      
-                                      
-                                        <?php for($count=1; $count<count($dietaRetornada->getListaAlimentos());$count++) {?>
-                                            <tr>
-                                                <td><?php echo $dietaRetornada->getListaAlimentos()[$count]->getDescricao() ?></td>
-                                                <td><?php echo $dietaRetornada->getListaAlimentos()[$count]->getCaloria() ?></td>
-                                                <td><?php echo $dietaRetornada->getListaAlimentos()[$count]->getProteina() ?></td>
-                                                <td><?php echo $dietaRetornada->getListaAlimentos()[$count]->getCarboidrato() ?></td>
-                                                <td><?php echo $dietaRetornada->getListaAlimentos()[$count]->getGordura() ?></td>
-                                            </tr>
-                                        <?php }
-                                    }
-                                    else
-                                    {
-                                        ?>
-                                            <tr>
-                                                <td><?php echo $dietaRetornada->getAluno()->getNome() ?></td>
-                                                <td><?php echo $dietaRetornada->getDescricao() ?></td>
+                                   
+                                     <?php foreach ($listaNutricionistas as $nutricionistaRetornada){ ?>
+                         <tr>
+                             <td><?php echo $nutricionistaRetornada->getNome() ?></td> 
+                             <td><?php echo $nutricionistaRetornada->getCrn() ?></td>
+                             <td><?php echo $nutricionistaRetornada->getTelefone() ?></td>
+                             <td><?php echo $nutricionistaRetornada->getEmail() ?></td>
+                         </tr>
 
-                                               <td>Nenhum alimento foi encontrado na dieta do aluno</td>
-                                               <td>//</td>
-                                               <td>//</td>
-                                               <td>//</td>
-                                               <td>//</td>
-                                            </tr>
-                                    <?php } ?>
-                                  
+                         <?php 
+                         
+                    
+                         } ?>
+
                         </table>
                     </div>
                 <?php
