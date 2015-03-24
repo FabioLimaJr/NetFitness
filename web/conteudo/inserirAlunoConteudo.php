@@ -82,6 +82,12 @@
                <label>Dt Nascimento</label>
                <input type="text" name="dataNascimento" value="<?php if(isset($aluno)) echo $aluno->getdataNascimento() ?>" class="text-input" style="width: 300px">
              </li>
+             
+             
+             <li class="form-row text-input-row">
+               <label>Foto</label>
+               <input type="text" name="foto" value="<?php if(isset($aluno)) echo $aluno->getFoto() ?>" class="text-input" style="width: 300px">
+             </li>
 
               <li class="form-row text-input-row">
                <label>Login</label>

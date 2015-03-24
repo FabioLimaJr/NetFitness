@@ -36,7 +36,7 @@ class Aluno extends Pessoa
         parent::__construct($idAluno);
     }
     
-    public function __construct15($idAluno, $nome, $cpf, $endereco, $senha, $telefone, $login, $email, $sexo, $dataNascimento, $secretaria,
+    public function __construct16($idAluno, $nome, $cpf, $endereco, $senha, $telefone, $login, $email, $sexo, $dataNascimento, $secretaria,
                                 $musica, $dieta, $listaPagamentos, $listaTreinos, $foto) 
     {
         parent::__construct($idAluno, $nome, $cpf, $endereco, $senha, $telefone, $login, $email);
