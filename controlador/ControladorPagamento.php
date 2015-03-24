@@ -23,11 +23,11 @@ class ControladorPagamento {
     }
     
     public function inserir($pagamento){
-        return $this->getRepositorioPagamento()->inserir(pagamento);
+        return $this->getRepositorioPagamento()->inserir($pagamento);
     }
     
     public function alterar($pagamento){
-        return $this->getRepositorioPagamento()->alterar(pagamento);
+        return $this->getRepositorioPagamento()->alterar($pagamento);
     }
     
     public function excluir($pagamento){

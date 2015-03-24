@@ -9,6 +9,7 @@
             <li><a href="excluirAluno.php">Excluir</a></li>
             <li><a href="detalharAluno.php">Detalhar</a></li>
             <li><a href="listarAlunos.php">Listar</a></li>
+            <li><a href="listarOpinioes.php">Visualizar Opiniões</a></li>
           </ul>
         </li>
         <li><a href="#">Musica</a>
@@ -17,6 +18,11 @@
             <li><a href="#">B</a></li>
             <li><a href="#">C</a></li>
             <li><a href="#">D</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Pagamento</a>
+          <ul>
+            <li><a href="inserirPagamento.php">Inserir</a></li>
           </ul>
         </li>
       </ul>
