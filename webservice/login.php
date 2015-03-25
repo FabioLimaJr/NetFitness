@@ -11,23 +11,20 @@
     
     if(isset($_POST['senha'])&&isset($_POST['login']))
     {
-
         $fachada = Fachada::getInstance();
-
         $pessoa = new Pessoa(null, null, null, null, $_POST['senha'], null, $_POST['login'], null);
-
         $mensagem = "";
         $tipoUsuario = "";
         $resposta = array();
         $usuarioLogado = null;
         $arrayMetodosLogar = ['logarAluno','logarCoordenador','logarNutricionista','logarInstrutor','logarSecretaria'];
-
+        $arrayFormat = ['.Aluno.','.Coordenador.','.Nutricionista.','.Instrutor.','.Secretaria.','.Pessoa.'];
+        
         try
         {
             foreach ($arrayMetodosLogar as $metodoLogar)
             {
                 $usuarioLogado = $fachada->{$metodoLogar}($pessoa);
-
                 if($usuarioLogado!=null)
                 {
                    $tipoUsuario =  get_class($usuarioLogado);
@@ -40,18 +37,24 @@
                 {
                     $tipoUsuario = "Desconhecido";
                     $resposta['tipoUsuario'] = $tipoUsuario;
-                    $resposta['mensagem'] = "Usuário inexistente";
                 }
-
             }
-            echo json_encode($resposta,true);
-
+           // $str = substr_replace($str,$char,$pos,1);
+            $json = json_encode($resposta);
+            $jsonFormat = str_replace("\u0000",".",json_encode($resposta));
+            
+            foreach($arrayFormat as $element)
+            {
+                $jsonFormat = str_replace($element, substr($element, 1), $jsonFormat);
+            }
+                
+            echo $jsonFormat;
         }
         catch (Exception $ex)
         {
            $tipoUsuario = "Desconhecido";
            $resposta['tipoUsuario'] = $tipoUsuario;
            $resposta['mensagem'] = $ex->getMessage();
-           echo json_encode($resposta,true);
+           echo json_encode($resposta);
         }
     }
