@@ -1,3 +1,3 @@
 <?php
 
-$serverPath = $_SERVER["DOCUMENT_ROOT"]."/Projeto/";
+$serverPath = $_SERVER["DOCUMENT_ROOT"]."/NetFitness/";

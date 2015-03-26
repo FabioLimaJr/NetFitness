@@ -88,6 +88,10 @@ class Excecoes
     public static  function descricaoInvalida($mensagem){
         return "Descrição Invalida,Favor Verifique a Descrição do ".$mensagem." antes da inclusão\n";
     }
+    
+    public static  function valorNumericoInvalido($mensagem){
+        return "Valor Numerico Invalido,Favor Verifique o Valor Numerico do ".$mensagem." antes da inclusão\n";
+    }
 }
 
 ?>

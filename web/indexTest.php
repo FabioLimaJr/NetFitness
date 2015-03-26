@@ -13,6 +13,8 @@
  include('../classesBasicas/Secretaria.php');
  include('../classesBasicas/Exercicio.php');
  include('../classesBasicas/Opiniao.php');
+ include('../classesBasicas/Alimento.php');
+ include('../classesBasicas/Nutricionista.php');
  
  include('../expressoesRegulares/ExpressoesRegulares.php');
  include('../excecoes/Excecoes.php');
@@ -192,7 +194,7 @@ $coordenador = new Coordenador(2, array(), array(), array(), "", "", "", "", "",
     echo $exc->getMessage();
  }                
  */
- 
+ /*
   //Teste Listar Alunos
  $fachada = new Fachada();
  
@@ -205,5 +207,29 @@ $coordenador = new Coordenador(2, array(), array(), array(), "", "", "", "", "",
 } catch (Exception $exc) {
     echo $exc->getMessage();
 }
+ */
+ //Teste Incluir Alimento
+ $nutricionista = new Nutricionista(9, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+//$treino = new Treino(null, "corrida", "corrida na istera", $instrutor);
+$alimento = new Alimento(2,"Feijao", 11, 111, 1111, 11111, $nutricionista);
+ 
+ 
+//$alimento = new Alimento(1,"Laranja", 2, 22, 222, 2222, $nutricionista);
+
+$fachada = Fachada::getInstance();
+//$controladorTreino = new ControladorTreino();
+ try 
+ {
+    $listaAlimento = $fachada->detalharAlimento($alimento);
+    var_dump($listaAlimento);
+    //echo $fachada;
+   //echo "Alimento inserido\n";
+   //echo "Alimento alterado\n";
+   // echo "Alimento excluido\n";
+ } 
+ catch (Exception $exc) 
+ {
+    echo $exc->getMessage();
+ }
  
 

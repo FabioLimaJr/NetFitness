@@ -2,10 +2,10 @@
 /**
  * Description of Alimento
  *
- * @author Daniele
+ * @author Marcelo
  */
-class Alimento 
-{
+class Alimento {
+    
     private $idAlimento;
     private $descricao;
     private $caloria;
@@ -14,8 +14,7 @@ class Alimento
     private $gordura;
     private $nutricionista;
     
-    function __construct($idAlimento, $descricao, $caloria, $proteina, $carboidrato, $gordura, $nutricionista) 
-    {
+    function __construct($idAlimento,$descricao, $caloria, $proteina, $carboidrato, $gordura, $nutricionista) {
         $this->idAlimento = $idAlimento;
         $this->descricao = $descricao;
         $this->caloria = $caloria;
@@ -25,7 +24,6 @@ class Alimento
         $this->nutricionista = $nutricionista;
     }
 
-    
     function getIdAlimento() {
         return $this->idAlimento;
     }
@@ -81,7 +79,4 @@ class Alimento
     function setNutricionista($nutricionista) {
         $this->nutricionista = $nutricionista;
     }
-
-
-    
 }

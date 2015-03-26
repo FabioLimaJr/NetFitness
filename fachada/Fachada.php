@@ -176,7 +176,6 @@ class Fachada implements IFachada
         return $this->controladorTreino->detalhar($treino);
     }
     
-    //Opinião
     public function inserirOpiniao($opiniao) {
         return $this->controladorOpiniao->inserir($opiniao);
     }
@@ -193,29 +192,24 @@ class Fachada implements IFachada
         return $this->controladorOpiniao->listar();
     }
 
-    public function alterarAlimento($alimento) 
-    {
-        
+    public function incluirAlimento($alimento) {
+        return $this->controladorAlimento->inserir($alimento);
+    }
+    
+    public function alterarAlimento($alimento) {
+        return $this->controladorAlimento->alterar($alimento);
     }
 
-    public function detalharAlimento($alimento) 
-    {
-        
+    public function excluirAlimento($alimento) {
+        return $this->controladorAlimento->excluir($alimento);
     }
 
-    public function excluirAlimento($alimento) 
-    {
-        
-    }
-
-    public function inserirAlimento($alimento) 
-    {
-        
-    }
-
-    public function listarAlimentos() 
-    {
+    public function listarAlimento() {
         return $this->controladorAlimento->listar();
+    }
+    
+    public function detalharAlimento($alimento) {
+        return $this->controladorAlimento->detalhar($alimento);
     }
 
     public function alterarDieta($dieta)
@@ -243,8 +237,7 @@ class Fachada implements IFachada
         return $this->controladorDieta->listar($nutricionista);
     }
     
-    //Nutricionista
-     public function logarNutricionista($nutricionista) {
+    public function logarNutricionista($nutricionista) {
         return $this->controladorNutricionista->logar($nutricionista);
     }
     
@@ -273,7 +266,6 @@ class Fachada implements IFachada
         $this->controladorNutricionista->detalhar($nutricionista);
     }
     
-    //pagamento
     public function inserirPagamento($pagamento) {
         $this->controladorPagamento->inserir($pagamento);
     }

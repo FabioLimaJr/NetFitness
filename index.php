@@ -366,7 +366,7 @@ $coordenador = new Coordenador(2, array(), array(), array(), "", "", "", "", "",
  /*$exercicio = new Exercicio(5, "Supino inclinado", "Peito", "Na posicaoo deitada em um banco inclinado, faca uma pegada na barra com o dorso das maos voltado.");
  
  $fachada = Fachada::getInstance();
- 
+ */
  
  ?>
 

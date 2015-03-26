@@ -41,10 +41,10 @@ interface IFachada {
     public function excluirOpiniao($opiniao);
     public function listarOpinioes();
     
-    public function inserirAlimento($alimento);
+    public function incluirAlimento($alimento);
     public function alterarAlimento($alimento);
     public function excluirAlimento($alimento);
-    public function listarAlimentos();
+    public function listarAlimento();
     public function detalharAlimento($alimento);
     
     public function inserirDieta($dieta);
