@@ -207,7 +207,7 @@ class Fachada implements IFachada
         return $this->controladorAlimento->excluir($alimento);
     }
 
-    public function listarAlimento() {
+    public function listarAlimentos() {
         return $this->controladorAlimento->listar();
     }
     

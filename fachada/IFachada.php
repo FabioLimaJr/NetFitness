@@ -44,7 +44,7 @@ interface IFachada {
     public function incluirAlimento($alimento);
     public function alterarAlimento($alimento);
     public function excluirAlimento($alimento);
-    public function listarAlimento();
+    public function listarAlimentos();
     public function detalharAlimento($alimento);
     
     public function inserirDieta($dieta);
