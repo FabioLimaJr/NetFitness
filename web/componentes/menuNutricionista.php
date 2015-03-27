@@ -5,9 +5,9 @@
         <li><a href="#">Alimento</a>
           <ul>
             <li><a href="inserirAlimento.php">Inserir</a></li>
-            <li><a href="excluirAlimento.php">Excluir</a></li>
             <li><a href="alterarAlimento.php">Alterar</a></li>
-            <li><a href="detalharAlimento.php">Detalhar</a></li>
+            <li><a href="excluirAlimento.php">Excluir</a></li>
+            <li><a href="listarAlimento.php">Listar</a></li>
           </ul>
         </li>
         <li><a href="#">Dieta</a>

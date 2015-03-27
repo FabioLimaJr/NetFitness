@@ -78,6 +78,7 @@ class  ExpressoesRegulares {
         return true;
     }
     
+    
     public static function validarDieta($objeto)
     {
         if(($objeto != "") && ($objeto != NULL))
@@ -108,6 +109,54 @@ class  ExpressoesRegulares {
             throw new Exception(Excecoes::objetoNulo("Dieta não inicializada"));
         }
         return true;
+    }
+    
+    
+    public static function validarExameFisico($objeto)
+    {
+        if(($objeto != "") && ($objeto != NULL))
+        {
+            if( !self::conferirDescricao($objeto->getDescricao())|| $objeto->getDescricao()=="")
+            {
+
+                throw new Exception(Excecoes::descricaoInvalida($objeto->getDescricao()));
+            }
+            
+            if($objeto->getInstrutor()==null)
+            {
+                throw new Exception(Excecoes::objetoNulo("Instrutor não inicializado"));
+            }
+            if($objeto->getAluno()==null)
+            {
+                throw new Exception(Excecoes::objetoNulo("Aluno não inicializado"));
+            }
+            
+            if(!self::conferirData($objeto->getData()))
+            {
+                throw new Exception(Excecoes::dataInvalida("ExameFisico"));
+            }
+            
+        }
+        else
+        {
+            throw new Exception(Excecoes::objetoNulo("Dieta não inicializada"));
+        }
+        return true;
+    }
+    
+    public static function conferirData($data)
+    {
+        $arrayData = explode("-", $data);
+        
+        if(checkdate($arrayData[1], $arrayData[0], $arrayData[2]))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+                
     }
     
     public static function conferirNome($nome){                    

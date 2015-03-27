@@ -14,7 +14,24 @@ class Alimento {
     private $gordura;
     private $nutricionista;
     
-    function __construct($idAlimento,$descricao, $caloria, $proteina, $carboidrato, $gordura, $nutricionista) {
+    
+    public function __construct() 
+    {
+        $get_arguments = func_get_args();
+        $number_of_arguments = func_num_args();
+
+        if (method_exists($this, $method_name = '__construct'.$number_of_arguments)) {
+            call_user_func_array(array($this, $method_name), $get_arguments);
+        }
+    }
+    
+    
+    function __construct1($idAlimento)
+    {
+        $this->setIdAlimento($idAlimento);
+    }
+    
+    function __construct7($idAlimento,$descricao, $caloria, $proteina, $carboidrato, $gordura, $nutricionista) {
         $this->idAlimento = $idAlimento;
         $this->descricao = $descricao;
         $this->caloria = $caloria;
@@ -24,6 +41,9 @@ class Alimento {
         $this->nutricionista = $nutricionista;
     }
 
+   
+    
+    
     function getIdAlimento() {
         return $this->idAlimento;
     }
