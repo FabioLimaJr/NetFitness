@@ -72,4 +72,7 @@ interface IFachada {
     public function excluirExercicio($exercicio);
     public function listarExercicios();
     public function detalharExercicio($exercicio);
+    
+    //Exame Fisico
+    public function inserirExameFisico($exameFisico);
 }

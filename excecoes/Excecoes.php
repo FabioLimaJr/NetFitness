@@ -92,6 +92,10 @@ class Excecoes
     public static  function valorNumericoInvalido($mensagem){
         return "Valor Numerico Invalido,Favor Verifique o Valor Numerico do ".$mensagem." antes da inclusão\n";
     }
+    
+    public static function dataInvalida($mensagem)
+    {
+        return "Data não válida no objeto: ".$mensagem;
+    }
 }
 
-?>
