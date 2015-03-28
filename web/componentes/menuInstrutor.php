@@ -15,7 +15,7 @@
           <ul>
             <li><a href="inserirExercicio.php">Inserir</a></li>
             <li><a href="#">Excluir</a></li>
-            <li><a href="#">Alterar</a></li>
+            <li><a href="alterarExercicio.php">Alterar</a></li>
             <li><a href="#">Listar</a></li>
           </ul>
         </li>
