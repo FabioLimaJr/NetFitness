@@ -13,7 +13,23 @@ class Exercicio {
     private $musculo;
     private $descricao;
     
-    function __construct($idExercicio, $nome, $musculo, $descricao) {
+    
+    public function __construct() 
+    {
+        $get_arguments = func_get_args();
+        $number_of_arguments = func_num_args();
+
+        if (method_exists($this, $method_name = '__construct'.$number_of_arguments)) {
+            call_user_func_array(array($this, $method_name), $get_arguments);
+        }
+    }
+    
+    function __construct1($idExercicio)
+    {
+        $this->setIdExercicio($idExercicio);
+    }
+            
+    function __construct4($idExercicio, $nome, $musculo, $descricao) {
         $this->idExercicio = $idExercicio;
         $this->nome = $nome;
         $this->musculo = $musculo;

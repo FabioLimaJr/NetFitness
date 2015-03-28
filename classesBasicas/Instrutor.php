@@ -26,7 +26,7 @@ class Instrutor extends Pessoa {
         }
     }
     
-    public function __construct1($idInstrutor)
+    function __construct1($idInstrutor)
     {
         parent::__construct($idInstrutor);
     }

@@ -29,6 +29,11 @@ class ExameFisico
         }
     }
     
+    function __construct1($idExameFisico)
+    {
+        $this->setIdExameFisico($idExameFisico);
+    }
+            
     function __construct5($idExameFisico, $data, $descricao, $aluno, $instrutor) {
         $this->idExameFisico = $idExameFisico;
         $this->data = $data;

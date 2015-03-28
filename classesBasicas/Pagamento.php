@@ -20,13 +20,29 @@ class Pagamento
     private $secretaria;
     private $aluno;
     
-    function __construct($idPagamento, $valor, $dataVencimento, $dataPagamento, $secretaria, $aluno) {
-        $this->idPagamento = $idPagamento;
-        $this->valor = $valor;
-        $this->dataVencimento = $dataVencimento;
-        $this->dataPagamento = $dataPagamento;
-        $this->secretaria = $secretaria;
-        $this->aluno = $aluno;
+    public function __construct() 
+    {
+        $get_arguments       = func_get_args();
+        $number_of_arguments = func_num_args();
+
+        if (method_exists($this, $method_name = '__construct'.$number_of_arguments)) {
+            call_user_func_array(array($this, $method_name), $get_arguments);
+        }
+    }
+    
+    function __construct1($idPagamento) 
+    {
+        $this->setIdPagamento($idPagamento);
+       
+    }
+    
+    function __construct6($idPagamento, $valor, $dataVencimento, $dataPagamento, $secretaria, $aluno) {
+        $this->setIdPagamento($idPagamento);
+        $this->setValor($valor);
+        $this->setDataVencimento($dataVencimento);
+        $this->setDataPagamento($dataPagamento);
+        $this->setSecretaria($secretaria);
+        $this->setAluno($aluno);
     }
 
     

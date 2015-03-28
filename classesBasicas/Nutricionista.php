@@ -12,7 +12,7 @@ class Nutricionista extends Pessoa {
     private $listaDietas;
     private $listaDicas;
 
-     public function __construct() 
+    public function __construct() 
     {
         $get_arguments       = func_get_args();
         $number_of_arguments = func_num_args();
@@ -23,7 +23,7 @@ class Nutricionista extends Pessoa {
     }
     
     
-     public function __construct1($idNutricionista)
+    function __construct1($idNutricionista)
     {
         parent::__construct($idNutricionista);
     }

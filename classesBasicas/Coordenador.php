@@ -13,8 +13,24 @@ class Coordenador extends Pessoa {
     private $listaSecretarias;
     private $listaNutricionistas;
     
+    
+    public function __construct() 
+    {
+        $get_arguments       = func_get_args();
+        $number_of_arguments = func_num_args();
+
+        if (method_exists($this, $method_name = '__construct'.$number_of_arguments)) {
+            call_user_func_array(array($this, $method_name), $get_arguments);
+        }
+    }
+    
+    function __construct1($idCoordenador)
+    {
+        parent::__construct($idCoordenador);
+    }
+    
     //parent:: (Construtor que passa os valores dos atributos para a super classe Pessoa)
-    function __construct($idCoordenador, $listaInstrutores, $listaSecretarias, $listaNutricionistas, 
+    function __construct11($idCoordenador, $listaInstrutores, $listaSecretarias, $listaNutricionistas, 
                          $nome, $cpf, $endereco, $senha, $telefone, $email, $login) 
     {
         parent::__construct($idCoordenador, $nome, $cpf, $endereco, $senha, $telefone, $email, $login);
