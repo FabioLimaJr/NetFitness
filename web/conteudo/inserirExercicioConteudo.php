@@ -21,7 +21,7 @@
          
     </div>
         
-    <h3>Inserir Exercicio</h3>
+    <h3>Inserir Exercício</h3>
     
     <div class="clear"></div>
     <div class="line"></div>
