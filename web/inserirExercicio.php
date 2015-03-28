@@ -5,6 +5,7 @@ include ('../classesBasicas/Coordenador.php');
 include ('../classesBasicas/Nutricionista.php');
 include ('../classesBasicas/Instrutor.php');
 include ('../classesBasicas/Secretaria.php');
+include ('../classesBasicas/Exercicio.php');
 session_start();
 
 if(isset($_SESSION['Instrutor']))

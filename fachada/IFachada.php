@@ -67,7 +67,7 @@ interface IFachada {
     public function ListarPagamento();
     
     //Exercicio
-    public function incluirExercicio($exercicio);
+    public function inserirExercicio($exercicio);
     public function alterarExercicio($exercicio);
     public function excluirExercicio($exercicio);
     public function listarExercicios();

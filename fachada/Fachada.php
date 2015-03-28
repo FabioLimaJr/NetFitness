@@ -135,7 +135,7 @@ class Fachada implements IFachada
         return $this->controladorAluno->logar($aluno);
     }
 
-    public function incluirExercicio($exercicio) {
+    public function inserirExercicio($exercicio) {
         return $this->controladorExercicio->inserir($exercicio);
     }
 
