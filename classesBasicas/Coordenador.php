@@ -27,6 +27,7 @@ class Coordenador extends Pessoa {
     function __construct1($idCoordenador)
     {
         parent::__construct($idCoordenador);
+        $this->setIdCoordenador($idCoordenador);
     }
     
     //parent:: (Construtor que passa os valores dos atributos para a super classe Pessoa)
@@ -35,10 +36,10 @@ class Coordenador extends Pessoa {
     {
         parent::__construct($idCoordenador, $nome, $cpf, $endereco, $senha, $telefone, $email, $login);
        
-        $this->idCoordenador = $idCoordenador;
-        $this->listaInstrutores = $listaInstrutores;
-        $this->listaSecretarias = $listaSecretarias;
-        $this->listaNutricionistas = $listaNutricionistas;
+        $this->setIdCoordenador($idCoordenador);
+        $this->setListaInstrutores($listaInstrutores);
+        $this->setListaSecretarias($listaSecretarias);
+        $this->setListaNutricionistas($listaNutricionistas);
     }
     
     function getIdCoordenador() {

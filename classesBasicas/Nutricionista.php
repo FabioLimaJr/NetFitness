@@ -26,6 +26,7 @@ class Nutricionista extends Pessoa {
     function __construct1($idNutricionista)
     {
         parent::__construct($idNutricionista);
+        $this->setIdNutricionista($idNutricionista);
     }
     
     
@@ -34,11 +35,11 @@ class Nutricionista extends Pessoa {
     {
         parent::__construct($idNutricionista, $nome, $cpf, $endereco, $senha, $telefone, $login, $email);
        
-        $this->idNutricionista = $idNutricionista;
-        $this->coordenador = $coordenador;
-        $this->crn = $crn;
-        $this->listaDietas = $listaDietas;
-        $this->listaDicas = $listaDicas;
+        $this->setIdNutricionista($idNutricionista);
+        $this->setCoordenador($coordenador);
+        $this->setCrn($crn);
+        $this->setListaDietas($listaDietas);
+        $this->setListaDicas($listaDicas);
     }
     
     function getIdNutricionista() {

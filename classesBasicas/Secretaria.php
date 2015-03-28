@@ -35,6 +35,7 @@ class Secretaria extends Pessoa{
     {
         
         parent::__construct($idSecretaria);
+        $this->setIdSecretaria($idSecretaria);
         
     }
     

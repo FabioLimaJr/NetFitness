@@ -29,6 +29,7 @@ class Instrutor extends Pessoa {
     function __construct1($idInstrutor)
     {
         parent::__construct($idInstrutor);
+        $this->setIdInstrutor($idInstrutor);
     }
     
     function __construct12($idInstrutor, $coordenador, $listaTreinos, $listaExamesFisicos, $listaDicas, 
@@ -36,11 +37,11 @@ class Instrutor extends Pessoa {
     {
         parent::__construct($idInstrutor, $nome, $cpf, $endereco, $senha, $telefone, $email, $login);
        
-        $this->idInstrutor = $idInstrutor;
-        $this->coordenador = $coordenador;
-        $this->listaTreinos = $listaTreinos;
-        $this->listaExamesFisicos = $listaExamesFisicos;
-        $this->listaDicas = $listaDicas;
+        $this->setIdInstrutor($idInstrutor);
+        $this->setCoordenador($coordenador);
+        $this->setListaTreinos($listaTreinos);
+        $this->setListaExamesFisicos($listaExamesFisicos);
+        $this->setListaDicas($listaDicas);
 
     }
     
