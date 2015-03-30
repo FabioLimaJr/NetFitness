@@ -11,7 +11,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 try {
     
-    $listaAlimento = $fachada->listarAlimento($_SESSION['Nutricionista']);
+    $listaAlimentos = $fachada->listarAlimentos($_SESSION['Nutricionista']);
     
 } catch (Exception $exc) {
 
@@ -54,7 +54,7 @@ if(!$camposPreenchidos){
                         <th>Gordura</th>
                     </tr>
                     
-                    <?php foreach ($listaAlimento as $alimento){ ?>
+                    <?php foreach ($listaAlimentos as $alimento){ ?>
                     <tr>
                         <td><?php echo $alimento->getDescricao();?></td>
                         <td><?php echo $alimento->getCaloria();?></td>
