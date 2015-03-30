@@ -6,6 +6,11 @@
  */
 class Opiniao {
     
+    private $idOpiniao; 
+    private $descricao;
+    private $dataPostagem;
+    private $aluno;
+    
     public function __construct() 
     {
         $get_arguments       = func_get_args();
