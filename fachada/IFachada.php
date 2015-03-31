@@ -75,4 +75,11 @@ interface IFachada {
     
     //Exame Fisico
     public function inserirExameFisico($exameFisico);
+    
+    //Dica
+    public function inserirDica($dica);
+    public function alterarDica($dica);
+    public function excluirDica($dica);
+    public function listarDica();
+    public function detalharDica($dica);
 }

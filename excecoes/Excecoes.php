@@ -97,5 +97,9 @@ class Excecoes
     {
         return "Data não válida no objeto: ".$mensagem;
     }
+    
+    public static  function tituloInvalida($mensagem){
+        return "Titulo Invalido,Favor Verifique o Titulo da ".$mensagem." antes da inclusão\n";
+    }
 }
 
