@@ -207,7 +207,7 @@ $coordenador = new Coordenador(2, array(), array(), array(), "", "", "", "", "",
 } catch (Exception $exc) {
     echo $exc->getMessage();
 }
- */
+
  //Teste Incluir Alimento
  $nutricionista = new Nutricionista(9, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 //$treino = new Treino(null, "corrida", "corrida na istera", $instrutor);
@@ -231,5 +231,16 @@ $fachada = Fachada::getInstance();
  {
     echo $exc->getMessage();
  }
- 
-
+  */
+//Teste Incluir Dica
+ //$idDica, $descricao, $titulo
+ $dica = new Dica(1,'teste dicaaaaa', 'titulo da dicaaaaaaa');
+$fachada = Fachada::getInstance();
+try {
+    $fachada->excluirDica($dica);
+    //echo 'dica incluida';
+    //echo 'dica alterada';
+    echo 'dica excluida';
+} catch (Exception $exc) {
+    echo $exc->getMessage();
+}
