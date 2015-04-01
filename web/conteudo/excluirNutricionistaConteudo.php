@@ -13,7 +13,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
 try
 {
-    $listaNutricionistas = $fachada->listarNutricionistas($_SESSION['Nutricionista']);
+    $listaNutricionistas = $fachada->listarNutricionistas();
     
 } 
 catch (Exception $exc)
@@ -25,10 +25,10 @@ catch (Exception $exc)
 
 <h1 class="title">Excluir Nutricionista</h1>
     <div class="line"></div>
-    Telefone:<?php //echo $coordenador->getTelefone() ?> | Email:<?php// echo $coordenador->getEmail() ?> | Endereço:<?php //echo $coordenador->getEndereco() ?>
+    Telefone:<?php echo $coordenador->getTelefone() ?> | Email:<?php echo $coordenador->getEmail() ?> | Endereço:<?php echo $coordenador->getEndereco() ?>
     <div class="intro" style="margin-bottom:50px"></div>
     
-    <h3>Usuário logado: <?php// echo $coordenador->getNome() ?></h3>
+    <h3>Usuário logado: <?php echo $coordenador->getNome() ?></h3>
    
     <div class="clear"></div>
     <div class="line"></div>
@@ -86,7 +86,8 @@ catch (Exception $exc)
         {
             $nutricionista = new Nutricionista($_POST['idNutricionista']);
             $fachada->excluirNutricionista($nutricionista);
-            $mensagem = "A Nutricionista ".$_POST['nomeNutricionista'.$nutricionista->getIdNutricionista()]." foi excluida com sucesso.";
+            var_dump($nutricionista);
+            $mensagem = "A Nutricionista ".$_POST['nomeNutricionista'.$_POST['idNutricionista']]." foi excluida com sucesso.";
         } 
         catch (Exception $exc)
         {
