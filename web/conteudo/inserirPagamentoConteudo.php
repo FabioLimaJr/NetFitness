@@ -11,6 +11,9 @@
  {
      $secretaria = $_SESSION['Secretaria'];
  }
+ $listaAlunos = array();
+ $listaAlunos = $fachada->listarAlunos();
+ 
 ?>
 
 <h1 class="title">Página usuário</h1>
@@ -42,18 +45,32 @@
              </li>
 
              <li class="form-row text-input-row">
-               <label>DataPagamento</label>
-               <input type="text" name="dataPagamento" value="<?php if(isset($pagamento)) echo $pagamento->getDataPagamento() ?>" class="text-input" style="width: 300px">
-             </li>
-
-             <li class="form-row text-input-row">
                <label>DataVencimento</label>
                <input type="text" name="dataVencimento" value="<?php if(isset($pagamento)) echo $pagamento->getDataVencimento() ?>" class="text-input" style="width: 300px">
              </li>
 
-             <li class="form-row text-input-row">
+              <li class="form-row text-input-row">
                <label>Aluno</label>
-               <input type="text" name="aluno" value="<?php if(isset($pagamento)) echo $pagamento->getAluno()->getIdAluno() ?>" class="text-input" style="width: 300px">
+               <select name="idAluno" size="5" style="width: 500px">
+                   
+                   <?php
+                   $primeiro = true;
+                   $selecionado = "selected=\"selected\"";
+                   foreach ($listaAlunos as $aluno) 
+                   {     
+                      ?>  
+                        <option <?php echo $selecionado ?> value="<?php echo $aluno->getIdAluno() ?>"><?php echo $aluno->getNome() ?></option>
+                        <?php 
+
+                         if($primeiro) 
+                         {
+                             $primeiro = false;
+                             $selecionado ="";
+                         }
+                    
+                   } ?>
+                   
+                </select>
              </li>
 
              <li class="button-row" style="margin-top:50px">
@@ -68,17 +85,19 @@
       <?php 
     } 
     else
-    {
+    {       
+        $alunoSelecionado = new Aluno();
+        $alunoSelecionado->setIdAluno($_POST['aluno']);
         $pagamento = new Pagamento(null, 
                                    $_POST['valor'], 
                                    $_POST['dataVencimento'],
                                    $_POST['dataPagamento'], 
                                    $secretaria, 
-                                   $aluno);
+                                   $alunoSelecionado);
              
 
-             $_SESSION['Secretaria'] = $secretaria; 
-             var_dump($_SESSION['Secretaria']);
+             $_SESSION['Pagamento'] = $pagamento; 
+             //var_dump($_SESSION['Secretaria']);
 
              try
              {

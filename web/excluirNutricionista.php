@@ -10,7 +10,7 @@ session_start();
 
 if(isset($_SESSION['Coordenador']))
 {
-    $nutricionista = $_SESSION['Coordenador'];
+    $coordenador = $_SESSION['Coordenador'];
 }
 else
 {
