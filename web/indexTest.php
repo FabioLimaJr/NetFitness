@@ -237,10 +237,11 @@ $fachada = Fachada::getInstance();
  $dica = new Dica(1,'teste dicaaaaa', 'titulo da dicaaaaaaa');
 $fachada = Fachada::getInstance();
 try {
-    $fachada->excluirDica($dica);
+    $listaDicas = $fachada->listarDica();
+    var_dump($listaDicas);
     //echo 'dica incluida';
     //echo 'dica alterada';
-    echo 'dica excluida';
+    //echo 'dica excluida';
 } catch (Exception $exc) {
     echo $exc->getMessage();
 }

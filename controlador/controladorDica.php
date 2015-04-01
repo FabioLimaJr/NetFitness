@@ -26,7 +26,7 @@ class controladorDica {
     public function inserir($dica) {
         if(!ExpressoesRegulares::conferirDescricao($dica->getDescricao())){
             throw new Exception(Excecoes::descricaoInvalida($dica->getDescricao()));
-        }else if (!ExpressoesRegulares::conferirNome($dica->getTitulo())) {
+        }else if ($dica->getTitulo() == null && $dica->getTitulo() == "") {
             throw new Exception(Excecoes::tituloInvalida($dica->getTitulo()));
         }else{
              return $this->getRepositorioDica()->inserir($dica);
@@ -36,7 +36,7 @@ class controladorDica {
     public function alterar($dica) {
         if(!ExpressoesRegulares::conferirDescricao($dica->getDescricao())){
             throw new Exception(Excecoes::descricaoInvalida($dica->getDescricao()));
-        }else if (!ExpressoesRegulares::conferirNome($dica->getTitulo())) {
+        }else if (($dica->getTitulo() == null) && ($dica->getTitulo() == "")) {
             throw new Exception(Excecoes::tituloInvalida($dica->getTitulo()));
         }else{
              return $this->getRepositorioDica()->alterar($dica);

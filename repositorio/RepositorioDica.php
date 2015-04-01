@@ -79,6 +79,26 @@ class RepositorioDica extends Conexao implements IRepositorioDica{
 
     public function listar() {
         
+        $listaDicas = array();
+        
+        $sql = "USE ". $this->getNomeBanco();
+        
+        if($this->getConexao()->query($sql) === true){
+            
+            $sql = "SELECT * FROM dica";
+            $result =  mysqli_query($this->getConexao(), $sql);
+            
+             while ($row = mysqli_fetch_array($result)){
+    
+              $dica = new Dica($row['idDica'], $row['descricao'], $row['titulo']);                
+                
+                array_push($listaDicas, $dica);
+                
+            }
+            return($listaDicas);
+        }else{
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error).")");
+         }
     }
     
     public function detalhar($dica) {

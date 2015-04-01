@@ -1,20 +1,29 @@
 <?php 
 include ('../classesBasicas/Aluno.php');
-include ('../classesBasicas/Coordenador.php');
+include ('../classesBasicas/Musica.php');
 include ('../classesBasicas/Nutricionista.php');
 include ('../classesBasicas/Instrutor.php');
 include ('../classesBasicas/Secretaria.php');
+include ('../classesBasicas/Dieta.php');
+include ('../classesBasicas/Alimento.php');
+include ('../classesBasicas/Dica.php');
 session_start();
 
-if(isset($_SESSION['Nutricionista']))
+$pessoa="";
+if($_SESSION['tipoUsuario'] == "Nutricionista")
 {
-    $nutricionista = $_SESSION['Nutricionista'];
+     $pessoa = $_SESSION['Nutricionista'];
+   
+}
+elseif(($_SESSION['tipoUsuario'] == "Instrutor"))
+{
+     $pessoa = $_SESSION['Instrutor'];
 }
 else
 {
     header('location: erroAcesso.php');
 }
-
+include ('../expressoesRegulares/ExpressoesRegulares.php');
 include ('../fachada/Fachada.php');
 include ('componentes/header.php');
 ?>
@@ -27,15 +36,15 @@ include ('componentes/header.php');
     
     <div id="logo"><a href="index.php"><img src="images/logo.png" alt=""></a></div>
 
-    <?php include ('componentes/menuNutricionista.php') ?>  
-    <?php include ('componentes/leftIcons.php') ?>
-    <?php include ('componentes/signature.php'); ?>   
+    <?php include ("componentes/menu".$_SESSION['tipoUsuario'].".php");
+     include ('componentes/leftIcons.php'); 
+     include ('componentes/signature.php'); ?>   
     
   </div><!-- end sidebar -->
      
   <div id="content">
   
-     <?php include('conteudo/nutricionistaConteudo.php'); ?>
+     <?php include('conteudo/inserirDicaConteudo.php'); ?>
     
   </div><!-- end content -->
   
@@ -45,3 +54,4 @@ include ('componentes/header.php');
 
 </body>
 </html>
+

@@ -19,5 +19,13 @@
             <li><a href="#">Listar</a></li>
           </ul>
         </li>
+        <li><a href="#">Dica</a>
+          <ul>
+            <li><a href="inserirDica.php">Inserir</a></li>
+            <li><a href="alterarDica.php">Alterar</a></li>
+            <li><a href="excluirDica.php">Excluir</a></li>
+            <li><a href="listarDica.php">Listar</a></li>
+          </ul>
+        </li>
       </ul>
     </div>

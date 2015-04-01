@@ -303,14 +303,14 @@ class Fachada implements IFachada
     }
 
     public function excluirDica($dica) {
-        $this->controladorDica->excluir($dica);
+        return $this->controladorDica->excluir($dica);
     }
 
-    public function listarDica() {
-        $this->controladorDica->listar();
+    public function listarDicas() {
+        return $this->controladorDica->listar();
     }
     
     public function detalharDica($dica) {
-        $this->controladorDica->detalhar($dica);
+        return $this->controladorDica->detalhar($dica);
     }
 }

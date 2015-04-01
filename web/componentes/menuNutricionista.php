@@ -24,8 +24,9 @@
         <li><a href="#">Dica</a>
           <ul>
             <li><a href="inserirDica.php">Inserir</a></li>
-            <li><a href="excluirDica.php">Excluir</a></li>
             <li><a href="alterarDica.php">Alterar</a></li>
+            <li><a href="excluirDica.php">Excluir</a></li>
+            <li><a href="alterarDica.php">Listar</a></li>
           </ul>
         </li>
         
