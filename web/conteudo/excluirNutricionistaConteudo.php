@@ -86,7 +86,7 @@ catch (Exception $exc)
         {
             $nutricionista = new Nutricionista($_POST['idNutricionista']);
             $fachada->excluirNutricionista($nutricionista);
-            var_dump($nutricionista);
+            //var_dump($nutricionista);
             $mensagem = "A Nutricionista ".$_POST['nomeNutricionista'.$_POST['idNutricionista']]." foi excluida com sucesso.";
         } 
         catch (Exception $exc)
