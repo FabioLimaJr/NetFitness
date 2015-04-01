@@ -1,7 +1,8 @@
 <?php
 include ('../classesBasicas/Aluno.php');
 include ('../classesBasicas/Secretaria.php');
-include ('../classesBasicas/pagamento.php');
+include ('../classesBasicas/Pagamento.php');
+include ('../classesBasicas/Dieta.php');
 
 session_start();
 

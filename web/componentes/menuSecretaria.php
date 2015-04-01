@@ -22,7 +22,7 @@
         </li>
         <li><a href="#">Pagamento</a>
           <ul>
-            <li><a href="inserirPagamento.php">Inserir</a></li>
+            <li><a href="inserirPagamento.php">Informar Pagamento</a></li>
           </ul>
         </li>
       </ul>

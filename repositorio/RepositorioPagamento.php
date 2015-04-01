@@ -20,13 +20,13 @@ class RepositorioPagamento extends RepositorioGenerico implements IRepositorioPa
         
         if($this->getConexao()->query($sql) === true){
             
-            $sql = "INSERT INTO pagamento VALUES('";
-            $sql.= NULL. "','";
-            $sql.= $pagamento->getValor()."','";
+            $sql = "INSERT INTO pagamento VALUES( null,";
+            //$sql.= NULL. ",";
+            $sql.= $pagamento->getValor().",'";
             $sql.= $pagamento->getDataPagamento()."','";
-            $sql.= $pagamento->getDataVencimento()."','";
-            $sql.= $pagamento->getSecretaria()->getIdSecretaria()."','";
-            $sql.= $pagamento->getAluno()->getIdAluno()."')";
+            $sql.= $pagamento->getDataVencimento()."',";
+            $sql.= $pagamento->getSecretaria()->getIdSecretaria().",";
+            $sql.= $pagamento->getAluno()->getIdAluno().")";
             
             if(mysqli_query($this->getConexao(), $sql)){
                
