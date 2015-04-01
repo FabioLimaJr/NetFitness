@@ -8,7 +8,7 @@ session_start();
 
 if(isset($_SESSION['Nutricionista']))
 {
-    $secretaria = $_SESSION['Nutricionista'];
+    $nutricionista = $_SESSION['Nutricionista'];
 }
 else
 {
