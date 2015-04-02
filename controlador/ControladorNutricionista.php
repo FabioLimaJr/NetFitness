@@ -36,12 +36,15 @@ class ControladorNutricionista {
     }
     
     public function alterar($nutricionista){
-        
+        /*
         if(ExpressoesRegulares::validarTodosOsCampos($nutricionista)){
             return $this->getRepositorioNutricionista()->alterar($nutricionista);
         }else{
             throw Excecoes::alterarObjeto($nutricionista);
         }
+         */
+        
+        $this->getRepositorioNutricionista()->alterar($nutricionista);
     }
     public function excluir($nutricionista){
                   
