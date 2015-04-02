@@ -58,35 +58,32 @@ class RepositorioNutricionista extends RepositorioGenerico implements IRepositor
         }
     } 
     
-    public function alterar($nutricionista) 
-    {
-        $sql = "USE " . $this->getNomeBanco();
-        if (@$this->getConexao()->query($sql) === TRUE) 
-        {
-            if (!$this->alterarPessoa($nutricionista)) 
-            {
-                throw new Exception(Excecoes::alterarObjeto("Nutricionista: " . mysqli_error($this->getConexao())));
-            } 
-            else 
-            {
-                $sql = "UPDATE nutricionista SET idCoordenador='" . $nutricionista->getCoordenador()->getIdCoordenador();
-                $sql.= "' WHERE idNutricionista='" . $nutricionista->getIdNutricionista() . "'";
-                //falta alterar as demais listas atreladas se for preciso
-                if (!mysqli_query($this->getConexao(), $sql)) 
-                {
-                    throw new Exception(Excecoes::alterarObjeto("Nutricionista: " . mysqli_error($this->getConexao())));
-                }
-                else
-                {
-                    $this->fecharConexao();
-                }
+    public function alterar($nutricionista) {
+        
+        $sql = " USE " . $this->getNomeBanco();
+        
+        if($this->getConexao()->query($sql) === true){
+
+            $sql = "UPDATE nutricionista SET nome = '".$nutricionista->getNome();
+            $sql.= "', cpf = '".$nutricionista->getCpf();
+            $sql.= "', endereco = '".$nutricionista->getEndereco();
+            $sql.= "', telefone = '".$nutricionista->getTelefone();
+            $sql.= "', email = '".$nutricionista->getEmail();
+            $sql.= "', crn = '".$nutricionista->getCrn();
+
+            $sql.= "'  WHERE idNutricionista = '".$nutricionista->getIdNutricionista()."'";
+            
+            if(mysqli_query($this->getConexao(), $sql)){
+                $this->fecharConexao();
+            }else{
+                throw new Exception(Excecoes::alterarObjeto("Nutricionista: ". mysqli_error($this->getConexao())));
             }
-        } 
-        else 
-        {
-            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+            
+        }else{
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco()."(".$this->getConexao()->erro.")"));
         }
     }
+
     public function excluir($nutricionista) 
     {
         $sql = "USE " . $this->getNomeBanco();
