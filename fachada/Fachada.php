@@ -162,7 +162,7 @@ class Fachada implements IFachada
         return $this->controladorInstrutor->logar($instrutor);
     }
 
-       public function incluirTreino($treino) {
+    public function inserirTreino($treino) {
         return $this->controladorTreino->inserir($treino);
     }
 

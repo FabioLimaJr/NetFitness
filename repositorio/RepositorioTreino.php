@@ -28,7 +28,24 @@ class RepositorioTreino extends Conexao implements IRepositorioTreino{
             $sql.= $treino->getInstrutor()->getIdInstrutor(). "')";
             
             if(mysqli_query($this->getConexao(), $sql)){
+                
+                $id = mysqli_insert_id($this->getConexao());
+                
+                foreach ($treino->getListaExercicios() as $exercicio){
+                    
+                    $sql = "INSERT INTO treinoexercicio VALUES(".$id.","
+                                                                .$exercicio->getId().","
+                                                                .$treino->getSeries().","
+                                                                .$treino->getRepeticoes().")";
+                    
+                    if(!mysqli_query($this->getConexao(), $sql)){
+                        
+                        throw new Exception(Excecoes::inserirObjeto("Relação entre treino e exercicio: ".  mysqli_error($this->getConexao())));
+                    }
+                }
+                
                 $this->fecharConexao();
+                return true;
             }else{
                 throw new Exception(Excecoes::inserirObjeto("Treino: ".  mysqli_error($this->getConexao())));
             }
@@ -38,6 +55,11 @@ class RepositorioTreino extends Conexao implements IRepositorioTreino{
         }
     }
     
+    private function inserirTreinoExercicio($treino){
+        
+        
+    }
+
     public function alterar($treino) {
         
     }
@@ -54,4 +76,5 @@ class RepositorioTreino extends Conexao implements IRepositorioTreino{
         
     }
 
+    
 }
