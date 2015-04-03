@@ -56,13 +56,49 @@ class RepositorioTreino extends Conexao implements IRepositorioTreino{
         }
     }
     
-    private function inserirTreinoExercicio($treino){
-        
-        
-    }
-
     public function alterar($treino) {
         
+        $sql = "USE " . $this->getNomeBanco();
+        
+        if($this->getConexao()->query($sql) === true){
+            
+            $sql = "UPDATE treino SET nome='".$treino->getNome().
+                                  "', descricao='".$treino->getDescricao().
+                                  "' WHERE idTreino=".$treino->getIdTreino();
+            
+            if(mysqli_query($this->getConexao(), $sql)){
+                
+                $sql = "DELETE FROM treinoexercicio WHERE idTreino=".$treino->getIdTreino();
+                
+                if(mysqli_query($this->getConexao(), $sql)){
+                    
+                    $listaExercicios = $treino->getListaExercicios();
+                    //var_dump($listaExercicios);
+                    foreach ($listaExercicios as $exercicio){
+
+                        $sql = "INSERT INTO treinoexercicio VALUES(".$treino->getIdTreino().","
+                                                                    .$exercicio->getIdExercicio().","
+                                                                    .$treino->getSeries().","
+                                                                    .$treino->getRepeticoes().")";
+
+                        if(!mysqli_query($this->getConexao(), $sql)){
+
+                            throw new Exception(Excecoes::inserirObjeto("Relação entre treino e exercicio: ".  mysqli_error($this->getConexao())));
+                        }
+                    }
+
+                    $this->fecharConexao();
+                    return true;
+                }else{
+                    throw new Exception(Excecoes::alterarObjeto("Erro ao tentar excluir os relacionamentos entre treino e exercício: ".  mysqli_error($this->getConexao())));
+                }
+            }else{
+                throw new Exception(Excecoes::alterarObjeto("Treino: ".  mysqli_error($this->getConexao())));
+            }
+        }else{
+            
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco()."(".$this->getConexao()->error.")"));
+        }    
     }
 
     public function excluir($treino) {
