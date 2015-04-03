@@ -76,7 +76,7 @@ class ControladorTreino {
     
     public function excluir($treino){
         
-        return $this->getRepositorioTreino()->excluir($excluir);
+        return $this->getRepositorioTreino()->excluir($treino);
         
     }
     

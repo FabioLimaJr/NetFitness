@@ -90,7 +90,7 @@ class RepositorioTreino extends Conexao implements IRepositorioTreino{
                     $this->fecharConexao();
                     return true;
                 }else{
-                    throw new Exception(Excecoes::alterarObjeto("Erro ao tentar excluir os relacionamentos entre treino e exercício: ".  mysqli_error($this->getConexao())));
+                    throw new Exception(Excecoes::excluirObjetosRelacionados("treino e exercício ".  mysqli_error($this->getConexao())));
                 }
             }else{
                 throw new Exception(Excecoes::alterarObjeto("Treino: ".  mysqli_error($this->getConexao())));
@@ -103,6 +103,21 @@ class RepositorioTreino extends Conexao implements IRepositorioTreino{
 
     public function excluir($treino) {
         
+        $sql = "USE " . $this->getNomeBanco();
+        
+        if($this->getConexao()->query($sql) === true){
+            
+            $sql = "DELETE FROM treino WHERE idTreino=".$treino->getIdTreino();
+            
+            if(mysqli_query($this->getConexao(), $sql)){
+                $this->fecharConexao();
+                return true;
+            }else{
+                throw new Exception(Excecoes::excluirObjeto("Treino: ".  mysqli_error($this->getConexao())));
+            }
+        }else{
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco()."(".$this->getConexao()->error.")"));
+        }
     }
 
     public function listar() {
