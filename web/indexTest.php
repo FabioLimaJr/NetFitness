@@ -234,14 +234,41 @@ $fachada = Fachada::getInstance();
   */
 //Teste Incluir Dica
  //$idDica, $descricao, $titulo
- $dica = new Dica(1,'teste dicaaaaa', 'titulo da dicaaaaaaa');
+ /*$dica = new Dica(1,'teste dicaaaaa', 'titulo da dicaaaaaaa');
 $fachada = Fachada::getInstance();
 try {
-    $listaDicas = $fachada->listarDica();
-    var_dump($listaDicas);
+    $listaDicas = $fachada->listarDica();*/
+    //var_dump($listaDicas);
     //echo 'dica incluida';
     //echo 'dica alterada';
     //echo 'dica excluida';
-} catch (Exception $exc) {
+/*} catch (Exception $exc) {
     echo $exc->getMessage();
-}
+}*/
+ 
+ // Teste inserir treino
+ 
+ 
+ $fachada = Fachada::getInstance();
+ 
+ $exercicios = $fachada->listarExercicios();
+ 
+ $instrutor = new Instrutor();
+ $instrutor->setIdInstrutor(13);
+ 
+ // $idTreino, $nome, $descricao, $instrutor, $listaExercicios, $series, $repeticoes
+ $treino = new Treino(null, "treino teste três", "Descricao do treino teste três", $instrutor, $exercicios, 3, 10);
+ 
+ $treino->setIdTreino(NULL);
+ $treino->setNome("treino teste dois");
+ $treino->setDescricao("descricao do treino teste dois");
+ $treino->setInstrutor($instrutor);
+ $treino->setListaExercicios($exercicios);
+ $treino->setSeries(3);
+ $treino->setRepeticoes(10);
+ 
+ $fachada->inserirTreino($treino);
+ 
+ echo 'Treino inserido com sucesso!!';
+ 
+ 

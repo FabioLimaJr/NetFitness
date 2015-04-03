@@ -31,9 +31,9 @@ class ControladorTreino {
             return $this->getRepositorioTreino()->inserir($treino);
         }*/
         if((!ExpressoesRegulares::conferirNome($treino->getNome()))){
-            throw Excecoes::inserirObjeto($treino);
+            throw Excecoes::inserirObjeto($treino->getNome());
         }else if(!ExpressoesRegulares::conferirDescricao($treino->getDescricao())){
-            throw Excecoes::inserirObjeto($treino);
+            throw Excecoes::inserirObjeto($treino->getDescricao());
         }else if($treino->getSeries() <= 0){
             throw Excecoes::inserirObjeto("A qtd de Series tem que ser maior que zero!");
         }else if($treino->getRepeticoes() <= 0){

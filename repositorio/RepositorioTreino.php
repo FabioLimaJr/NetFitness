@@ -21,20 +21,21 @@ class RepositorioTreino extends Conexao implements IRepositorioTreino{
         
         if($this->getConexao()->query($sql) === true){
             
-            $sql = "INSERT INTO treino VALUES('";
-            $sql.= NULL. "','";
-            $sql.= $treino->getNome(). "','";
-            $sql.= $treino->getDescricao(). "','";
-            $sql.= $treino->getInstrutor()->getIdInstrutor(). "')";
+            $sql = "INSERT INTO treino VALUES(null,'";
+            $sql.= $treino->getNome()."','";
+            $sql.= $treino->getDescricao()."',";
+            $sql.= $treino->getInstrutor()->getIdInstrutor().")";
             
             if(mysqli_query($this->getConexao(), $sql)){
                 
                 $id = mysqli_insert_id($this->getConexao());
                 
-                foreach ($treino->getListaExercicios() as $exercicio){
+                $listaExercicios = $treino->getListaExercicios();
+                //var_dump($listaExercicios);
+                foreach ($listaExercicios as $exercicio){
                     
                     $sql = "INSERT INTO treinoexercicio VALUES(".$id.","
-                                                                .$exercicio->getId().","
+                                                                .$exercicio->getIdExercicio().","
                                                                 .$treino->getSeries().","
                                                                 .$treino->getRepeticoes().")";
                     

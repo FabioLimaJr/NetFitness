@@ -15,7 +15,7 @@ class Treino {
 
     //put your code here
     private $idTreino;
-    private $listaExercicio;
+    private $listaExercicios;
     private $nome;
     private $descricao;
     private $instrutor;
@@ -35,11 +35,14 @@ class Treino {
         $this->setIdTreino($idTreino);
     }
 
-    function __construct4($idTreino, $nome, $descricao, $instrutor) {
+    function __construct4($idTreino, $nome, $descricao, $instrutor, $listaExercicios, $series, $repeticoes) {
         $this->setIdTreino($idTreino);
         $this->setNome($nome);
         $this->setDescricao($descricao);
         $this->setInstrutor($instrutor);
+        $this->setListaExercicios($listaExercicios);
+        $this->setSeries($series);
+        $this->setRepeticoes($repeticoes);
     }
 
     function getIdTreino() {
@@ -74,8 +77,8 @@ class Treino {
         $this->instrutor = $instrutor;
     }
     
-    function getListaExercicio() {
-        return $this->listaExercicio;
+    function getListaExercicios() {
+        return $this->listaExercicios;
     }
 
     function getSeries() {
@@ -86,8 +89,8 @@ class Treino {
         return $this->repeticoes;
     }
 
-    function setListaExercicio($listaExercicio) {
-        $this->listaExercicio = $listaExercicio;
+    function setListaExercicios($listaExercicios) {
+        $this->listaExercicios = $listaExercicios;
     }
 
     function setSeries($series) {

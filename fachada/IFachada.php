@@ -29,7 +29,7 @@ interface IFachada {
     public function logarInstrutor($instrutor);
     public function logarNutricionista($nutricionista);    
     
-    public function incluirTreino($treino);
+    public function inserirTreino($treino);
     public function alterarTreino($treino);
     public function excluirTreino($treino);
     public function listarTreino();
