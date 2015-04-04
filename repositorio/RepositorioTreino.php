@@ -121,6 +121,7 @@ class RepositorioTreino extends Conexao implements IRepositorioTreino{
     }
 
     public function listar() {
+       
         
     }
 

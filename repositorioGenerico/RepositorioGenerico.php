@@ -59,7 +59,8 @@ class RepositorioGenerico extends Conexao
         
         while ($row = mysqli_fetch_array($result)) 
         {
-            $pessoaReturn = new Pessoa($row['idPessoa'], $row['nome'], $row['cpf'], $row['cpf'], 
+            // $idPessoa, $nome, $cpf, $endereco, $senha, $telefone, $login,$email
+            $pessoaReturn = new Pessoa($row['idPessoa'], $row['nome'], $row['cpf'], $row['endereco'], 
                                  $row['senha'], $row['telefone'], $row['login'], $row['email']);
         }        
         
