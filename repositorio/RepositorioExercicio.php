@@ -15,8 +15,12 @@ include_once($serverPath.'excecoes/Excecoes.php');
  *
  * @author Schmitz
  */
-class RepositorioExercicio extends RepositorioGenerico implements IRepositorioExercicio{
+class RepositorioExercicio extends Conexao implements IRepositorioExercicio{
     //put your code here
+    
+    function __construct() {
+       parent::__construct();  
+    }
     
     public function inserir($exercicio) {
         
@@ -113,7 +117,7 @@ class RepositorioExercicio extends RepositorioGenerico implements IRepositorioEx
         
         $sql = "USE " . $this->getNomeBanco();
         
-        if($this->getConexao()->query($sql) === TRUE){
+        if($this->getConexao()->query($sql) === true){
             
             $sql = "SELECT * FROM exercicio WHERE exercicio.idExercicio = " . $exercicio->getIdExercicio();
             $result = mysqli_query($this->getConexao(), $sql);
