@@ -1,12 +1,10 @@
 <?php
 
 include ('../classesBasicas/Aluno.php');
-include ('../classesBasicas/Musica.php');
-include ('../classesBasicas/Nutricionista.php');
 include ('../classesBasicas/Coordenador.php');
+include ('../classesBasicas/Nutricionista.php');
+include ('../classesBasicas/Instrutor.php');
 include ('../classesBasicas/Secretaria.php');
-include ('../classesBasicas/Dieta.php');
-include ('../classesBasicas/Alimento.php');
 include ('../classesBasicas/Exercicio.php');
 session_start();
 
@@ -20,6 +18,7 @@ else
 }
 include ('../expressoesRegulares/ExpressoesRegulares.php');
 include ('../fachada/Fachada.php');
+include ('componentes/header.php');
 include ('componentes/header.php');
 ?>
 
