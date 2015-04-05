@@ -107,7 +107,7 @@ class RepositorioExercicio extends Conexao implements IRepositorioExercicio{
                 
                 array_push($listaExercicios, $exercicio);
             }
-            $this->fecharConexao();
+            //$this->fecharConexao();
             return $listaExercicios;
         }else{
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");

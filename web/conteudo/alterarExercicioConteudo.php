@@ -76,8 +76,8 @@ Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->
          
          if($_POST['idExercicio']){
              
-             $exercicio = new Exercicio();
-             $exercicio->setIdExercicio($_POST['idExercicio']);
+             $exercicio = new Exercicio($_POST['idExercicio']);
+             //$exercicio->setIdExercicio($_POST['idExercicio']);
              $exercicioRetornado = $fachada->detalharExercicio($exercicio);
              
              $_SESSION['exercicioRetornado'] = $exercicioRetornado;
