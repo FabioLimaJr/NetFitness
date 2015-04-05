@@ -9,6 +9,7 @@
 include($serverPath.'interfaceRepositorio/IRepositorioExercicio.php');
 include_once($serverPath.'repositorioGenerico/RepositorioGenerico.php');
 include_once($serverPath.'excecoes/Excecoes.php');
+include_once($serverPath.'conexao/Conexao.php');
 
 /**
  * Description of RepositorioExercicio
