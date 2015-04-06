@@ -8,9 +8,9 @@ include ('../classesBasicas/Dieta.php');
 include ('../classesBasicas/Alimento.php');
 session_start();
 
-if(isset($_SESSION['Nutricionista']))
+if(isset($_SESSION['Aluno']))
 {
-    $nutricionista = $_SESSION['Nutricionista'];
+    $aluno = $_SESSION['Aluno'];
 }
 else
 {
@@ -29,7 +29,7 @@ include ('componentes/header.php');
     
     <div id="logo"><a href="index.php"><img src="images/logo.png" alt=""></a></div>
 
-    <?php include ('componentes/menuNutricionista.php') ?>  
+    <?php include ('componentes/menuAluno.php') ?>  
     <?php include ('componentes/leftIcons.php') ?>
     <?php include ('componentes/signature.php'); ?>   
     
@@ -37,7 +37,7 @@ include ('componentes/header.php');
      
   <div id="content">
   
-     <?php include('conteudo/listarDietasConteudo.php'); ?>
+     <?php include('conteudo/alunoListarDietasConteudo.php'); ?>
     
   </div><!-- end content -->
   
