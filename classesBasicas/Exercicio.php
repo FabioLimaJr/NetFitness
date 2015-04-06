@@ -12,6 +12,8 @@ class Exercicio {
     private $nome;
     private $musculo;
     private $descricao;
+    private $series;
+    private $repeticoes;
     
     
     public function __construct() 
@@ -66,6 +68,22 @@ class Exercicio {
 
     function setDescricao($descricao) {
         $this->descricao = $descricao;
+    }
+
+    function getSeries() {
+        return $this->series;
+    }
+
+    function getRepeticoes() {
+        return $this->repeticoes;
+    }
+
+    function setSeries($series) {
+        $this->series = $series;
+    }
+
+    function setRepeticoes($repeticoes) {
+        $this->repeticoes = $repeticoes;
     }
 
 
