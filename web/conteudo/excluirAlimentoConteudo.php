@@ -52,6 +52,7 @@ if(!$camposPreenchidos){
                         <th>Proteina</th>
                         <th>Carboidrato</th>
                         <th>Gordura</th>
+                        <th>Selecione</th>
                     </tr>
                     
                     <?php foreach ($listaAlimentos as $alimento){ ?>

@@ -76,7 +76,48 @@ class RepositorioDica extends Conexao implements IRepositorioDica{
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco()."(".$this->getConexao()->erro.")"));
         }
     }
-
+    
+    /*public function listar($pessoa){
+        $tipoUsuario = get_class($pessoa);
+        $tabela = lcfirst($tipoUsuario)."dica";
+        $sql = "USE " . $this->getNomeBanco();
+        $listaDicas=array();
+       
+        if($this->getConexao()->query($sql) === TRUE)
+        {
+            $sqlPessoaDica = "SELECT * FROM ".$tabela." WHERE id".$tipoUsuario." = '".$pessoa->getIdPessoa()."'";
+           
+         
+            try
+            {
+                $resultPessoaDica = mysqli_query($this->getConexao(), $sqlPessoaDica);
+           
+                while ($rowPessoaDica = mysqli_fetch_array($resultPessoaDica))
+                {
+                    $sqlDica = "SELECT * FROM dica WHERE idDica = '".$rowPessoaDica['idDica']."'";
+                    $resultDica = mysqli_query($this->getConexao(), $sqlDica);
+                    $rowDica = mysqli_fetch_assoc($resultDica);
+                   
+                    $dica = new Dica($rowDica['idDica'], $rowDica['descricao'], $rowDica['titulo']);
+                   
+                    array_push($listaDicas, $dica);
+                }   
+            }
+            catch (Exception $exc)
+            {
+                    throw new Exception($exc->getMessage());
+            }
+            $this->fecharConexao();
+            return $listaDicas;
+           
+        }
+        else
+        {
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+        }
+       
+    }*/
+   
     public function listar() {
         
         $listaDicas = array();
@@ -101,8 +142,38 @@ class RepositorioDica extends Conexao implements IRepositorioDica{
          }
     }
     
-    public function detalhar($dica) {
+     public function detalhar($dica)
+    {
+       
+        $sql = "USE " . $this->getNomeBanco();
+ 
+        if($this->getConexao()->query($sql) === TRUE)
+        {
+            $sqlDica = "SELECT * FROM dica WHERE idDica = '".$dica->getIdDica()."'";
         
+            try
+            {
+                $resultDica = mysqli_query($this->getConexao(), $sqlDica);
+               
+                $rowDica = mysqli_fetch_assoc($resultDica);
+                $dicaRetornada = new Dica($rowDica['idDica'], $rowDica['descricao'],
+                                                  $rowDica['titulo']);
+              
+            }
+            catch(Exception $exc)
+            {
+                throw new Exception($exc->getMessage());
+            }
+                
+            $this->fecharConexao();
+         
+            return $dicaRetornada;
+       }
+       else
+       {
+           throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+       }
+       
     }
 
 }
