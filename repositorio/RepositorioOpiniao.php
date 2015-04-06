@@ -8,7 +8,7 @@ include($serverPath.'interfaceRepositorio/IRepositorioOpiniao.php');
 include_once($serverPath.'excecoes/Excecoes.php');
 include_once($serverPath.'conexao/Conexao.php');
 
-class RepositorioOpiniao extends RepositorioGenerico implements IRepositorioOpiniao {
+class RepositorioOpiniao extends Conexao implements IRepositorioOpiniao {
     
     function __construct() {
        parent::__construct();  

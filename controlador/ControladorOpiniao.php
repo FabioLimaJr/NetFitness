@@ -24,15 +24,19 @@ class ControladorOpiniao {
     
     public function inserir($opiniao){        
         if((!ExpressoesRegulares::conferirDescricao($opiniao->getDescricao()))){
-            throw Excecoes::inserirObjeto($opiniao);
+            throw Excecoes::descricaoInvalida($opiniao->getDescricao());
+        }if((!ExpressoesRegulares::conferirData($opiniao->getDataPostagem()))){
+            throw Excecoes::dataInvalida($opiniao->getDataPostagem());
         }else{
-            return $this->getRepositorioOpiniao()->inserir($Opiniao);
+            return $this->getRepositorioOpiniao()->inserir($opiniao);
         }
     }
     
     public function alterar($opiniao){        
         if((!ExpressoesRegulares::conferirDescricao($opiniao->getDescricao()))){
-            throw Excecoes::inserirObjeto($opiniao);
+            throw Excecoes::descricaoInvalida($opiniao->getDescricao());
+        }if((!ExpressoesRegulares::conferirData($opiniao->getDataPostagem()))){
+            throw Excecoes::dataInvalida($opiniao->getDataPostagem());
         }else{
             return $this->getRepositorioTreino()->inserir($opiniao);
         }        
