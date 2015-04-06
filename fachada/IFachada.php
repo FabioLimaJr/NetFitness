@@ -32,8 +32,8 @@ interface IFachada {
     public function inserirTreino($treino);
     public function alterarTreino($treino);
     public function excluirTreino($treino);
-    public function listarTreino();
-    public function detalharTreino($treino);
+    public function listarTreinos($fetchType);
+    public function detalharTreino($treino, $fetchType);
     
     //Opinião
     public function inserirOpiniao($opiniao);

@@ -120,13 +120,88 @@ class RepositorioTreino extends Conexao implements IRepositorioTreino{
         }
     }
 
-    public function listar() {
+    public function listar($fetchType) {
        
-        
+        $sql = "USE " . $this->getNomeBanco();
+        $listaTreinos = array();
+ 
+        if($this->getConexao()->query($sql) === TRUE)
+        {
+            $sqlListaTreinos = "SELECT * FROM treino";      
+            try
+            {   
+                $resultListaTreinos = mysqli_query($this->getConexao(), $sqlListaTreinos);
+                
+                while ($rowListaTreinos = mysqli_fetch_array($resultListaTreinos))
+                {
+                   
+                    $treinoRetornado = new Treino($rowListaTreinos['idTreino']);
+                    
+                    if($fetchType == EAGER)
+                    {
+                        $treinoRetornado = $this->detalhar($treinoRetornado, EAGER);
+                    }
+                    else 
+                    {
+                        $treinoRetornado = $this->detalhar($treinoRetornado, LAZY);
+                    }    
+                    
+                    array_push($listaTreinos, $treinoRetornado);
+                }
+                
+                return $listaTreinos;
+            }
+            catch(Exception $exc)
+            {
+                throw new Exception($exc->getMessage());
+            }
+ 
+            return $listaTreinos;
+        }
+        else
+        {
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+        }
     }
 
-    public function detalhar($treino) {
+    public function detalhar($treino, $fetchType) {
         
+        $sql = "USE " . $this->getNomeBanco();
+ 
+        if($this->getConexao()->query($sql) === TRUE)
+        {
+            $sqlTreino = "SELECT * FROM treino WHERE idTreino = '".$treino->getIdTreino()."'";
+         
+            try
+            {
+                $resultTreino = mysqli_query($this->getConexao(), $sqlTreino);
+                
+                $rowTreino = mysqli_fetch_assoc($resultTreino);
+                $treinoRetornado = new Treino($rowTreino['idTreino'], $rowTreino['nome'], 
+                                              $rowTreino['descricao'], null/*$instrutor*/);
+                
+                $sqlDataTreino = "SELECT data FROM alunotreino WHERE idTreino = '".$treino->getIdTreino()."'";                
+                $resultDataTreino =  mysqli_query($this->getConexao(), $sqlDataTreino);
+                $rowDataTreino = mysqli_fetch_assoc($resultDataTreino);
+                $treinoRetornado->setData($rowDataTreino['data']);
+               
+            }
+            catch(Exception $exc)
+            {
+                throw new Exception($exc->getMessage());
+            }
+            
+            if($fetchType === EAGER)
+            {               
+                $treinoRetornado->setInstrutor($this->detalharObjeto(new Instrutor($rowTreino['idInstrutor']), LAZY));               
+            }
+          
+            return $treinoRetornado;
+       }
+       else
+       {
+           throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+       }
     }
 
     

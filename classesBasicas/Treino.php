@@ -19,9 +19,8 @@ class Treino {
     private $nome;
     private $descricao;
     private $instrutor;
-    private $series;
-    private $repeticoes;
-
+    private $data;
+    
     public function __construct() {
         $get_arguments = func_get_args();
         $number_of_arguments = func_num_args();
@@ -35,14 +34,12 @@ class Treino {
         $this->setIdTreino($idTreino);
     }
 
-    function __construct4($idTreino, $nome, $descricao, $instrutor, $listaExercicios, $series, $repeticoes) {
+    function __construct4($idTreino, $nome, $descricao, $instrutor) {
         $this->setIdTreino($idTreino);
         $this->setNome($nome);
         $this->setDescricao($descricao);
         $this->setInstrutor($instrutor);
-        $this->setListaExercicios($listaExercicios);
-        $this->setSeries($series);
-        $this->setRepeticoes($repeticoes);
+        //$this->setListaExercicios($listaExercicios);
     }
 
     function getIdTreino() {
@@ -81,24 +78,16 @@ class Treino {
         return $this->listaExercicios;
     }
 
-    function getSeries() {
-        return $this->series;
-    }
-
-    function getRepeticoes() {
-        return $this->repeticoes;
-    }
-
     function setListaExercicios($listaExercicios) {
         $this->listaExercicios = $listaExercicios;
     }
 
-    function setSeries($series) {
-        $this->series = $series;
+    function getData() {
+        return $this->data;
     }
 
-    function setRepeticoes($repeticoes) {
-        $this->repeticoes = $repeticoes;
+    function setData($data) {
+        $this->data = $data;
     }
 
 

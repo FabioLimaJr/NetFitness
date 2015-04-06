@@ -174,12 +174,12 @@ class Fachada implements IFachada
         return $this->controladorTreino->excluir($treino);
     }
 
-    public function listarTreino() {
-        return $this->controladorTreino->listar();
+    public function listarTreinos($fetchType) {
+        return $this->controladorTreino->listar($fetchType);
     }
 
-    public function detalharTreino($treino) {
-        return $this->controladorTreino->detalhar($treino);
+    public function detalharTreino($treino, $fetchType) {
+        return $this->controladorTreino->detalhar($treino, $fetchType);
     }
     
     public function inserirOpiniao($opiniao) {
