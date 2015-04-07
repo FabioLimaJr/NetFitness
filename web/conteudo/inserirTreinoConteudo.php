@@ -64,7 +64,7 @@ Nome: <?php echo $instrutor->getNome() ?> | Telefone:<?php echo $instrutor->getT
                          <tr>
                              <td> <?php echo $exercicio->getNome() ?> </td>
                              <td> <?php echo $exercicio->getMusculo() ?> </td>
-                             <td> <input type="text" name="serie<?php echo $exercicio->getIdExercicio() ?>" value="<?php if(isset($treino)) echo $treino->getSerie() ?>" class="text-input" style="width: 30px"> </td>
+                             <td> <input type="text" name="series<?php echo $exercicio->getIdExercicio() ?>" value="<?php if(isset($treino)) echo $treino->getSerie() ?>" class="text-input" style="width: 30px"> </td>
                              <td> <input type="text" name="repeticoes<?php echo $exercicio->getIdExercicio() ?>" value="<?php if(isset($treino)) echo $treino->getRepeticoes() ?>" class="text-input" style="width: 30px"> </td>
                              <td> <input type="checkbox" name="exercicio<?php echo $exercicio->getIdExercicio() ?>" value="true" style="width: 30px"> </td>
                          </tr>
@@ -87,9 +87,29 @@ Nome: <?php echo $instrutor->getNome() ?> | Telefone:<?php echo $instrutor->getT
 
     }else{
         
-        /* 
-         * falta o trecho para pegar os exercicios selecionados
-         */
+       $listaExerciciosSelecionados = array();
+      
+       foreach(array_keys($_POST) as $parametro)
+       {
+           if(strpos($parametro,'exercicio') !== false)
+           {
+               $idExercicio = explode("exercicio", $parametro);
+               
+               foreach($listaExercicios as $exercicio) 
+               {
+                    if ($idExercicio[1] == $exercicio->getIdExercicio()) 
+                    {
+                        //$postSerie = "serie".$idExercicio;
+                        $exercicio->setSeries($_POST['series'.$exercicio->getIdExercicio()]);
+                        echo $exercicio->getSeries();
+                        $exercicio->setRepeticoes($_POST['repeticoes'.$exercicio->getIdExercicio()]);
+                        echo $exercicio->getRepeticoes();
+                        array_push($listaExerciciosSelecionados, $exercicio);
+                        break;
+                    }
+               }
+           }
+       }
         
         $treino = new Treino();
         $treino->setIdTreino(NULL);
@@ -102,6 +122,7 @@ Nome: <?php echo $instrutor->getNome() ?> | Telefone:<?php echo $instrutor->getT
         try{
             
             $fachada->inserirTreino($treino);
+            //var_dump($treino);
             unset($_SESSION['Dieta']);
             $mensagem = "O treino foi inserido com sucesso!!";
             

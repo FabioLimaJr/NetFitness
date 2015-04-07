@@ -34,10 +34,6 @@ class ControladorTreino {
             throw Excecoes::inserirObjeto($treino->getNome());
         }else if(!ExpressoesRegulares::conferirDescricao($treino->getDescricao())){
             throw Excecoes::inserirObjeto($treino->getDescricao());
-        }else if($treino->getSeries() <= 0){
-            throw Excecoes::inserirObjeto("A qtd de Series tem que ser maior que zero!");
-        }else if($treino->getRepeticoes() <= 0){
-            throw Excecoes::inserirObjeto("A qtd de Repetições tem que ser maior que zero!");
         }else{
             return $this->getRepositorioTreino()->inserir($treino);
         }
@@ -58,14 +54,6 @@ class ControladorTreino {
         }else if(!ExpressoesRegulares::conferirDescricao($treino->getDescricao())){
             
             throw Excecoes::inserirObjeto($treino->getDescricao());
-            
-        }else if($treino->getSeries() <= 0){
-            
-            throw Excecoes::inserirObjeto("A qtd de Series tem que ser maior que zero!");
-            
-        }else if($treino->getRepeticoes() <= 0){
-            
-            throw Excecoes::inserirObjeto("A qtd de Repetições tem que ser maior que zero!");
             
         }else{
             
