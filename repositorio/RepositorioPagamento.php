@@ -20,17 +20,27 @@ class RepositorioPagamento extends RepositorioGenerico implements IRepositorioPa
         
         if($this->getConexao()->query($sql) === true){
             
-            $sql = "INSERT INTO pagamento VALUES( null,";
+            /*$sql = "INSERT INTO pagamento VALUES( null,";
             //$sql.= NULL. ",";
             $sql.= $pagamento->getValor().",'";
+            //$sql.= "null, '";
             $sql.= $pagamento->getDataPagamento()."','";
             $sql.= $pagamento->getDataVencimento()."',";
             $sql.= $pagamento->getSecretaria()->getIdSecretaria().",";
-            $sql.= $pagamento->getAluno()->getIdAluno().")";
+            $sql.= $pagamento->getAluno()->getIdAluno().")";*/
+            
+            $sql = "INSERT INTO pagamento VALUES( null,"
+                    .$pagamento->getValor().", null,'"
+                    //.$pagamento->getDataPagamento().",'"
+                    .$pagamento->getDataVencimento()."',"
+                    .$pagamento->getSecretaria()->getIdSecretaria().","
+                    .$pagamento->getAluno()->getIdAluno(). ")";
+            
+            //$sql = "INSERT INTO pagamento(valor,dataVencimento, idSecretaria, idAluno) VALUES (200,'2015-05-12',12,10";
             
             if(mysqli_query($this->getConexao(), $sql)){
                
-                $this->fecharConexao();
+               // $this->fecharConexao();
            
             }else{
                 throw new Exception(Excecoes::inserirObjeto("Pagamento".  mysql_errno($this->getConexao())));
@@ -95,9 +105,9 @@ class RepositorioPagamento extends RepositorioGenerico implements IRepositorioPa
         
         if($this->getConexao()->query($sql) === TRUE){
             
-            $sql = "SELECT * FROM pagamento,pessoa,aluno,secretaria WHERE (opiniao.idAluno = pessoa.idPessoa) AND "
-                                                                        ."(pessoa.idPessoa = aluno.idAluno) OR "
-                                                                        ."(pessoa.idPessoa = secretaria.idSecretaria)";
+            $sql = "SELECT * FROM pagamento,pessoa,aluno,secretaria WHERE (pagamento.idAluno = aluno.idAluno) AND "
+                                                                        ."(pagamento.idSecretaria = secretaria.idSecretaria)";
+                                                                        //."(pessoa.idPessoa = secretaria.idSecretaria)";
              $result = mysqli_query($this->getConexao(), $sql);
              
              while ($row = mysqli_fetch_array($result)){
@@ -128,7 +138,7 @@ class RepositorioPagamento extends RepositorioGenerico implements IRepositorioPa
                                              $row['login'], 
                                              $row['email'], 
                                              NULL);
-                  
+                
                 $pagamento = new Pagamento($row['idPagamento'], 
                                            $row['valor'],
                                            $row['dataVencimento'], 

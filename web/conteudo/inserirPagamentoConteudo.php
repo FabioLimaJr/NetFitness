@@ -85,13 +85,14 @@
       <?php 
     } 
     else
-    {       
-        $alunoSelecionado = new Aluno();
-        $alunoSelecionado->setIdAluno($_POST['aluno']);
+    {  
+        echo 'Id Aluno: '.$_POST['idAluno'];
+        $alunoSelecionado = new Aluno($_POST['idAluno']);
+        //$alunoSelecionado->setIdAluno($_POST['aluno']);
         $pagamento = new Pagamento(null, 
                                    $_POST['valor'], 
                                    $_POST['dataVencimento'],
-                                   $_POST['dataPagamento'], 
+                                   null, 
                                    $secretaria, 
                                    $alunoSelecionado);
              
