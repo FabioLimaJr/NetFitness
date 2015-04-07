@@ -68,9 +68,9 @@ class ControladorTreino {
         
     }
     
-    public function listar($fetchType){
+    public function listar($instrutor, $fetchType){
         
-        return $this->getRepositorioTreino()->listar($fetchType);
+        return $this->getRepositorioTreino()->listar($instrutor, $fetchType);
         
     }
     

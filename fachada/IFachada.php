@@ -32,7 +32,7 @@ interface IFachada {
     public function inserirTreino($treino);
     public function alterarTreino($treino);
     public function excluirTreino($treino);
-    public function listarTreinos($fetchType);
+    public function listarTreinos($instrutor, $fetchType);
     public function detalharTreino($treino, $fetchType);
     
     //Opinião

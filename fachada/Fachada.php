@@ -174,8 +174,8 @@ class Fachada implements IFachada
         return $this->controladorTreino->excluir($treino);
     }
 
-    public function listarTreinos($fetchType) {
-        return $this->controladorTreino->listar($fetchType);
+    public function listarTreinos($instrutor, $fetchType) {
+        return $this->controladorTreino->listar($instrutor, $fetchType);
     }
 
     public function detalharTreino($treino, $fetchType) {

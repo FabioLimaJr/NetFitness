@@ -120,7 +120,7 @@ class RepositorioTreino extends Conexao implements IRepositorioTreino{
         }
     }
 
-    public function listar($fetchType) {
+    public function listar($instrutor, $fetchType) {
        
         $sql = "USE " . $this->getNomeBanco();
         $listaTreinos = array();
