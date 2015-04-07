@@ -78,8 +78,8 @@ class RepositorioTreino extends Conexao implements IRepositorioTreino{
 
                         $sql = "INSERT INTO treinoexercicio VALUES(".$treino->getIdTreino().","
                                                                     .$exercicio->getIdExercicio().","
-                                                                    .$treino->getSeries().","
-                                                                    .$treino->getRepeticoes().")";
+                                                                    .$exercicio->getSeries().","
+                                                                    .$exercicio->getRepeticoes().")";
 
                         if(!mysqli_query($this->getConexao(), $sql)){
 
