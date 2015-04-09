@@ -69,6 +69,14 @@ class RepositorioOpiniao extends Conexao implements IRepositorioOpiniao {
             $id = $opiniao->getIdOpiniao();
             
             $sql = "DELETE FROM opiniao where idOpiniao = '".$id."'";
+                if (!mysqli_query($this->getConexao(), $sql)) 
+                {
+                    throw new Exception(Excecoes::alterarObjeto("Opiniao: " . mysqli_error($this->getConexao())));
+                }
+                else
+                {
+                    $this->fecharConexao();
+                }   
             
         }
         else 
