@@ -127,7 +127,7 @@ class RepositorioTreino extends Conexao implements IRepositorioTreino{
  
         if($this->getConexao()->query($sql) === TRUE)
         {
-            $sqlListaTreinos = "SELECT * FROM treino";      
+            $sqlListaTreinos = "SELECT * FROM treino WHERE idInstrutor = ".$instrutor->getIdInstrutor();      
             try
             {   
                 $resultListaTreinos = mysqli_query($this->getConexao(), $sqlListaTreinos);
@@ -202,6 +202,50 @@ class RepositorioTreino extends Conexao implements IRepositorioTreino{
        {
            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
        }
+    }
+    
+    public function listarTodos($fetchType) {
+       
+        $sql = "USE " . $this->getNomeBanco();
+        $listaTreinos = array();
+ 
+        if($this->getConexao()->query($sql) === TRUE)
+        {
+            $sqlListaTreinos = "SELECT * FROM treino";      
+            try
+            {   
+                $resultListaTreinos = mysqli_query($this->getConexao(), $sqlListaTreinos);
+                
+                while ($rowListaTreinos = mysqli_fetch_array($resultListaTreinos))
+                {
+                   
+                    $treinoRetornado = new Treino($rowListaTreinos['idTreino']);
+                    
+                    if($fetchType == EAGER)
+                    {
+                        $treinoRetornado = $this->detalhar($treinoRetornado, EAGER);
+                    }
+                    else 
+                    {
+                        $treinoRetornado = $this->detalhar($treinoRetornado, LAZY);
+                    }    
+                    
+                    array_push($listaTreinos, $treinoRetornado);
+                }
+                
+                return $listaTreinos;
+            }
+            catch(Exception $exc)
+            {
+                throw new Exception($exc->getMessage());
+            }
+ 
+            return $listaTreinos;
+        }
+        else
+        {
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+        }
     }
 
     

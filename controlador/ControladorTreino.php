@@ -79,4 +79,10 @@ class ControladorTreino {
         return $this->getRepositorioTreino()->detalhar($treino, $fetchType);
         
     }
+    // Listar todos os treinos independente do instrutor logado.
+    public function listarTodos($fetchType){
+        
+        return $this->getRepositorioTreino()->listarTodos($fetchType);
+        
+    }
 }

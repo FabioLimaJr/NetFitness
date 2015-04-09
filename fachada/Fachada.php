@@ -181,6 +181,10 @@ class Fachada implements IFachada
     public function detalharTreino($treino, $fetchType) {
         return $this->controladorTreino->detalhar($treino, $fetchType);
     }
+    // listar todos os treino independente do instrutor logado.
+    public function listarTodosTreinos($fetchType) {
+        return $this->controladorTreino->listarTodos($fetchType);
+    }
     
     public function inserirOpiniao($opiniao) {
         return $this->controladorOpiniao->inserir($opiniao);
