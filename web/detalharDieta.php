@@ -6,6 +6,7 @@ include ('../classesBasicas/Coordenador.php');
 include ('../classesBasicas/Secretaria.php');
 include ('../classesBasicas/Dieta.php');
 include ('../classesBasicas/Alimento.php');
+include ('../classesBasicas/Pagamento.php');
 session_start();
 
 if(isset($_SESSION['Nutricionista']))

@@ -56,13 +56,7 @@ Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->
                              <td><?php echo $treino->getNome() ?></td> 
                              <td><?php echo $treino->getDescricao() ?></td>  
                              <td>
-                                 <table style="width:100%;margin-bottom:50px">
-                                     <?php foreach($treino->getListaExercicios() as $exercicio){ ?>
-                                     <tr>
-                                         <td><?php echo $exercicio->getNome() ?></td>
-                                     </tr>
-                                     <?php } ?>
-                                 </table>
+                                 Falta lista de Exercicios
                              </td>  
                              <td><input type="radio" name="idTreino" value="<?php echo $treino->getIdTreino() ?>"></td>
                          </tr>
@@ -84,6 +78,34 @@ Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->
        </form>
     </div>
 
-     <?php } ?>
+     <?php }else{
+         
+         if(isset($_POST['idTreino']))){
+             
+             $treino = new Treino($_POST['idTreino']);
+             $treinoRetornado = $fachada->detalharTreino($treino, EAGER);
+             
+             $listaExerciciosNaoSelecionados = array();
+             $listaExerciciosSelecionados = $treino->getListaExercicios();
+             
+             foreach($listaExercicios as $exercicio){
+                 
+                 $exercicioPresemte = false;
+                 foreach($listaExerciciosSelecionados as $exercicioSelecionado){
+                     
+                     if($exercicioSelecionado->getIdExercicio() == $exercicio->getIdExercicio()){
+                         
+                         $exercicioPresemte = true;
+                     }
+                 }
+                 
+                 if(!$exercicioPresemte){
+                         array_push($listaExerciciosNaoSelecionados, $exercicio);
+                 }
+             }
+             
+             $_SESSION['exercicioRetornado']=$exercicioRetornado;
+     
+     ?>
 
 

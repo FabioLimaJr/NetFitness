@@ -33,7 +33,7 @@ class RepositorioAlimento extends Conexao implements IRepositorioAlimento {
             
             
             if(mysqli_query($this->getConexao(), $sql)){
-                $this->fecharConexao();
+                //$this->fecharConexao();
             }else{
                 throw new Exception(Excecoes::inserirObjeto("Alimento: ". mysqli_error($this->getConexao())));
             }
@@ -57,7 +57,7 @@ class RepositorioAlimento extends Conexao implements IRepositorioAlimento {
             $sql.= "'  WHERE IdAlimento = '".$alimento->getIdAlimento()."'";
             
             if(mysqli_query($this->getConexao(), $sql)){
-                $this->fecharConexao();
+                //$this->fecharConexao();
             }else{
                 throw new Exception(Excecoes::alterarObjeto("Alimento: ". mysqli_error($this->getConexao())));
             }
@@ -76,7 +76,7 @@ class RepositorioAlimento extends Conexao implements IRepositorioAlimento {
             $sql = "DELETE FROM alimento WHERE IdAlimento = '".$alimento->getIdAlimento()."'";
             
             if(mysqli_query($this->getConexao(), $sql)){
-                $this->fecharConexao();
+                //$this->fecharConexao();
             }else {
                 throw new Exception(Excecoes::excluirObjeto("Alimento: ". mysqli_error($this->getConexao())));
             }
@@ -147,7 +147,7 @@ class RepositorioAlimento extends Conexao implements IRepositorioAlimento {
             
              $alimentoRetornado->setNutricionista($nutricionista);
             
-            $this->fecharConexao();
+            //$this->fecharConexao();
           
            return $alimentoRetornado;
        }
