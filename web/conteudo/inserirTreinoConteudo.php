@@ -123,7 +123,7 @@ Nome: <?php echo $instrutor->getNome() ?> | Telefone:<?php echo $instrutor->getT
             
             $fachada->inserirTreino($treino);
             //var_dump($treino);
-            unset($_SESSION['Dieta']);
+            unset($_SESSION['Treino']);
             $mensagem = "O treino foi inserido com sucesso!!";
             
         } catch (Exception $ex) {
