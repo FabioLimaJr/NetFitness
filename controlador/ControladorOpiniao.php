@@ -25,9 +25,9 @@ class ControladorOpiniao {
     public function inserir($opiniao){        
         if((!ExpressoesRegulares::conferirDescricao($opiniao->getDescricao()))){
             throw Excecoes::descricaoInvalida($opiniao->getDescricao());
-        }if((!ExpressoesRegulares::conferirData($opiniao->getDataPostagem()))){
-            throw Excecoes::dataInvalida($opiniao->getDataPostagem());
-        }else{
+        }//if((!ExpressoesRegulares::conferirData($opiniao->getDataPostagem()))){
+           // throw Excecoes::dataInvalida($opiniao->getDataPostagem());
+        else{
             return $this->getRepositorioOpiniao()->inserir($opiniao);
         }
     }

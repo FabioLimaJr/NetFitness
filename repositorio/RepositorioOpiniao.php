@@ -20,15 +20,15 @@ class RepositorioOpiniao extends Conexao implements IRepositorioOpiniao {
         
         if($this->getConexao()->query($sql) === true){
             
-            $sql = "INSERT INTO opiniao VALUES('";
-            $sql.= NULL. "','";
+            $sql = "INSERT INTO opiniao VALUES(null,'";
+            //$sql.= NULL. "','";
             $sql.= $opiniao->getDescricao()."','";
             $sql.= $opiniao->getDataPostagem()."','";
             $sql.= $opiniao->getAluno()->getIdAluno(). "')";
             
             if(mysqli_query($this->getConexao(), $sql)){
                
-                $this->fecharConexao();
+                //$this->fecharConexao();
            
             }else{
                 throw new Exception(Excecoes::inserirObjeto("Opiniao: ".  mysql_errno($this->getConexao())));
@@ -69,7 +69,14 @@ class RepositorioOpiniao extends Conexao implements IRepositorioOpiniao {
             $id = $opiniao->getIdOpiniao();
             
             $sql = "DELETE FROM opiniao where idOpiniao = '".$id."'";
-            
+                if (!mysqli_query($this->getConexao(), $sql)) 
+                {
+                    throw new Exception(Excecoes::alterarObjeto("Opiniao: " . mysqli_error($this->getConexao())));
+                }
+                else
+                {
+                    $this->fecharConexao();
+                }   
         }
         else 
         {
