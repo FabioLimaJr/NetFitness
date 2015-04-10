@@ -20,15 +20,15 @@ class RepositorioOpiniao extends Conexao implements IRepositorioOpiniao {
         
         if($this->getConexao()->query($sql) === true){
             
-            $sql = "INSERT INTO opiniao VALUES(null,'";
-            //$sql.= NULL. "','";
+            $sql = "INSERT INTO opiniao VALUES('";
+            $sql.= NULL. "','";
             $sql.= $opiniao->getDescricao()."','";
             $sql.= $opiniao->getDataPostagem()."','";
             $sql.= $opiniao->getAluno()->getIdAluno(). "')";
             
             if(mysqli_query($this->getConexao(), $sql)){
                
-                //$this->fecharConexao();
+                $this->fecharConexao();
            
             }else{
                 throw new Exception(Excecoes::inserirObjeto("Opiniao: ".  mysql_errno($this->getConexao())));

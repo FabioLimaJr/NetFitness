@@ -140,7 +140,7 @@ Nome: <?php echo $aluno->getNome() ?> | Telefone:<?php echo $aluno->getTelefone(
       }
     }
     
-    if($camposPreenchidos && !isset($_POST['idExercicio']) || isset($exercicioAlterado)){
+    if($camposPreenchidos && !isset($_POST['idExercicio']) || isset($exercicioAlterado)){}
 ?>
 
 
