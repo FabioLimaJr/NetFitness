@@ -85,4 +85,10 @@ class ControladorTreino {
         return $this->getRepositorioTreino()->listarTodos($fetchType);
         
     }
+    
+    public function vincularTreinoAlunos($treino, $listaAlunos){
+        
+        return $this->getRepositorioTreino()->vincularTreinoAlunos($treino, $listaAlunos);
+        
+    }
 }

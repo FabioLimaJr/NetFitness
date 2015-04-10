@@ -248,5 +248,30 @@ class RepositorioTreino extends Conexao implements IRepositorioTreino{
         }
     }
 
-    
+    public function vincularTreinoAlunos($treino, $listaAlunos){
+        
+        $sql = "USE " . $this->getNomeBanco();
+        
+        if($this->getConexao()->query($sql) === true){
+            
+            foreach($listaAlunos as $aluno){
+                
+                $sql = "INSERT INTO alunotreino VALUES('";
+                $sql.= $aluno->getIdAluno()."','";
+                $sql.= $treino->getIdTreino()."','";
+                $sql.= $treino->getData()."')";
+            
+                if(!mysqli_query($this->getConexao(), $sql)){
+                 
+                    throw new Exception(Excecoes::inserirObjeto("Treino: ".  mysqli_error($this->getConexao())));
+                
+                }
+            }
+            
+            return true;
+            
+        }  else {
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco()."(".$this->getConexao()->error.")"));
+        }
+    }
 }
