@@ -248,4 +248,12 @@ class  ExpressoesRegulares {
             return false;
         }
     }
+    
+    public static function inverterData($data){
+        
+        $arrayData = explode("-", $data);
+        $dataSqlFormat = $arrayData[2]."-".$arrayData[1]."-".$arrayData[0];
+            
+        return $dataSqlFormat;
+    }
 }
