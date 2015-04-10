@@ -77,6 +77,7 @@ class RepositorioOpiniao extends Conexao implements IRepositorioOpiniao {
                 {
                     $this->fecharConexao();
                 }   
+            
         }
         else 
         {
