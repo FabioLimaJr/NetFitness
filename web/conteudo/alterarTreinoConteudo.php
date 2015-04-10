@@ -90,16 +90,16 @@ Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->
              
              foreach($listaExercicios as $exercicio){
                  
-                 $exercicioPresemte = false;
+                 $exercicioPresente = false;
                  foreach($listaExerciciosSelecionados as $exercicioSelecionado){
                      
                      if($exercicioSelecionado->getIdExercicio() == $exercicio->getIdExercicio()){
                          
-                         $exercicioPresemte = true;
+                         $exercicioPresente = true;
                      }
                  }
                  
-                 if(!$exercicioPresemte){
+                 if(!$exercicioPresente){
                          array_push($listaExerciciosNaoSelecionados, $exercicio);
                  }
              }
