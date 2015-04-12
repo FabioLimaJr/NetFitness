@@ -85,8 +85,8 @@ Nome: <?php echo $coordenador->getNome() ?> | Telefone:<?php echo $coordenador->
         <?php 
     }else{
         // $idSecretaria, $nome, $cpf, $endereco, $senha, $telefone, $login, $email, $coordenador
-        $secretaria = new Secretaria(null, $_POST['cpf'], $_POST['endereco'], $_POST['senha'], $_POST['telefone'], $_POST['login'], $_POST['email'], $coordenador);
-        $secretaria->setCoordenador($coordenador);
+        $secretaria = new Secretaria(null, $_POST['nome'], $_POST['cpf'], $_POST['endereco'], $_POST['senha'], $_POST['telefone'], $_POST['login'], $_POST['email'], $coordenador);
+        //$secretaria->setCoordenador($coordenador);
         //echo $secretaria->getCoordenador()->getIdCoordenador();
         $_SESSION['Secretaria'] = $secretaria;
         
