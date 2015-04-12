@@ -20,7 +20,7 @@ interface IFachada {
     public function inserirSecretaria($secretaria);
     public function alterarSecretaria($secretaria);
     public function excluirSecretaria($secretaria);
-    public function listarSecretaria();
+    public function listarSecretarias();
     public function detalharSecretaria($secretaria);
     
     public function logarCoordenador($coordenador);
