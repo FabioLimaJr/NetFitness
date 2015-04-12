@@ -106,7 +106,7 @@ class Fachada implements IFachada
         return $this->controladorInstrutor->listar();
     }
 
-    public function incluirSecretaria($secretaria) {
+    public function inserirSecretaria($secretaria) {
         $this->controladorSecretaria->inserir($secretaria);
     }
 
