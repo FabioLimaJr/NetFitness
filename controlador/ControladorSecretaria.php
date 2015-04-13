@@ -53,4 +53,8 @@ class ControladorSecretaria {
     public function logar($secretaria){
         return $this->getRepositorioSecretaria()->logar($secretaria);
     }
+    
+    public function detalhar($secretaria){
+        return $this->repositorioSecretaria->detalhar($secretaria);
+    }
 }

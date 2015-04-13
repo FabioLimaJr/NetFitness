@@ -134,7 +134,7 @@ class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioS
         }
     }
     
-    public function detalharSecretaria($secretaria){ 
+    public function detalhar($secretaria){ 
         
         $sql = "USE " . $this->getNomeBanco();
 

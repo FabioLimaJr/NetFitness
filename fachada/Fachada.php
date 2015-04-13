@@ -123,7 +123,7 @@ class Fachada implements IFachada
     }
 
     public function detalharSecretaria($secretaria) {
-        return $this->controladorSecretaria->listar();
+        return $this->controladorSecretaria->detalhar($secretaria);
     }
 
     public function logarCoordenador($coordenador) {
