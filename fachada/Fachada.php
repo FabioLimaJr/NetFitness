@@ -203,8 +203,12 @@ class Fachada implements IFachada
         return $this->controladorOpiniao->excluir($opiniao);
     }
 
-    public function listarOpinioes() {
-        return $this->controladorOpiniao->listar();
+    public function listarOpinioes($aluno) {
+        return $this->controladorOpiniao->listar($aluno);
+    }
+    
+    public function detalharOpiniao($opiniao){
+        return $this->controladorOpiniao->detalhar($opiniao);
     }
 
     public function incluirAlimento($alimento) {

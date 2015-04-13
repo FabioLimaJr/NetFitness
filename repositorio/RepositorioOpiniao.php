@@ -45,7 +45,7 @@ class RepositorioOpiniao extends Conexao implements IRepositorioOpiniao {
         
         if (@$this->getConexao()->query($sql) === TRUE)
         {
-            $sql = "UPDATE opiniao SET descricao = '".$opiniao->getDescricao();
+            $sql = "UPDATE opiniao SET descricao = '".$opiniao->getDescricao()."' WHERE idOpiniao = ".$opiniao->getIdOpiniao();
             
             if (!mysqli_query($this->getConexao(), $sql)) 
                 {
@@ -86,7 +86,7 @@ class RepositorioOpiniao extends Conexao implements IRepositorioOpiniao {
                 
     }
     
-    public function listar(){
+    public function listar($aluno){
         
         $listaOpinioes = array();
         
@@ -94,15 +94,15 @@ class RepositorioOpiniao extends Conexao implements IRepositorioOpiniao {
         
         if($this->getConexao()->query($sql) === TRUE)
         {
-            $sql = "SELECT * FROM opiniao,pessoa,aluno WHERE (opiniao.idAluno = pessoa.idPessoa) and "
-                                                            ."(pessoa.idPessoa = aluno.idAluno)";
+            $sql = "SELECT * FROM opiniao WHERE idAluno = ".$aluno->getIdAluno();
             $result = mysqli_query($this->getConexao(), $sql);
             
             while ($row = mysqli_fetch_array($result)) 
             {
-                $aluno = new Aluno($row['idPessoa'], $row['nome'], $row['cpf'], $row['endereco'], $row['senha'], $row['telefone'], 
-                                   $row['login'], $row['email'], $row['sexo'], $row['dataNascimento'], null/*secretaria*/, $row['idMusica'], 
-                                   null/*$dieta*/, null/*$listaPagamentos*/, null/*$listaTreinos*/, $row['foto']);
+                /*$aluno = new Aluno($row['idPessoa'], $row['nome'], $row['cpf'], $row['endereco'], $row['senha'], $row['telefone'], 
+                                   $row['login'], $row['email'], $row['sexo'], $row['dataNascimento'], null/*secretaria*///, $row['idMusica'], 
+                                   //null/*$dieta*/, null/*$listaPagamentos*/, null/*$listaTreinos*/, $row['foto']);
+                $aluno = new Aluno($row['idAluno']);
                 
                 $opiniao = new Opiniao($row['idOpiniao'],
                                        $row['descricao'],
@@ -118,7 +118,27 @@ class RepositorioOpiniao extends Conexao implements IRepositorioOpiniao {
         
     }
     
-    public function detalhar(){
+    public function detalhar($opiniao){
         
+        $sql = "USE " . $this->getNomeBanco();
+        
+        if($this->getConexao()->query($sql) === TRUE)
+        {
+            $sql = "SELECT * FROM opiniao WHERE idOpiniao = ".$opiniao->getIdOpiniao();
+            $result = mysqli_query($this->getConexao(), $sql);
+            
+            $row = mysqli_fetch_array($result); 
+            
+                
+            $aluno = new Aluno($row['idAluno']);
+                
+            $opiniao = new Opiniao($row['idOpiniao'],
+                                   $row['descricao'],
+                                   $row['dataPostagem'],
+                                   $aluno);
+            
+            return $opiniao;
+              
+        }
     }
 }

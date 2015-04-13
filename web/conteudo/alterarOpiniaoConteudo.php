@@ -15,7 +15,7 @@
  
  try{
      
-     $listaOpinioes = $fachada->listarOpinioesAluno($_SESSION['Aluno']);
+     $listaOpinioes = $fachada->listarOpinioes($_SESSION['Aluno']);
      
  } catch (Exception $ex) {
      $mensagem = $ex->getMessage();
@@ -79,39 +79,41 @@ Nome: <?php echo $aluno->getNome() ?> | Telefone:<?php echo $aluno->getTelefone(
 <?php 
      }else{
          
-         if($_POST['idOpiniao']){
+         if(isset($_POST['idOpiniao'])){
              
              $opiniao = new Opiniao($_POST['idOpiniao']);
              //$exercicio->setIdExercicio($_POST['idExercicio']);
              $opiniaoRetornada = $fachada->detalharOpiniao($opiniao);
-             
+             //var_dump($opiniaoRetornada);
+             //echo $opiniaoRetornada->getDescricao();
              $_SESSION['opiniaoRetornada'] = $opiniaoRetornada;
 
 ?>
 
-<div class="form-container" style="margin-bottom:50px">
-             <form class="forms" action="alterarOpiniao.php" method="post" >
-         <fieldset>
-           <ol>
+    <div class="form-container" style="margin-bottom:50px">
+        <form class="forms" action="alterarOpiniao.php" method="post" >
+            <fieldset>
+                <ol>
 
-              <li class="form-row text-input-row">
+                    <li class="form-row text-input-row">
                         <label>Descrição</label>
                         <textarea class="text-input" name="descricao" value="<?php if(isset($opiniaoRetornada)) echo $opiniaoRetornada->getDescricao() ?>" style="width:500px; height: 100px"></textarea>
-              </li> 
+                    </li>
 
-             <li class="form-row text-input-row">
-                 <label><?php if(isset($opiniaoRetornada)) echo $opiniaoRetornada->getDescricao() ?></label>
-             </li>
+                    <li class="form-row text-input-row">
+                        <label>Data de Postagem</label>
+                        <input type="text" id="dataPicked" maxlength="10" name="data" value="<?php if(isset($opiniaoRetornada)) echo $opiniaoRetornada->getDataPostagem() ?>" class="text-input" style="width: 300px">
+                    </li>
 
-             <li class="button-row" style="margin-top:50px">
-               <input type="submit" value="Salvar Alterações" name="submit" class="btn-submit">
-             </li>
-           </ol>
+                    <li class="button-row" style="margin-top:50px">
+                        <input type="submit" value="Salvar Alterações" name="submit" class="btn-submit">
+                    </li>
+               </ol>
 
-         </fieldset>
-       </form>
-       <div class="response"></div>
-     </div>
+            </fieldset>
+        </form>
+        <div class="response"></div>
+    </div>
 
     <?php 
          }else{
@@ -120,27 +122,35 @@ Nome: <?php echo $aluno->getNome() ?> | Telefone:<?php echo $aluno->getTelefone(
                  
              $opiniaoAlterada = new Opiniao($_SESSION['opiniaoRetornada']->getIdOpiniao());
              $opiniaoAlterada->setDescricao($_POST['descricao']);
-             $opiniaoAlterada->setDataPostagem($opiniaoRetornada->getDataPostagem());
-             // PAROU AQUI-----------------------
+             $opiniaoAlterada->setDataPostagem($_POST['data']);
+             
              try{
                  
                  //$fachada->alterarExercicio($exercicioAlterado);
-                 $fachada->alterarExercicio($exercicioAlterado);
-                 $mensagem = "O exercício foi alterado com sucesso!!";
+                 $fachada->alterarOpiniao($opiniaoAlterada);
+                 $mensagem = "A opinião foi alterada com sucesso!!";
                  
              } catch (Exception $ex) {
                  
-                 $mensagem = $exc->getMessage();
+                 $mensagem = $ex->getMessage();
                  
              }
         }else{
     
-            $mensagem = "Não foi selecionado o exercicio";
+            $mensagem = "Não foi selecionado a opinião";
         }
       }
     }
     
-    if($camposPreenchidos && !isset($_POST['idExercicio']) || isset($exercicioAlterado)){}
-?>
+    if($camposPreenchidos && !isset($_POST['idOpiniao']) || isset($opiniaoAlterada)){
+        
+    ?>
+    
+        <h3>Mensagem</h3>
+        <p><?php echo $mensagem ?></p>
+    
+    <?php } 
+    
+include('componentes/footerOne.php') ?>
 
 

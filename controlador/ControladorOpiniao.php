@@ -35,10 +35,10 @@ class ControladorOpiniao {
     public function alterar($opiniao){        
         if((!ExpressoesRegulares::conferirDescricao($opiniao->getDescricao()))){
             throw Excecoes::descricaoInvalida($opiniao->getDescricao());
-        }if((!ExpressoesRegulares::conferirData($opiniao->getDataPostagem()))){
-            throw Excecoes::dataInvalida($opiniao->getDataPostagem());
+        /*}if((!ExpressoesRegulares::conferirData($opiniao->getDataPostagem()))){
+            throw Excecoes::dataInvalida($opiniao->getDataPostagem());*/
         }else{
-            return $this->getRepositorioTreino()->inserir($opiniao);
+            return $this->getRepositorioOpiniao()->alterar($opiniao);
         }        
     }
     
@@ -46,7 +46,11 @@ class ControladorOpiniao {
         return $this->getRepositorioOpiniao()->excluir($opiniao);
     }
     
-    public function listar(){
-        return $this->repositorioOpiniao->listar(); 
+    public function listar($aluno){
+        return $this->repositorioOpiniao->listar($aluno); 
+    }
+    
+    public function detalhar($opiniao){
+        return $this->repositorioOpiniao->detalhar($opiniao);
     }
 }
