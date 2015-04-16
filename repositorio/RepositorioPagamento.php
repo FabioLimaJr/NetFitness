@@ -8,13 +8,13 @@ include($serverPath.'interfaceRepositorio/IRepositorioPagamento.php');
 include_once($serverPath.'excecoes/Excecoes.php');
 include_once($serverPath.'conexao/Conexao.php');
 
-class RepositorioPagamento extends RepositorioGenerico implements IRepositorioPagamento {
+class RepositorioPagamento extends RepositorioPessoa implements IRepositorioPagamento {
     
     function __construct() {
        parent::__construct();  
     }
     
-    public function inserir($pagamento){
+   public function inserir($pagamento){
         
         $sql = "USE " . $this->getNomeBanco();
         
@@ -43,7 +43,7 @@ class RepositorioPagamento extends RepositorioGenerico implements IRepositorioPa
                // $this->fecharConexao();
            
             }else{
-                throw new Exception(Excecoes::inserirObjeto("Pagamento".  mysql_errno($this->getConexao())));
+                throw new Exception(Excecoes::inserirObjeto("Pagamento".  mysqli_error($this->getConexao())));
             }
             
         }else {
@@ -65,7 +65,7 @@ class RepositorioPagamento extends RepositorioGenerico implements IRepositorioPa
                        
             if( mysqli_query($this->getConexao(), $sql)){
                 
-                $this->fecharConexao();
+                //$this->fecharConexao();
                 return TRUE;
             }else{
                 throw new Exception(Excecoes::alterarObjeto("Pagamento: ".mysqli_error($this->getConexao())));
@@ -87,7 +87,7 @@ class RepositorioPagamento extends RepositorioGenerico implements IRepositorioPa
             
             if( mysqli_query($this->getConexao(), $sql)){
                 
-                $this->fecharConexao();
+                //$this->fecharConexao();
                 return TRUE;
             }else{
                 throw new Exception(Excecoes::alterarObjeto("Pagamento: ".mysqli_error($this->getConexao())));
@@ -97,59 +97,94 @@ class RepositorioPagamento extends RepositorioGenerico implements IRepositorioPa
         }
     }   
     
-    public function listar(){
-        
-        $listaPagamentos = array();
-        
+    
+    public function listar($fetchType)
+    {
+        $listaPagamentosRetornados = array();       
         $sql = "USE " . $this->getNomeBanco();
         
-        if($this->getConexao()->query($sql) === TRUE){
-            
-            $sql = "SELECT * FROM pagamento,pessoa,aluno,secretaria WHERE (pagamento.idAluno = aluno.idAluno) AND "
-                                                                        ."(pagamento.idSecretaria = secretaria.idSecretaria)";
-                                                                        //."(pessoa.idPessoa = secretaria.idSecretaria)";
-             $result = mysqli_query($this->getConexao(), $sql);
-             
-             while ($row = mysqli_fetch_array($result)){
-                 
-                $aluno = new Aluno($row['idPessoa'], 
-                                   $row['nome'], 
-                                   $row['cpf'], 
-                                   $row['endereco'], 
-                                   $row['senha'], 
-                                   $row['telefone'], 
-                                   $row['login'], 
-                                   $row['email'], 
-                                   $row['sexo'], 
-                                   $row['dataNascimento'], 
-                                   null/*secretaria*/, 
-                                   $row['idMusica'], 
-                                   null/*$dieta*/, 
-                                   null/*$listaPagamentos*/, 
-                                   null/*$listaTreinos*/,
-                                   $row['foto']);
-                 
-                $secretaria = new Secretaria($row['idPessoa'], 
-                                             $row['nome'], 
-                                             $row['cpf'], 
-                                             $row['endereco'], 
-                                             $row['senha'], 
-                                             $row['telefone'],
-                                             $row['login'], 
-                                             $row['email'], 
-                                             NULL);
-                
-                $pagamento = new Pagamento($row['idPagamento'], 
-                                           $row['valor'],
-                                           $row['dataVencimento'], 
-                                           $row['dataPagamento'],
-                                           $secretaria, 
-                                           $aluno);  
-                
-                array_push($listaPagamento, $pagamento);
+        if($this->getConexao()->query($sql) === TRUE)
+        {
+            $sqlListaPagamentos = "SELECT * FROM pagamento";
+                    
+            try
+            {
+                $resultListaPagamentos = mysqli_query($this->getConexao(), $sqlListaPagamentos);
+
+                while ($rowListaPagamentos = mysqli_fetch_array($resultListaPagamentos)) 
+                {
+                    $pagamentoRetornado = new Pagamento($rowListaPagamentos['idPagamento']);
+
+                    if($fetchType == EAGER)
+                    {
+                        $pagamentoRetornado = $this->detalhar($pagamentoRetornado, EAGER);                       
+                    }
+                    else 
+                    {
+                        $pagamentoRetornado = $this->detalhar($pagamentoRetornado, LAZY);    
+                    }
+
+                    array_push($listaPagamentosRetornados, $pagamentoRetornado);
+
+                }
+            }
+            catch (Exception $exc)
+            {
+                throw new Exception($exc->getMessage());
             }
             
-            return $listaPagamento;
-        }   
+            return $listaPagamentosRetornados;
+        }
+        else
+        {
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco()."(".$this->getConexao()->error.")"));
+        }
+        
+    }
+
+ 
+    public function detalhar($pagamento, $fetchType)
+    {
+        $sqlPagamento = "USE " . $this->getNomeBanco();
+        
+        if($this->getConexao()->query($sqlPagamento) === true)
+        { 
+            $sqlPagamento = "SELECT * FROM pagamento WHERE idPagamento = '".$pagamento->getIdPagamento()."'";             
+            
+            try
+            {
+                $resultPagamento = mysqli_query($this->getConexao(), $sqlPagamento);
+                $rowPagamento = mysqli_fetch_assoc($resultPagamento);
+                $pagamentoRetornado = new Pagamento($rowPagamento['idPagamento'], $rowPagamento['valor'], 
+                                                    $rowPagamento['dataVencimento'], $rowPagamento['dataPagamento'],
+                                                    null/*$secretaria*/, null/*$aluno*/);
+            }
+            catch (Exception $exc)
+            {
+                throw new Exception($exc->getMessage());
+            }
+            
+            if($fetchType === EAGER)
+            {
+               try
+               {
+                    //Secretaria            
+                    $pagamentoRetornado->setSecretaria($this->detalharObjeto(new Secretaria($rowPagamento['idSecretaria']), LAZY));
+                    //Aluno
+                    $pagamentoRetornado->setAluno($this->detalharObjeto(new Aluno($rowPagamento['idAluno']), LAZY));
+                                
+                }
+                catch (Exception $exc)
+                {
+                    throw new Exception($exc->getMessage());
+                }
+            }         
+            
+            return $pagamentoRetornado;
+        }  
+        else 
+        {
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco()."(".$this->getConexao()->error.")"));
+        }
     }
 }

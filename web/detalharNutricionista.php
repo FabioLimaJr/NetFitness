@@ -5,6 +5,7 @@ include ('../classesBasicas/Nutricionista.php');
 include ('../classesBasicas/Coordenador.php');
 include ('../classesBasicas/Secretaria.php');
 include ('../classesBasicas/Dieta.php');
+include ('../classesBasicas/Dica.php');
 include ('../classesBasicas/Alimento.php');
 session_start();
 

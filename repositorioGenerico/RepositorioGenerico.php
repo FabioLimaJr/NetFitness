@@ -14,57 +14,58 @@ class RepositorioGenerico extends Conexao
     {
         parent::__construct();
     }
-  
-    public function inserirPessoa($pessoa)
+    
+    public function listarObjetos($objeto, $objetoRelacionado, $fetchType)
     {
-        $sql = "INSERT INTO pessoa values(null,'";
-        $sql .= $pessoa->getNome()."','";
-        $sql .= $pessoa->getCpf()."','";
-        $sql .= $pessoa->getEndereco()."','";
-        $sql .= $pessoa->getSenha()."','";
-        $sql .= $pessoa->getTelefone()."','";
-        $sql .= $pessoa->getLogin()."','";
-        $sql .= $pessoa->getEmail()."')";
-
-        if( mysqli_query($this->getConexao(), $sql))
-        {return TRUE;}
+        
+        //$arrayPesquisaSimples = ['Instrutor','Secretaria','Nutricionista', 'Treino', 'Pagamento', 'ExameFisico', 'Dica', 'Opiniao'];
+        
+        $listaObjetos = array();
+        $nomeClasseObjeto = get_class($objeto);
+        $nomeRepositorio = "Repositorio".get_class($objeto);
+        $nomeClasseObjetoRelacionado = get_class($objetoRelacionado);
+                
+        $repositorioObjeto = new $nomeRepositorio();
+        
+        if($nomeClasseObjeto == "Dieta")
+        {
+          $listaObjetos = $repositorioObjeto->listar($objetoRelacionado, EAGER);
+        }
         else
-        {return FALSE;}
-    }
- 
-    public function alterarPessoa($pessoa)
-    {
-        $sql = "UPDATE pessoa SET nome='" . $pessoa->getNome() . "',";
-        $sql.= "cpf='" . $pessoa->getCpf(). "',";
-        $sql.= "endereco='" . $pessoa->getEndereco(). "',";
-        $sql.= "senha='" . $pessoa->getSenha().  "',";
-        $sql.= "telefone='" . $pessoa->getTelefone().  "',";
-        $sql.= "login='" . $pessoa->getLogin().  "',";
-        $sql.= "email='" . $pessoa->getEmail().  "' ";
-        $sql.= "WHERE idPessoa='" . $pessoa->getIdPessoa() . "'";
-
-        if (mysqli_query($this->getConexao(), $sql)) 
-        {return TRUE;}
-        else
-        {return FALSE;}
+        {
+            $listaObjetos = $repositorioObjeto->listar(EAGER);
+        }
+        
+        $getObjetoRelacionado = "get".$nomeClasseObjetoRelacionado;
+        $getIdObjetoRelacionado = "getId".$nomeClasseObjetoRelacionado;
+        $setObjeto = "set".$nomeClasseObjeto;
+        $objetoRetornado = array();
+        
+        foreach ($listaObjetos as $objeto)
+        {
+            if($objeto->$getObjetoRelacionado()->$getIdObjetoRelacionado() == $objetoRelacionado->$getIdObjetoRelacionado())
+            {
+                if(in_array($setObjeto, get_class_methods($objetoRelacionado)))
+                {
+                    $objetoRetornado = $repositorioObjeto->detalhar($objeto, $fetchType);
+                }
+                else 
+                {
+                    array_push($objetoRetornado,  $repositorioObjeto->detalhar($objeto, $fetchType));
+                }
+                
+            }
+        }
+        
+        return $objetoRetornado;
     }
     
-    public function logarPessoa($pessoa)
+    public function detalharObjeto($objeto, $fetchType)
     {
-        $pessoaReturn = null;
-            
-        $query = "SELECT * FROM pessoa WHERE login = '".$pessoa->getLogin()."' AND senha = '".$pessoa->getSenha()."' LIMIT 0,1";
-
-        $result = mysqli_query($this->getConexao(), $query);
-        
-        while ($row = mysqli_fetch_array($result)) 
-        {
-            // $idPessoa, $nome, $cpf, $endereco, $senha, $telefone, $login,$email
-            $pessoaReturn = new Pessoa($row['idPessoa'], $row['nome'], $row['cpf'], $row['endereco'], 
-                                 $row['senha'], $row['telefone'], $row['login'], $row['email']);
-        }        
-        
-        return $pessoaReturn;
+   
+        $nomeRepositorio = "Repositorio".get_class($objeto);
+        $repositorioObjeto = new $nomeRepositorio();
+        return $repositorioObjeto->detalhar($objeto, $fetchType);
     }
 }
 

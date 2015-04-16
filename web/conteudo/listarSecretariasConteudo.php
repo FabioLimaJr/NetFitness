@@ -7,7 +7,7 @@ $listaSecretarias = array();
 
 try
 {
-    $listaSecretarias = $fachada->listarSecretarias();
+    $listaSecretarias = $fachada->listarSecretarias(LAZY);
 } 
 catch (Exception $exc)
 {

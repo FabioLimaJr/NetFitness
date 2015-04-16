@@ -47,14 +47,14 @@ class ControladorInstrutor {
         return $this->getRepositorioInstrutor()->excluir($instrutor);
     }
     
-    public function listar()
+    public function listar($fetchType)
     {
-        return $this->getRepositorioInstrutor()->listar();
+        return $this->getRepositorioInstrutor()->listar($fetchType);
     }
     
-    public function detalhar($instrutor)
+    public function detalhar($instrutor, $fetchType)
     {
-        return $this->getRepositorioInstrutor()->detalhar($instrutor);
+        return $this->getRepositorioInstrutor()->detalhar($instrutor, $fetchType);
     }
     
     public function logar($instrutor)

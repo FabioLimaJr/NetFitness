@@ -37,7 +37,7 @@ class ControladorAluno
     
     public function alterar($aluno){
         
-        if(ExpressoesRegulares::validarTodosOsCampos($aluno)){
+       if(ExpressoesRegulares::validarTodosOsCampos($aluno)){
             return $this->getRepositorioAluno()->alterar($aluno);
         }else{
             throw Excecoes::alterarObjeto($aluno);
@@ -49,14 +49,14 @@ class ControladorAluno
         return $this->getRepositorioAluno()->excluir($aluno);
     }
     
-    public function listar()
+    public function listar($fetchType)
     {
-        return $this->getRepositorioAluno()->listar();
+        return $this->getRepositorioAluno()->listar($fetchType);
     }
     
-    public function detalhar($aluno)
+    public function detalhar($aluno,$fetchType)
     {
-        return $this->getRepositorioAluno()->detalhar($aluno);
+        return $this->getRepositorioAluno()->detalhar($aluno,$fetchType);
     }
     
     public function logar($aluno)

@@ -47,8 +47,8 @@ class controladorDica {
         return $this->getRepositorioDica()->excluir($dica);
     }
     
-    public function listar() {
-        return $this->getRepositorioDica()->listar();
+    public function listar($pessoa) {
+        return $this->getRepositorioDica($pessoa)->listar($pessoa);
     }
     
     public function detalhar($dica) {

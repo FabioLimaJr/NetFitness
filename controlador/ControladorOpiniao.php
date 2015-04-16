@@ -46,11 +46,12 @@ class ControladorOpiniao {
         return $this->getRepositorioOpiniao()->excluir($opiniao);
     }
     
-    public function listar($aluno){
-        return $this->repositorioOpiniao->listar($aluno); 
+    public function listar($fetchType){
+        return $this->repositorioOpiniao->listar($fetchType); 
     }
     
-    public function detalhar($opiniao){
-        return $this->repositorioOpiniao->detalhar($opiniao);
+    public function detalhar($opiniao, $fetchType)
+    {
+        return $this->repositorioOpiniao->detalhar($opiniao, $fetchType);
     }
 }

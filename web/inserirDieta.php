@@ -6,6 +6,7 @@ include ('../classesBasicas/Secretaria.php');
 include ('../classesBasicas/Dieta.php');
 include ('../classesBasicas/Alimento.php');
 include ('../classesBasicas/Pagamento.php');
+include ('../classesBasicas/Treino.php');
 session_start();
 
 if(isset($_SESSION['Nutricionista']))
@@ -37,7 +38,7 @@ include ('componentes/header.php');
      
   <div id="content">
   
-     <?php include('conteudo/prescreverDietaConteudo.php'); ?>
+     <?php include('conteudo/inserirDietaConteudo.php'); ?>
     
   </div><!-- end content -->
   

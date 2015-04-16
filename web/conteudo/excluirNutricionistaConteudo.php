@@ -13,7 +13,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
 try
 {
-    $listaNutricionistas = $fachada->listarNutricionistas();
+    $listaNutricionistas = $fachada->listarNutricionistas(LAZY);
     
 } 
 catch (Exception $exc)

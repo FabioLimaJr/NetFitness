@@ -12,7 +12,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
 try
 {
-    $listaSecretarias = $fachada->listarSecretarias();
+    $listaSecretarias = $fachada->listarSecretarias(LAZY);
     $_SESSION['listaSecretarias'] = $listaSecretarias;
 } 
 catch (Exception $exc)
@@ -85,7 +85,7 @@ catch (Exception $exc)
             if($_POST['submit']=="Alterar"){
                 
                 $secretaria = new Secretaria($_POST['idSecretaria']);
-                $secretariaRetornada = $fachada->detalharSecretaria($secretaria);
+                $secretariaRetornada = $fachada->detalharSecretaria($secretaria, EAGER);
                 $_SESSION['secretariaRetornada'] = $secretariaRetornada;
                 
                 ?>

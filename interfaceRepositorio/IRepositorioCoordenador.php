@@ -13,4 +13,5 @@
 interface IRepositorioCoordenador 
 {
     public function logar($coordenador);
+    public function detalhar($coordenador, $fetchType);
 }

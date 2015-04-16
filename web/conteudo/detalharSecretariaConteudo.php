@@ -12,7 +12,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
 try
 {
-    $listaSecretarias = $fachada->listarSecretarias();
+    $listaSecretarias = $fachada->listarSecretarias(LAZY);
 } 
 catch (Exception $exc)
 {
@@ -82,7 +82,7 @@ catch (Exception $exc)
                 try{
                     
                     $secretaria = new Secretaria($_POST['idSecretaria']);
-                    $secretariaRetornada = $fachada->detalharSecretaria($secretaria);
+                    $secretariaRetornada = $fachada->detalharSecretaria($secretaria, LAZY);
                     //echo $secretaria->getIdSecretaria();
                     
                     ?>

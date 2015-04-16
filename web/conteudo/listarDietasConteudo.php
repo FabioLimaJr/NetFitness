@@ -6,7 +6,7 @@ $mensagem ="";
 
 try
 {
-    $listaDietas = $fachada->listarDietas($_SESSION['Nutricionista']);
+    $listaDietas = $fachada->listarDietas($_SESSION['Nutricionista'], EAGER);
     //var_dump($listaDietas);
 } 
 catch (Exception $exc)
@@ -45,7 +45,23 @@ catch (Exception $exc)
                     <tr>
                         <td><?php echo $dieta->getAluno()->getNome() ?></td> 
                         <td><?php echo $dieta->getDescricao() ?></td>  
-                        <td>Falta lista Alimentos</td>  
+                        <td><?php 
+                                 $sizeListaAlimentos = count($dieta->getListaAlimentos());
+                                 $count = 1;
+                                 foreach ($dieta->getListaAlimentos() as $alimento)
+                                 {
+                                     if($count == $sizeListaAlimentos)
+                                     {
+                                       echo $alimento->getDescricao();
+                                     }
+                                     else
+                                     {
+                                       echo $alimento->getDescricao().", ";  
+                                     }
+                                     
+                                     $count++;
+                                 }
+                             ?></td>  
                     </tr>
                   
                     <?php } ?>

@@ -30,7 +30,7 @@ class ControladorSecretaria {
             return $this->repositorioSecretaria->inserir($secretaria);
         }else{
             throw new Exception(Excecoes::inserirObjeto("secretaria"));
-        }
+       }
         
     }
     public function alterar($secretaria){
@@ -46,15 +46,16 @@ class ControladorSecretaria {
         $this->repositorioSecretaria->excluir($secretaria);    
     }
     
-    public function listar(){
-        return $this->getRepositorioSecretaria()->listar();
+   public function listar($fetchType){
+        return $this->getRepositorioSecretaria()->listar($fetchType);
     }
     
     public function logar($secretaria){
         return $this->getRepositorioSecretaria()->logar($secretaria);
     }
     
-    public function detalhar($secretaria){
-        return $this->repositorioSecretaria->detalhar($secretaria);
+    public function detalhar($secretaria, $fetchType)
+    {
+        return $this->getRepositorioSecretaria()->detalhar($secretaria, $fetchType);
     }
 }

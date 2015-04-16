@@ -89,7 +89,7 @@ if(!$camposPreenchidos){
 
              try
              {
-                $fachada->incluirAlimento($alimento);
+                $fachada->inserirAlimento($alimento);
                 $mensagem = "Parabéns, o alimento foi inserido com sucesso!";
                 unset($_SESSION['Nutricionista']);
 

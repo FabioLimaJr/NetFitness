@@ -9,5 +9,6 @@ interface IRepositorioOpiniao {
     public function inserir($opiniao);
     public function alterar($opiniao);
     public function excluir($opiniao);
-    public function listar($aluno);
+    public function detalhar($opiniao, $fetchType);
+    public function listar($fetchType);
 }

@@ -12,8 +12,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
 try
 {
-    $listaDietas = $fachada->listarDietas($_SESSION['Nutricionista']);
-    $listaAlimentos = $fachada->listarAlimentos();
+    $listaDietas = $fachada->listarDietas($_SESSION['Nutricionista'], EAGER);
+    $listaAlimentos = $fachada->listarAlimentos(LAZY);
 } 
 catch (Exception $exc)
 {
@@ -58,7 +58,25 @@ catch (Exception $exc)
                          <tr>
                              <td><?php echo $dieta->getAluno()->getNome() ?></td> 
                              <td><?php echo $dieta->getDescricao() ?></td>  
-                             <td>Falta lista Alimentos</td>  
+                             
+                             <td><?php 
+                                 $sizeListaAlimentos = count($dieta->getListaAlimentos());
+                                 $count = 1;
+                                 foreach ($dieta->getListaAlimentos() as $alimento)
+                                 {
+                                     if($count == $sizeListaAlimentos)
+                                     {
+                                       echo $alimento->getDescricao();
+                                     }
+                                     else
+                                     {
+                                       echo $alimento->getDescricao().", ";  
+                                     }
+                                     
+                                     $count++;
+                                 }
+                             ?></td>
+                               
                              <td><input type="radio" name="idDieta" value="<?php echo $dieta->getIdDieta() ?>"></td>
                          </tr>
 
@@ -85,7 +103,7 @@ catch (Exception $exc)
          if(isset($_POST['idDieta']))
          {
              $dieta = new Dieta($_POST['idDieta']);
-             $dietaRetornada = $fachada->detalharDieta($dieta);
+             $dietaRetornada = $fachada->detalharDieta($dieta, EAGER);
              
              $listaAlimentosNaoSelecionados = array();
              $listaAlimentosSelecionados = $dietaRetornada->getListaAlimentos();

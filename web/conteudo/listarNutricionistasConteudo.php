@@ -7,7 +7,7 @@ $listaNutricionistas = array();
 
 try
 {
-    $listaNutricionistas = $fachada->listarNutricionistas();
+    $listaNutricionistas = $fachada->listarNutricionistas(LAZY);
    // var_dump($listaNutricionistas);
 } 
 catch (Exception $exc)

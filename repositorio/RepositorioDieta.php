@@ -10,14 +10,13 @@ include($serverPath.'interfaceRepositorio/IRepositorioDieta.php');
 include_once($serverPath.'excecoes/Excecoes.php');
 include_once($serverPath.'conexao/Conexao.php');
 
-class RepositorioDieta extends Conexao implements IRepositorioDieta
+class RepositorioDieta extends RepositorioGenerico implements IRepositorioDieta
 {
     function __construct()
     {
         parent::__construct(); 
     }
-
-    
+      
     public function alterar($dieta) 
     {
         $sql = "USE " . $this->getNomeBanco();
@@ -48,83 +47,89 @@ class RepositorioDieta extends Conexao implements IRepositorioDieta
                             //remover dieta inserida e os elementos de deitaalimento jà inseridos 
                             //ou usar autocommit false(preferido) e fazer o commit final
 
-                            $this->fecharConexao();
+                            //$this->fecharConexao();
                             throw new Exception(Excecoes::inserirObjeto("Dieta: ".  mysqli_error($this->getConexao())));
                         }
                     }
                 }
                 else
                 {
-                    $this->fecharConexao();
+                   // $this->fecharConexao();
                    throw new Exception(Excecoes::alterarObjeto("Dieta: ".  mysqli_error($this->getConexao()))); 
                 }
                 
-                $this->fecharConexao();
+               // $this->fecharConexao();
                
             }
             else
             {
-                $this->fecharConexao();
+                //$this->fecharConexao();
                 throw new Exception(Excecoes::inserirObjeto("Dieta: ".  mysqli_error($this->getConexao())));
             }
             
         }  else {
-            $this->fecharConexao();
+           // $this->fecharConexao();
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco()."(".$this->getConexao()->error.")"));
         }
     }
 
-    public function detalhar($dieta) 
+    public function detalhar($dieta,$fetchType) 
     {
-        $sql = "USE " . $this->getNomeBanco();
+        $sqlDieta = "USE " . $this->getNomeBanco();
         
-        if($this->getConexao()->query($sql) === true)
+        if($this->getConexao()->query($sqlDieta) === true)
         { 
-            $sql = "SELECT * FROM dieta WHERE idDieta = '".$dieta->getIdDieta()."'";   
-            $result = mysqli_query($this->getConexao(), $sql);
-            $row = mysqli_fetch_assoc($result);
+            $sqlDieta = "SELECT * FROM dieta WHERE idDieta = '".$dieta->getIdDieta()."'";             
             
-            $dietaRetornada = new Dieta($row['idDieta'], $row['descricao'], null/*$listaAlimentos*/, 
-                               null/*$nutricionista*/, null/*$aluno*/);
-            
-             
-            
-            $listaAlimentos = array();
-            
-            $sql2 = "SELECT * FROM dietaalimento WHERE idDieta = '".$dieta->getIdDieta()."'";
-            $result2 = mysqli_query($this->getConexao(), $sql2);
-            
-            while ($row2 = mysqli_fetch_array($result2)) 
+            try
             {
-               
-                $idAlimento = $row2['idAlimento'];
+                $resultDieta = mysqli_query($this->getConexao(), $sqlDieta);
+                $rowDieta = mysqli_fetch_assoc($resultDieta);
+
+                $dietaRetornada = new Dieta($rowDieta['idDieta'], $rowDieta['descricao'], 
+                                            null/*$listaAlimentos*/, null/*$nutricionista*/, null/*$aluno*/);
+            }
+            catch (Exception $exc)
+            {
+                throw new Exception($exc->getMessage());
+            }
+          
+            if($fetchType === EAGER)
+            {
+               try
+               {              
+                    $listaAlimentosRetornados = array();
+
+                    $sqlDietaAlimento = "SELECT * FROM dietaalimento WHERE idDieta = '".$dieta->getIdDieta()."'";
+                    $resultDietaAlimento = mysqli_query($this->getConexao(), $sqlDietaAlimento);
+                    
+                    while ($rowDietaAlimento = mysqli_fetch_array($resultDietaAlimento)) 
+                    {                     
+                        $alimento = $this->detalharObjeto(new Alimento($rowDietaAlimento['idAlimento']), LAZY);
+                        array_push($listaAlimentosRetornados, $alimento);
+                    }
+                    $dietaRetornada->setListaAlimentos($listaAlimentosRetornados);
+
+                    //NUTRICIONISTA
+                    $dietaRetornada->setNutricionista($this->detalharObjeto(new Nutricionista($rowDieta['idNutricionista']), LAZY));
+ 
+                    //ALUNO
+                    $dietaRetornada->setAluno($this->detalharObjeto(new Aluno($rowDieta['idAluno']), LAZY));
+                 
                 
-                $sql3 = "SELECT * FROM alimento WHERE idAlimento = '".$idAlimento."'";
-                $result3 = mysqli_query($this->getConexao(), $sql3);
-                
-                while ($row3 = mysqli_fetch_array($result3))
-                {
-                     $alimento = new Alimento($row3['idAlimento'], $row3['descricao'], 
-                                              $row3['caloria'], $row3['proteina'], 
-                                              $row3['carboidrato'], $row3['gordura'], null/*$nutricionista*/);
-                     array_push($listaAlimentos, $alimento);
                 }
-                
+                catch (Exception $exc)
+                {
+                    throw new Exception($exc->getMessage());
+                }
             }
             
-            $dietaRetornada->setListaAlimentos($listaAlimentos);
-            
-            $repositorioAluno = new RepositorioAluno();
-            $aluno = new Aluno($row['idAluno']);
-            $dietaRetornada->setAluno($repositorioAluno->detalhar($aluno));
-            
-            $this->fecharConexao();
-            
+          
             return $dietaRetornada;
         }  
         else 
         {
-            $this->fecharConexao();
+          
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco()."(".$this->getConexao()->error.")"));
         }
     }
@@ -142,7 +147,7 @@ class RepositorioDieta extends Conexao implements IRepositorioDieta
             
             if(mysqli_query($this->getConexao(), $sql))
             {               
-                $this->fecharConexao();
+                //$this->fecharConexao();
             }
             else
             {
@@ -184,12 +189,12 @@ class RepositorioDieta extends Conexao implements IRepositorioDieta
                         //remover dieta inserida e os elementos de deitaalimento jà inseridos 
                         //ou usar autocommit false(preferido) e fazer o commit final
                         
-                        $this->fecharConexao();
+                        //$this->fecharConexao();
                         throw new Exception(Excecoes::inserirObjeto("Dieta: ".  mysqli_error($this->getConexao())));
                     }
                 }
                 
-                $this->fecharConexao();
+                //$this->fecharConexao();
                
             }
             else
@@ -202,42 +207,42 @@ class RepositorioDieta extends Conexao implements IRepositorioDieta
         }
     }
 
-    public function listar($nutricionista) 
+    public function listar($pessoa, $fetchType) 
     {
+        $tipoUsuario = get_class($pessoa);
         $listaDietas = array();
         
-        $sql = "USE " . $this->getNomeBanco();
-    
+        $sql = "USE " . $this->getNomeBanco();   
         
         if($this->getConexao()->query($sql) === TRUE)
         {
-        
             
-            $sql = "SELECT * FROM dieta WHERE idNutricionista ='".$nutricionista->getIdNutricionista()."'";
-            //$sql = "SELECT * FROM dieta";
-            $result = mysqli_query($this->getConexao(), $sql);
+            $sql = "SELECT * FROM dieta WHERE id".$tipoUsuario." ='".$pessoa->getIdPessoa()."'";
             
-            while ($row = mysqli_fetch_array($result)) 
+            try
             {
-              
-                $dieta = new Dieta($row['idDieta'], $row['descricao'], null/*$listaAlimentos*/, null/*$nutricionista*/, null/*$aluno*/);
-                
-                $repositorioNutricionista = new RepositorioNutricionista;
-                $nutricionista = new Nutricionista($row['idNutricionista']);
-                $nutricionistaRetornado = $repositorioNutricionista->detalhar($nutricionista);
-                
-                $repositorioAluno = new RepositorioAluno;
-                $aluno = new Aluno($row['idAluno']);
-                $alunoRetornado = $repositorioAluno->detalhar($aluno);
-                
-                $dieta->setAluno($alunoRetornado);
-                $dieta->setNutricionista($nutricionistaRetornado);
-                
-                //falta incluir a lista de alimentos (esperando que seja implementada detalharAlimento)
-                //ler de alimentodieta os alimentos incluidos e, por cada um chamar o detalharAlimento
-                
-                array_push($listaDietas, $dieta);
-                
+                $result = mysqli_query($this->getConexao(), $sql);
+
+                while ($row = mysqli_fetch_array($result)) 
+                {
+                    $dietaRetornada = new Dieta($row['idDieta']);               
+
+                    if($fetchType === EAGER)
+                    {                
+                        $dietaRetornada = $this->detalhar($dietaRetornada, EAGER);
+                    }
+                    else
+                    {
+                        $dietaRetornada = $this->detalhar($dietaRetornada, LAZY);
+                    }
+
+                    array_push($listaDietas, $dietaRetornada);
+
+                }
+            }
+            catch (Exception $exc)
+            {
+                throw new Exception($exc->getMessage());
             }
             
             return($listaDietas);        

@@ -23,26 +23,25 @@ class ControladorNutricionista {
         $this->repositorioNutricionista = $repositorioNutricionista;
     }
     public function inserir($nutricionista){
-         /*
+        
         if(ExpressoesRegulares::validarTodosOsCampos($nutricionista)){
             return $this->getRepositorioNutricionista()->inserir($nutricionista);
         }else{
             throw Excecoes::inserirObjeto($nutricionista);
         }
-           */
+          
           $this->getRepositorioNutricionista()->inserir($nutricionista);
-        
-        
+               
     }
     
     public function alterar($nutricionista){
-        /*
+        
         if(ExpressoesRegulares::validarTodosOsCampos($nutricionista)){
             return $this->getRepositorioNutricionista()->alterar($nutricionista);
         }else{
             throw Excecoes::alterarObjeto($nutricionista);
         }
-         */
+         
         
         $this->getRepositorioNutricionista()->alterar($nutricionista);
     }
@@ -51,14 +50,14 @@ class ControladorNutricionista {
         return $this->getRepositorioNutricionista()->excluir($nutricionista);
     }
     
-    public function listar()
+    public function listar($fetchType)
     {
-        return $this->getRepositorioNutricionista()->listar();
+        return $this->getRepositorioNutricionista()->listar($fetchType);
     }
     
-    public function detalhar($nutricionista)
+    public function detalhar($nutricionista, $fetchType)
     {
-        return $this->getRepositorioNutricionista()->detalhar($nutricionista);
+        return $this->getRepositorioNutricionista()->detalhar($nutricionista, $fetchType);
     }
     
     public function logar($nutricionista)

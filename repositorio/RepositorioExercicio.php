@@ -9,19 +9,14 @@
 include($serverPath.'interfaceRepositorio/IRepositorioExercicio.php');
 include_once($serverPath.'repositorioGenerico/RepositorioGenerico.php');
 include_once($serverPath.'excecoes/Excecoes.php');
-include_once($serverPath.'conexao/Conexao.php');
 
 /**
  * Description of RepositorioExercicio
  *
  * @author Schmitz
  */
-class RepositorioExercicio extends Conexao implements IRepositorioExercicio{
+class RepositorioExercicio extends RepositorioGenerico implements IRepositorioExercicio{
     //put your code here
-    
-    function __construct() {
-       parent::__construct();  
-    }
     
     public function inserir($exercicio) {
         
@@ -37,7 +32,7 @@ class RepositorioExercicio extends Conexao implements IRepositorioExercicio{
             
             if( mysqli_query($this->getConexao(), $sql)){
                 
-                $this->fecharConexao();
+                //$this->fecharConexao();
                 return TRUE;
             }else{
                 throw new Exception(Excecoes::inserirObjeto("Exercício: ".mysqli_error($this->getConexao())));
@@ -60,7 +55,7 @@ class RepositorioExercicio extends Conexao implements IRepositorioExercicio{
             
             if( mysqli_query($this->getConexao(), $sql)){
                 
-                $this->fecharConexao();
+                //$this->fecharConexao();
                 return TRUE;
             }else{
                 throw new Exception(Excecoes::alterarObjeto("Exercício: ".mysqli_error($this->getConexao())));
@@ -80,7 +75,7 @@ class RepositorioExercicio extends Conexao implements IRepositorioExercicio{
             
             if( mysqli_query($this->getConexao(), $sql)){
                 
-                $this->fecharConexao();
+                //$this->fecharConexao();
                 return TRUE;
             }else{
                 throw new Exception(Excecoes::alterarObjeto("Exercício: ".mysqli_error($this->getConexao())));
@@ -90,46 +85,62 @@ class RepositorioExercicio extends Conexao implements IRepositorioExercicio{
         }
     }
 
-    public function listar() {
-        
+    public function listar() 
+    {       
         $listaExercicios = array();
         
         $sql = "USE " . $this->getNomeBanco();
         
-        if(@$this->getConexao()->query($sql) === TRUE){
-            
-            $sql = "SELECT * FROM exercicio";
-            $result = mysqli_query($this->getConexao(), $sql);
-            
-            while($row = mysqli_fetch_array($result)){
-                
-                $exercicio = new Exercicio($row['idExercicio'], $row['nome'], $row['musculo'], $row['descricao']);
-                
-                array_push($listaExercicios, $exercicio);
+        if(@$this->getConexao()->query($sql) === TRUE)
+        {           
+            $sqlListaExercicios = "SELECT * FROM exercicio";
+            try
+            {
+                $resultListaExercicios = mysqli_query($this->getConexao(), $sqlListaExercicios);
+
+                while($rowListaExercicios = mysqli_fetch_array($resultListaExercicios))
+                {
+                    $exercicio = new Exercicio($rowListaExercicios['idExercicio']);
+                    array_push($listaExercicios, $this->detalharObjeto($exercicio, LAZY));
+                }
             }
-            //$this->fecharConexao();
+            catch (Exception $exc)
+            {
+                throw new Exception($exc->getMessage());
+            }
             return $listaExercicios;
-        }else{
+        }
+        else
+        {
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
         }
     }
 
-    public function detalhar($exercicio) {
+    public function detalhar($exercicio) 
+    {
         
         $sql = "USE " . $this->getNomeBanco();
         
-        if($this->getConexao()->query($sql) === true){
+        if($this->getConexao()->query($sql) === TRUE)
+        {        
+            $sqlExercicio = "SELECT * FROM exercicio WHERE exercicio.idExercicio = " . $exercicio->getIdExercicio();
             
-            $sql = "SELECT * FROM exercicio WHERE exercicio.idExercicio = " . $exercicio->getIdExercicio();
-            $result = mysqli_query($this->getConexao(), $sql);
-            
-            while($row = mysqli_fetch_array($result)){
+            try
+            {
+                $resultExercicio = mysqli_query($this->getConexao(), $sqlExercicio);
+
+                $rowExercicio = mysqli_fetch_assoc($resultExercicio);
                 
-                $exercicioDetalhado = new Exercicio($row['idExercicio'], $row['nome'], $row['musculo'], $row['descricao']);
+                $exercicioRetornado = new Exercicio($rowExercicio['idExercicio'], $rowExercicio['nome'], 
+                                                        $rowExercicio['musculo'], $rowExercicio['descricao']);
                 
             }
-            $this->fecharConexao();
-            return $exercicioDetalhado;
+            catch (Exception $exc)
+            {
+                throw new Exception($exc->getMessage());
+            }
+ 
+            return $exercicioRetornado;
             
         }else{
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");

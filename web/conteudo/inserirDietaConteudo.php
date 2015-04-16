@@ -14,8 +14,8 @@
      $dieta = $_SESSION['Dieta'];
  }
 
- $listaAlunos = $fachada->listarAlunos();
- $listaAlimentos = $fachada->listarAlimentos();
+ $listaAlunos = $fachada->listarAlunos(EAGER);
+ $listaAlimentos = $fachada->listarAlimentos(LAZY);
  
  
 ?>
@@ -47,7 +47,7 @@
         foreach($listaAlunos as $aluno)
         {
           
-            if($aluno->getDieta()->getIdDieta()==null)
+            if($aluno->getDieta() == null)
             {
                 array_push($listaAlunosSemDieta, $aluno);
             }
@@ -57,7 +57,7 @@
         {
         ?> 
          <div class="form-container" style="margin-bottom:50px">
-         <form class="forms" action="prescreverDieta.php" method="post" >
+         <form class="forms" action="inserirDieta.php" method="post" >
          <fieldset>
            <ol>
 
@@ -140,9 +140,8 @@
     } 
     else
     {
-       //$aluno = $fachada->;
        $aluno = new Aluno($_POST['idAluno']);
-       $aluno = $fachada->detalharAluno($aluno);
+       $aluno = $fachada->detalharAluno($aluno, LAZY);
        
        $listaAlimentosPrescritos = array();
       

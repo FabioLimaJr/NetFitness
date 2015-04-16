@@ -12,7 +12,7 @@
      $secretaria = $_SESSION['Secretaria'];
  }
  $listaAlunos = array();
- $listaAlunos = $fachada->listarAlunos();
+ $listaAlunos = $fachada->listarAlunos(LAZY);
  
 ?>
 
@@ -110,6 +110,7 @@
              catch(Exception $exc)
              {
                 $mensagem = $exc->getMessage();
+                echo $mensagem;
              }
     }
   

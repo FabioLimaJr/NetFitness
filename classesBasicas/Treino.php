@@ -34,12 +34,13 @@ class Treino {
         $this->setIdTreino($idTreino);
     }
 
-    function __construct4($idTreino, $nome, $descricao, $instrutor) {
-        $this->setIdTreino($idTreino);
-        $this->setNome($nome);
-        $this->setDescricao($descricao);
-        $this->setInstrutor($instrutor);
-        //$this->setListaExercicios($listaExercicios);
+    function __construct6($idTreino, $nome, $descricao, $instrutor, $data, $listaExercicios) {
+     $this->idTreino = $idTreino;
+     $this->nome = $nome;
+     $this->descricao = $descricao;
+     $this->instrutor = $instrutor;
+     $this->data = $data;
+     $this->listaExercicios = $listaExercicios;
     }
 
     function getIdTreino() {

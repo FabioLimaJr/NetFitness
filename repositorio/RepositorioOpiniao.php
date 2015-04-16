@@ -8,7 +8,7 @@ include($serverPath.'interfaceRepositorio/IRepositorioOpiniao.php');
 include_once($serverPath.'excecoes/Excecoes.php');
 include_once($serverPath.'conexao/Conexao.php');
 
-class RepositorioOpiniao extends Conexao implements IRepositorioOpiniao {
+class RepositorioOpiniao extends RepositorioGenerico implements IRepositorioOpiniao {
     
     function __construct() {
        parent::__construct();  
@@ -28,7 +28,7 @@ class RepositorioOpiniao extends Conexao implements IRepositorioOpiniao {
             
             if(mysqli_query($this->getConexao(), $sql)){
                
-                $this->fecharConexao();
+                //$this->fecharConexao();
            
             }else{
                 throw new Exception(Excecoes::inserirObjeto("Opiniao: ".  mysql_errno($this->getConexao())));
@@ -53,7 +53,7 @@ class RepositorioOpiniao extends Conexao implements IRepositorioOpiniao {
                 }
                 else
                 {
-                    $this->fecharConexao();
+                    //$this->fecharConexao();
                 }                                                      
         }
         
@@ -75,7 +75,7 @@ class RepositorioOpiniao extends Conexao implements IRepositorioOpiniao {
                 }
                 else
                 {
-                    $this->fecharConexao();
+                    //$this->fecharConexao();
                 }   
             
         }
@@ -86,59 +86,84 @@ class RepositorioOpiniao extends Conexao implements IRepositorioOpiniao {
                 
     }
     
-    public function listar($aluno){
+    public function listar($fetchType)
+    {
         
         $listaOpinioes = array();
-        
+
         $sql = "USE " . $this->getNomeBanco();
-        
+
         if($this->getConexao()->query($sql) === TRUE)
         {
-            $sql = "SELECT * FROM opiniao WHERE idAluno = ".$aluno->getIdAluno();
-            $result = mysqli_query($this->getConexao(), $sql);
-            
-            while ($row = mysqli_fetch_array($result)) 
+            $sqlOpiniao = "SELECT * FROM opiniao";
+
+            try
             {
-                /*$aluno = new Aluno($row['idPessoa'], $row['nome'], $row['cpf'], $row['endereco'], $row['senha'], $row['telefone'], 
-                                   $row['login'], $row['email'], $row['sexo'], $row['dataNascimento'], null/*secretaria*///, $row['idMusica'], 
-                                   //null/*$dieta*/, null/*$listaPagamentos*/, null/*$listaTreinos*/, $row['foto']);
-                $aluno = new Aluno($row['idAluno']);
-                
-                $opiniao = new Opiniao($row['idOpiniao'],
-                                       $row['descricao'],
-                                       $row['dataPostagem'],
-                                       $aluno);
-                
-                array_push($listaOpinioes, $opiniao);
+                $resultOpiniao = mysqli_query($this->getConexao(), $sqlOpiniao);
+
+                while ($rowOpiniao = mysqli_fetch_array($resultOpiniao)) 
+                {      
+                    $opiniaoRetornada = new Opiniao($rowOpiniao['idOpiniao']);
+
+                    if($fetchType == EAGER)
+                    {  
+                        $opiniaoRetornada = $this->detalhar($opiniaoRetornada, EAGER);                  
+                    }
+                    else 
+                    {
+                        $opiniaoRetornada = $this->detalhar($opiniaoRetornada, LAZY);    
+                    }            
+
+                    array_push($listaOpinioes, $opiniaoRetornada);
+
+                }
             }
-            
-            return $listaOpinioes;
-              
+            catch (Exception $exc)
+            {
+                throw new Exception($exc->getMessage());
+            }           
+
+            return($listaOpinioes);                    
+        }
+        else 
+        {
+           throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
         }
         
     }
     
-    public function detalhar($opiniao){
+    public function detalhar($opiniao, $fetchType)
+    {
         
         $sql = "USE " . $this->getNomeBanco();
-        
+ 
         if($this->getConexao()->query($sql) === TRUE)
         {
-            $sql = "SELECT * FROM opiniao WHERE idOpiniao = ".$opiniao->getIdOpiniao();
-            $result = mysqli_query($this->getConexao(), $sql);
+            $sqlOpiniao = "SELECT * FROM opiniao WHERE idOpiniao = '".$opiniao->getIdOpiniao()."'";
+         
+            try
+            {
+                $resultOpiniao = mysqli_query($this->getConexao(), $sqlOpiniao);                
+                $rowOpiniao = mysqli_fetch_assoc($resultOpiniao);
+                $opiniaoRetornada = new Opiniao($rowOpiniao['idOpiniao'], $rowOpiniao['descricao'], 
+                                                $rowOpiniao['dataPostagem'], null/*$aluno*/);
+               
+            }
+            catch(Exception $exc)
+            {
+                throw new Exception($exc->getMessage());
+            }
             
-            $row = mysqli_fetch_array($result); 
-            
-                
-            $aluno = new Aluno($row['idAluno']);
-                
-            $opiniao = new Opiniao($row['idOpiniao'],
-                                   $row['descricao'],
-                                   $row['dataPostagem'],
-                                   $aluno);
-            
-            return $opiniao;
-              
-        }
+            if($fetchType === EAGER)
+            {               
+                $opiniaoRetornada->setAluno($this->detalharObjeto(new Aluno($rowOpiniao['idAluno']), LAZY));               
+            }
+        
+            return $opiniaoRetornada;
+       }
+       else
+       {
+           throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+       }
     }
 }

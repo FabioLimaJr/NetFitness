@@ -25,10 +25,10 @@ class ControladorDieta
         $this->repositorioDieta = $repositorioDieta;
     }
     
-    function listar($nutricionista)
+    function listar($pessoa, $fetchType)
     {   
-        //falta conferir nutricionista nulo
-        return $this->getRepositorioDieta()->listar($nutricionista);
+        //falta conferir pessoa nulo
+        return $this->getRepositorioDieta()->listar($pessoa, $fetchType);
     }
     
     function inserir($dieta)
@@ -52,15 +52,15 @@ class ControladorDieta
         }
     }
     
-    function detalhar($dieta)
+    function detalhar($dieta,$fetchType)
     {
         if($dieta == null || $dieta == "")
         {
-            throw Excecoes::detalharObjeto("Dieta");
+            throw new Exception(Excecoes::detalharObjeto("Dieta"));
         }
         else
         {
-            return $this->getRepositorioDieta()->detalhar($dieta);
+            return $this->getRepositorioDieta()->detalhar($dieta,$fetchType);
         }
     }
     

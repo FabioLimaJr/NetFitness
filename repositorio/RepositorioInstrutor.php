@@ -10,7 +10,7 @@ include($serverPath.'interfaceRepositorio/IRepositorioInstrutor.php');
 include_once($serverPath.'repositorioGenerico/RepositorioGenerico.php');
 include_once($serverPath.'excecoes/Excecoes.php');
 
-class RepositorioInstrutor extends RepositorioGenerico implements IRepositorioInstrutor{
+class RepositorioInstrutor extends RepositorioPessoa implements IRepositorioInstrutor{
     
     public function __construct() 
     {
@@ -45,7 +45,7 @@ class RepositorioInstrutor extends RepositorioGenerico implements IRepositorioIn
 
                 if (mysqli_query($this->getConexao(), $sql)) 
                 {
-                    $this->fecharConexao();
+                   // $this->fecharConexao();
                     $instrutor->setIdInstrutor($idReturn);
                     return $instrutor;
                     //return $idReturn;
@@ -93,7 +93,7 @@ class RepositorioInstrutor extends RepositorioGenerico implements IRepositorioIn
                 }
                 else
                 {
-                    $this->fecharConexao();
+                    //$this->fecharConexao();
                 }
             }
         } 
@@ -126,7 +126,7 @@ class RepositorioInstrutor extends RepositorioGenerico implements IRepositorioIn
             }
             else 
             {
-                $this->fecharConexao();
+                //$this->fecharConexao();
             }
   
         } 
@@ -137,93 +137,68 @@ class RepositorioInstrutor extends RepositorioGenerico implements IRepositorioIn
 
     }
 
-    public function detalhar($instrutor) 
+    public function detalhar($instrutor, $fetchType) 
     {
          $sql = "USE " . $this->getNomeBanco();
 
         if($this->getConexao()->query($sql) === TRUE)
         {
-            $sql = "SELECT * FROM pessoa,instrutor WHERE pessoa.idPessoa = instrutor.idInstrutor AND "
-                    ."instrutor.idInstrutor = '".$instrutor->getIdPessoa()."'";
+            $sqlInstrutor = "SELECT * FROM pessoa,instrutor WHERE pessoa.idPessoa = instrutor.idInstrutor AND "
+                    ."instrutor.idInstrutor = '".$instrutor->getIdInstrutor()."'";
             
-            $result = mysqli_query($this->getConexao(), $sql);
-            
-            while ($row = mysqli_fetch_array($result)) 
+            try
             {
-
-                $instrutor = new Instrutor($row['idPessoa'], null/*$coordenador*/, null/*$listaTreinos*/, 
-                                           null/*$listaExamesFisicos*/, null/*$listaDicas*/, $row['nome'], $row['cpf'], 
-                                           $row['endereco'], $row['senha'], $row['telefone'], $row['email'], $row['login']);
-                
-                $sql2 = "SELECT * FROM  pessoa WHERE idPessoa = '".$row['idCoordenador']."'";
-                $result2 = mysqli_query($this->getConexao(), $sql2); 
-                $row2 = mysqli_fetch_assoc($result2);
-                
-                $coordenador = new Coordenador($row['idCoordenador'], null/*listaInstrutores*/, null/*listaSecretarias*/, null/*listaNutricionistas*/, $row2['nome'], $row2['cpf'], 
-                                               $row2['endereco'], $row2['senha'], $row2['telefone'], $row2['email'], $row2['login']);
-                
-                $instrutor->setCoordenador($coordenador);
-                
-                
-                
-                //listaTreinos
-                $listaTreinos = Array();
-                
-                $sql3 = "SELECT * FROM treino WHERE idInstrutor ='".$row['idPessoa']."'";
-                $result3 = mysqli_query($this->getConexao(), $sql3); 
-                while ($row3 = mysqli_fetch_array($result3)) 
-                {
-                    $treino = new Treino($row3['idTreino'], $row3['nome'], $row3['descricao'], null/*$instrutor*/);                
-                    array_push($listaTreinos, $treino); 
-                    
-                }
-                $instrutor->setListaTreinos($listaTreinos);
-                
-                
-                //listaExamesFisicos
-                $listaExamesFisicos = Array();
-                
-                $sql4 = "SELECT * FROM examefisico WHERE idInstrutor ='".$row['idPessoa']."'";
-                $result4 = mysqli_query($this->getConexao(), $sql4); 
-                while ($row4 = mysqli_fetch_array($result4)) 
-                {
-                                
-                    
-                    $exameFisico = new ExameFisico($row4['idExame'], $row4['data'], $row4['descricao'], null/*$aluno*/, null/*$instrutor*/);
-                    
-                    array_push($listaExamesFisicos, $exameFisico); 
-                    //completar com o aluno
-                    
-                }
-                $instrutor->setListaExamesFisicos($listaExamesFisicos);
-                
-                
-                
-                
-                
-                //listaDicas
-                $listaDicas = Array();
-                
-                $sql5 = "SELECT * FROM instrutordica WHERE idInstrutor ='".$row['idPessoa']."'";
-                $result5 = mysqli_query($this->getConexao(), $sql5); 
-                while ($row5 = mysqli_fetch_array($result5)) 
-                {
-                      $idDica = $row5['idDica'];
-                      
-                      $sql5B = "SELECT * FROM dica WHERE idDica='".$idDica."'";  
-                      $result5B = mysqli_query($this->getConexao(), $sql5B); 
-                      while ($row5B = mysqli_fetch_array($result5B)) 
-                      {
-                          $dica = new Dica($row5B['idDica'], $row5B['descricao'], $row5B['titulo']);
-                          array_push($listaDicas, $dica);
-                      }
-                    
-                }
-                
-                $instrutor->setListaDicas($listaDicas);
-                
+                $resultInstrutor = mysqli_query($this->getConexao(), $sqlInstrutor);
+                $rowInstrutor = mysqli_fetch_assoc($resultInstrutor);
+                $instrutorRetornado = new Instrutor($rowInstrutor['idInstrutor'], null/*$coordenador*/,
+                                                    null/*$listaTreinos*/, null/*$listaExamesFisicos*/, 
+                                                    null/*$listaDicas*/, $rowInstrutor['nome'], 
+                                                    $rowInstrutor['cpf'], $rowInstrutor['endereco'], 
+                                                    $rowInstrutor['senha'], $rowInstrutor['telefone'], 
+                                                    $rowInstrutor['email'], $rowInstrutor['login']);
             }
-            return $instrutor;
+            catch (Exception $exc)
+            {
+                throw new Exception($exc->getMessage());
+            }
+            
+            if($fetchType === EAGER)
+            {
+                //Coordenador
+                $instrutorRetornado->setCoordenador($this->detalharObjeto(new Coordenador($rowInstrutor['idCoordenador']), LAZY));
+                
+                //Lista Treinos
+                $listaTreinos = $this->listarObjetos(new Treino(), $instrutorRetornado, LAZY);
+                $instrutorRetornado->setListaTreinos($listaTreinos);
+                
+                //Lista Exames Fisicos
+                $listaExamesFisicos = $this->listarObjetos(new ExameFisico(), $instrutorRetornado, LAZY);
+                $instrutorRetornado->setListaExamesFisicos($listaExamesFisicos);
+                
+                //Lista Dicas
+                $listaDicas = Array();
+                $sqlInstrutorDica = "SELECT * FROM instrutorDica WHERE idInstrutor ='".$rowInstrutor['idInstrutor']."'";
+                try
+                {
+                    $resultInstrutorDica = mysqli_query($this->getConexao(), $sqlInstrutorDica);
+                    $repositorioDica  = new RepositorioDica();
+                    
+                    while ($rowInstrutorDica = mysqli_fetch_array($resultInstrutorDica)) 
+                    {
+                        $dica = $this->detalharObjeto(new Dica($rowInstrutorDica['idDica']), LAZY);
+                        array_push($listaDicas, $dica);
+                    }
+
+                    $instrutorRetornado->setListaDicas($listaDicas);
+                }
+                catch(Exception $ecx)
+                {
+                    throw new Exception($exc->getMessage());
+                }           
+                
+            }       
+            
+            return $instrutorRetornado;
         }
         else 
         {
@@ -231,45 +206,46 @@ class RepositorioInstrutor extends RepositorioGenerico implements IRepositorioIn
         }
     }
     
-    public function listar() 
+    public function listar($fetchType) 
     {
         $listaInstrutores = array();
         
         $sql = "USE " . $this->getNomeBanco();
-    
-        
+            
         if($this->getConexao()->query($sql) === TRUE)
-        {
-        
+        {         
+            $sqlInstrutor = "SELECT * FROM pessoa,instrutor WHERE pessoa.idPessoa = instrutor.idInstrutor";
             
-            $sql = "SELECT * FROM pessoa,instrutor WHERE pessoa.idPessoa = instrutor.idInstrutor";
-            $result = mysqli_query($this->getConexao(), $sql);
-            
-            while ($row = mysqli_fetch_array($result)) 
+            try
             {
-                
-                $instrutor = new Instrutor($row['idPessoa'], null/*coordenador*/,null/*listaTreinos*/,null/*listaExamesFisicos*/,null/*listaDicas*/,
-                $row['nome'], $row['cpf'], $row['endereco'], $row['senha'], $row['telefone'],
-                $row['email'], $row['login']);
-                
-                //echo ($row['idCoordenador']);
-                
-                $sql2 = "SELECT * FROM  pessoa WHERE idPessoa = '".$row['idCoordenador']."'";
-                $result2 = mysqli_query($this->getConexao(), $sql2); 
-                $row2 = mysqli_fetch_assoc($result2);
-                
-                $coordenador = new Coordenador($row['idCoordenador'], null/*listaInstrutores*/, null/*listaSecretarias*/, null/*listaNutricionistas*/, $row2['nome'], $row2['cpf'], 
-                                               $row2['endereco'], $row2['senha'], $row2['telefone'], $row2['email'], $row2['login']);
-                
-                $instrutor->setCoordenador($coordenador);
-                
-                array_push($listaInstrutores, $instrutor);
-                
+                $resultInstrutor = mysqli_query($this->getConexao(), $sqlInstrutor);
+
+                while ($rowInstrutor = mysqli_fetch_array($resultInstrutor)) 
+                {      
+                    $instrutorRetornado = new Instrutor($rowInstrutor['idPessoa']);
+
+                    if($fetchType == EAGER)
+                    {  
+                        $instrutorRetornado = $this->detalhar($instrutorRetornado, EAGER);                  
+                    }
+                    else 
+                    {
+                        $instrutorRetornado = $this->detalhar($instrutorRetornado, LAZY);    
+                    }            
+
+                    array_push($listaInstrutores, $instrutorRetornado);
+
+                }
             }
-            
-            return($listaInstrutores);
-            
-           //Falta incluir as listas: listaTreinos, listaExamesFisicos, ListaDicas                
+            catch (Exception $exc)
+            {
+                throw new Exception($exc->getMessage());
+            }                       
+            return($listaInstrutores);                    
+         }
+         else 
+         {
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
          }
     }
     

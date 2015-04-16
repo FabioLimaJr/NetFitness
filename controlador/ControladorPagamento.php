@@ -34,8 +34,12 @@ class ControladorPagamento {
         return $this->getRepositorioPagamento()->excluir($pagamento);
     }
     
-    public function listar(){
-        return $this->getRepositorioPagamento()->listar();
+    public function listar($fetchType){
+        return $this->getRepositorioPagamento()->listar($fetchType);
+    }
+    
+    public function detalhar($pagamento, $fetchType){
+        return $this->getRepositorioPagamento()->detalhar($pagamento, $fetchType);
     }
     
 }

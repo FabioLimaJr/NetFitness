@@ -6,7 +6,9 @@
  * @author Marcelo
  */
 include('../serverPath.php');
+include('../constants.php');
 include('IFachada.php');
+
 include($serverPath . 'controlador/ControladorAluno.php');
 include($serverPath . 'controlador/ControladorCoordenador.php');
 include($serverPath . 'controlador/ControladorInstrutor.php');
@@ -20,6 +22,7 @@ include($serverPath . 'controlador/ControladorDieta.php');
 include($serverPath . 'controlador/ControladorPagamento.php');
 include($serverPath . 'controlador/ControladorExameFisico.php');
 include($serverPath . 'controlador/ControladorDica.php');
+include($serverPath . 'controlador/ControladorMusica.php');
 
 class Fachada implements IFachada 
 {
@@ -37,6 +40,7 @@ class Fachada implements IFachada
     private $controladorPagamento;
     private $controladorExameFisico;
     private $controladorDica;
+    private $controladorMusica;
     
     private static $instance = null;
 
@@ -55,6 +59,7 @@ class Fachada implements IFachada
         $this->controladorPagamento = new ControladorPagamento();
         $this->controladorExameFisico = new ControladorExameFisico();
         $this->controladorDica = new controladorDica();
+        $this->controladorMusica = new ControladorMusica();
     }
 
 //self:: serve para chamar um atributo statico da propria classe
@@ -74,12 +79,12 @@ class Fachada implements IFachada
         $this->controladorInstrutor->alterar($instrutor);
     }
 
-    public function detalharAluno($aluno) {
-        return $this->controladorAluno->detalhar($aluno);
+   public function detalharAluno($aluno, $fetchType) {
+        return $this->controladorAluno->detalhar($aluno, $fetchType);
     }
 
-    public function detalharInstrutor($instrutor) {
-        return $this->controladorInstrutor->detalhar($instrutor);
+    public function detalharInstrutor($instrutor, $fetchType) {
+        return $this->controladorInstrutor->detalhar($instrutor, $fetchType);
     }
 
     public function excluirAluno($aluno) {
@@ -90,20 +95,20 @@ class Fachada implements IFachada
         $this->controladorInstrutor->alterar($instrutor);
     }
 
-    public function incluirAluno($aluno) {
+    public function inserirAluno($aluno) {
         $this->controladorAluno->inserir($aluno);
     }
 
-    public function incluirInstrutor($instrutor) {
-        $this->controladorInstrutor->incluir($instrutor);
+    public function inserirInstrutor($instrutor) {
+        $this->controladorInstrutor->inserir($instrutor);
     }
 
-    public function listarAlunos() {
-        return $this->controladorAluno->listar();
+    public function listarAlunos($fetchType) {
+        return $this->controladorAluno->listar($fetchType);
     }
 
-    public function listarInstrutores() {
-        return $this->controladorInstrutor->listar();
+    public function listarInstrutores($fetchType) {
+        return $this->controladorInstrutor->listar($fetchType);
     }
 
     public function inserirSecretaria($secretaria) {
@@ -118,16 +123,21 @@ class Fachada implements IFachada
         $this->controladorSecretaria->excluir($secretaria);
     }
 
-    public function listarSecretarias() {
-        return $this->controladorSecretaria->listar();
+   public function listarSecretarias($fetchType) {
+        return $this->controladorSecretaria->listar($fetchType);
     }
 
-    public function detalharSecretaria($secretaria) {
-        return $this->controladorSecretaria->detalhar($secretaria);
+    public function detalharSecretaria($secretaria,$fetchType) {
+        return $this->controladorSecretaria->detalhar($secretaria,$fetchType);
     }
 
     public function logarCoordenador($coordenador) {
         return $this->controladorCoordenador->logar($coordenador);
+    }
+    
+    public function detalharCoordenador($coordenador, $fetchType)
+    {
+        return $this->controladorCoordenador->detalhar($coordenador, $fetchType);
     }
 
     public function logarSecretaria($secretaria) {
@@ -211,7 +221,7 @@ class Fachada implements IFachada
         return $this->controladorOpiniao->detalhar($opiniao);
     }
 
-    public function incluirAlimento($alimento) {
+    public function inserirAlimento($alimento) {
         return $this->controladorAlimento->inserir($alimento);
     }
     
@@ -223,12 +233,12 @@ class Fachada implements IFachada
         return $this->controladorAlimento->excluir($alimento);
     }
 
-    public function listarAlimentos() {
-        return $this->controladorAlimento->listar();
+    public function listarAlimentos($fetchType) {
+        return $this->controladorAlimento->listar($fetchType);
     }
     
-    public function detalharAlimento($alimento) {
-        return $this->controladorAlimento->detalhar($alimento);
+    public function detalharAlimento($alimento,$fetchType) {
+        return $this->controladorAlimento->detalhar($alimento,$fetchType);
     }
 
     public function alterarDieta($dieta)
@@ -236,9 +246,9 @@ class Fachada implements IFachada
         $this->controladorDieta->alterar($dieta);
     }
 
-    public function detalharDieta($dieta)
+    public function detalharDieta($dieta,$fetchType)
     {
-        return $this->controladorDieta->detalhar($dieta);
+        return $this->controladorDieta->detalhar($dieta,$fetchType);
     }
 
     public function excluirDieta($dieta)
@@ -251,9 +261,9 @@ class Fachada implements IFachada
         $this->controladorDieta->inserir($dieta);
     }
 
-    public function listarDietas($nutricionista)
+    public function listarDietas($pessoa, $fetchType)
     {
-        return $this->controladorDieta->listar($nutricionista);
+        return $this->controladorDieta->listar($pessoa, $fetchType);
     }
     
     public function logarNutricionista($nutricionista) {
@@ -275,14 +285,14 @@ class Fachada implements IFachada
         $this->controladorNutricionista->excluir($nutricionista);
     }
 
-    public function listarNutricionistas()
+    public function listarNutricionistas($fetchType)
     {
-        return $this->controladorNutricionista->listar();
+        return $this->controladorNutricionista->listar($fetchType);
     }
     
-    public function detalharNutricionista($nutricionista)
+    public function detalharNutricionista($nutricionista, $fetchType)
     {
-        $this->controladorNutricionista->detalhar($nutricionista);
+        return $this->controladorNutricionista->detalhar($nutricionista, $fetchType);
     }
     
     public function inserirPagamento($pagamento) {
@@ -297,13 +307,28 @@ class Fachada implements IFachada
         $this->controladorPagamento->excluir($pagamento);
     }
     
-    public function ListarPagamento() {
-        $this->controladorPagamento->listar();
+    public function listarPagamentos($fetchType) {
+        return $this->controladorPagamento->listar($fetchType);
+    }
+    
+    public function detalharPagamento($pagamento, $fetchType)
+    {
+        return $this->controladorPagamento->detalhar($pagamento, $fetchType);
     }
 
     public function inserirExameFisico($exameFisico)
     {
         $this->controladorExameFisico->inserir($exameFisico);
+    }
+    
+    public function listarExamesFisicos($fetchType)
+    {
+        return $this->controladorExameFisico->listar($fetchType);
+    }
+    
+    public function detalharExameFisico($exameFisico, $fetchType)
+    {
+        return $this->controladorExameFisico->detalhar($exameFisico, $fetchType);
     }
     
     
@@ -319,11 +344,21 @@ class Fachada implements IFachada
         return $this->controladorDica->excluir($dica);
     }
 
-    public function listarDicas() {
-        return $this->controladorDica->listar();
+    public function listarDicas($pessoa) {
+        return $this->controladorDica->listar($pessoa);
     }
     
     public function detalharDica($dica) {
         return $this->controladorDica->detalhar($dica);
+    }
+    
+    public function detalharMusica($musica, $fetchType)
+    {
+        return $this->controladorMusica->detalhar($musica, $fetchType);
+    }
+
+    public function listarMusicas($fetchType)
+    {
+        return $this->controladorMusica->listar($fetchType);
     }
 }

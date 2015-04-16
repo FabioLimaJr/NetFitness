@@ -14,7 +14,7 @@
      $aluno = $_SESSION['Aluno'];
  }
 
- $listaAlunos = $fachada->listarAlunos();
+ $listaAlunos = $fachada->listarAlunos(LAZY);
  
  
 ?>
@@ -106,7 +106,7 @@
     {
       
        $aluno = new Aluno($_POST['idAluno']);
-       $aluno = $fachada->detalharAluno($aluno);
+       $aluno = $fachada->detalharAluno($aluno, LAZY);
        
        
        $exameFisico = new ExameFisico(null, $_POST['data'], $_POST['descricao'], $aluno, $_SESSION['Instrutor']);

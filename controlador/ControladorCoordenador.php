@@ -37,4 +37,9 @@ class controladorCoordenador
     {
        return $this->getRepositorioCoordenador()->logar($coordenador);
     }
+    
+    public function detalhar($coordenador, $fetchType)
+    {
+        return $this->getRepositorioCoordenador()->detalhar($coordenador, $fetchType);
+    }
 }

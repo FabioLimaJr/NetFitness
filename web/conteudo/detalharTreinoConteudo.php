@@ -1,6 +1,5 @@
 <?php 
 
-$fachada = new Fachada();
 $fachada = Fachada::getInstance();
 $mensagem ="";
 $camposPreenchidos = false;
@@ -12,7 +11,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
 try
 {
-    $listaTreinos = $fachada->listarTodosTreinos(EAGER);
+    $listaTreinos = $fachada->listarTreinos($_SESSION['Instrutor'], EAGER);
+    $listaExercicios = $fachada->listarExercicios(LAZY);
 } 
 catch (Exception $exc)
 {

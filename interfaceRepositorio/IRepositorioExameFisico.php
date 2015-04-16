@@ -9,6 +9,6 @@ interface IRepositorioExameFisico
     public function inserir($exameFisico);   
     public function alterar($exameFisico);   
     public function excluir($exameFisico);   
-    public function listar();   
-    public function detalhar($exameFisico);
+    public function listar($fetchType);   
+    public function detalhar($exameFisico, $fetchType);
 }

@@ -31,9 +31,9 @@ class ControladorTreino {
             return $this->getRepositorioTreino()->inserir($treino);
         }*/
         if((!ExpressoesRegulares::conferirNome($treino->getNome()))){
-            throw Excecoes::inserirObjeto($treino->getNome());
+            throw new Exception(Excecoes::inserirObjeto($treino->getNome()));
         }else if(!ExpressoesRegulares::conferirDescricao($treino->getDescricao())){
-            throw Excecoes::inserirObjeto($treino->getDescricao());
+            throw new Exception(Excecoes::inserirObjeto($treino->getDescricao()));
         }else{
             return $this->getRepositorioTreino()->inserir($treino);
         }
@@ -49,11 +49,11 @@ class ControladorTreino {
         
         if((!ExpressoesRegulares::conferirNome($treino->getNome()))){
             
-            throw Excecoes::inserirObjeto($treino->getNome());
+            throw new Exception(Excecoes::inserirObjeto($treino->getNome()));
             
         }else if(!ExpressoesRegulares::conferirDescricao($treino->getDescricao())){
             
-            throw Excecoes::inserirObjeto($treino->getDescricao());
+            throw new Exception(Excecoes::inserirObjeto($treino->getDescricao()));
             
         }else{
             
@@ -79,6 +79,7 @@ class ControladorTreino {
         return $this->getRepositorioTreino()->detalhar($treino, $fetchType);
         
     }
+    
     // Listar todos os treinos independente do instrutor logado.
     public function listarTodos($fetchType){
         

@@ -68,11 +68,11 @@ class ControladorAlimento {
         return $this->getRepositorioAlimento()->excluir($alimento);
     }
     
-    public function listar() {
-        return $this->getRepositorioAlimento()->listar();
+     public function listar($fetchType) {
+        return $this->getRepositorioAlimento()->listar($fetchType);
     }
     
-    public function detalhar($alimento) {
-        return $this->getRepositorioAlimento()->detalhar($alimento);
+    public function detalhar($alimento,$fetchType) {
+        return $this->getRepositorioAlimento()->detalhar($alimento,$fetchType);
     }
 }

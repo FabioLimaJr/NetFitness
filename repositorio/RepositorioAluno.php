@@ -6,18 +6,19 @@
  */
 
 include($serverPath.'interfaceRepositorio/IRepositorioAluno.php');
-include_once($serverPath.'repositorioGenerico/RepositorioGenerico.php');
+include_once('RepositorioPessoa.php');
 include_once($serverPath.'excecoes/Excecoes.php');
-//include($serverPath.'classesBasicas/Dieta.php');
 
-class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
+class RepositorioAluno extends RepositorioPessoa implements IRepositorioAluno
 {
+ 
     
     function __construct() 
     {
        parent::__construct();
     }
-    public function inserir($aluno){
+   
+     public function inserir($aluno){
         
         $idReturn = -1;
         $sql = "USE " . $this->getNomeBanco();
@@ -37,7 +38,7 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                 
                 if (mysqli_query($this->getConexao(), $sql)) 
                 {
-                    $this->fecharConexao();
+                    //$this->fecharConexao();
                     $aluno->setIdAluno($idReturn);
                     return $aluno;
                     //return $idReturn;
@@ -80,7 +81,7 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                     throw new Exception(Excecoes::alterarObjeto("Aluno: " . mysqli_error($this->getConexao())));
                 }
                 else{
-                    $this->fecharConexao();
+                    //$this->fecharConexao();
                 }
             }
         } 
@@ -106,7 +107,7 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                 throw new Exception(Excecoes::excluirObjeto("Aluno: " . mysqli_error($this->getConexao())));
             }
             else{
-                $this->fecharConexao();
+                //$this->fecharConexao();
             }  
         } 
         else{
@@ -114,97 +115,70 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
         }
     }
     
-    public function detalhar($aluno) 
+    public function detalhar($aluno,$fetchType) 
     {
         $sql = "USE " . $this->getNomeBanco();
 
         if($this->getConexao()->query($sql) === TRUE)
         {
-            $sql = "SELECT * FROM pessoa,aluno WHERE pessoa.idPessoa = aluno.idAluno AND "
+            
+            $sqlAluno = "SELECT * FROM pessoa,aluno WHERE pessoa.idPessoa = aluno.idAluno AND "
                     ."aluno.idAluno = '".$aluno->getIdPessoa()."'";
             
-            $result = mysqli_query($this->getConexao(), $sql);
-            
-            while ($row = mysqli_fetch_array($result)) 
+            try
             {
-                 $aluno = new Aluno($row['idPessoa'], $row['nome'], $row['cpf'], $row['endereco'], $row['senha'], $row['telefone'], 
-                                   $row['login'], $row['email'], $row['sexo'], $row['dataNascimento'], null/*secretaria*/, null/*musica*/, 
-                                   null/*$dieta*/, null/*$listaPagamentos*/, null/*$listaTreinos*/, $row['foto']);
+                $resultAluno = mysqli_query($this->getConexao(), $sqlAluno);
+                $rowAluno = mysqli_fetch_assoc($resultAluno);
+                $alunoRetornado = new Aluno($rowAluno['idAluno'], $rowAluno['nome'], $rowAluno['cpf'], $rowAluno['endereco'], 
+                                   $rowAluno['senha'], $rowAluno['telefone'], $rowAluno['login'],$rowAluno['email'], 
+                                   $rowAluno['sexo'], $rowAluno['dataNascimento'], null/*secretaria*/, null/*musica*/, 
+                                   null/*$dieta*/, null/*$listaPagamentos*/, null/*$listaTreinos*/, $rowAluno['foto']);
+             }
+             catch(Exception $exc)
+             {
+                 throw new Exception($exc->getMessage());
+             }
                 
-                  
-                
-                
-                $sql2 = "SELECT * FROM  pessoa WHERE idPessoa = '".$row['idSecretaria']."'";
-                $result2 = mysqli_query($this->getConexao(), $sql2); 
-                $row2 = mysqli_fetch_assoc($result2);
-                
-                $secretaria = new Secretaria($row['idSecretaria'], $row2['nome'], $row2['cpf'], $row2['endereco'], $row2['senha'], $row2['telefone'], $row2['login'], $row2['email'], null/*$coordenador*/);
-                
-                $aluno->setSecretaria($secretaria);
-                
-                
-                $sql3 = "SELECT * FROM musica WHERE idMusica ='".$row['idMusica']."'";
-                $result3 = mysqli_query($this->getConexao(), $sql3); 
-                $row3 = mysqli_fetch_assoc($result3);
-                
-                $musica = new Musica($row['idMusica'], $row3['titulo'], null/*$secretaria*/);
-                
-                $aluno->setMusica($musica);
-                
-                
-                $sql4 = "SELECT * FROM dieta WHERE idAluno ='".$row['idAluno']."'";
-                $result4 = mysqli_query($this->getConexao(), $sql4); 
-                $row4 = mysqli_fetch_assoc($result4);
-                
-                $dieta = new Dieta($row4['idDieta'], $row4['descricao'],null/*listaAlimentos*/, null/*$nutricionista*/, null/*aluno*/);
-                
-                $aluno->setDieta($dieta);
-                
-                
-                
-                
-                $listaPagamentos = Array();
-                
-                $sql5 = "SELECT * FROM pagamento WHERE idAluno ='".$row['idAluno']."'";
-                $result5 = mysqli_query($this->getConexao(), $sql5); 
-                while ($row5 = mysqli_fetch_array($result5)) 
-                {
-                    $pagamento = new Pagamento($row5['idPagamento'], $row5['valor'], 
-                                               $row5['dataVencimento'], $row5['dataPagamento'], 
-                                               null/*$secretaria*/, null/*$aluno*/);
-                    array_push($listaPagamentos, $pagamento);
-                }
-                
-                $aluno->setListaPagamentos($listaPagamentos);
-                
+            if($fetchType === EAGER)
+            {
+                //Secretaria
+                $alunoRetornado->setSecretaria($this->detalharObjeto(new Secretaria($rowAluno['idSecretaria']), LAZY));
+               
+                //Musica
+                $alunoRetornado->setMusica($this->detalharObjeto(new Musica($rowAluno['idMusica']), LAZY)); 
+
+                //Dieta  
+                $alunoRetornado->setDieta($this->listarObjetos(new Dieta(), $alunoRetornado, LAZY)) ;
+              
+                //Pagamentos
+                $alunoRetornado->setListaPagamentos($this->listarObjetos(new Pagamento(), $alunoRetornado, LAZY));
 
                 
                 $listaTreinos = Array();
-                
-                $sql6 = "SELECT * FROM alunotreino WHERE idAluno ='".$row['idAluno']."'";
-                $result6 = mysqli_query($this->getConexao(), $sql6); 
-                while ($row6 = mysqli_fetch_array($result6)) 
+
+                $sqlAlunoTreino = "SELECT * FROM alunotreino WHERE idAluno ='".$rowAluno['idAluno']."'";
+                try
                 {
-                    $idTreino = $row6['idTreino'];
+                    $resultAlunoTreino = mysqli_query($this->getConexao(), $sqlAlunoTreino);
+                    $repositorioTreino  = new RepositorioTreino();
                     
-                    $sql6B = "SELECT * FROM treino WHERE idTreino = '".$idTreino."'";
-                    $result6B = mysqli_query($this->getConexao(), $sql6B);
-                    
-                    while ($row6B = mysqli_fetch_array($result6B))
+                    while ($rowAlunoTreino = mysqli_fetch_array($resultAlunoTreino)) 
                     {
-                         $treino = new Treino($idTreino, $row6B['nome'], $row6B['descricao'], null/*$instrutor*/);
-                         array_push($listaTreinos, $treino);
+                        $treino = $this->detalharObjeto(new Treino($rowAlunoTreino['idTreino']), LAZY);
+                        $treino->setData($rowAlunoTreino['data']);
+                        array_push($listaTreinos, $treino);
                     }
-                    
-                    $aluno->setListaTreinos($listaTreinos);
-                    
+
+                    $alunoRetornado->setListaTreinos($listaTreinos); 
                 }
-           
-               
+                catch(Exception $ecx)
+                {
+                    throw new Exception($exc->getMessage());
+                }
+                
             }
             
-            $this->fecharConexao();
-            return $aluno;
+            return $alunoRetornado;
         }
         else 
         {
@@ -213,62 +187,50 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
     }
     
     
-    public function listar() 
+    public function listar($fetchType) 
     {
-        $listaAlunos = array();
-        
+        $listaAlunos = array();       
         $sql = "USE " . $this->getNomeBanco();
-    
-        
+            
         if($this->getConexao()->query($sql) === TRUE)
-        {
-        
-            
-            $sql = "SELECT * FROM pessoa,aluno WHERE pessoa.idPessoa = aluno.idAluno";
-            $result = mysqli_query($this->getConexao(), $sql);
-            
-            while ($row = mysqli_fetch_array($result)) 
+        {      
+            $sqlAluno = "SELECT * FROM pessoa,aluno WHERE pessoa.idPessoa = aluno.idAluno";           
+            try
             {
-              
+                $resultAluno = mysqli_query($this->getConexao(), $sqlAluno);
                 
-                $aluno = new Aluno($row['idPessoa'], $row['nome'], $row['cpf'], $row['endereco'], $row['senha'], $row['telefone'], 
-                                   $row['login'], $row['email'], $row['sexo'], $row['dataNascimento'], null/*secretaria*/, $row['idMusica'], 
-                                   null/*$dieta*/, null/*$listaPagamentos*/, null/*$listaTreinos*/, $row['foto']);
-                
-                
-                $sql2 = "SELECT * FROM  pessoa WHERE idPessoa = '".$row['idSecretaria']."'";
-                $result2 = mysqli_query($this->getConexao(), $sql2); 
-                $row2 = mysqli_fetch_assoc($result2);
-                
-                $secretaria = new Secretaria($row['idSecretaria'], $row2['nome'], $row2['cpf'], $row2['endereco'], $row2['senha'], $row2['telefone'], $row2['login'], $row2['email'], null/*$coordenador*/);
-                
-                $aluno->setSecretaria($secretaria);
-                
-                $sql3 = "SELECT * FROM dieta WHERE idAluno = '".$row['idPessoa']."'";
-                $result3 = mysqli_query($this->getConexao(), $sql3);
-                $row3 = mysqli_fetch_assoc($result3);
-                $dieta = new Dieta($row3['idDieta']);
-                $aluno->setDieta($dieta);
-                
-                array_push($listaAlunos, $aluno);
-                
+                while ($rowAluno = mysqli_fetch_array($resultAluno)) 
+                {      
+                    $alunoRetornado = new Aluno($rowAluno['idPessoa']);
+
+                    if($fetchType == EAGER)
+                    {  
+                        $alunoRetornado = $this->detalhar($alunoRetornado, EAGER);                  
+                    }
+                    else 
+                    {
+                        $alunoRetornado = $this->detalhar($alunoRetornado, LAZY);    
+                    }            
+                    array_push($listaAlunos, $alunoRetornado);
+                }
             }
+            catch (Exception $exc)
+            {
+                throw new Exception($exc->getMessage());
+            }           
             
-            return($listaAlunos);
-            
-           //Falta incluir as listas: listaTreinos, mas é preciso ligar no banco a tabela aluno com a tabela treino           
+            return($listaAlunos);                    
          }
          else 
-        {
+         {
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
-        }
+         }
     }
     
     public function logar($aluno)
     {
         
-        $sql = "USE " . $this->getNomeBanco();
-        
+        $sql = "USE " . $this->getNomeBanco();        
         $alunoReturn = null;
         
         if($this->getConexao()->query($sql) === TRUE)
@@ -305,20 +267,20 @@ class RepositorioAluno extends RepositorioGenerico implements IRepositorioAluno
                  
                 }
                 
-                $this->fecharConexao();
+               // $this->fecharConexao();
                 return $alunoReturn;
                 
             }
             else
             {
-                $this->fecharConexao();
+              //  $this->fecharConexao();
                 throw new Exception(Excecoes::usuarioInvalido(""));
             }
             
         }
         else
         {
-            $this->fecharConexao();
+            //$this->fecharConexao();
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
         }  
     }

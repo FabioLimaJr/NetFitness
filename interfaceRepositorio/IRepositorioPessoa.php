@@ -7,14 +7,13 @@
  */
 
 /**
+ * Description of IRepositorioPessoa
  *
  * @author Daniele
  */
-interface IRepositorioAluno 
+interface IRepositorioPessoa
 {
-    public function inserir($aluno);
-    public function alterar($aluno);
-    public function excluir($aluno);
-    public function listar($fetchType);
-    public function detalhar($aluno,$fetchType);
+    public function inserirPessoa($objeto);
+    public function excluirPessoa($objeto);
+    public function alterarPessoa($objeto);
 }

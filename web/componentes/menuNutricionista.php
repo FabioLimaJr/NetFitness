@@ -12,7 +12,7 @@
         </li>
         <li><a href="#">Dieta</a>
           <ul>
-            <li><a href="prescreverDieta.php">Prescrever</a></li>
+            <li><a href="inserirDieta.php">Prescrever</a></li>
             <li><a href="excluirDieta.php">Excluir</a></li>
             <li><a href="alterarDieta.php">Alterar</a></li>
             <li><a href="listarDietas.php">Listar</a></li>

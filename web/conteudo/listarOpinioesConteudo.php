@@ -6,8 +6,7 @@ $mensagem ="";
 
 try
 {
-    $listaOpinioes = $fachada->listarOpinioes($_SESSION['Secretaria']);
-   // var_dump($listaOpinioes);
+    $listaOpinioes = $fachada->listarOpinioes(EAGER); 
 } 
 catch (Exception $exc)
 {

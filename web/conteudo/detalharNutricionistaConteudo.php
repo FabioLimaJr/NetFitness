@@ -12,7 +12,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
 try
 {
-    $listaNutricionistas = $fachada->listarNutricionistas();
+    $listaNutricionistas = $fachada->listarNutricionistas(LAZY);
 } 
 catch (Exception $exc)
 {
@@ -87,7 +87,7 @@ catch (Exception $exc)
             try
             {
                 $nutricionista = new Nutricionista($_POST['idNutricionista']);
-                $nutricionistaRetornada = $fachada->detalharNutricionista($nutricionista);
+                $nutricionistaRetornada = $fachada->detalharNutricionista($nutricionista, EAGER);
                // var_dump($dietaRetornada);
                 ?>
                      <div style="margin-bottom: 50px">

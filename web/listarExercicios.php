@@ -1,6 +1,4 @@
-
 <?php
-
 include ('../classesBasicas/Aluno.php');
 include ('../classesBasicas/Coordenador.php');
 include ('../classesBasicas/Nutricionista.php');

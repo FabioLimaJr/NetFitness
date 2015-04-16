@@ -9,7 +9,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 }
 
 try {
-    $listaPagamentos = $fachada->ListarPagamento($_SESSION['Secretaria']);
+    $listaPagamentos = $fachada->listarPagamentos(EAGER);
+    $listaPagamentosRetornada = array();
+    foreach ($listaPagamentos as $pagamento)
+    {
+        if($pagamento->getSecretaria()->getIdSecretaria() == $_SESSION['Secretaria']->getIdSecretaria())
+        {
+            array_push($listaPagamentosRetornada, $pagamento);
+        }
+    }
+    
     $_SESSION['listaPagamentos'] = $listaPagamentos;
 } catch (Exception $exc) {
     echo $exc->getMessage();
@@ -45,7 +54,7 @@ Telefone:<?php echo $secretaria->getTelefone() ?> | Email:<?php echo $secretaria
                            <th>Selecionar</th>
                       </tr>
                       
-                      <?php foreach ($listaPagamentos as $pagamento){ ?>
+                      <?php foreach ($listaPagamentosRetornada as $pagamento){ ?>
                         <tr>
                             <td><?php echo $pagamento->getAluno()->getIdAluno() ?></td>
                             <td><?php echo $pagamento->getValor() ?></td>

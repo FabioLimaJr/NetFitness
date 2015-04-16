@@ -6,7 +6,7 @@ $mensagem ="";
 
 try
 {
-    $listaTreinos = $fachada->listarTodosTreinos(EAGER);
+    $listaTreinos = $fachada->listarTreinos($_SESSION['Instrutor'],EAGER);
 
 } 
 catch (Exception $exc)
@@ -39,7 +39,23 @@ Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->
                     <tr>
                         <td><?php echo $treino->getNome() ?></td> 
                         <td><?php echo $treino->getDescricao() ?></td>  
-                        <td>Falta lista de Exercicios</td>  
+                         <td><?php 
+                                 $sizeListaExercicios = count($treino->getListaExercicios());
+                                 $count = 1;
+                                 foreach ($treino->getListaExercicios() as $exercicio)
+                                 {
+                                     if($count == $sizeListaExercicios)
+                                     {
+                                       echo $exercicio->getDescricao();
+                                     }
+                                     else
+                                     {
+                                       echo $exercicio->getDescricao().", ";  
+                                     }
+                                     
+                                     $count++;
+                                 }
+                             ?></td> 
                     </tr>
                   
                     <?php } ?>

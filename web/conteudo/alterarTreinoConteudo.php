@@ -12,8 +12,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
 try
 {
-    $listaTreinos = $fachada->listarTreinos($_POST['Instrutor'], EAGER);
-    $listaExercicios = $fachada->listarExercicios();
+    $listaTreinos = $fachada->listarTreinos($_SESSION['Instrutor'], EAGER);
+    $listaExercicios = $fachada->listarExercicios(LAZY);
 } 
 catch (Exception $exc)
 {
@@ -55,9 +55,23 @@ Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->
                          <tr>
                              <td><?php echo $treino->getNome() ?></td> 
                              <td><?php echo $treino->getDescricao() ?></td>  
-                             <td>
-                                 Falta lista de Exercicios
-                             </td>  
+                             <td><?php 
+                                 $sizeListaExercicios = count($treino->getListaExercicios());
+                                 $count = 1;
+                                 foreach ($treino->getListaExercicios() as $exercicio)
+                                 {
+                                     if($count == $sizeListaExercicios)
+                                     {
+                                       echo $exercicio->getDescricao();
+                                     }
+                                     else
+                                     {
+                                       echo $exercicio->getDescricao().", ";  
+                                     }
+                                     
+                                     $count++;
+                                 }
+                             ?></td> 
                              <td><input type="radio" name="idTreino" value="<?php echo $treino->getIdTreino() ?>"></td>
                          </tr>
 
@@ -86,8 +100,9 @@ Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->
              $treinoRetornado = $fachada->detalharTreino($treino, EAGER);
              
              $listaExerciciosNaoSelecionados = array();
-             $listaExerciciosSelecionados = $treino->getListaExercicios();
+             $listaExerciciosSelecionados = $treinoRetornado->getListaExercicios();
              
+
              foreach($listaExercicios as $exercicio){
                  
                  $exercicioPresente = false;
@@ -104,7 +119,13 @@ Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->
                  }
              }
              
+          
+             
              $_SESSION['treinoRetornado']=$treinoRetornado;
+             
+             //var_dump($treinoRetornado);
+             
+            
      
      ?>
 
@@ -118,7 +139,7 @@ Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->
                       </li>
                       <li class="form-row text-input-row">
                             <label>Descrição</label>
-                            <input type="text" name="descricao" value="<?php if(isset($treinoRetornado)) echo $treinoRetornado->getNome() ?>" class="text-input" style="width: 300px">
+                            <input type="text" name="descricao" value="<?php if(isset($treinoRetornado)) echo $treinoRetornado->getDescricao() ?>" class="text-input" style="width: 300px">
                       </li>
 
                       <li class="form-row text-input-row">
@@ -136,8 +157,8 @@ Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->
                              <tr>
                                  <td> <?php echo $exercicioSelecionado->getNome() ?> </td>
                                  <td> <?php echo $exercicioSelecionado->getMusculo() ?> </td>
-                                 <td> <input type="text" name="series<?php echo $exercicioSelecionado->getIdExercicio() ?>" value="<?php if(isset($treinoRetornado)) echo $treinoRetornado->getSerie() ?>" class="text-input" style="width: 30px"> </td>
-                                 <td> <input type="text" name="repeticoes<?php echo $exercicioSelecionado->getIdExercicio() ?>" value="<?php if(isset($treinoRetornado)) echo $treinoRetornado->getRepeticoes() ?>" class="text-input" style="width: 30px"> </td>
+                                 <td> <input type="text" name="series<?php echo $exercicioSelecionado->getIdExercicio() ?>" value="<?php echo $exercicioSelecionado->getSeries() ?>" class="text-input" style="width: 30px"> </td>
+                                 <td> <input type="text" name="repeticoes<?php echo $exercicioSelecionado->getIdExercicio() ?>" value="<?php echo $exercicioSelecionado->getRepeticoes() ?>" class="text-input" style="width: 30px"></td>
                                  <td> <input type="checkbox" name="exercicio<?php echo $exercicioSelecionado->getIdExercicio() ?>" value="true" style="width: 30px" checked> </td>
                              </tr>
 
@@ -147,8 +168,8 @@ Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->
                              <tr>
                                  <td> <?php echo $exercicioNaoSelecionado->getNome() ?> </td>
                                  <td> <?php echo $exercicioNaoSelecionado->getMusculo() ?> </td>
-                                 <td> <input type="text" name="series<?php echo $exercicioNaoSelecionado->getIdExercicio() ?>" value="<?php if(isset($treinoRetornado)) echo $treinoRetornado->getSerie() ?>" class="text-input" style="width: 30px"> </td>
-                                 <td> <input type="text" name="repeticoes<?php echo $exercicioNaoSelecionado->getIdExercicio() ?>" value="<?php if(isset($treinoRetornado)) echo $treinoRetornado->getRepeticoes() ?>" class="text-input" style="width: 30px"> </td>
+                                 <td> <input type="text" name="series<?php echo $exercicioNaoSelecionado->getIdExercicio() ?>" value="" class="text-input" style="width: 30px"> </td>
+                                 <td> <input type="text" name="repeticoes<?php echo $exercicioNaoSelecionado->getIdExercicio() ?>" value="" class="text-input" style="width: 30px"> </td>
                                  <td> <input type="checkbox" name="exercicio<?php echo $exercicioNaoSelecionado->getIdExercicio() ?>" value="true" style="width: 30px"> </td>
                              </tr>
 
@@ -196,7 +217,9 @@ Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->
                 }
                 
                 $treinoAlterado = new Treino();
-                $treinoAlterado->setIdTreino($_SESSION['treinoRetornado']);
+                $treinoAlterado = ($_SESSION['treinoRetornado']);
+                
+                
                 $treinoAlterado->setNome($_POST['nome']);
                 $treinoAlterado->setDescricao($_POST['descricao']);
                 $treinoAlterado->setInstrutor($instrutor);

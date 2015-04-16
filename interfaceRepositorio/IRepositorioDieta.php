@@ -15,6 +15,6 @@ interface IRepositorioDieta
     public function inserir($dieta);
     public function alterar($dieta);
     public function excluir($dieta);
-    public function listar($nutricionista);
-    public function detalhar($dieta);
+    public function listar($pessoa, $fetchType);
+    public function detalhar($dieta,$fetchType);
 }

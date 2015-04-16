@@ -8,15 +8,15 @@ include($serverPath.'interfaceRepositorio/IRepositorioSecretaria.php');
 include_once($serverPath.'repositorioGenerico/RepositorioGenerico.php');
 include_once($serverPath.'excecoes/Excecoes.php');
 
-class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioSecretaria {
+class RepositorioSecretaria extends RepositorioPessoa implements IRepositorioSecretaria {
     //put your code here
     
     public function __construct() 
     {
        parent::__construct();
     }
-    
-    public function inserir($secretaria){
+
+        public function inserir($secretaria){
         
         $idReturn = -1;
         
@@ -36,7 +36,7 @@ class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioS
                 
                 if( mysqli_query($this->getConexao(), $sql)){
                     
-                    $this->fecharConexao();
+                    //$this->fecharConexao();
                     return TRUE;
                     
                 }else{
@@ -72,7 +72,7 @@ class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioS
                     throw new Exception(Excecoes::alterarObjeto("Secretaria: " . mysqli_error($this->getConexao())));
                 }else{
                     
-                    $this->fecharConexao();
+                    //$this->fecharConexao();
                 }
             }
         }else{
@@ -91,84 +91,102 @@ class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioS
             if(!mysqli_query($this->getConexao(), $sql)){
                 throw new Exception(Excecoes::excluirObjeto("Secretaria: " . mysqli_error($this->getConexao())));
             }else{
-                $this->fecharConexao();
+                //$this->fecharConexao();
             }
         }else{
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
         }
     }
     
-     public function listar(){
+     public function listar($fetchType){
         $listaSecretarias = array();
         
         $sql = "USE " . $this->getNomeBanco();
         
-        if(@$this->getConexao()->query($sql) === TRUE){
+        if(@$this->getConexao()->query($sql) === TRUE)
+        {
             
-            $sql = "SELECT * FROM pessoa,secretaria WHERE pessoa.idPessoa = secretaria.idSecretaria";
-            $result = mysqli_query($this->getConexao(), $sql);
+            $sqlListaScretarias = "SELECT * FROM pessoa,secretaria WHERE pessoa.idPessoa = secretaria.idSecretaria";
             
-            while ($row = mysqli_fetch_array($result)){
-                
-                $secretaria = new Secretaria($row['idPessoa'], $row['nome'], $row['cpf'], $row['endereco'], 
-                                             $row['senha'], $row['telefone'],$row['login'], $row['email'], NULL);
-                
-                $sql2 = "SELECT * FROM  pessoa WHERE idPessoa = '".$row['idCoordenador']."'";
-                $result2 = mysqli_query($this->getConexao(), $sql2); 
-                $row2 = mysqli_fetch_assoc($result2);
-                
-                $coordenador = new Coordenador($row['idCoordenador'], null/*listaInstrutores*/, null/*listaSecretarias*/, 
-                                               null/*listaNutricionistas*/, $row2['nome'], $row2['cpf'], 
-                                               $row2['endereco'], $row2['senha'], $row2['telefone'], $row2['email'], 
-                                               $row2['login']);
-                                
-                $secretaria->setCoordenador($coordenador);                
-                
-                array_push($listaSecretarias, $secretaria);
-                
+            try
+            {
+                $resultListaSecretarias = mysqli_query($this->getConexao(), $sqlListaScretarias);
+
+                while ($rowListaSecretarias = mysqli_fetch_array($resultListaSecretarias))
+                {
+
+                    $secretariaRetornada = new Secretaria($rowListaSecretarias['idSecretaria']);
+
+                    if($fetchType === EAGER)
+                    {
+                        $secretariaRetornada = $this->detalharObjeto($secretariaRetornada, EAGER);
+                    }
+                    else 
+                    {
+                        $secretariaRetornada = $this->detalharObjeto($secretariaRetornada, LAZY);
+                    }
+
+                    array_push($listaSecretarias, $secretariaRetornada);
+
+                }
+            }
+            catch (Exception $exc)
+            {
+                throw new Exception($exc->getMessage());
             }
             
             return $listaSecretarias;                  
-        }else{
+        }
+        else
+        {
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
         }
     }
     
-    public function detalhar($secretaria){ 
-        
+    public function detalhar($secretaria,$fetchType)
+    { 
+
         $sql = "USE " . $this->getNomeBanco();
 
         if($this->getConexao()->query($sql) === TRUE)
         {
-            $sql = "SELECT * FROM pessoa,secretaria WHERE pessoa.idPessoa = ".$secretaria->getIdSecretaria()." AND "
+            
+            $sqlSecretaria = "SELECT * FROM pessoa,secretaria WHERE pessoa.idPessoa = secretaria.idSecretaria AND "
                     ."secretaria.idSecretaria = '".$secretaria->getIdSecretaria()."'";
             
-            $result = mysqli_query($this->getConexao(), $sql);
-            
-            while ($row = mysqli_fetch_array($result)) 
+            try
             {
-                 $secretaria = new Secretaria($row['idPessoa'], $row['nome'], $row['cpf'], $row['endereco'], $row['senha'], $row['telefone'], 
-                                   $row['login'], $row['email'], $row['idCoordenador']);
+                $resultSecretaria = mysqli_query($this->getConexao(), $sqlSecretaria);
+                $rowSecretaria = mysqli_fetch_assoc($resultSecretaria);
+                $secretariaRetornada = new Secretaria($rowSecretaria['idSecretaria'], $rowSecretaria['nome'], 
+                                                      $rowSecretaria['cpf'], $rowSecretaria['endereco'], 
+                                                      $rowSecretaria['senha'], $rowSecretaria['telefone'], 
+                                                      $rowSecretaria['login'], $rowSecretaria['email'], 
+                                                      null/*$coordenador*/);
+             }
+             catch(Exception $exc)
+             {
+                 throw new Exception($exc->getMessage());
+             }
                 
-                $sql2 = "SELECT * FROM  pessoa WHERE idPessoa = '".$row['idCoordenador']."'";
-                $result2 = mysqli_query($this->getConexao(), $sql2); 
-                $row2 = mysqli_fetch_assoc($result2);
-                
-                $coordenador = new Coordenador($row['idCoordenador'], null/*listaInstrutores*/, null/*listaSecretarias*/, null/*listaNutricionistas*/, $row2['nome'], $row2['cpf'], 
-                                               $row2['endereco'], $row2['senha'], $row2['telefone'], $row2['email'], $row2['login']);
-                
-                $secretaria->setCoordenador($coordenador); 
+            if($fetchType === EAGER)
+            {  
+                //Coordenador
+                $secretariaRetornada->setCoordenador($this->detalharObjeto(new Coordenador($rowSecretaria['idCoordenador']), LAZY));
             }
             
-            $this->fecharConexao();
-            return $secretaria;
+            return $secretariaRetornada;
         }
         else 
         {
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
         }
-      
+        
     }
+    
+    
+    
+    
     // esse metodo retorna nulo caso o usuario encontrado em pessoa n seja uma secretaria
     public function logar($secretaria){
         
@@ -193,10 +211,7 @@ class RepositorioSecretaria extends RepositorioGenerico implements IRepositorioS
                 $result = mysqli_query($this->getConexao(), $sql);
 
                 while($row = mysqli_fetch_array($result)){
-                    /*
-                     * $pessoaReturn = new Pessoa($row['idPessoa'], $row['nome'], $row['cpf'], $row['cpf'], 
-                                     $row['senha'], $row['telefone'], $row['login'], $row['email']);
-                     */
+                    
                     $secretariaReturn = new Secretaria($pessoa->getIdPessoa()
                                                         ,$pessoa->getNome()
                                                         ,$pessoa->getCpf()

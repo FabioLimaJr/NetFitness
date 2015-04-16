@@ -126,7 +126,7 @@
 
              try
              {
-                $fachada->incluirAluno($aluno);
+                $fachada->inserirAluno($aluno);
                 $mensagem = "Parabéns, o aluno ".$_POST['nome']." foi incluido com sucesso!";
                 unset($_SESSION['Aluno']);
 

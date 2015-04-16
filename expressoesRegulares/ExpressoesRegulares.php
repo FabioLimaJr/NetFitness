@@ -150,6 +150,11 @@ class  ExpressoesRegulares {
         
         if(checkdate($arrayData[1], $arrayData[0], $arrayData[2]))
         {
+            if (strtotime($data) < time()) 
+            {
+                return false;
+            }
+            
             return true;
         }
         else

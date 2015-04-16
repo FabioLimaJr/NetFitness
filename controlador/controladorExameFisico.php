@@ -13,7 +13,7 @@ class controladorExameFisico
 {
     private $repositorioExameFisico;
     
-     public function __construct() 
+    public function __construct() 
     {
         $this->setRepositorioExameFisico(new RepositorioExameFisico());
     }
@@ -35,6 +35,18 @@ class controladorExameFisico
         {
             $this->getRepositorioExameFisico()->inserir($exameFisico);
         }
+    }
+    
+    public function listar($fetchType)
+    {
+        //conferir obejto
+        return $this->getRepositorioExameFisico()->listar($fetchType);
+    }
+    
+    public function detalhar($exameFisico, $fetchType)
+    {
+        //conferir obejto e fetchType
+        return $this->getRepositorioExameFisico()->detalhar($exameFisico, $fetchType);
     }
 
 

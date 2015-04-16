@@ -23,12 +23,12 @@ catch (Exception $exc)
   
 ?>
 
-<h1 class="title">Excluir Dieta</h1>
+<h1 class="title">Excluir Treino</h1>
 <div class="line"></div>
-Telefone:<?php echo $insrtutor->getTelefone() ?> | Email:<?php echo $insrtutor->getEmail() ?> | Endereço:<?php echo $insrtutor->getEndereco() ?>
+Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->getEmail() ?> | Endereço:<?php echo $instrutor->getEndereco() ?>
 <div class="intro" style="margin-bottom:50px"></div>
    
-<h3>Usuário logado: <?php echo $insrtutor->getNome() ?></h3>
+<h3>Usuário logado: <?php echo $instrutor->getNome() ?></h3>
    
 <div class="clear"></div>
 <div class="line"></div>
