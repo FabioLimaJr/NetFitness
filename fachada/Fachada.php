@@ -332,8 +332,8 @@ class Fachada implements IFachada
     }
     
     
-    public function inserirDica($dica) {
-        $this->controladorDica->inserir($dica);
+    public function inserirDica($dica, $pessoa) {
+        $this->controladorDica->inserir($dica, $pessoa);
     }
     
     public function alterarDica($dica) {

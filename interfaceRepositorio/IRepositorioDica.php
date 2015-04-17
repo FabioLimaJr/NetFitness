@@ -5,7 +5,7 @@
  */
 interface IRepositorioDica {
    
-    public function inserir($dica);
+    public function inserir($dica, $pessoa);
     public function alterar($dica);
     public function excluir($dica);
     public function listar($pessoa);

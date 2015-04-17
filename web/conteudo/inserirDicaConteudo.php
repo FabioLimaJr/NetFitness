@@ -4,10 +4,28 @@ $fachada = Fachada::getInstance();
 $mensagem = "";
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    
     $camposPreenchidos = true;
-    
 }
+try {
+    //$pessoa="";
+if($_SESSION['tipoUsuario'] == "Nutricionista")
+{
+    // $pessoa = $_SESSION['Nutricionista'];
+     $listaDicas = $fachada->listarDicas($pessoa);
+     $_SESSION['listaDicas'] = $listaDicas;   
+}
+else if(($_SESSION['tipoUsuario'] == "Instrutor"))
+{
+    // $pessoa = $_SESSION['Instrutor'];
+     $listaDicas = $fachada->listarDicas($pessoa);
+     $_SESSION['listaDicas'] = $listaDicas;
+}
+    
+    
+} catch (Exception $exc) {
+    echo $exc->getMessage();
+}
+
 ?>
 <h1 class="title">Pagina Usuário</h1>
 
@@ -58,28 +76,24 @@ if(!$camposPreenchidos){
                     $_POST['descricao'], 
                     $_POST['titulo']);
 
-    if(isset($_SESSION['Nutricionista'])){
+    if($_SESSION['tipoUsuario'] == "Nutricionista"){
         
         $_SESSION['Nutricionista'] = $pessoa; 
-        var_dump($_SESSION['Nutricionista']);
-        
         try{
-            $fachada->inserirDica($dica);
-            $mensagem = "Parabéns, a dica foi inserido com sucesso!";
+            $fachada->inserirDica($dica, $pessoa);
+            $mensagem = "Parabéns, a dica foi inserida com sucesso!";
             unset($_SESSION['Nutricionista']);
 
         }catch(Exception $exc){
                 $mensagem = $exc->getMessage();
         }
         
-    }else if (isset($_SESSION['Instrutor'])) {
+    }else if ($_SESSION['tipoUsuario'] == "Instrutor") {
         
         $_SESSION['Instrutor'] = $pessoa; 
-        var_dump($_SESSION['Instrutor']);
-        
         try{
-            $fachada->inserirDica($dica);
-            $mensagem = "Parabéns, a dica foi inserido com sucesso!";
+            $fachada->inserirDica($dica, $pessoa);
+            $mensagem = "Parabéns, a dica foi inserida com sucesso!";
             unset($_SESSION['Instrutor']);
 
         }catch(Exception $exc){
@@ -89,3 +103,6 @@ if(!$camposPreenchidos){
     
 }
 ?>
+    <h3>Mensagem</h3>
+    <p><?php echo $mensagem ?></p>
+    <?php include('componentes/footerOne.php') ?>

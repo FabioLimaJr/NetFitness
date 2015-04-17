@@ -9,17 +9,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 }
 
 try {
-    $pessoa="";
+    //$pessoa="";
 if($_SESSION['tipoUsuario'] == "Nutricionista")
 {
-     $pessoa = $_SESSION['Nutricionista'];
-     $listaDicas = $fachada->listarDicas($_SESSION['Nutricionista']);
+    // $pessoa = $_SESSION['Nutricionista'];
+     $listaDicas = $fachada->listarDicas($pessoa);
      $_SESSION['listaDicas'] = $listaDicas;   
 }
 else if(($_SESSION['tipoUsuario'] == "Instrutor"))
 {
-     $pessoa = $_SESSION['Instrutor'];
-     $listaDicas = $fachada->listarDicas($_SESSION['Instrutor']);
+    // $pessoa = $_SESSION['Instrutor'];
+     $listaDicas = $fachada->listarDicas($pessoa);
      $_SESSION['listaDicas'] = $listaDicas;
 }
     

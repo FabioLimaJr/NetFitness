@@ -15,7 +15,7 @@ class RepositorioDica extends Conexao implements IRepositorioDica{
         parent::__construct();
     }
  
-    public function inserir($dica) {
+    public function inserir($dica, $pessoa) {
         
         $sql = " USE " . $this->getNomeBanco();
         
@@ -26,8 +26,25 @@ class RepositorioDica extends Conexao implements IRepositorioDica{
             $sql.= $dica->getDescricao(). "','";
             $sql.= $dica->getTitulo(). "')";
             
-            if(mysqli_query($this->getConexao(), $sql)){
-              //  $this->fecharConexao();
+            if(mysqli_query($this->getConexao(), $sql))
+            {  
+                $tabela = "";
+                
+              if(get_class($pessoa) == "Nutricionista")
+              {
+                  $tabela = "nutricionistadica";
+              }else{
+                  $tabela = "instrutordica";
+              }
+                $id = mysqli_insert_id($this->getConexao());
+                
+                    $sql = "INSERT INTO ".$tabela." VALUES('".$pessoa->getIdPessoa()."','".$id."')";
+                                                                  
+                    if(!mysqli_query($this->getConexao(), $sql)){
+                        throw new Exception(Excecoes::inserirObjeto("Relação entre ".get_class($pessoa)." e Dica: ".  mysqli_error($this->getConexao())));
+                    }
+                
+               
             }else{
                 throw new Exception(Excecoes::inserirObjeto("Dica: ". mysqli_error($this->getConexao())));
             }
