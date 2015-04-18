@@ -92,4 +92,11 @@ interface IFachada {
     //Musica
     public function listarMusicas($fetchType);
     public function detalharMusica($musica, $fetchType);
+    
+    //Noticia
+    public function inserirNoticia($noticia);
+    public function alterarNoticia($noticia);    
+    public function excluirNoticia($noticia);
+    public function listarNoticia($secretaria,$fetchType);
+    public function detalharNoticia($noticia,$fetchType);
 }

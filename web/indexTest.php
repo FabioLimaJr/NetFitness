@@ -15,6 +15,7 @@
  include('../classesBasicas/Opiniao.php');
  include('../classesBasicas/Alimento.php');
  include('../classesBasicas/Nutricionista.php');
+ include('../classesBasicas/Noticia.php');
  
  include('../expressoesRegulares/ExpressoesRegulares.php');
  include('../excecoes/Excecoes.php');
@@ -245,10 +246,8 @@ try {
 /*} catch (Exception $exc) {
     echo $exc->getMessage();
 }*/
- 
+ /*
  // Teste inserir treino
- 
- 
  $fachada = Fachada::getInstance();
  
  $exercicios = $fachada->listarExercicios();
@@ -270,5 +269,25 @@ try {
  $fachada->inserirTreino($treino);
  
  echo 'Treino inserido com sucesso!!';
- 
- 
+ */
+ //Teste Incluir Noticia
+ /*
+    private $idNoticia;
+    private $titulo;
+    private $descricao;
+    private $secretaria;
+    */
+ $secretaria  = new Secretaria(6);
+ $noticia = new Noticia(null,'teste titulo','teste descricao',$secretaria);
+$fachada = Fachada::getInstance();
+try {
+    $fachada->inserirNoticia($noticia);
+    //$listaDicas = $fachada->listarDica();*/
+    //var_dump($listaDicas);
+    //echo 'dica incluida';
+    //echo 'dica alterada';
+    //echo 'dica excluida';
+} catch (Exception $exc) {
+    echo $exc->getMessage();
+}
+?>

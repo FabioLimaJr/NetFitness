@@ -23,6 +23,7 @@ include($serverPath . 'controlador/ControladorPagamento.php');
 include($serverPath . 'controlador/ControladorExameFisico.php');
 include($serverPath . 'controlador/ControladorDica.php');
 include($serverPath . 'controlador/ControladorMusica.php');
+include($serverPath . 'controlador/ControladorNoticia.php');
 
 class Fachada implements IFachada 
 {
@@ -41,6 +42,7 @@ class Fachada implements IFachada
     private $controladorExameFisico;
     private $controladorDica;
     private $controladorMusica;
+    private $controladorNoticia;
     
     private static $instance = null;
 
@@ -60,6 +62,7 @@ class Fachada implements IFachada
         $this->controladorExameFisico = new ControladorExameFisico();
         $this->controladorDica = new controladorDica();
         $this->controladorMusica = new ControladorMusica();
+        $this->controladorNoticia = new ControladorNoticia();
     }
 
 //self:: serve para chamar um atributo statico da propria classe
@@ -360,5 +363,25 @@ class Fachada implements IFachada
     public function listarMusicas($fetchType)
     {
         return $this->controladorMusica->listar($fetchType);
+    }
+    
+    public function inserirNoticia($noticia) {
+        return $this->controladorNoticia->inserir($noticia);
+    }
+
+    public function alterarNoticia($noticia) {
+        return $this->controladorNoticia->alterar($noticia);
+    }
+
+    public function excluirNoticia($noticia) {
+        return $this->controladorNoticia->excluir($noticia);
+    }
+    
+    public function listarNoticia($secretaria,$fetchType) {
+        return $this->controladorNoticia->listar($secretaria,$fetchType);
+    }
+
+    public function detalharNoticia($noticia, $fetchType) {
+        return $this->controladorNoticia->detalhar($noticia, $fetchType);
     }
 }
