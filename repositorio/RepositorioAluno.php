@@ -18,38 +18,44 @@ class RepositorioAluno extends RepositorioPessoa implements IRepositorioAluno
        parent::__construct();
     }
    
-     public function inserir($aluno){
-        
-        $idReturn = -1;
+     public function inserir($aluno)
+     {       
         $sql = "USE " . $this->getNomeBanco();
+        
         if (@$this->getConexao()->query($sql) === TRUE) 
         {
+            $this->getConexao()->autocommit(FALSE); 
+            
             if ($this->inserirPessoa($aluno)) 
             {
+                $arrayData = explode("-", $aluno->getDataNascimento());
+                $dataSqlFormat = $arrayData[2]."-".$arrayData[1]."-".$arrayData[0];
+                
                 $id = mysqli_insert_id($this->getConexao());
                 $idReturn = $id;
                 $sql = "INSERT INTO aluno values('";
                 $sql.= $id ."','";
                 $sql.= $aluno->getSexo()."','";
-                $sql.= $aluno->getDataNascimento()."',";  
-                $sql.= "'foto que falta','"; //foto
+                $sql.= $dataSqlFormat."','";  
+                $sql.= $aluno->getFoto()."','";
                 $sql.= $aluno->getSecretaria()->getIdSecretaria()."',";  
                 $sql.= "null)"; //musica
                 
                 if (mysqli_query($this->getConexao(), $sql)) 
                 {
-                    //$this->fecharConexao();
+                    $this->getConexao()->commit();
                     $aluno->setIdAluno($idReturn);
                     return $aluno;
-                    //return $idReturn;
                 } 
                 else 
                 {
+                    $this->getConexao()->rollback();
                     throw new Exception(Excecoes::inserirObjeto("Aluno: ".mysqli_error($this->getConexao())));
                 }
             } 
             else 
             {
+                $this->getConexao()->rollback();
                 throw new Exception(Excecoes::inserirObjeto("Aluno: ".mysqli_error($this->getConexao())));
             }
         } 

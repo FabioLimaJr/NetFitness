@@ -44,7 +44,7 @@
 				month:<?php echo date("m")?>,
 				year:<?php echo date("Y")?>
 			},
-			yearsRange:[2015,2050],
+			yearsRange:[1900,2050],
 			limitToToday:false,
 			cellColorScheme:"aqua",
 			weekStartDay:0

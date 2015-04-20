@@ -50,6 +50,7 @@ class Aluno extends Pessoa
         $this->setMusica($musica);
         $this->setListaPagamentos($listaPagamentos);
         $this->setListaTreinos($listaTreinos);
+        $this->setFoto($foto);
         
     }
     

@@ -41,7 +41,7 @@
     {   
         ?> 
          <div class="form-container" style="margin-bottom:50px">
-         <form class="forms" action="inserirAluno.php" method="post" >
+         <form class="forms" enctype="multipart/form-data" action="inserirAluno.php" method="post" >
          <fieldset>
            <ol>
 
@@ -75,18 +75,16 @@
                <label>Email</label>
                <input type="text" name="email" value="<?php if(isset($aluno)) echo $aluno->getEmail() ?>" class="text-input" style="width: 300px">
              </li>
-
-
-
+             
              <li class="form-row text-input-row">
-               <label>Dt Nascimento</label>
-               <input type="text" name="dataNascimento" value="<?php if(isset($aluno)) echo $aluno->getdataNascimento() ?>" class="text-input" style="width: 300px">
+                 <label>Dt Nascimento</label>
+                 <input type="text" id="dataPicked" name="dataNascimento" maxlength="10" name="data" value="" class="text-input" style="width: 300px">
              </li>
              
              
              <li class="form-row text-input-row">
                <label>Foto</label>
-               <input type="text" name="foto" value="<?php if(isset($aluno)) echo $aluno->getFoto() ?>" class="text-input" style="width: 300px">
+               <input type="file" name="foto" value="<?php if(isset($aluno)) echo $aluno->getFoto() ?>" class="text-input" style="width: 300px">
              </li>
 
               <li class="form-row text-input-row">
@@ -112,24 +110,49 @@
     } 
     else
     {
-
+             $sufixo_foto = substr($_FILES['foto']['name'], -4);
+             $nome_foto = substr($_FILES['foto']['name'],0,-4)."_".substr(md5(rand()), 0, 5);
+             $nome_foto = str_replace(" ", "_", $nome_foto);
+             
              $aluno = new Aluno(null, $_POST['nome'], $_POST['cpf'], 
                                 $_POST['endereco'], $_POST['senha'], 
                                 $_POST['telefone'], $_POST['login'], 
                                 $_POST['email'],$_POST['sexo'], 
                                 $_POST['dataNascimento'], $secretaria, 
                                 null/*$musica*/, null/*$dieta*/, null/*$listaPagamentos*/, 
-                                null/*$listaTreinos*/, $_POST['foto'] );
+                                null/*$listaTreinos*/, $nome_foto.$sufixo_foto );
 
              $_SESSION['Aluno'] = $aluno; 
-            // var_dump($_SESSION['Aluno']);
 
              try
              {
-                $fachada->inserirAluno($aluno);
-                $mensagem = "Parabéns, o aluno ".$_POST['nome']." foi incluido com sucesso!";
-                unset($_SESSION['Aluno']);
-
+                
+                $fotoUpload = new Upload($_FILES['foto'],'pt_BR'); 
+                
+                if ($fotoUpload->uploaded) 
+                {
+                    $fotoUpload->file_new_name_body   = $nome_foto;
+                    $fotoUpload->image_resize         = true;
+                    $fotoUpload->image_x              = 300;
+                    $fotoUpload->image_ratio_y        = true;
+                    $fotoUpload->process(IMAGE_PATH_ALUNOS);
+                    
+                    if ($fotoUpload->processed) 
+                    {
+                       $fachada->inserirAluno($aluno);
+                       $mensagem = "Parabéns, o aluno ".$_POST['nome']." foi incluido com sucesso!";
+                       unset($_SESSION['Aluno']);
+                    } 
+                    else 
+                    {
+                      $mensagem = $fotoUpload->error;
+                    }
+                }
+                else 
+                {
+                  $mensagem = $fotoUpload->error;
+                }
+                 
              }
              catch(Exception $exc)
              {

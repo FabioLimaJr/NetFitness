@@ -4,6 +4,8 @@ include ('../classesBasicas/Coordenador.php');
 include ('../classesBasicas/Nutricionista.php');
 include ('../classesBasicas/Instrutor.php');
 include ('../classesBasicas/Secretaria.php');
+include ('../ferramentas/upload/Upload.php');
+
 session_start();
 
 if(isset($_SESSION['Secretaria']))
@@ -16,7 +18,8 @@ else
 }
 include ('../expressoesRegulares/ExpressoesRegulares.php');
 include ('../fachada/Fachada.php');
-include ('componentes/header.php');
+include ('componentes/headerData.php');
+
 ?>
 
 

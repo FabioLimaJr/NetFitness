@@ -9,7 +9,6 @@ include ($serverPath.'repositorio/RepositorioAluno.php');
 
 class ControladorAluno 
 {
-    //put your code here
     private $repositorioAluno;
     
     public function __construct() 
@@ -29,9 +28,16 @@ class ControladorAluno
     public function inserir($aluno){
          
         if(ExpressoesRegulares::validarTodosOsCampos($aluno)){
-            return $this->getRepositorioAluno()->inserir($aluno);
+            if(!ExpressoesRegulares::conferirDataNascimento($aluno->getDataNascimento()))
+            {
+                throw new Exception(Excecoes::dataInvalida("Aluno"));
+            }
+            else 
+            {
+                $this->getRepositorioAluno()->inserir($aluno);
+            }
         }else{
-            throw Excecoes::inserirObjeto($aluno);
+           throw Excecoes::inserirObjeto($aluno);
         }
     }
     

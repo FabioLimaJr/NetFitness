@@ -164,6 +164,21 @@ class  ExpressoesRegulares {
                 
     }
     
+    public static function conferirDataNascimento($data)
+    {
+        $arrayData = explode("-", $data);
+        
+        if(checkdate($arrayData[1], $arrayData[0], $arrayData[2]))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+                
+    }
+    
     public static function conferirNome($nome){                    
         //$regularNome = "(^[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$";        
         //$regularNome = "^[aA-zZ]+((\s[aA-zZ]+)+)?$";
