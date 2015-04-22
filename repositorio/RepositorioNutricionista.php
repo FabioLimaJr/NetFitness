@@ -22,6 +22,8 @@ class RepositorioNutricionista extends RepositorioPessoa implements IRepositorio
         $sql = "USE " . $this->getNomeBanco();
         if (@$this->getConexao()->query($sql) === TRUE) 
         {
+            $this->getConexao()->autocommit(FALSE); 
+            
             if ($this->inserirPessoa($nutricionista)) 
             {
                 $id = mysqli_insert_id($this->getConexao());
@@ -32,18 +34,20 @@ class RepositorioNutricionista extends RepositorioPessoa implements IRepositorio
                 $sql.= $nutricionista->getCoordenador()->getIdCoordenador() . "')";
                 if (mysqli_query($this->getConexao(), $sql)) 
                 {
-                   // $this->fecharConexao();
+                    $this->getConexao()->commit();
                     $nutricionista->setIdNutricionista($idReturn);
                     return $nutricionista;
                     //return $idReturn;
                 } 
                 else 
                 {
+                    $this->getConexao()->rollback();
                     throw new Exception(Excecoes::inserirObjeto("Nutricionista: ".mysqli_error($this->getConexao())));
                 }
             } 
             else 
             {
+                $this->getConexao()->rollback();
                 throw new Exception(Excecoes::inserirObjeto("Nutricionista: ".mysqli_error($this->getConexao())));
             }
         } 
