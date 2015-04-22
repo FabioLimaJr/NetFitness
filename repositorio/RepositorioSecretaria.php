@@ -23,6 +23,8 @@ class RepositorioSecretaria extends RepositorioPessoa implements IRepositorioSec
         $sql = "USE " . $this->getNomeBanco();
         
         if(@$this->getConexao()->query($sql) === TRUE){
+             
+            $this->getConexao()->autocommit(FALSE); 
             
             if($this->inserirPessoa($secretaria)){
                 
@@ -36,15 +38,18 @@ class RepositorioSecretaria extends RepositorioPessoa implements IRepositorioSec
                 
                 if( mysqli_query($this->getConexao(), $sql)){
                     
-                    //$this->fecharConexao();
-                    return TRUE;
+                    $this->getConexao()->commit();
+                     $secretaria->setIdSecretaria($idReturn);
+                    return $secretaria;
                     
                 }else{
+                    $this->getConexao()->rollback();
                     throw new Exception(Excecoes::inserirObjeto("Secretaria: ".mysqli_error($this->getConexao())));
                     
                 }
             }else 
                 {
+                    $this->getConexao()->rollback();
                     throw new Exception(Excecoes::inserirObjeto("Secretaria: ".mysqli_error($this->getConexao())));
                 }
         }else{
