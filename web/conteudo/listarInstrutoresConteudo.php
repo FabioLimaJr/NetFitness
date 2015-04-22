@@ -3,11 +3,11 @@
 $fachada = new Fachada();
 $fachada = Fachada::getInstance();
 $mensagem ="";
-$listaSecretarias = array();
+$listaInstrutores = array();
 
 try
 {
-    $listaSecretarias = $fachada->listarSecretarias(LAZY);
+    $listaInstrutores = $fachada->listarInstrutores(LAZY);
 } 
 catch (Exception $exc)
 {
@@ -16,7 +16,7 @@ catch (Exception $exc)
     
 ?>
 
-<h1 class="title">Lista de Secretarias</h1>
+<h1 class="title">Lista de Instrutores</h1>
 <div class="line"></div>
     
 Telefone:<?php echo $coordenador->getTelefone() ?> | Email:<?php echo $coordenador->getEmail() ?> | Endereço:<?php echo $coordenador->getEndereco() ?>
@@ -41,11 +41,11 @@ Telefone:<?php echo $coordenador->getTelefone() ?> | Email:<?php echo $coordenad
                       
                     </tr>
                     
-                    <?php foreach ($listaSecretarias as $secretaria){ ?>
+                    <?php foreach ($listaInstrutores as $instrutor){ ?>
                     <tr>
-                        <td><?php echo $secretaria->getNome() ?></td> 
-                        <td><?php echo $secretaria->getEmail() ?></td>  
-                        <td><?php echo $secretaria->getTelefone() ?> </td>
+                        <td><?php echo $instrutor->getNome() ?></td> 
+                        <td><?php echo $instrutor->getEmail() ?></td>  
+                        <td><?php echo $instrutor->getTelefone() ?> </td>
                     </tr>
                   
                     <?php } ?>
@@ -55,3 +55,4 @@ Telefone:<?php echo $coordenador->getTelefone() ?> | Email:<?php echo $coordenad
 
     
     <?php include('componentes/footerOne.php') ?>
+
