@@ -121,6 +121,7 @@ Nome: <?php echo $secretaria->getNome() ?> | Telefone:<?php echo $secretaria->ge
              $noticiaAlterada = new Noticia($_SESSION['noticiaRetornada']->getIdNoticia());
              $noticiaAlterada->setTitulo($_POST['titulo']);
              $noticiaAlterada->setDescricao($_POST['descricao']);
+             $noticiaAlterada->setSecretaria($_SESSION['Secretaria']);
              
              try{
                  
