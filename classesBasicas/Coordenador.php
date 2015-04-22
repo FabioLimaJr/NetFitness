@@ -34,7 +34,8 @@ class Coordenador extends Pessoa {
     function __construct11($idCoordenador, $listaInstrutores, $listaSecretarias, $listaNutricionistas, 
                          $nome, $cpf, $endereco, $senha, $telefone, $email, $login) 
     {
-        parent::__construct($idCoordenador, $nome, $cpf, $endereco, $senha, $telefone, $email, $login);
+        // $idPessoa, $nome, $cpf, $endereco, $senha, $telefone, $login,$email
+        parent::__construct($idCoordenador, $nome, $cpf, $endereco, $senha, $telefone, $login, $email);
        
         $this->setIdCoordenador($idCoordenador);
         $this->setListaInstrutores($listaInstrutores);
