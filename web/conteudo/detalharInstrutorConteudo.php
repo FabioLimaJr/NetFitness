@@ -12,7 +12,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
 try
 {
-    $listaSecretarias = $fachada->listarSecretarias(LAZY);
+    $listaInstrutores = $fachada->listarInstrutores(LAZY);
 } 
 catch (Exception $exc)
 {
@@ -21,7 +21,7 @@ catch (Exception $exc)
     
 ?>
 
-<h1 class="title">Detalhar Secretaria</h1>
+<h1 class="title">Detalhar Instrutor</h1>
   <div class="line"></div>
     
         Telefone:<?php echo $coordenador->getTelefone() ?> | Email:<?php echo $coordenador->getEmail() ?> | Endereço:<?php echo $coordenador->getEndereco() ?>
@@ -39,23 +39,23 @@ catch (Exception $exc)
     <?php if(!$camposPreenchidos) {?>
     
     <div class="form-container" style="margin-bottom:50px">
-      <form class="forms" action="detalharSecretaria.php" method="post" >
+      <form class="forms" action="detalharInstrutor.php" method="post" >
       <fieldset>
       
        <ol>
             <li class="form-row text-input-row">     
                <table style="width:100%;margin-bottom:50px">
                          <tr>
-                           <th>Nome Secretaria</th> 
+                           <th>Nome Instrutor</th> 
                            <th>CPF</th>
                            <th>Selecionar</th>
                          </tr>
 
-                         <?php foreach ($listaSecretarias as $secretaria){ ?>
+                         <?php foreach ($listaInstrutores as $instrutor){ ?>
                          <tr>
-                             <td><?php echo $secretaria->getNome() ?></td> 
-                             <td><?php echo $secretaria->getCpf() ?></td>
-                             <td><input type="radio" name="idSecretaria" value="<?php echo $secretaria->getIdSecretaria() ?>"></td>
+                             <td><?php echo $instrutor->getNome() ?></td> 
+                             <td><?php echo $instrutor->getCpf() ?></td>
+                             <td><input type="radio" name="idInstrutor" value="<?php echo $instrutor->getIdInstrutor() ?>"></td>
                          </tr>
 
                          <?php 
@@ -81,9 +81,8 @@ catch (Exception $exc)
                 
                 try{
                     
-                    $secretaria = new Secretaria($_POST['idSecretaria']);
-                    $secretariaRetornada = $fachada->detalharSecretaria($secretaria, LAZY);
-                    //echo $secretaria->getIdSecretaria();
+                    $instrutor = new Instrutor($_POST['idInstrutor']);
+                    $instrutorRetornado = $fachada->detalharInstrutor($instrutor, LAZY);
                     
                     ?>
                     
@@ -91,22 +90,21 @@ catch (Exception $exc)
         
                         <table style="width:100%">
                                     <tr>
-                                        <td>Nome da Secretaria</td>
+                                        <td>Nome do Instrutor</td>
                                         <td>CPF</td>
                                         <td>Endereço</td>
                                         <td>Telefone</td>
                                         <td>Login</td>
                                         <td>Email</td>
-                                      
                                     </tr>
                                   
                                     <tr>
-                                        <td><?php echo $secretariaRetornada->getNome() ?></td> 
-                                        <td><?php echo $secretariaRetornada->getCpf() ?></td>
-                                        <td><?php echo $secretariaRetornada->getEndereco() ?></td>
-                                        <td><?php echo $secretariaRetornada->getTelefone() ?></td>
-                                        <td><?php echo $secretariaRetornada->getLogin() ?></td>
-                                        <td><?php echo $secretariaRetornada->getEmail() ?></td>
+                                        <td><?php echo $instrutorRetornado->getNome() ?></td> 
+                                        <td><?php echo $instrutorRetornado->getCpf() ?></td>
+                                        <td><?php echo $instrutorRetornado->getEndereco() ?></td>
+                                        <td><?php echo $instrutorRetornado->getTelefone() ?></td>
+                                        <td><?php echo $instrutorRetornado->getLogin() ?></td>
+                                        <td><?php echo $instrutorRetornado->getEmail() ?></td>
                                     </tr>
 
                         </table>
@@ -123,7 +121,7 @@ catch (Exception $exc)
                 
             }else{
                 
-                $mensagem = "Não foi selecionada a secretaria";
+                $mensagem = "Não foi selecionada o instrutor";
                 ?> <h3>Mensagem</h3>
                 <p><?php echo $mensagem ?></p> <?php
             }
