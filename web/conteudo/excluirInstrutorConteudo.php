@@ -13,7 +13,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
 try
 {
-    $listaSecretarias = $fachada->listarSecretarias(LAZY);
+    $listaInstrutores = $fachada->listarInstrutores(LAZY);
     
 } 
 catch (Exception $exc)
@@ -23,7 +23,7 @@ catch (Exception $exc)
   
 ?>
 
-<h1 class="title">Excluir Secretaria</h1>
+<h1 class="title">Excluir Instrutor</h1>
 <div class="line"></div>
 Telefone:<?php echo $coordenador->getTelefone() ?> | Email:<?php echo $coordenador->getEmail() ?> | Endereço:<?php echo $coordenador->getEndereco() ?>
 <div class="intro" style="margin-bottom:50px"></div>
@@ -40,25 +40,25 @@ Telefone:<?php echo $coordenador->getTelefone() ?> | Email:<?php echo $coordenad
  
         <div class="form-container" style="margin-bottom:50px">
          
-            <form class="forms" action="excluirSecretaria.php" method="post" >
+            <form class="forms" action="excluirInstrutor.php" method="post" >
          <fieldset>
             <ol>
 
 
              <li class="form-row text-input-row">
-               <label>Secretarias</label>
+               <label>Instrutores</label>
                <table style="width:100%">
                     <tr>
-                      <th>Nome da Secretaria</th> 
+                      <th>Nome do Instrutor</th> 
                       <th>CPF</th>
                       <th>Selecionar</th>
                     </tr>
                     
-                    <?php foreach ($listaSecretarias as $secretaria){ ?>
+                    <?php foreach ($listaInstrutores as $instrutor){ ?>
                     <tr>
-                        <td><?php echo $secretaria->getNome() ?></td> 
-                        <td><?php echo $secretaria->getCpf() ?></td>  
-                        <td><input type="radio" name="idSecretaria" value="<?php echo $secretaria->getIdSecretaria() ?>"></td>  
+                        <td><?php echo $instrutor->getNome() ?></td> 
+                        <td><?php echo $instrutor->getCpf() ?></td>  
+                        <td><input type="radio" name="idInstrutor" value="<?php echo $instrutor->getIdInstrutor() ?>"></td>  
                     </tr>
                     <?php } ?>
                     
@@ -81,9 +81,9 @@ Telefone:<?php echo $coordenador->getTelefone() ?> | Email:<?php echo $coordenad
         
         try{
             
-            $secretaria = new Secretaria($_POST['idSecretaria']);
-            $fachada->excluirSecretaria($secretaria);
-            $mensagem = "A Secretaria foi excluida com sucesso!!";
+            $instrutor = new Instrutor($_POST['idInstrutor']);
+            $fachada->excluirInstrutor($instrutor);
+            $mensagem = "O(A) Instrutor(a) foi excluido(a) com sucesso!!";
             
         } catch (Exception $ex) {
 

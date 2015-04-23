@@ -44,7 +44,7 @@ class RepositorioNoticia extends RepositorioGenerico implements IRepositorioNoti
 
             $sql = "UPDATE noticia SET titulo = '".$noticia->getTitulo();
             $sql.= "', descricao = '".$noticia->getDescricao();
-            $sql.= "'  WHERE IdNoticia = '".$noticia->getIdNoticia()." and ". "'idSecretaria= '".$noticia->getSecretaria()->getIdSecretaria();
+            $sql.= "'  WHERE IdNoticia = '".$noticia->getIdNoticia()."' and idSecretaria= '".$noticia->getSecretaria()->getIdSecretaria()."'";
             
             if(mysqli_query($this->getConexao(), $sql)){
                 //$this->fecharConexao();

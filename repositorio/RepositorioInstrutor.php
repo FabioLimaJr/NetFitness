@@ -33,6 +33,8 @@ class RepositorioInstrutor extends RepositorioPessoa implements IRepositorioInst
 
         if (@$this->getConexao()->query($sql) === TRUE) 
         {
+             $this->getConexao()->autocommit(FALSE); 
+             
             if ($this->inserirPessoa($instrutor)) 
             {
                 $id = mysqli_insert_id($this->getConexao());
@@ -45,18 +47,20 @@ class RepositorioInstrutor extends RepositorioPessoa implements IRepositorioInst
 
                 if (mysqli_query($this->getConexao(), $sql)) 
                 {
-                   // $this->fecharConexao();
+                   $this->getConexao()->commit();                    
                     $instrutor->setIdInstrutor($idReturn);
                     return $instrutor;
                     //return $idReturn;
                 } 
                 else 
                 {
+                    $this->getConexao()->rollback();
                     throw new Exception(Excecoes::inserirObjeto("Instrutor: ".mysqli_error($this->getConexao())));
                 }
             } 
             else 
             {
+                $this->getConexao()->rollback();
                 throw new Exception(Excecoes::inserirObjeto("Instrutor: ".mysqli_error($this->getConexao())));
             }
         } 
