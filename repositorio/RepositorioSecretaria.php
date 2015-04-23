@@ -60,8 +60,11 @@ class RepositorioSecretaria extends RepositorioPessoa implements IRepositorioSec
         
         if(@$this->getConexao()->query($sql) === TRUE){
             
+            $this->getConexao()->autocommit(FALSE);
+            
             if(!$this->alterarPessoa($secretaria)){
                 
+                $this->getConexao()->rollback();
                 throw new Exception(Excecoes::alterarObjeto("Secretaria: " . mysqli_error($this->getConexao())));
                 
             }else{
@@ -69,12 +72,13 @@ class RepositorioSecretaria extends RepositorioPessoa implements IRepositorioSec
                 $sql = "UPDATE secretaria SET idCoordenador=" . $secretaria->getCoordenador()->getIdCoordenador();
                 $sql.= " WHERE idSecretaria=" . $secretaria->getIdSecretaria();
                 
-                if(!mysqli_query($this->getConexao(), $sql)){
+                if(mysqli_query($this->getConexao(), $sql)){
                     
-                    throw new Exception(Excecoes::alterarObjeto("Secretaria: " . mysqli_error($this->getConexao())));
+                    $this->getConexao()->commit();
+                    
                 }else{
-                    
-                    //$this->fecharConexao();
+                  $this->getConexao()->rollback();
+                  throw new Exception(Excecoes::alterarObjeto("Secretaria: " . mysqli_error($this->getConexao())));
                 }
             }
         }else{

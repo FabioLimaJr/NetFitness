@@ -79,26 +79,32 @@ class RepositorioInstrutor extends RepositorioPessoa implements IRepositorioInst
         if (@$this->getConexao()->query($sql) === TRUE) 
         {
 
+            $this->getConexao()->autocommit(FALSE); 
+            
             if (!$this->alterarPessoa($instrutor)) 
             {
+                $this->getConexao()->rollback();
                 throw new Exception(Excecoes::alterarObjeto("Instrutor: " . mysqli_error($this->getConexao())));
             } 
             else 
             {
 
-                $sql = "UPDATE instrutor SET idCoordenador='" . $instrutor->getCoordenador()->getIdCoordenador();
+                $this->getConexao()->commit();
+                
+                /*$sql = "UPDATE instrutor SET idCoordenador='" . $instrutor->getCoordenador()->getIdCoordenador();
                 $sql.= "' WHERE idInstrutor='" . $instrutor->getIdInstrutor() . "'";
                 //falta alterar as demais listas atreladas se for preciso
 
 
-                if (!mysqli_query($this->getConexao(), $sql)) 
+                if (mysqli_query($this->getConexao(), $sql)) 
                 {
+                     $this->getConexao()->commit();
+                }
+                else                    
+                {
+                    $this->getConexao()->rollback();
                     throw new Exception(Excecoes::alterarObjeto("Instrutor: " . mysqli_error($this->getConexao())));
-                }
-                else
-                {
-                    //$this->fecharConexao();
-                }
+                }*/
             }
         } 
         else 
