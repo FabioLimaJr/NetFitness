@@ -60,7 +60,7 @@ class RepositorioPessoa extends RepositorioGenerico implements IRepositorioPesso
         
         while ($row = mysqli_fetch_array($result)) 
         {
-            $pessoaReturn = new Pessoa($row['idPessoa'], $row['nome'], $row['cpf'], $row['cpf'], 
+            $pessoaReturn = new Pessoa($row['idPessoa'], $row['nome'], $row['cpf'], $row['endereco'], 
                                  $row['senha'], $row['telefone'], $row['login'], $row['email']);
         }        
         
