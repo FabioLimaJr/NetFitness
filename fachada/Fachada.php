@@ -355,6 +355,18 @@ class Fachada implements IFachada
         return $this->controladorDica->detalhar($dica);
     }
     
+    public function inserirMusica($musica) {
+        $this->controladorMusica->inserir($musica);        
+    }
+    
+    public function alterarMusica($musica) {
+        $this->controladorMusica->alterar($musica);
+    }
+    
+    public function excluirMusica($musica) {
+        $this->controladorMusica->excluir($musica);
+    }
+
     public function detalharMusica($musica, $fetchType)
     {
         return $this->controladorMusica->detalhar($musica, $fetchType);

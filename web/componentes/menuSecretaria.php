@@ -14,8 +14,8 @@
         </li>
         <li><a href="#">Musica</a>
           <ul>
-            <li><a href="#">A</a></li>
-            <li><a href="#">B</a></li>
+            <li><a href="inserirMusica.php">Inserir</a></li>
+            <li><a href="alterarMusica.php">Alterar</a></li>
             <li><a href="#">C</a></li>
             <li><a href="#">D</a></li>
           </ul>

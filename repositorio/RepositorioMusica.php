@@ -12,23 +12,69 @@ include_once($serverPath.'conexao/Conexao.php');
 
 class RepositorioMusica extends RepositorioGenerico implements IRepositorioMusica
 {
+    function __construct() {
+        parent::__construct();
+    }
     
     public function inserir($musica)
     {
+        $sql = " USE " . $this->getNomeBanco();
         
+        if($this->getConexao()->query($sql) === true){
+            
+            $sql = "INSERT INTO musica VALUES(NULL,'";
+            $sql.= $musica->getTitulo(). "','";
+            $sql.= $musica->getSecretaria()->getIdSecretaria(). "')"; 
+            
+            if(mysqli_query($this->getConexao(), $sql)){
+                //$this->fecharConexao();
+            }else{
+                throw new Exception(Excecoes::inserirObjeto("Musica: ". mysqli_error($this->getConexao())));
+            }
+            
+        }else{
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco()."(".$this->getConexao()->erro.")"));
+        }        
     }
     
     public function alterar($musica)
     {
+        $sql = " USE " . $this->getNomeBanco();
         
+        if($this->getConexao()->query($sql) === true){
+            
+            $sql = "UPDATE musica SET titulo = '".$musica->getTitulo();
+            $sql.= "'  WHERE idMusica = '".$musica->getIdmusica()."'";
+            
+            if(mysqli_query($this->getConexao(), $sql)){
+               // $this->fecharConexao();
+            }else{
+                throw new Exception(Excecoes::alterarObjeto("Musica: ". mysqli_error($this->getConexao())));
+            }
+        
+        }else{
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco()."(".$this->getConexao()->erro.")"));
+        }       
     }
 
     public function excluir($musica)
     {
+        $sql = "USE " . $this->getNomeBanco();
         
-    }
-
-    
+        if($this->getConexao()->query($sql) === true){
+            
+            $sql = "DELETE FROM musica WHERE idMusica = '".$musica->getIdMusica()."'";
+            
+            if(mysqli_query($this->getConexao(), $sql)){
+                //$this->fecharConexao();
+            }else {
+                throw new Exception(Excecoes::excluirObjeto("musica: ". mysqli_error($this->getConexao())));
+            }
+        
+        }else{
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco()."(".$this->getConexao()->erro.")"));
+        }
+    }  
 
     public function listar($fetchType)
     {
