@@ -69,6 +69,11 @@ class ControladorAluno
     {
         return $this->getRepositorioAluno()->logar($aluno);
     }
+    
+    public function conferirLoginSenha($aluno)
+    {
+        return $this->getRepositorioAluno()->conferirLoginSenha($aluno);
+    }
  
 }
 ?>

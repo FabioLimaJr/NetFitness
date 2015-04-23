@@ -139,9 +139,16 @@
                     
                     if ($fotoUpload->processed) 
                     {
-                        $fachada->inserirAluno($aluno);
-                        $mensagem = "Parabéns, o aluno ".$_POST['nome']." foi incluido com sucesso!";
-                        unset($_SESSION['Aluno']);
+                        if(!$fachada->conferirLoginsenha($aluno))
+                        {
+                            $fachada->inserirAluno($aluno);
+                            $mensagem = "Parabéns, o aluno ".$_POST['nome']." foi incluido com sucesso!";
+                            unset($_SESSION['Aluno']);
+                        }
+                        else
+                        {
+                            throw new Exception(Excecoes::loginSenhaInvalidos());
+                        }
                         
                         $mail = new PHPMailer;
                         $mail->setLanguage('pt');

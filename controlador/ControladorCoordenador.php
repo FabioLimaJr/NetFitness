@@ -42,4 +42,9 @@ class controladorCoordenador
     {
         return $this->getRepositorioCoordenador()->detalhar($coordenador, $fetchType);
     }
+    
+    public function conferirLoginSenha($coordenador)
+    {
+        return $this->getRepositorioCoordenador()->conferirLoginSenha($coordenador);
+    }
 }

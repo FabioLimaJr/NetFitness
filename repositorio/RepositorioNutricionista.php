@@ -86,29 +86,13 @@ class RepositorioNutricionista extends RepositorioPessoa implements IRepositorio
     public function excluir($nutricionista) 
     {
         $sql = "USE " . $this->getNomeBanco();
-        if (@$this->getConexao()->query($sql) === TRUE) 
-        {
-            $id = $nutricionista->getIdNutricionista();
+        if (@$this->getConexao()->query($sql) === TRUE){
             
-            $sql = "DELETE FROM nutricionista where idNutricionista = '".$id."'";
-            
-            if (!mysqli_query($this->getConexao(), $sql)) 
-            {
-                throw new Exception(Excecoes::excluirObjetosRelacionados("Nutricionista: " . mysqli_error($this->getConexao())));
-            }
-            $sql = "DELETE FROM pessoa WHERE idPessoa = '" . $id . "'";
-            if (!mysqli_query($this->getConexao(), $sql)) 
-            {
+            if (!$this->excluirPessoa($nutricionista)){
                 throw new Exception(Excecoes::excluirObjeto("Nutricionista: " . mysqli_error($this->getConexao())));
-            }
-            else 
-            {
-                //$this->fecharConexao();
-            }
-  
+            }  
         } 
-        else 
-        {
+        else{
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
         }
     }

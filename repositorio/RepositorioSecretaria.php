@@ -18,8 +18,6 @@ class RepositorioSecretaria extends RepositorioPessoa implements IRepositorioSec
 
         public function inserir($secretaria){
         
-        $idReturn = -1;
-        
         $sql = "USE " . $this->getNomeBanco();
         
         if(@$this->getConexao()->query($sql) === TRUE){
@@ -30,8 +28,7 @@ class RepositorioSecretaria extends RepositorioPessoa implements IRepositorioSec
                 
                 $id = mysqli_insert_id($this->getConexao());
                 $idReturn = $id;
-                //echo $id . "\n";
-                // INSERT INTO `secretaria`(`idSecretaria`, `idCoordenador`) VALUES ([value-1],[value-2])
+
                 $sql = "INSERT INTO secretaria(idSecretaria, idCoordenador) VALUES(";
                 $sql.= $id . ",";
                 $sql.= $secretaria->getCoordenador()->getIdCoordenador() . ")";
@@ -88,17 +85,13 @@ class RepositorioSecretaria extends RepositorioPessoa implements IRepositorioSec
     public function excluir($secretaria){
         
         $sql = "USE " . $this->getNomeBanco();
-        
-        if(@$this->getConexao()->query($sql) === TRUE){
+        if (@$this->getConexao()->query($sql) === TRUE){
             
-            $sql = "DELETE FROM pessoa WHERE pessoa.idPessoa = " . $secretaria->getIdSecretaria();
-            
-            if(!mysqli_query($this->getConexao(), $sql)){
+            if (!$this->excluirPessoa($secretaria)){
                 throw new Exception(Excecoes::excluirObjeto("Secretaria: " . mysqli_error($this->getConexao())));
-            }else{
-                //$this->fecharConexao();
-            }
-        }else{
+            }  
+        } 
+        else{
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
         }
     }

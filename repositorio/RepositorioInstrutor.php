@@ -110,32 +110,13 @@ class RepositorioInstrutor extends RepositorioPessoa implements IRepositorioInst
     public function excluir($instrutor) 
     {
         $sql = "USE " . $this->getNomeBanco();
-
-        if (@$this->getConexao()->query($sql) === TRUE) 
-        {
-            $id = $instrutor->getIdInstrutor();
+        if (@$this->getConexao()->query($sql) === TRUE){
             
-            $sql = "DELETE FROM instrutor where idInstrutor = '".$id."'";
-            
-            if (!mysqli_query($this->getConexao(), $sql)) 
-            {
-                throw new Exception(Excecoes::excluirObjetosRelacionados("Instrutor: " . mysqli_error($this->getConexao())));
-            }
-
-            $sql = "DELETE FROM pessoa WHERE idPessoa = '" . $id . "'";
-
-            if (!mysqli_query($this->getConexao(), $sql)) 
-            {
+            if (!$this->excluirPessoa($instrutor)){
                 throw new Exception(Excecoes::excluirObjeto("Instrutor: " . mysqli_error($this->getConexao())));
-            }
-            else 
-            {
-                //$this->fecharConexao();
-            }
-  
+            }  
         } 
-        else 
-        {
+        else{
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
         }
 

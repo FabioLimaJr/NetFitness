@@ -101,19 +101,8 @@ class RepositorioAluno extends RepositorioPessoa implements IRepositorioAluno
         $sql = "USE " . $this->getNomeBanco();
         if (@$this->getConexao()->query($sql) === TRUE){
             
-            $id = $aluno->getIdAluno();
-            //$sql = "DELETE FROM pessoa WHERE idPessoa IN (SELECT idAluno FROM aluno WHERE idInstrutor = '" . $id . "')";
-            $sql = "DELETE FROM aluno where idAluno = '".$id."'";
-            
-            if (!mysqli_query($this->getConexao(), $sql)){
-                throw new Exception(Excecoes::excluirObjetosRelacionados("Aluno: " . mysqli_error($this->getConexao())));
-            }
-            $sql = "DELETE FROM pessoa WHERE idPessoa = '" . $id . "'";
-            if (!mysqli_query($this->getConexao(), $sql)){
+            if (!$this->excluirPessoa($aluno)){
                 throw new Exception(Excecoes::excluirObjeto("Aluno: " . mysqli_error($this->getConexao())));
-            }
-            else{
-                //$this->fecharConexao();
             }  
         } 
         else{

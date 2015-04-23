@@ -13,7 +13,8 @@
  */
 interface IRepositorioPessoa
 {
-    public function inserirPessoa($objeto);
-    public function excluirPessoa($objeto);
-    public function alterarPessoa($objeto);
+    public function inserirPessoa($pessoa);
+    public function excluirPessoa($pessoa);
+    public function alterarPessoa($pessoa);
+    public function conferirLoginSenha($pessoa);
 }

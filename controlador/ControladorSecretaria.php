@@ -58,4 +58,9 @@ class ControladorSecretaria {
     {
         return $this->getRepositorioSecretaria()->detalhar($secretaria, $fetchType);
     }
+    
+    public function conferirLoginSenha($secretaria)
+    {
+        return $this->getRepositorioSecretaria()->conferirLoginSenha($secretaria);
+    }
 }

@@ -8,77 +8,82 @@ class Excecoes
 {
     public static function conexaoInvalida($message)
     {
-        return "Impossível criar uma conexão com o banco de dados: ".$message."\n";
+        return "Impossível criar uma conexão com o banco de dados: ".$message."<br/>";
     }
     
+    public static function loginSenhaInvalidos()
+    {
+        return "Login e senha inválidos";
+    }
+
     public static function selecionarBanco($message)
     {
-        return "Erro em selecionar o banco de dados: ".$message."\n";
+        return "Erro em selecionar o banco de dados: ".$message."<br/>";
     }
     
     public static function inserirObjeto($message)
     {
-        return "Impossível salvar o objeto ".$message."\n";
+        return "Impossível salvar o objeto ".$message."<br/>";
     }
     
     public static function excluirObjeto($message)
     {
-        return "Impossível excluir o objeto ".$message."\n";
+        return "Impossível excluir o objeto ".$message."<br/>";
     }
     
     public static function excluirObjetosRelacionados($message)
     {
-        return "Impossível excluir os objetos relacionados a ".$message."\n";
+        return "Impossível excluir os objetos relacionados a ".$message."<br/>";
     }
     
     public static function alterarObjeto($message)
     {
-        return "Impossível alterar o objeto ".$message."\n";
+        return "Impossível alterar o objeto ".$message."<br/>";
     }
     
     public static function detalharObjeto($message)
     {
-        return "Impossível detalhar o objeto ".$message."\n";
+        return "Impossível detalhar o objeto ".$message."<br/>";
     }
     
     public static function parentInvalido($message1,$message2)
     {
-        return "Impossível alterar o objeto ".$message1.". O objeto ".$message2." não existe no banco\n";
+        return "Impossível alterar o objeto ".$message1.". O objeto ".$message2." não existe no banco<br/>";
     }
     
      public static function objetoNulo($message)
     {
-        return $message.". O objeto é nulo\n";
+        return $message.". O objeto é nulo<br/>";
     }
     
     //Metodos Referentes as Expressoes Regulares
     
     public static  function nomeInvalido($mensagem){
-        return "Nome Invalido,Favor Verifique o Nome do ".$mensagem." antes da inclusão\n";
+        return "Nome Invalido,Favor Verifique o Nome do ".$mensagem." antes da inclusão<br/>";
     }
     
     public static  function cpfInvalido($mensagem){
-        return "Cpf Invalido,Favor Verifique o Cpf do ".$mensagem." antes da inclusão\n";
+        return "Cpf Invalido,Favor Verifique o Cpf do ".$mensagem." antes da inclusão<br/>";
     }
     
     public static  function emailInvalido($mensagem){
-        return "Email Invalido,Favor Verifique o Email do ".$mensagem." antes da inclusão\n";
+        return "Email Invalido,Favor Verifique o Email do ".$mensagem." antes da inclusão<br/>";
     }
     
     public static  function telefoneInvalido($mensagem){
-        return "Telefone Invalido,Favor Verifique o Telefone do ".$mensagem." antes da inclusão\n";
+        return "Telefone Invalido,Favor Verifique o Telefone do ".$mensagem." antes da inclusão<br/>";
     }
     
     public static  function loginInvalido($mensagem){
-        return "Login Invalido,Favor Verifique o Login do ".$mensagem." antes da inclusão\n";
+        return "Login Invalido,Favor Verifique o Login do ".$mensagem." antes da inclusão<br/>";
     }
     
     public static  function senhaInvalida($mensagem){
-        return "Senha Invalido,Favor Verifique a Senha do ".$mensagem." antes da inclusão\n";
+        return "Senha Invalido,Favor Verifique a Senha do ".$mensagem." antes da inclusão<br/>";
     }
     
     public static  function enderecoInvalido($mensagem){
-        return "Endereço Invalido,Favor Verifique o Endereço do ".$mensagem." antes da inclusão\n";
+        return "Endereço Invalido,Favor Verifique o Endereço do ".$mensagem." antes da inclusão<br/>";
     }
     
     public static function usuarioInvalido(){
@@ -86,11 +91,11 @@ class Excecoes
     }
     
     public static  function descricaoInvalida($mensagem){
-        return "Descrição Invalida,Favor Verifique a Descrição do ".$mensagem." antes da inclusão\n";
+        return "Descrição Invalida,Favor Verifique a Descrição do ".$mensagem." antes da inclusão<br/>";
     }
     
     public static  function valorNumericoInvalido($mensagem){
-        return "Valor Numerico Invalido,Favor Verifique o Valor Numerico do ".$mensagem." antes da inclusão\n";
+        return "Valor Numerico Invalido,Favor Verifique o Valor Numerico do ".$mensagem." antes da inclusão<br/>";
     }
     
     public static function dataInvalida($mensagem)
@@ -99,7 +104,7 @@ class Excecoes
     }
     
     public static  function tituloInvalida($mensagem){
-        return "Titulo Invalido,Favor Verifique o Titulo da ".$mensagem." antes da inclusão\n";
+        return "Titulo Invalido,Favor Verifique o Titulo da ".$mensagem." antes da inclusão<br/>";
     }
 }
 

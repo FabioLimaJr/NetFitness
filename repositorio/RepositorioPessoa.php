@@ -16,6 +16,40 @@ class RepositorioPessoa extends RepositorioGenerico implements IRepositorioPesso
         parent::__construct();
     }
   
+    public function conferirLoginSenha($pessoa)
+    {
+        
+        $sql = "USE " . $this->getNomeBanco();
+        
+        if(@$this->getConexao()->query($sql) === TRUE)
+        {
+        
+            $sql = "SELECT * FROM pessoa WHERE login = '".$pessoa->getLogin()."' AND senha = '".$pessoa->getSenha()."'";
+
+            if($result = mysqli_query($this->getConexao(), $sql))
+            {
+                $numRows = mysqli_num_rows($result);
+                
+                if($numRows!=0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                throw new Exception(mysqli_error($this->getConexao()));
+            }
+        }
+        else 
+        {
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+        }
+    }
+    
     public function inserirPessoa($pessoa)
     {
         $sql = "INSERT INTO pessoa values(null,'";
@@ -67,9 +101,18 @@ class RepositorioPessoa extends RepositorioGenerico implements IRepositorioPesso
         return $pessoaReturn;
     }
 
-    public function excluirPessoa($objeto)
+    public function excluirPessoa($pessoa)
     {
+        $sql = "DELETE FROM pessoa WHERE idPessoa = '" . $pessoa->getIdPessoa() . "'";
         
+        if (!mysqli_query($this->getConexao(), $sql))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 
 }

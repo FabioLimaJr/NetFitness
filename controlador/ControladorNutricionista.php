@@ -64,4 +64,9 @@ class ControladorNutricionista {
     {
         return $this->getRepositorioNutricionista()->logar($nutricionista);
     }
+    
+    public function conferirLoginSenha($nutricionista)
+    {
+        return $this->getRepositorioNutricionista()->conferirLoginSenha($nutricionista);
+    }
 }

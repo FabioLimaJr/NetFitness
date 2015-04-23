@@ -61,4 +61,9 @@ class ControladorInstrutor {
     {
         return $this->getRepositorioInstrutor()->logar($instrutor);
     }
+    
+    public function conferirLoginSenha($instrutor)
+    {
+        return $this->getRepositorioInstrutor()->conferirLoginSenha($instrutor);
+    }
 }
