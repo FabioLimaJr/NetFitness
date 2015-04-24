@@ -4,6 +4,8 @@ include ('../classesBasicas/Coordenador.php');
 include ('../classesBasicas/Nutricionista.php');
 include ('../classesBasicas/Instrutor.php');
 include ('../classesBasicas/Secretaria.php');
+include ('../ferramentas/upload/Upload.php');
+require ('../ferramentas/mail/PHPMailerAutoload.php');
 session_start();
 
 if(isset($_SESSION['Coordenador']))

@@ -84,6 +84,21 @@ class RepositorioPessoa extends RepositorioGenerico implements IRepositorioPesso
         {return FALSE;}
     }
     
+    public function alterarPerfilPessoa($pessoa)
+    {
+        $sql = "UPDATE pessoa SET nome='" . $pessoa->getNome() . "',";
+        $sql.= "senha='" . $pessoa->getSenha().  "',";
+        $sql.= "telefone='" . $pessoa->getTelefone().  "',";
+        $sql.= "login='" . $pessoa->getLogin().  "',";
+        $sql.= "email='" . $pessoa->getEmail().  "' ";
+        $sql.= "WHERE idPessoa='" . $pessoa->getIdPessoa() . "'";
+
+        if (mysqli_query($this->getConexao(), $sql)) 
+        {return TRUE;}
+        else
+        {return FALSE;}
+    }
+    
     public function logarPessoa($pessoa)
     {
         $pessoaReturn = null;

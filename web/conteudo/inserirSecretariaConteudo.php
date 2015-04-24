@@ -84,21 +84,63 @@ Nome: <?php echo $coordenador->getNome() ?> | Telefone:<?php echo $coordenador->
 </div>
         <?php 
     }else{
-        // $idSecretaria, $nome, $cpf, $endereco, $senha, $telefone, $login, $email, $coordenador
+        
         $secretaria = new Secretaria(null, $_POST['nome'], $_POST['cpf'], $_POST['endereco'], $_POST['senha'], $_POST['telefone'], $_POST['login'], $_POST['email'], $coordenador);
-        //$secretaria->setCoordenador($coordenador);
-        //echo $secretaria->getCoordenador()->getIdCoordenador();
         $_SESSION['Secretaria'] = $secretaria;
         
         try{
-            
-            $fachada->inserirSecretaria($secretaria);
-            $mensagem = "Parabéns, a(o) secretaria(o) ".$_POST['nome']." foi inserida(o)  com sucesso!";
-            unset($_SESSION['Secretaria']);
+           if(!$fachada->conferirLoginsenha($secretaria)){ 
+               
+                $fachada->inserirSecretaria($secretaria);
+                $mensagem = "Parabéns, a(o) secretaria(o) ".$_POST['nome']." foi inserida(o)  com sucesso!";
+                unset($_SESSION['Secretaria']);
+                           
+           }  else {
+               throw new Exception(Excecoes::loginSenhaInvalidos());
+           }
+           
+            $mail = new PHPMailer;
+            $mail->setLanguage('pt');
+                        //$mail->SMTPDebug = 1;
+                        
+            $mail->isSMTP();                                      // Set mailer to use SMTP
+            $mail->Host = SMTP_SERVER;  // Specify main and backup SMTP servers
+            $mail->SMTPAuth = SMTP_AUTH;                               // Enable SMTP authentication
+            $mail->Username = EMAIL_ADDRESS;                 // SMTP username
+            $mail->Password = EMAIL_PASSWORD;                      // SMTP password
+            $mail->SMTPSecure = SMTP_SICURE;                            // Enable TLS encryption, `ssl` also accepted
+            $mail->Port = SMTP_PORT;                                    // TCP port to connect to
+
+            $mail->From = EMAIL_ADDRESS;
+            $mail->CharSet = 'UTF-8';
+            $mail->Encoding = '8bit';
+            $mail->ContentType = 'text/html; charset=utf-8\r\n';
+            $mail->FromName = "NetFitness";
+            $mail->addAddress($_POST['email']);     // Add a recipient
+
+            $mail->isHTML(true);                                  // Set email format to HTML
+
+            $mail->Subject = "Cadastro NetFitness";
+            $mail->Body    = "Parabéns ".$_POST['nome'].", o seu cadastro na NetFitness foi realizado com sucesso.<br><br/>".
+                             "Dados do cadastro do usuário:<br/>".
+                             "Login: ".$_POST['login']."<br/>".
+                             "Senha: ".$_POST['senha']."<br/><br/>".
+                             "NetFitenss.com.br";
+
+
+            if(!$mail->send()) 
+            {
+                $mensagem.="<br/><br/>Erro ao enviar o email de notificação de cadastro<br/>".$mail->ErrorInfo;
+            }  
+            else
+            {
+                $mensagem.="<br/><br/>Um email de notificação foi enviada ao usuário ".$_POST['nome'];
+            }
+           
         } catch (Exception $ex) {
 
             $mensagem = $ex->getMessage();
-        }
+        }            
     }
     
     ?>
