@@ -98,8 +98,10 @@ catch (Exception $exc)
                           
                         <li class="form-row text-input-row">
                             <label>Sexo</label>
-                            <input type="radio" name="sexo" value="m" style="margin-top: 10px" checked>Masculino
-                            <input type="radio" name="sexo" value="f">Feminino
+                            <input type="radio" name="sexo" value="m" style="margin-top: 10px" <?php 
+                            if(isset($alunoRetornado) && $alunoRetornado->getSexo() == "m") echo "checked"?> >Masculino
+                            <input type="radio" name="sexo" value="f" <?php 
+                            if(isset($alunoRetornado) && $alunoRetornado->getSexo() == "f") echo "checked"?> >Feminino
                         </li>
                         <li class="form-row text-input-row">
                             <label>Nome</label>
