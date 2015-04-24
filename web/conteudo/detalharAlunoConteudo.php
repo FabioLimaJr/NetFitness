@@ -126,7 +126,7 @@ catch (Exception $exc)
                                     
                                     <tr>
                                         <td>Dt Nascimento</td>
-                                        <td><?php echo $alunoRetornado->getDataNascimento() ?></td>
+                                        <td><?php echo ExpressoesRegulares::inverterData($alunoRetornado->getDataNascimento()) ?></td>
                                     </tr>
                                     
                                     <tr>
