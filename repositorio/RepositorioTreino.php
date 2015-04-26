@@ -140,7 +140,7 @@ class RepositorioTreino extends RepositorioGenerico implements IRepositorioTrein
                 $sqlDataTreino = "SELECT data FROM alunotreino WHERE idTreino = '".$treino->getIdTreino()."'";                
                 $resultDataTreino =  mysqli_query($this->getConexao(), $sqlDataTreino);
                 $rowDataTreino = mysqli_fetch_assoc($resultDataTreino);
-                $treinoRetornado->setData($rowDataTreino['data']);            
+                $treinoRetornado->setData($rowDataTreino['data']);           
                
             }
             catch(Exception $exc)

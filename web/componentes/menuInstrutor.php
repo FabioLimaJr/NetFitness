@@ -26,6 +26,7 @@
             <li><a href="ExcluirTreino.php">Excluir</a></li>
             <li><a href="alterarTreino.php">Alterar</a></li>
             <li><a href="listarTreinos.php">Listar</a></li>
+            <li><a href="detalharTreino.php">Detalhar</a></li>
           </ul>
         </li>
         <li><a href="#">Dica</a>

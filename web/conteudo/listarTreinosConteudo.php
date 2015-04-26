@@ -46,11 +46,11 @@ Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->
                                  {
                                      if($count == $sizeListaExercicios)
                                      {
-                                       echo $exercicio->getDescricao();
+                                       echo $exercicio->getNome();
                                      }
                                      else
                                      {
-                                       echo $exercicio->getDescricao().", ";  
+                                       echo $exercicio->getNome().", ";  
                                      }
                                      
                                      $count++;

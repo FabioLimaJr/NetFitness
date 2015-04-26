@@ -34,11 +34,29 @@ class ControladorTreino {
             throw new Exception(Excecoes::inserirObjeto($treino->getNome()));
         }else if(!ExpressoesRegulares::conferirDescricao($treino->getDescricao())){
             throw new Exception(Excecoes::inserirObjeto($treino->getDescricao()));
+        }else if(!$this->validarSeriesRepeticoes($treino->getListaExercicios())){
+            throw new Exception(Excecoes::valorNumericoInvalido("Series e Repetições"));
         }else{
             return $this->getRepositorioTreino()->inserir($treino);
         }
     }
     
+    public function validarSeriesRepeticoes($listaExercicios){
+        
+        foreach ($listaExercicios as $exercicio){
+            
+            if($exercicio->getSeries() == null || $exercicio->getSeries() <= 0){
+                return false;
+            }
+            if($exercicio->getRepeticoes() == null || $exercicio->getRepeticoes() <= 0){
+                return false;
+            }
+        }
+        
+        return true;
+    }
+
+
     public function alterar($treino){        
          /*if((!ExpressoesRegulares::conferirNome($treino->getNome())) &&                
             (!ExpressoesRegulares::conferirDescricao($treino->getDescricao()))){

@@ -21,7 +21,7 @@ catch (Exception $exc)
         
 ?>
 
-<h1 class="title">Detalhar Dieta</h1>
+<h1 class="title">Detalhar Treino</h1>
 <div class="line"></div>
 Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->getEmail() ?> | Endereço:<?php echo $instrutor->getEndereco() ?>
 <div class="intro" style="margin-bottom:50px"></div>
@@ -48,9 +48,9 @@ Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->
 
                          <?php foreach ($listaTreinos as $treino){ ?>
                          <tr>
-                             <td><?php echo $treino->getAluno()->getNome() ?></td> 
+                             <td><?php echo $treino->getNome() ?></td> 
                              <td><?php echo $treino->getDescricao() ?></td>    
-                             <td><input type="radio" name="idTreino" value="<?php echo $treino->getIdDieta() ?>"></td>
+                             <td><input type="radio" name="idTreino" value="<?php echo $treino->getIdTreino() ?>"></td>
                          </tr>
 
                          <?php 
@@ -76,8 +76,10 @@ Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->
             
             try{
                 
-                $treino = new Treino();
+                $treino = new Treino($_POST['idTreino']);
                 $treinoRetornado = $fachada->detalharTreino($treino, EAGER);
+                
+                //$treinoRetornado->setListaExercicios($listaExercicios);
                 ?>
                 
                 <div style="margin-bottom: 50px">
@@ -88,20 +90,28 @@ Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->
                             <td>Descrição</td>
                             <td>Instrutor</td>
                             <td>Exercicios</td>
+                            <td>Series</td>
+                            <td>Repetições</td>
+                            <td>Descrição dos Exercicios</td>
                         </tr>
                         <?php if($treinoRetornado->getListaExercicios()!=null)
                                     { ?>
                                      <tr>
                                         <td rowspan="<?php echo count($treinoRetornado->getListaExercicios()) ?>"><?php echo $treinoRetornado->getNome() ?></td>
                                         <td rowspan="<?php echo count($treinoRetornado->getListaExercicios()) ?>"><?php echo $treinoRetornado->getDescricao() ?></td>
+                                        <td rowspan="<?php echo count($treinoRetornado->getListaExercicios()) ?>"><?php echo $treinoRetornado->getInstrutor()->getNome() ?></td>
                                 
                                             <td><?php echo $treinoRetornado->getListaExercicios()[0]->getNome() ?></td>
+                                            <td><?php echo $treinoRetornado->getListaExercicios()[0]->getSeries() ?></td>
+                                            <td><?php echo $treinoRetornado->getListaExercicios()[0]->getRepeticoes() ?></td>
                                             <td><?php echo $treinoRetornado->getListaExercicios()[0]->getDescricao() ?></td>
                                       </tr>
                                       
                                         <?php for($count=1; $count<count($treinoRetornado->getListaExercicios());$count++) {?>
                                             <tr>
                                                 <td><?php echo $treinoRetornado->getListaExercicios()[$count]->getNome() ?></td>
+                                                <td><?php echo $treinoRetornado->getListaExercicios()[$count]->getSeries() ?></td>
+                                                <td><?php echo $treinoRetornado->getListaExercicios()[$count]->getRepeticoes() ?></td>
                                                 <td><?php echo $treinoRetornado->getListaExercicios()[$count]->getDescricao() ?></td>
                                             </tr>
                                         <?php }
