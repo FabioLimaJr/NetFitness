@@ -128,6 +128,48 @@ class Aluno extends Pessoa
         $this->foto = $foto;
     }
 
+    function calcularIMC($peso, $altura){
+        
+        if($peso <= 0 || $altura <= 0){
+            
+            return "Peso e Altura não podem ser menor ou igual a 0.";
+            
+        }else{
+            
+            $imc = $peso / ($altura * $altura);
+            
+            if($imc < 17){
 
+                return "Seu IMC é ".substr($imc, 0, 5)." você está muito abaixo do peso.";
 
+            }else if($imc <= 18.49){
+
+                return "Seu IMC é ".substr($imc, 0, 5)." você está abaixo do peso.";
+
+            }else if($imc <= 24.99){
+
+                return "Seu IMC é ".substr($imc, 0, 5)." você está no peso normal.";
+
+            }else if($imc <= 29.99){
+
+                return "Seu IMC é ".substr($imc, 0, 5)." você está acima do peso.";
+
+            }else if($imc <= 34.99){
+
+                return "Seu IMC é ".substr($imc, 0, 5)." você está na obesidade I.";
+
+            }else if($imc <= 39.99){
+
+                return "Seu IMC é ".substr($imc, 0, 5)." você está na obesidade II(Severa).";
+
+            }else{
+
+                return "Seu IMC é ".substr($imc, 0, 5)." você está na obesidade III(Morbida).";
+
+            }
+            
+        }
+        
+    }
+    
 }

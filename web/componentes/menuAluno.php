@@ -20,5 +20,6 @@
             <li><a href="listarOpiniao.php">Listar</a></li>
           </ul>
         </li>
+        <li><a href="calcularIMC.php">Calcular IMC</a>
       </ul>
     </div>

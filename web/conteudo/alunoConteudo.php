@@ -5,7 +5,7 @@
 
 <h1 class="title">Página usuário</h1>
     <div class="line"></div>
-    Telefone:<?php echo $aluno->getTelefone() ?> | Email:<?php echo $aluno->getEmail() ?>>
+    Telefone:<?php echo $aluno->getTelefone() ?> | Email:<?php echo $aluno->getEmail() ?>
     <div class="intro" style="margin-bottom:50px">
          
     </div>
