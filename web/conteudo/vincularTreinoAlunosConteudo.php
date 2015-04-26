@@ -15,7 +15,7 @@
     }
     
     $listaTreinos = $fachada->listarTreinos($instrutor, EAGER);
-    $listaAlunos = $fachada->listarAlunos();
+    $listaAlunos = $fachada->listarAlunos(LAZY);
     
 ?>
 
@@ -38,7 +38,7 @@ Nome: <?php echo $instrutor->getNome() ?> | Telefone:<?php echo $instrutor->getT
 ?>
 
 <div class="form-container" style="margin-bottom:50px">
-      <form class="forms" action="alterarTreino.php" method="post" >
+      <form class="forms" action="vincularTreinoAlunos.php" method="post" >
       <fieldset>
       
        <ol>
@@ -151,6 +151,8 @@ Nome: <?php echo $instrutor->getNome() ?> | Telefone:<?php echo $instrutor->getT
                 }
                 
                 try{
+                    
+                    $treinoRetornado = $_SESSION['treinoRetornado'];
                     $treinoRetornado->setData($_POST['data']);
                     
                     $fachada->vincularTreinoAlunos($treinoRetornado, $alunosSelecionados);
