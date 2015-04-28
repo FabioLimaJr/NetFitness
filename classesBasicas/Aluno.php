@@ -37,7 +37,13 @@ class Aluno extends Pessoa
         $this->setIdAluno($idAluno);
     }
     
-    public function __construct16($idAluno, $nome, $cpf, $endereco, $senha, $telefone, $login, $email, $sexo, $dataNascimento, $secretaria,
+    public function __construct2($login, $senha)
+    {
+        $this->setLogin($login);
+        $this->setSenha($senha);
+    }
+
+        public function __construct16($idAluno, $nome, $cpf, $endereco, $senha, $telefone, $login, $email, $sexo, $dataNascimento, $secretaria,
                                 $musica, $dieta, $listaPagamentos, $listaTreinos, $foto) 
     {
         parent::__construct($idAluno, $nome, $cpf, $endereco, $senha, $telefone, $login, $email);
