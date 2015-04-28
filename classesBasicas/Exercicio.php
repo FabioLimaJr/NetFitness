@@ -5,7 +5,7 @@
  *
  * @author Marcelo
  */
-class Exercicio {
+class Exercicio implements JsonSerializable{
     //put your code here
     
     private $idExercicio;
@@ -86,5 +86,10 @@ class Exercicio {
         $this->repeticoes = $repeticoes;
     }
 
+    public function jsonSerialize()
+    {
+        $vars = get_object_vars($this);
+        return $vars;
+    }
 
 }

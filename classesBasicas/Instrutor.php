@@ -7,7 +7,7 @@
  */
 include_once('Pessoa.php');
 
-class Instrutor extends Pessoa {
+class Instrutor extends Pessoa implements JsonSerializable{
     
     private $idInstrutor;
     private $coordenador;
@@ -32,6 +32,12 @@ class Instrutor extends Pessoa {
         $this->setIdInstrutor($idInstrutor);
     }
     
+    function __construct2($login, $senha)
+    {
+        $this->setLogin($login);
+        $this->setSenha($senha);
+    }
+            
     function __construct12($idInstrutor, $coordenador, $listaTreinos, $listaExamesFisicos, $listaDicas, 
                          $nome, $cpf, $endereco, $senha, $telefone, $email, $login) 
     {
@@ -85,4 +91,11 @@ class Instrutor extends Pessoa {
     function setListaDicas($listaDicas) {
         $this->listaDicas = $listaDicas;
     }
+
+    public function jsonSerialize()
+    {
+        $vars = get_object_vars($this);
+        return $vars;
+    }
+
 }

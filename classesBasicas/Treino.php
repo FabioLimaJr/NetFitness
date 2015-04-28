@@ -11,7 +11,7 @@
  *
  * @author Marcelo
  */
-class Treino {
+class Treino implements JsonSerializable{
 
     //put your code here
     private $idTreino;
@@ -20,7 +20,7 @@ class Treino {
     private $descricao;
     private $instrutor;
     private $data;
-    
+     
     public function __construct() {
         $get_arguments = func_get_args();
         $number_of_arguments = func_num_args();
@@ -35,12 +35,13 @@ class Treino {
     }
 
     function __construct6($idTreino, $nome, $descricao, $instrutor, $data, $listaExercicios) {
-     $this->idTreino = $idTreino;
-     $this->nome = $nome;
-     $this->descricao = $descricao;
-     $this->instrutor = $instrutor;
-     $this->data = $data;
-     $this->listaExercicios = $listaExercicios;
+    
+        $this->setIdTreino($idTreino);
+        $this->setNome($nome);
+        $this->setDescricao($descricao);
+        $this->setInstrutor($instrutor);
+        $this->setData($data);
+        $this->setListaExercicios($listaExercicios);
     }
 
     function getIdTreino() {
@@ -91,5 +92,10 @@ class Treino {
         $this->data = $data;
     }
 
+    public function jsonSerialize()
+    {
+        $vars = get_object_vars($this);
+        return $vars;
+    }
 
 }

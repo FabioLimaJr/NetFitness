@@ -39,7 +39,7 @@
                     $resposta['tipoUsuario'] = $tipoUsuario;
                 }
             }
-           // $str = substr_replace($str,$char,$pos,1);
+           
             $json = json_encode($resposta);
             $jsonFormat = str_replace("\u0000",".",json_encode($resposta));
             

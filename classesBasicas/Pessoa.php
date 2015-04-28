@@ -31,7 +31,7 @@ class Pessoa {
     {
         $this->idPessoa = $idPessoa;
     }
-    
+  
     function __constructPai8($idPessoa, $nome, $cpf, $endereco, $senha, $telefone, $login,$email) {
         $this->idPessoa = $idPessoa;
         $this->nome = $nome;
