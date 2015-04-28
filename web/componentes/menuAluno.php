@@ -4,12 +4,12 @@
         </li>
         <li><a href="#">Dietas</a>
           <ul>
-            <li><a href="alunoListarDietas.php">Listar</a></li>
+            <li><a href="listarDietasAluno.php">Visualizar Dieta</a></li>
           </ul>
         </li>
         <li><a href="#">Treinos</a>
           <ul>
-            <li><a href="alunoListarTreinos.php">Listar</a></li>
+            <li><a href="listarTreinosAluno.php">Visualizar Treino</a></li>
           </ul>
         </li> 
         <li><a href="#">Opinião</a>
