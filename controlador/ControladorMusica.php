@@ -32,4 +32,24 @@ class ControladorMusica
     public function detalhar($musica, $fetchType) {
         return $this->getRepositorioMusica()->detalhar($musica, $fetchType);
     }
+    
+    public function inserir($musica){
+        if ($musica->getTitulo() == null && $musica->getTitulo() == "") {
+            throw new Exception(Excecoes::tituloInvalida($musica->getTitulo()));
+        }else{
+            return $this->getRepositorioMusica()->inserir($musica);
+        }
+    }
+    
+    public function alterar($musica){
+        if ($musica->getTitulo() == null && $musica->getTitulo() == "") {
+            throw new Exception(Excecoes::tituloInvalida($musica->getTitulo()));
+        }else{
+            return $this->getRepositorioMusica()->alterar($musica);
+        }    
+    }
+    
+    public function excluir($musica){
+        return $this->getRepositorioMusica()->excluir($musica);
+    }
 }

@@ -60,8 +60,7 @@ class RepositorioPagamento extends RepositorioPessoa implements IRepositorioPaga
             $sql = "UPDATE pagamento SET valor = '".$pagamento->getValor()
                                                  ."', dataPagamento = '".$pagamento->getDataPagamento()
                                                  ."', dataVencimento = '".$pagamento->getDataVencimento()
-                                                 ."' WHERE idSecretaria = '".$pagamento->getSecretaria()->getIdSecretaria()
-                                                 ."' AND idAluno = '".$pagamento->getAluno()->getIdAluno();//getIdAluno();  
+                                                 ."' WHERE idPagamento = '".$pagamento->getIdPagamento()."'";
                        
             if( mysqli_query($this->getConexao(), $sql)){
                 
@@ -155,6 +154,19 @@ class RepositorioPagamento extends RepositorioPessoa implements IRepositorioPaga
             {
                 $resultPagamento = mysqli_query($this->getConexao(), $sqlPagamento);
                 $rowPagamento = mysqli_fetch_assoc($resultPagamento);
+                
+                /*if($rowPagamento['dataVencimento'] != NULL){
+                    $vencimento = ExpressoesRegulares::inverterData($rowPagamento['dataVencimento']);
+                }else{
+                    $vencimento = "";
+                }
+                if($rowPagamento['dataPagamento'] != NULL){
+                    $pagamento = ExpressoesRegulares::inverterData($rowPagamento['dataPagamento']);
+                }else{
+                    $pagamento = "";
+                }*/
+                
+                
                 $pagamentoRetornado = new Pagamento($rowPagamento['idPagamento'], $rowPagamento['valor'], 
                                                     $rowPagamento['dataVencimento'], $rowPagamento['dataPagamento'],
                                                     null/*$secretaria*/, null/*$aluno*/);
