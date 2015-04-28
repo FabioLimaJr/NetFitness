@@ -106,5 +106,9 @@ class Excecoes
     public static  function tituloInvalida($mensagem){
         return "Titulo Invalido,Favor Verifique o Titulo da ".$mensagem." antes da inclusão<br/>";
     }
+    
+    public static  function arrayVazioInvalido($mensagem){
+        return "Lista de ".$mensagem." vazia.<br/>";
+    }
 }
 

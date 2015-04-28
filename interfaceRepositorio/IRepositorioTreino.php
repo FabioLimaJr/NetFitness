@@ -10,5 +10,6 @@ interface IRepositorioTreino {
     public function excluir($treino);
     public function listar($instrutor, $fetchType);
     public function detalhar($treino, $fetchType);
+     public function listarTreinoPorAluno($aluno, $fetchType);
     
 }

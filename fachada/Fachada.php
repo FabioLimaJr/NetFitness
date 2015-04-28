@@ -236,6 +236,10 @@ class Fachada implements IFachada
         return $this->controladorTreino->vincularTreinoAlunos($treino, $listaAlunos);
     }
     
+     public function listarTreinoPorAluno($aluno, $fetchType){
+         return $this->controladorTreino->listarTreinoPorAluno($aluno, $fetchType);
+     }
+    
     
     //Opinião 
     public function inserirOpiniao($opiniao) {

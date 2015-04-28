@@ -110,4 +110,7 @@ class ControladorTreino {
         return $this->getRepositorioTreino()->vincularTreinoAlunos($treino, $listaAlunos);
         
     }
+     public function listarTreinoPorAluno($aluno, $fetchType){
+         return $this->getRepositorioTreino()->listarTreinoPorAluno($aluno, $fetchType);
+     }
 }

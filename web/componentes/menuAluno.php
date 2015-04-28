@@ -9,7 +9,7 @@
         </li>
         <li><a href="#">Treinos</a>
           <ul>
-            <li><a href="listarTreinosAluno.php">Visualizar Treino</a></li>
+            <li><a href="listarTreinosAluno.php">Visualizar Treinos</a></li>
           </ul>
         </li> 
         <li><a href="#">Opinião</a>

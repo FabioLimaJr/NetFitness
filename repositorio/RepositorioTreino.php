@@ -260,5 +260,54 @@ class RepositorioTreino extends RepositorioGenerico implements IRepositorioTrein
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco()."(".$this->getConexao()->error.")"));
         }
     }
+    
+    public function listarTreinoPorAluno($aluno, $fetchType) {
+       
+        $sql = "USE " . $this->getNomeBanco();
+        $listaTreinos = array();
+ 
+        if($this->getConexao()->query($sql) === TRUE)
+        {
+            $sqlListaTreinos = "SELECT * FROM treino WHERE idAluno = ".$aluno->getIdAluno();      
+            try
+            {   
+                $resultListaTreinos = mysqli_query($this->getConexao(), $sqlListaTreinos);
+                //if(($resultListaTreinos != null) && (count($resultListaTreinos) > 0)){
+                    while ($rowListaTreinos = mysqli_fetch_array($resultListaTreinos))
+                    {
+
+                        $treinoRetornado = new Treino($rowListaTreinos['idTreino']);
+
+                        if($fetchType == EAGER)
+                        {
+                            $treinoRetornado = $this->detalhar($treinoRetornado, EAGER);
+                        }
+                        else 
+                        {
+                            $treinoRetornado = $this->detalhar($treinoRetornado, LAZY);
+                        }    
+
+                        array_push($listaTreinos, $treinoRetornado);
+                    }
+                    
+                //}else{
+                    //throw new Exception(Excecoes::arrayVazioInvalido("Treino"));
+               // }
+                
+                
+                return $listaTreinos;
+            }
+            catch(Exception $exc)
+            {
+                throw new Exception($exc->getMessage());
+            }
+ 
+            return $listaTreinos;
+        }
+        else
+        {
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+        }
+    }
 
 }
