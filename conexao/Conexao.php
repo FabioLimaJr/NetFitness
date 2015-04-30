@@ -7,55 +7,29 @@
 
 include_once("../constants.php");
 
-class Conexao {
+class Conexao{
  
+ private static $conexao;
+ private static $nomeBanco;
  
- private $conexao;
- private $nomeBanco;
- 
- public function __construct() 
+ function __construct() 
  {
-     
-     $this->setNomeBanco();  
-     try 
-     {
-          if($this->getConexao()==NULL)
-          {
-             $this->criarConexao();
-          }
-     } 
-     catch (Exception $exc) 
-     {
-         echo $exc->getMessage();
-     }
+    self::$conexao = new mysqli(DB_SERVER_NAME, DB_USER_NAME, DB_USER_PASSWORD);
+    self::$nomeBanco = DB_NAME;
   }
   
+public static function getConexao()
+{
+    if (self::$conexao == null)
+    {
+        self::$conexao = new mysqli(DB_SERVER_NAME, DB_USER_NAME, DB_USER_PASSWORD);
+        self::$nomeBanco = DB_NAME;
+    }
+    return self::$conexao;
+}
   
  public function getNomeBanco() {
-     return $this->nomeBanco;
- }
- 
- public function setNomeBanco() {
-     $this->nomeBanco = DB_NAME;
- }
- 
- public function getConexao() {
-     return $this->conexao;
- }
- 
- public function setConexao($conexao) {
-     $this->conexao = $conexao;
- }
- 
- private function criarConexao()
- {
-   @$this->setConexao(new mysqli(DB_SERVER_NAME, DB_USER_NAME, DB_USER_PASSWORD));
-   
-   if($this->getConexao()->connect_error)
-   {
-       throw  new Exception (Excecoes::conexaoInvalida(""));
-   }
-  
+     return self::$nomeBanco;
  }
  
  public function fecharConexao()
