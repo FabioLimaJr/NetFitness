@@ -4,15 +4,14 @@
  *
  * @author Daniele
  */
+
+include_once("../constants.php");
+
 class Conexao {
  
- const nomeBanco = 'netfitness';   
- const nomeServidor = 'localhost';
- const nomeUsuario = 'root';
- //const senhaUsuario = '';
- const senhaUsuario = '123456';
- //public $conexao;
- public $nomeBanco;
+ 
+ private $conexao;
+ private $nomeBanco;
  
  public function __construct() 
  {
@@ -20,29 +19,37 @@ class Conexao {
      $this->setNomeBanco();  
      try 
      {
-         $this->criarConexao();
+          if($this->getConexao()==NULL)
+          {
+             $this->criarConexao();
+          }
      } 
      catch (Exception $exc) 
      {
          echo $exc->getMessage();
      }
   }
+  
+  
  public function getNomeBanco() {
      return $this->nomeBanco;
  }
+ 
  public function setNomeBanco() {
-     $this->nomeBanco = self::nomeBanco;
+     $this->nomeBanco = DB_NAME;
  }
  
  public function getConexao() {
      return $this->conexao;
  }
+ 
  public function setConexao($conexao) {
      $this->conexao = $conexao;
  }
+ 
  private function criarConexao()
  {
-   @$this->setConexao(new mysqli(self::nomeServidor, self::nomeUsuario, self::senhaUsuario));
+   @$this->setConexao(new mysqli(DB_SERVER_NAME, DB_USER_NAME, DB_USER_PASSWORD));
    
    if($this->getConexao()->connect_error)
    {
