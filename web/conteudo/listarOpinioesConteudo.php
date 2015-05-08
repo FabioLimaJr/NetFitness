@@ -6,7 +6,7 @@ $mensagem ="";
 
 try
 {
-    $listaOpinioes = $fachada->listarOpinioes(EAGER); 
+    $listaDicas = $fachada->listarOpinioes(EAGER); 
 } 
 catch (Exception $exc)
 {
@@ -35,7 +35,7 @@ catch (Exception $exc)
                       <th>DataPostagem</th>
                     </tr>
                     
-                    <?php foreach ($listaOpinioes as $opiniao){ ?>
+                    <?php foreach ($listaDicas as $opiniao){ ?>
                     <tr> 
                         <td><?php echo $opiniao->getAluno()->getNome() ?></td> 
                         <td><?php echo $opiniao->getDescricao() ?></td> 

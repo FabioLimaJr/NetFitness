@@ -6,10 +6,15 @@
           <ul>
             <li><a href="listarDietasAluno.php">Visualizar Dieta</a></li>
           </ul>
-        </li>
+        </li>        
         <li><a href="#">Treinos</a>
           <ul>
             <li><a href="listarTreinosAluno.php">Visualizar Treinos</a></li>
+          </ul>
+        </li> 
+        <li><a href="#">Noticias</a>
+          <ul>
+            <li><a href="listarNoticiasAluno.php">Visualizar Noticias</a></li>
           </ul>
         </li> 
         <li><a href="#">Opinião</a>
