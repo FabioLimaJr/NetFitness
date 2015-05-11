@@ -18,9 +18,9 @@
             <li><a href="pageAquatica.php">Aquatica</a></li>
           </ul>
         </li>
-        <li><a href="pageLocalozacao.php">Contatos e Localização</a>
+        <li><a href="pageLocalizacao.php">Contatos e Localização</a>
         <ul>
-            <li><a href="pageLocalozacao.php">Localização</a></li>
+            <li><a href="pageLocalizacao.php">Localização</a></li>
             <li><a href="pageContato.php">Entre em contato</a></li>
           </ul>
         </li>

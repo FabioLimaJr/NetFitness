@@ -1,6 +1,6 @@
 <div id="menu" class="menu-v">
       <ul>
-        <li><a href="index.php" class="active">Home</a>
+        <li><a href="index.php" class="active">Sair</a>
         </li>
         <li><a href="#">Aluno</a>
           <ul>
