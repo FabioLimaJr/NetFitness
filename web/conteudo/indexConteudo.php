@@ -1,6 +1,6 @@
-<h1 class="title">Welcome</h1>
+<h1 class="title">Bem Vindos</h1>
     <div class="line"></div>
-    <div class="intro">Nullam id dolor id nibh ultricies vehicula ut id elit. Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</div>
+    <div class="intro">A NetFitness, foi eleita a melhor acadêmia em satisfação do cliente, pela revista FitCertifield.</div>
     <div id="slider">
       <div class="flexslider">
         <ul class="slides">
@@ -11,28 +11,22 @@
         </ul>
       </div>
     </div>
-    <h3>Ipsum Tortor Vestibulum Sollicitudin</h3>
-    <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere consectetur est at lobortis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-    <div class="one-half">
-      <h3><img src="images/icon-web.png" alt="">Web Design</h3>
-      <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-    </div>
-    <div class="one-half last">
-      <h3><img src="images/icon-illus.png" alt="">Illustration</h3>
-      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
-    </div>
+    <h3>Compromisso com o Cliente</h3>
+    <p>Estamos sempre inovando para melhor servir nossos clientes, parceiros e amigos.</p>
+    
     <div class="clear"></div>
+    <h3>Promoções</h3>
     <div class="one-half">
-      <h3><img src="images/icon-motion.png" alt="">Motion Graphic</h3>
-      <p>Vestibulum id ligula porta felis euismod semper. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
+      <h3><img src="images/icon-motion.png" alt="">Video Premiado</h3>
+      <p>Poste vídeos em suas redes sociais fazendo comentários sobre nossa academias e concorra a vários premios. Basta postar os videos e enviar o link para o nosso email.</p>
     </div>
     <div class="one-half last">
-      <h3><img src="images/icon-pack.png" alt="">Package Design</h3>
-      <p>Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, posuere velit aliquet. Donec id elit non mi porta gravida. </p>
+      <h3><img src="images/icon-pack.png" alt="">Aniversariante do Mês</h3>
+      <p>Se você estiver matriculado há mais de 3 meses, no mês do seu aniversário a sua mensalidade é por nossa conta. Não precisa de cadastro.</p>
     </div>
     <div class="clear"></div>
     <div class="line"></div>
-    <h2>Latest Works</h2>
+    <h2>Imagens</h2>
     <div class="carousel">
       <div id="carousel-scroll"><a href="#" id="prev"></a><a href="#" id="next"></a></div>
       <ul>
@@ -51,40 +45,52 @@
       </ul>
     </div>
     <div class="line"></div>
-    <h3>Malesuada Condimentum Inceptos Vehicula</h3>
-    <p>Sed posuere consectetur est at lobortis. Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
-    <ul>
-      <li>Sed posuere consectetur est at lobortis, Nullam id dolor id nibh ultricies vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-      <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </li>
-      <li>Maecenas sed diam eget risus varius blandit sit amet non magna.</li>
-    </ul>
+     <h2>Calcule seu IMC</h2>
+    <div class="form-container" style="margin-bottom:50px">
+             <form class="forms"  method="post" >
+         <fieldset>
+           <ol>
+
+             <li class="form-row text-input-row">
+                    <label>Peso</label>
+                    <input type="text" name="peso" value="" class="text-input" style="width: 70px">
+             </li>
+             
+             <li class="form-row text-input-row">
+                    <label>Altura</label>
+                    <input type="text" name="altura" value="" class="text-input" style="width: 70px">
+             </li>
+             <li class="button-row" style="margin-top:50px">
+               <input type="submit" value="Calcular" name="submit" class="btn-submit">
+             </li>
+           </ol>
+
+         </fieldset>
+       </form>
+       <div class="response"></div>
+
+    
     <div id="footer">
       <div class="footer-box one-third">
-        <h3>Popular Posts</h3>
+        <h3>Ultimas Notícias</h3>
         <ul class="popular-posts">
           <li> <a href="#"><img src="images/art/s1.jpg" alt=""></a>
-            <h5><a href="#">Dolor Commodo Consectetur</a></h5>
-            <span>26 Aug 2011 | <a href="#">21 Comments</a></span> </li>
+            <h5><a href="#">Novos Aparelhos Chegam em Junho</a></h5>
+            <span>26 Abril 2015 | <a href="#">21 Cometárarios</a></span> </li>
           <li> <a href="#"><img src="images/art/s2.jpg" alt=""></a>
-            <h5><a href="#">Dolor Commodo Consectetur</a></h5>
-            <span>26 Aug 2011 | <a href="#">21 Comments</a></span> </li>
+            <h5><a href="#">Sete Suplementos Permitdos</a></h5>
+            <span>25 abril 2015 | <a href="#">40 Cometárarios</a></span> </li>
           <li> <a href="#"><img src="images/art/s3.jpg" alt=""></a>
-            <h5><a href="#">Dolor Commodo Consectetur</a></h5>
-            <span>26 Aug 2011 | <a href="#">21 Comments</a></span> </li>
+            <h5><a href="#">Novidade para as Mulheres</a></h5>
+            <span>24 Abril 2015 | <a href="#">33 Cometárarios</a></span> </li>
         </ul>
       </div>
       <div class="footer-box one-third">
-        <h3>About</h3>
-        <p>Donec id elit non mi porta gravida at eget metus. Donec ullamcorper nulla non metus auctor fringilla.</p>
-        <p>Lorem Ipsum Dolor Sit Moon Avenue No:11/21 Planet City, Earth<br>
-          <br>
-          <span class="lite1">Fax:</span> +555 797 534 01<br>
-          <span class="lite1">Tel:</span> +555 636 646 62<br>
-          <span class="lite1">E-mail:</span> name@domain.com</p>
-      </div>
+        <h3>Sobre</h3>
+        <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 13px!important;">A </span><span style="font-size: 13px; line-height: 1.3em;">academia</span><span style="font-size: 13px; line-height: 1.3em;"> NetFitness &nbsp;atua há vinte e dois anos, no Recife, promovendo saúde e bem-estar aos seus clientes. Baseada na excelência, está sempre focando na qualidade e nos resultados, tanto nas atividades oferecidas quanto no atendimento personalizado ao seu público. Para isso, mantém uma metodologia própria e constante de capacitação da equipe de professores.</span></p>
+    </div>
       <div class="footer-box one-third last">
-        <h3>Custom Text</h3>
-        <p>Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas faucibus mollis interdum. Etiam porta sem malesuada magna mollis euismod. Nulla vitae elit. </p>
-        <p>Donec ullamcorper nulla non metus auctor fringilla. Maecenas faucibus mollis interdum. Curabitur blandit tempus porttitor.</p>
+        <h3>Inovação</h3>
+        <p>Analisar com frequência os ambientes externos e internos à academia, buscando inovar na oferta de processos e serviços para melhorar o atendimento ao cliente, e simplificando a relação empresa-público.</p>
       </div>
     </div>
