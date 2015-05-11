@@ -1,7 +1,7 @@
 <div id="menu" class="menu-v">
       <ul>
           
-        <li><a href="index.php" class="active">Home</a>
+        <li><a href="index.php" class="active">Sair</a>
         </li>
         <li><a href="#">Exame Fisico</a>
           <ul>
