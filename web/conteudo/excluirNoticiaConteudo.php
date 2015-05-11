@@ -44,7 +44,6 @@ if(!$camposPreenchidos){
     <fieldset>
         <ol>
             <li class="form-row text-input-row">
-                <label>Noticias</label>
                 <table style="width: 100%">
                     <tr>
                         <th>Titulo</th>

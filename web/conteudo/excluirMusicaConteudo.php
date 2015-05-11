@@ -47,12 +47,16 @@ if(!$camposPreenchidos){
                 <table style="width: 100%">
                     <tr>
                         <th>Titulo</th>
+                        <th>Categoria</th>
+                        <th>Artista</th>
                         <th>Selecione</th>
                     </tr>
                     
                     <?php foreach ($listaMusica as $musica){ ?>
                     <tr>
                          <td><?php echo $musica->getTitulo();?></td>  
+                         <td><?php echo $musica->getCategoria();?></td>  
+                         <td><?php echo $musica->getArtista();?></td>  
                         <td><input type="radio" name="idMusica" value="<?php echo $musica->getIdMusica()?>"></td>                        
                     </tr>
                     <input type="hidden" name="nomeSecretaria<?php echo $musica->getIdMusica() ?>" value="<?php echo $musica->getSecretaria()->getNome() ?>">

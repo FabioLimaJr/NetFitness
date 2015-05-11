@@ -81,7 +81,7 @@ Telefone:<?php echo $secretaria->getTelefone() ?> | Email:<?php echo $secretaria
       </fieldset>
     </form>
     </div>
-<?php //FALTA TERMINAR DAQUI PRA BAIXO-----------------------------------------
+<?php 
      }else{
          
          if(isset($_POST['idPagamento'])){

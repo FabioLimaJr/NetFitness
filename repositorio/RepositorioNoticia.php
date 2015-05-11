@@ -18,11 +18,11 @@ class RepositorioNoticia extends RepositorioGenerico implements IRepositorioNoti
         
         if($this->getConexao()->query($sql) === true){
 
-            $sql = "INSERT INTO noticia VALUES('";
-            $sql.= "NULL','";
+            $sql = "INSERT INTO noticia VALUES(NULL,'";
             $sql.= $noticia->getTitulo(). "','";
             $sql.= $noticia->getDescricao(). "','";
-            $sql.= $noticia->getSecretaria()->getIdPessoa(). "')";
+            $sql.= $noticia->getSecretaria()->getIdPessoa(). "','";
+            $sql.= $noticia->getData(). "')";
             
             if(mysqli_query($this->getConexao(), $sql)){
                 //$this->fecharConexao();
@@ -44,6 +44,7 @@ class RepositorioNoticia extends RepositorioGenerico implements IRepositorioNoti
 
             $sql = "UPDATE noticia SET titulo = '".$noticia->getTitulo();
             $sql.= "', descricao = '".$noticia->getDescricao();
+            $sql.= "', data = '".$noticia->getData();
             $sql.= "'  WHERE IdNoticia = '".$noticia->getIdNoticia()."' and idSecretaria= '".$noticia->getSecretaria()->getIdSecretaria()."'";
             
             if(mysqli_query($this->getConexao(), $sql)){
@@ -135,7 +136,8 @@ class RepositorioNoticia extends RepositorioGenerico implements IRepositorioNoti
                 $resultNoticia = mysqli_query($this->getConexao(), $sqlNoticia);
                 $rowNoticia = mysqli_fetch_assoc($resultNoticia);
                 $noticiaRetornada = new Noticia($rowNoticia['idNoticia'], $rowNoticia['titulo'], 
-                                                    $rowNoticia['descricao'],null/*$secretaria*/);
+                                                    $rowNoticia['descricao'],null/*$secretaria*/,
+                                                    $rowNoticia['data']);
             }
             catch (Exception $exc)
             {

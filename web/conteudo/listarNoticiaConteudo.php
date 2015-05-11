@@ -28,13 +28,15 @@ try {
         <table style="width: 100%">
             <tr>
                <th>Titulo</th>
-               <th>Descrição</th> 
+               <th>Descrição</th>
+               <th>Data</th>
             </tr>
             
             <?php foreach ($listaNoticias as $noticia){ ?>
                     <tr>
                         <td><?php echo $noticia->getTitulo() ?></td>
                         <td><?php echo $noticia->getDescricao() ?></td> 
+                        <td><?php echo ExpressoesRegulares::inverterData($noticia->getData()) ?></td> 
                     </tr>
                   
             <?php } ?>

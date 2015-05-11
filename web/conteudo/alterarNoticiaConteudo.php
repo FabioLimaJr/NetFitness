@@ -51,14 +51,17 @@ Nome: <?php echo $secretaria->getNome() ?> | Telefone:<?php echo $secretaria->ge
                         <tr>
                             <th>Titulo</th> 
                             <th>Descrição</th>
+                            <th>Data</th>
                             <th>Selecionar</th>
                         </tr>
                         
                         <?php foreach ($listaNoticias as $noticia){ ?>
                         
                         <tr>
+                            <?php $noticia->setData(ExpressoesRegulares::inverterData($noticia->getData()))?>
                             <td><?php echo $noticia->getTitulo() ?></td> 
                             <td><?php echo $noticia->getDescricao() ?></td>    
+                            <td><?php echo $noticia->getData() ?></td> 
                             <td><input type="radio" name="idNoticia" value="<?php echo $noticia->getIdNoticia() ?>"></td>
                         </tr>
                         <?php 
@@ -100,7 +103,12 @@ Nome: <?php echo $secretaria->getNome() ?> | Telefone:<?php echo $secretaria->ge
                     
                     <li class="form-row text-input-row">
                         <label>Descrição</label>
-                        <textarea class="text-input" name="descricao" value="" style="width:500px; height: 100px"><?php if(isset($noticiaRetornada)) echo $noticiaRetornada->getDescricao() ?></textarea>
+                        <input type="text" name="descricao" value="<?php if(isset($noticiaRetornada)) echo $noticiaRetornada->getDescricao() ?>" class="text-input" style="white: 300px">
+                    </li>
+                    
+                    <li class="form-row text-input-row" >
+                        <label>Data</label>
+                        <input type="text" disabled="disabled" name="data" value="<?php if(isset($noticiaRetornada)) echo (ExpressoesRegulares::inverterData($noticiaRetornada->getData())) ?>" class="text-input" style="white: 300px">
                     </li>
                     
                     <li class="button-row" style="margin-top:50px">
@@ -117,11 +125,14 @@ Nome: <?php echo $secretaria->getNome() ?> | Telefone:<?php echo $secretaria->ge
          }else{
              
              if($_POST['submit'] == 'Salvar Alterações'){
+             
+             
                  
-             $noticiaAlterada = new Noticia($_SESSION['noticiaRetornada']->getIdNoticia());
-             $noticiaAlterada->setTitulo($_POST['titulo']);
-             $noticiaAlterada->setDescricao($_POST['descricao']);
-             $noticiaAlterada->setSecretaria($_SESSION['Secretaria']);
+             $noticiaAlterada = new Noticia($_SESSION['noticiaRetornada']->getIdNoticia(),
+                                            $_POST['titulo'],
+                                            $_POST['descricao'],
+                                            $_SESSION['Secretaria'],
+                                            $_SESSION['noticiaRetornada']->getData());
              
              try{
                  

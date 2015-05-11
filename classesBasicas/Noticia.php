@@ -11,6 +11,7 @@ class Noticia {
     private $titulo;
     private $descricao;
     private $secretaria;
+    private $data;
     
     public function __construct() 
     {
@@ -27,12 +28,13 @@ class Noticia {
         $this->setIdNoticia($idNoticia);
     }
     
-    function __construct4($idNoticia,$titulo,$descricao,$secretaria) 
+    function __construct5($idNoticia,$titulo,$descricao,$secretaria,$data) 
     {
         $this->idNoticia = $idNoticia;
         $this->titulo = $titulo;
         $this->descricao = $descricao;
         $this->secretaria = $secretaria;
+        $this->data = $data;
     }
         
     function getIdNoticia() {
@@ -50,6 +52,10 @@ class Noticia {
     function getSecretaria() {
         return $this->secretaria;
     }
+    
+    function getData() {
+        return $this->data;
+    }
 
     function setIdNoticia($idNoticia) {
         $this->idNoticia = $idNoticia;
@@ -65,5 +71,9 @@ class Noticia {
 
     function setSecretaria($secretaria) {
         $this->secretaria = $secretaria;
+    }
+    
+    function setData($data) {
+        $this->data = $data;
     }
 }

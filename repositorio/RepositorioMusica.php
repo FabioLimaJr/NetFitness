@@ -24,7 +24,11 @@ class RepositorioMusica extends RepositorioGenerico implements IRepositorioMusic
             
             $sql = "INSERT INTO musica VALUES(NULL,'";
             $sql.= $musica->getTitulo(). "','";
-            $sql.= $musica->getSecretaria()->getIdSecretaria(). "')"; 
+            $sql.= $musica->getCategoria()."','";
+            $sql.= $musica->getArtista()."','";
+            $sql.= $musica->getSecretaria()->getIdSecretaria()."')";
+            
+            
             
             if(mysqli_query($this->getConexao(), $sql)){
                 //$this->fecharConexao();
@@ -43,8 +47,11 @@ class RepositorioMusica extends RepositorioGenerico implements IRepositorioMusic
         
         if($this->getConexao()->query($sql) === true){
             
-            $sql = "UPDATE musica SET titulo = '".$musica->getTitulo();
-            $sql.= "'  WHERE idMusica = '".$musica->getIdmusica()."'";
+            $sql = "UPDATE musica SET titulo = '".$musica->getTitulo()
+                              ."', categoria = '".$musica->getCategoria()
+                              ."', artista = '".$musica->getArtista()
+                              ."'  WHERE idMusica = '".$musica->getIdmusica()."'";
+             
             
             if(mysqli_query($this->getConexao(), $sql)){
                // $this->fecharConexao();
@@ -133,7 +140,11 @@ class RepositorioMusica extends RepositorioGenerico implements IRepositorioMusic
             {
                 $resultMusica = mysqli_query($this->getConexao(), $sqlMusica);              
                 $rowMusica = mysqli_fetch_assoc($resultMusica);
-                $musicaRetornada = new Musica($rowMusica['idMusica'], $rowMusica['titulo'], null/*$secretaria*/);
+                $musicaRetornada = new Musica($rowMusica['idMusica'], 
+                                              $rowMusica['titulo'], 
+                                              $rowMusica['categoria'],
+                                              $rowMusica['artista'],
+                                               null/*$secretaria*/);
                
             }
             catch(Exception $exc)

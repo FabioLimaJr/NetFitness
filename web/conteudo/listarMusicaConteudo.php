@@ -28,11 +28,15 @@ try {
         <table style="width: 100%">
             <tr>
                <th>Titulo</th>
+               <th>Categoria</th>
+               <th>Artista</th>
             </tr>
             
             <?php foreach ($listaMusicas as $musica){ ?>
                     <tr>
                         <td><?php echo $musica->getTitulo() ?></td>
+                        <td><?php echo $musica->getCategoria() ?></td>
+                        <td><?php echo $musica->getArtista() ?></td>
                     </tr>
                   
             <?php } ?>

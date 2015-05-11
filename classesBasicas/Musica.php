@@ -1,11 +1,4 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of Musica
  *
@@ -15,8 +8,10 @@ class Musica
 {
     private $idMusica;
     private $titulo;
+    private $categoria;
+    private $artista;
     private $secretaria;
-    
+        
     public function __construct() 
     {
         $get_arguments = func_get_args();
@@ -32,10 +27,13 @@ class Musica
         $this->setIdMusica($idMusica);
     }
     
-    function __construct3($idMusica, $titulo, $secretaria) {
+    function __construct5($idMusica, $titulo, $categoria, $artista, $secretaria) {
         $this->setIdMusica($idMusica);
         $this->setTitulo($titulo);
+        $this->setCategoria($categoria);
+        $this->setArtista($artista);
         $this->setSecretaria($secretaria);
+        
     }
 
     
@@ -47,10 +45,18 @@ class Musica
         return $this->titulo;
     }
 
+    function getCategoria(){
+        return $this->categoria;
+    }
+    
+    function getArtista(){
+        return $this->artista;
+    }
+    
     function getSecretaria() {
         return $this->secretaria;
     }
-
+    
     function setIdMusica($idMusica) {
         $this->idMusica = $idMusica;
     }
@@ -58,10 +64,20 @@ class Musica
     function setTitulo($titulo) {
         $this->titulo = $titulo;
     }
+    
+    function setCategoria($categoria) {
+        $this->categoria = $categoria;
+    }
+    
+    function setArtista($artista) {
+        $this->artista = $artista;
+    }
 
     function setSecretaria($secretaria) {
         $this->secretaria = $secretaria;
     }
+    
+    
 
 
 }

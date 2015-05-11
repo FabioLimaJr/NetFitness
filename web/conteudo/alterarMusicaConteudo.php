@@ -49,7 +49,9 @@ Nome: <?php echo $secretaria->getNome() ?> | Telefone:<?php echo $secretaria->ge
                 <li class="form-row text-input-row">     
                     <table style="width:100%;margin-bottom:50px">
                         <tr>
-                            <th>Titulo</th> 
+                            <th>Titulo</th>
+                            <th>Categoria</th>
+                            <th>Artista</th>                            
                             <th>Selecionar</th>
                         </tr>
                         
@@ -57,6 +59,8 @@ Nome: <?php echo $secretaria->getNome() ?> | Telefone:<?php echo $secretaria->ge
                         
                         <tr>
                             <td><?php echo $musica->getTitulo() ?></td>     
+                            <td><?php echo $musica->getCategoria() ?></td>                               
+                            <td><?php echo $musica->getArtista() ?></td>     
                             <td><input type="radio" name="idMusica" value="<?php echo $musica->getIdMusica() ?>"></td>
                         </tr>
                         <?php 
@@ -95,6 +99,16 @@ Nome: <?php echo $secretaria->getNome() ?> | Telefone:<?php echo $secretaria->ge
                         <label>Titulo</label>
                         <input type="text" name="titulo" value="<?php if(isset($musicaRetornada)) echo $musicaRetornada->getTitulo() ?>" class="text-input" style="white: 300px">
                     </li>
+                    
+                    <li class="form-row text-input-row" >
+                        <label>Categoria</label>
+                        <input type="text" name="categoria" value="<?php if(isset($musicaRetornada)) echo $musicaRetornada->getCategoria() ?>" class="text-input" style="white: 300px">
+                    </li>
+                    
+                    <li class="form-row text-input-row" >
+                        <label>Artista</label>
+                        <input type="text" name="artista" value="<?php if(isset($musicaRetornada)) echo $musicaRetornada->getArtista() ?>" class="text-input" style="white: 300px">
+                    </li>
                                         
                     <li class="button-row" style="margin-top:50px">
                         <input type="submit" value="Salvar Alterações" name="submit" class="btn-submit">
@@ -113,6 +127,9 @@ Nome: <?php echo $secretaria->getNome() ?> | Telefone:<?php echo $secretaria->ge
                  
              $musicaAlterada = new Musica($_SESSION['musicaRetornada']->getIdMusica());
              $musicaAlterada->setTitulo($_POST['titulo']);
+             $musicaAlterada->setCategoria($_POST['categoria']);
+             $musicaAlterada->setArtista($_POST['artista']);
+             $musicaAlterada->setSecretaria($_SESSION['Secretaria']);
              
              try{
                  
