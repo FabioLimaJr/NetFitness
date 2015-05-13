@@ -147,6 +147,7 @@ class  ExpressoesRegulares {
     public static function conferirData($data)
     {
         $arrayData = explode("-", $data);
+        date_default_timezone_set('America/Recife');
         
         if(checkdate($arrayData[1], $arrayData[0], $arrayData[2]))
         {

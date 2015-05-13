@@ -110,5 +110,15 @@ class Excecoes
     public static  function arrayVazioInvalido($mensagem){
         return "Lista de ".$mensagem." vazia.<br/>";
     }
+    
+    public static function numeroNaoInteiro($mensagem)
+    {
+        return "O valor informado '".$mensagem."' não é um inteiro.";
+    }
+    
+    public static function numeroMenorIgualZero($mensagem)
+    {
+        return "O valor informado '".$mensagem."' não pode ser negativo ou igual a 0.";
+    }
 }
 

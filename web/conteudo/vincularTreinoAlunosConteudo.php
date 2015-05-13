@@ -104,12 +104,14 @@ Nome: <?php echo $instrutor->getNome() ?> | Telefone:<?php echo $instrutor->getT
                                 <tr>
                                   <th>Nome</th> 
                                   <th>Selecione</th>
+                                  <th>Qtd Treinos</th>
                                 </tr>
 
                                 <?php foreach ($listaAlunos as $aluno) { ?>
                                      <tr>
                                          <td> <?php echo $aluno->getNome() ?> </td>
                                          <td> <input type="checkbox" name="aluno<?php echo $aluno->getIdAluno() ?>" value="true" style="width: 30px"> </td>
+                                         <td> <input type="text" name="qtdTreinos<?php echo $aluno->getIdAluno() ?>" type="number" style="width: 30px"></td>
                                      </tr>
 
                                   <?php } ?>
@@ -132,6 +134,7 @@ Nome: <?php echo $instrutor->getNome() ?> | Telefone:<?php echo $instrutor->getT
              if($_POST['submit']=='Vincular Alunos'){
                  
                  $alunosSelecionados = array();
+                 $qtdTreinos = array();
                  
                  foreach(array_keys($_POST) as $parametro){
                      
@@ -144,6 +147,7 @@ Nome: <?php echo $instrutor->getNome() ?> | Telefone:<?php echo $instrutor->getT
                              if ($idAluno[1] == $aluno->getIdAluno()) 
                              {
                                  array_push($alunosSelecionados, $aluno);
+                                 array_push($qtdTreinos, $_POST['qtdTreinos'.$idAluno[1]]);
                                  break;
                              }
                         }
@@ -155,7 +159,7 @@ Nome: <?php echo $instrutor->getNome() ?> | Telefone:<?php echo $instrutor->getT
                     $treinoRetornado = $_SESSION['treinoRetornado'];
                     $treinoRetornado->setData($_POST['data']);
                     
-                    $fachada->vincularTreinoAlunos($treinoRetornado, $alunosSelecionados);
+                    $fachada->vincularTreinoAlunos($treinoRetornado, $alunosSelecionados, $qtdTreinos);
                     $mensagem = "Treino vinculado aos alunos com sucesso!!";
                 } catch (Exception $ex) {
                     $mensagem = $ex->getMessage();

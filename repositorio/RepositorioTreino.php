@@ -31,7 +31,7 @@ class RepositorioTreino extends RepositorioGenerico implements IRepositorioTrein
                 $id = mysqli_insert_id($this->getConexao());
                 
                 $listaExercicios = $treino->getListaExercicios();
-                //var_dump($listaExercicios);
+                
                 foreach ($listaExercicios as $exercicio){
                     
                     $sql = "INSERT INTO treinoexercicio VALUES(".$id.","
@@ -234,25 +234,28 @@ class RepositorioTreino extends RepositorioGenerico implements IRepositorioTrein
     }
     
   
-    public function vincularTreinoAlunos($treino, $listaAlunos){
+    public function vincularTreinoAlunos($treino, $listaAlunos, $qtdTreinos){
         
         $sql = "USE " . $this->getNomeBanco();
         
         if($this->getConexao()->query($sql) === true){
-            
-            foreach($listaAlunos as $aluno){
-                
-                $sql = "INSERT INTO alunotreino VALUES('";
-                $sql.= $aluno->getIdAluno()."','";
-                $sql.= $treino->getIdTreino()."','";
-                $sql.= ExpressoesRegulares::inverterData($treino->getData())."')";
-            
-                if(!mysqli_query($this->getConexao(), $sql)){
-                 
-                    throw new Exception(Excecoes::inserirObjeto("Treino: ".  mysqli_error($this->getConexao())));
-                
-                }
+        
+        $cont=0;
+        foreach($listaAlunos as $aluno){
+
+            $sql = "INSERT INTO alunotreino VALUES(NULL,'";
+            $sql.= $aluno->getIdAluno()."','";
+            $sql.= $treino->getIdTreino()."','";
+            $sql.= $qtdTreinos[$cont]."','";
+            $sql.= ExpressoesRegulares::inverterData($treino->getData())."')";
+
+            if(!mysqli_query($this->getConexao(), $sql)){
+
+                throw new Exception(Excecoes::inserirObjeto("Treino: ".  mysqli_error($this->getConexao())));
+
             }
+            $cont++;
+        }
             
             return true;
             

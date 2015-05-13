@@ -105,11 +105,32 @@ class ControladorTreino {
         
     }
     
-    public function vincularTreinoAlunos($treino, $listaAlunos){
+    public function vincularTreinoAlunos($treino, $listaAlunos, $qtdTreinos){
+        foreach ($qtdTreinos as $qtd)
+        {
+            if(!is_numeric($qtd) || !is_int((int)$qtd))
+            {
+                throw new Exception(Excecoes::numeroNaoInteiro("quantidade de treinos"));
+            }
+            else
+            {
+                if((int)$qtd<=0)
+                {
+                    throw new Exception(Excecoes::numeroMenorIgualZero("quantidade de treinos"));
+                }
+            }
+
+        }
         
-        return $this->getRepositorioTreino()->vincularTreinoAlunos($treino, $listaAlunos);
+        if(!ExpressoesRegulares::conferirData($treino->getData()))
+        {
+            throw new Exception(Excecoes::dataInvalida("Treino"));
+        }
+    
+        return $this->getRepositorioTreino()->vincularTreinoAlunos($treino, $listaAlunos, $qtdTreinos);
         
     }
+    
      public function listarTreinoPorAluno($aluno, $fetchType){
          return $this->getRepositorioTreino()->listarTreinoPorAluno($aluno, $fetchType);
      }

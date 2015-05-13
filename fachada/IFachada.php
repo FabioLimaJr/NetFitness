@@ -51,7 +51,7 @@ interface IFachada
     public function excluirTreino($treino);
     public function listarTreinos($instrutor, $fetchType);
     public function detalharTreino($treino, $fetchType);
-    public function vincularTreinoAlunos($treino, $listaAlunos);
+    public function vincularTreinoAlunos($treino, $listaAlunos, $qtdTreinos);
     public function listarTreinoPorAluno($aluno, $fetchType);
     
     //Opinião
