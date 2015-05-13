@@ -1,4 +1,4 @@
-b<?php 
+<?php 
 
     $fachada = Fachada::getInstance();
 

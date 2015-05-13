@@ -10,7 +10,7 @@ define("SMTP_PORT", 465);
 define("SMTP_SICURE","ssl");
 define("SMTP_AUTH",true);
 
-define ("DB_NAME", "u691406612_netf");
-define ("DB_SERVER_NAME", "mysql.hostinger.com.br");
-define ("DB_USER_NAME", "u691406612_user");
-define ("DB_USER_PASSWORD", "unibratec2015");
+define ("DB_NAME", "netfitness");
+define ("DB_SERVER_NAME", "localhost");
+define ("DB_USER_NAME", "root");
+define ("DB_USER_PASSWORD", "123456");
