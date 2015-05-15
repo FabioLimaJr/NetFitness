@@ -6,7 +6,8 @@
     include ('../classesBasicas/Treino.php');
     include ('../classesBasicas/Exercicio.php');
     include ('../fachada/Fachada.php');
-
+    
+    include ('../ferramentas/texto/Texto.php');
 
 if(isset($_POST['idInstrutor']) && isset($_POST['senha']) && isset($_POST['login']))
 {
@@ -27,7 +28,7 @@ if(isset($_POST['idInstrutor']) && isset($_POST['senha']) && isset($_POST['login
         } 
         catch (Exception $ex) 
         {
-            $resposta['mensagem'] = $ex->getMessage();
+            $resposta['mensagem'] =  Texto::brReplace($ex->getMessage());
             $resposta['listaTreinos'] = "null";
             echo json_encode($resposta);
         }

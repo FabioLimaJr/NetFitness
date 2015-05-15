@@ -23,8 +23,8 @@ class RepositorioTreino extends RepositorioGenerico implements IRepositorioTrein
             
             $sql = "INSERT INTO treino VALUES(NULL,'";
             $sql.= $treino->getNome()."','";
-            $sql.= $treino->getDescricao()."',";
-            $sql.= $treino->getInstrutor()->getIdInstrutor().")";
+            $sql.= $treino->getDescricao()."','";
+            $sql.= $treino->getInstrutor()->getIdInstrutor()."')";
             
             if(mysqli_query($this->getConexao(), $sql)){
                 
