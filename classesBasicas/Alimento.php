@@ -12,8 +12,8 @@ class Alimento {
     private $proteina;
     private $carboidrato;
     private $gordura;
+    private $qtdAlimento;
     private $nutricionista;
-    
     
     public function __construct() 
     {
@@ -31,18 +31,16 @@ class Alimento {
         $this->setIdAlimento($idAlimento);
     }
     
-    function __construct7($idAlimento,$descricao, $caloria, $proteina, $carboidrato, $gordura, $nutricionista) {
+    function __construct8($idAlimento,$descricao, $caloria, $proteina, $carboidrato, $gordura, $qtdAlimento, $nutricionista) {
         $this->idAlimento = $idAlimento;
         $this->descricao = $descricao;
         $this->caloria = $caloria;
         $this->proteina = $proteina;
         $this->carboidrato = $carboidrato;
         $this->gordura = $gordura;
+        $this->qtdAlimento = $qtdAlimento;
         $this->nutricionista = $nutricionista;
     }
-
-   
-    
     
     function getIdAlimento() {
         return $this->idAlimento;
@@ -67,11 +65,15 @@ class Alimento {
     function getGordura() {
         return $this->gordura;
     }
-
+    
+    function getQtdAlimento() {
+        return $this->qtdAlimento;
+    }
+    
     function getNutricionista() {
         return $this->nutricionista;
     }
-
+    
     function setIdAlimento($idAlimento) {
         $this->idAlimento = $idAlimento;
     }
@@ -96,6 +98,10 @@ class Alimento {
         $this->gordura = $gordura;
     }
 
+    function setQtdAlimento($qtdAlimento) {
+        $this->qtdAlimento = $qtdAlimento;
+    }
+    
     function setNutricionista($nutricionista) {
         $this->nutricionista = $nutricionista;
     }

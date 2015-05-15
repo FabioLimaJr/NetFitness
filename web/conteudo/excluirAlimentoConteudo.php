@@ -52,6 +52,7 @@ if(!$camposPreenchidos){
                         <th>Proteina</th>
                         <th>Carboidrato</th>
                         <th>Gordura</th>
+                        <th>Quantidade Alimento</th>
                         <th>Selecione</th>
                     </tr>
                     
@@ -62,9 +63,10 @@ if(!$camposPreenchidos){
                         <td><?php echo $alimento->getProteina();?></td>
                         <td><?php echo $alimento->getCarboidrato();?></td>
                         <td><?php echo $alimento->getGordura();?></td>
+                        <td><?php echo $alimento->getQtdAlimento();?></td>
                         <td><input type="radio" name="idAlimento" value="<?php echo $alimento->getIdAlimento()?>"></td>                        
                     </tr>
-                    <input type="hidden" name="nomeNutricionista<?php echo $alimento->getIdAlimento() ?>" value="<?php echo $alimento->getNutricionista()->getNome() ?>">
+                    <!--<input type="hidden" name="nomeNutricionista<//?php echo $alimento->getIdAlimento() ?>" value="<//?php echo $alimento->getNutricionista()->getNome() ?>">-->
                     <?php } ?>
                 </table>
             </li>
@@ -79,10 +81,10 @@ if(!$camposPreenchidos){
 <?php }  else {
     
     try {
-    
+    //".$_POST['nomeNutricionista'.$alimento->getIdAlimento()]."
         $alimento = new Alimento($_POST['idAlimento']);
          $fachada->excluirAlimento($alimento);
-         $mensagem = "O Alimento do Nutricionista ".$_POST['nomeNutricionista'.$alimento->getIdAlimento()]." foi excluida com sucesso.";
+         $mensagem = "O Alimento do Nutricionista foi excluida com sucesso.";
         
      } catch (Exception $exc) {
          echo $exc->getMessage();

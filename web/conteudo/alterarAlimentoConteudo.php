@@ -44,6 +44,7 @@ Telefone:<?php echo $nutricionista->getTelefone() ?> | Email:<?php echo $nutrici
                           <th>Proteina</th>
                           <th>Carboidrato</th>
                           <th>Gordura</th>
+                          <th>Quantidade Alimento</th>
                            <th>Selecionar</th>
                       </tr>
                       
@@ -54,6 +55,7 @@ Telefone:<?php echo $nutricionista->getTelefone() ?> | Email:<?php echo $nutrici
                             <td><?php echo $alimento->getProteina() ?></td>
                             <td><?php echo $alimento->getCarboidrato() ?></td>
                             <td><?php echo $alimento->getGordura() ?></td>
+                            <td><?php echo $alimento->getQtdAlimento() ?></td>
                             <td><input type="radio" name="idAlimento" value="<?php echo $alimento->getIdAlimento() ?>"></td>
                         </tr>
                       <?php }?>
@@ -117,7 +119,12 @@ Telefone:<?php echo $nutricionista->getTelefone() ?> | Email:<?php echo $nutrici
                     <li class="form-row text-input-row">
                         <label>Gordura</label>
                         <input type="text" name="gordura" value="<?php if(isset($alimentoSelecionado)) echo $alimentoSelecionado->getGordura() ?>" class="text-input" style="white: 300px">
-                    </li>                  
+                    </li>      
+                    
+                    <li class="form-row text-input-row">
+                        <label>Quantidade</label>
+                        <input type="text" name="qtdAlimento" value="<?php if(isset($alimentoSelecionado)) echo $alimentoSelecionado->getQtdAlimento() ?>" class="text-input" style="white: 300px">
+                    </li>
                     
                     <li class="button-row" style="margin-top: 50px">
                         <input type="hidden" name="idAlimento" value="<?php echo $_POST['idAlimento'] ?>">
@@ -137,6 +144,7 @@ Telefone:<?php echo $nutricionista->getTelefone() ?> | Email:<?php echo $nutrici
                              $_POST['proteina'],
                              $_POST['carboidrato'],
                              $_POST['gordura'], 
+                             $_POST['qtdAlimento'],
                              $_SESSION['Nutricionista']);
     
              //$_SESSION['Nutricionista'] = $nutricionista; 
