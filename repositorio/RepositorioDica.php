@@ -21,8 +21,7 @@ class RepositorioDica extends Conexao implements IRepositorioDica{
         
         if($this->getConexao()->query($sql) === true){
 
-            $sql = "INSERT INTO dica VALUES('";
-            $sql.= "NULL','";
+            $sql = "INSERT INTO dica VALUES(NULL,'";
             $sql.= $dica->getDescricao(). "','";
             $sql.= $dica->getTitulo(). "')";
             
