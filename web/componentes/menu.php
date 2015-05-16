@@ -24,6 +24,7 @@
             <li><a href="pageContato.php">Entre em contato</a></li>
           </ul>
         </li>
+        <li><a href="visualizarDicas.php">Visualizar Dicas</a></li>
         <li><a href="login.php">Login</a></li>
       </ul>
     </div>

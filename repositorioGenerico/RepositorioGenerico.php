@@ -27,7 +27,7 @@ class RepositorioGenerico extends Conexao
                 
         $repositorioObjeto = new $nomeRepositorio();
         
-        if($nomeClasseObjeto == "Dieta")
+        if($nomeClasseObjeto == "Dieta" || $nomeClasseObjeto == "Treino")
         {
           $listaObjetos = $repositorioObjeto->listar($objetoRelacionado, EAGER);
         }
