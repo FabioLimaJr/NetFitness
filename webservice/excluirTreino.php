@@ -19,6 +19,7 @@ if(isset($_POST['idTreino']) && isset($_POST['senha']) && isset($_POST['login'])
 {
     $fachada = Fachada::getInstance();
     $treino = new Treino($_POST['idTreino']);
+    $instrutor = new Instrutor($_POST['login'], $_POST['senha']);
     $resposta = "";
     
     if($fachada->conferirLoginSenha($instrutor))
