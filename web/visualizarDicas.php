@@ -11,28 +11,10 @@ include ('../classesBasicas/Secretaria.php');
 include ('../classesBasicas/Dieta.php');
 include ('../classesBasicas/Alimento.php');
 include ('../classesBasicas/Dica.php');
-session_start();
-
-$pessoa="";
-if($_SESSION['tipoUsuario'] == "Nutricionista")
-{
-     $pessoa = $_SESSION['Nutricionista'];
-   
-}
-elseif(($_SESSION['tipoUsuario'] == "Instrutor"))
-{
-     $pessoa = $_SESSION['Instrutor'];
-}
-else
-{
-    header('location: erroAcesso.php');
-}
 include ('../expressoesRegulares/ExpressoesRegulares.php');
 include ('../fachada/Fachada.php');
 include ('componentes/header.php');
 ?>
-
-
 <body>
 <div id="wrapper">
     
@@ -40,7 +22,7 @@ include ('componentes/header.php');
     
     <div id="logo"><a href="index.php"><img src="images/logo.png" alt=""></a></div>
 
-    <?php include ("componentes/menu".$_SESSION['tipoUsuario'].".php");
+    <?php include ("componentes/menu.php");
      include ('componentes/leftIcons.php'); 
      include ('componentes/signature.php'); ?>   
     

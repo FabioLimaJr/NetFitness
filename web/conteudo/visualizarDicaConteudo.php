@@ -28,14 +28,7 @@ catch (Exception $exc)
 ?>
 
 <h1 class="title">Visualizar Dicas</h1>
-    <div class="line"></div>
-    Telefone:<?php echo $pessoa->getTelefone() ?> | Email:<?php echo $pessoa->getEmail() ?> | Endereço:<?php echo $pessoa->getEndereco() ?>
-    <div class="intro" style="margin-bottom:50px"></div>
     
-    
-    
-    <h3>Usuário logado: <?php echo $pessoa->getNome() ?></h3>
-   
     <div class="clear"></div>
     <div class="line"></div>
 
