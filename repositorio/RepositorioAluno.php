@@ -79,6 +79,7 @@ class RepositorioAluno extends RepositorioPessoa implements IRepositorioAluno
                 $sql.= "' WHERE idAluno= '".$aluno->getIdAluno();*/
                 
                 $sql = "UPDATE aluno SET sexo = '".$aluno->getSexo()."'";
+                $sql.= ", idMusica = '".$aluno->getMusica()->getIdMusica()."'";
                 $sql.= ", dataNascimento = '".ExpressoesRegulares::inverterData($aluno->getDataNascimento())."'";
                 $sql.= " WHERE idAluno= '".$aluno->getIdAluno()."'";
                 //falta alterar as demais listas atreladas se for preciso
