@@ -18,7 +18,7 @@ if(isset($_GET['comp']))
 
     $graph->setTitleLocation("left");
     $graph->setDataValueColor ("#000000");
-    $graph->setBarColor('#d3222f','#dc661c','#ffe700','#71bf44','#007c37','#68aee0','#374ea1','#2e1950');
+    $graph->setBarColor('#d3222f','#f9a33e','#ffe700','#71bf44','#007c37','#68aee0','#374ea1','#2e1950');
     $graph->setLegend(TRUE);
     call_user_func_array(array($graph, 'setLegendTitle'), $legends);
    
