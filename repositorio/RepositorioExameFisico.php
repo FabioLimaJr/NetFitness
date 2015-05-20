@@ -74,7 +74,11 @@ class RepositorioExameFisico extends RepositorioGenerico implements IRepositorio
                 $rowExameFisico = mysqli_fetch_assoc($resultExameFisico);
 
                 $exameFisicoRetornado = new ExameFisico($rowExameFisico['idExameFisico'],$rowExameFisico['data'],
-                                                        $rowExameFisico['descricao'], null/*aluno*/,  null/*instrutor*/);
+                                                        $rowExameFisico['descricao'], $rowExameFisico['imc'],$rowExameFisico['altura'],
+                                                        $rowExameFisico['peso'], $rowExameFisico['circTorax'],$rowExameFisico['circAbdomen'],
+                                                        $rowExameFisico['circBraco'], $rowExameFisico['circAntebraco'],$rowExameFisico['circCoxa'],
+                                                        $rowExameFisico['circPanturrilha'], null/*aluno*/,  null/*instrutor*/);
+                                                        
                                                         
             }
             catch (Exception $exc)
@@ -108,14 +112,15 @@ class RepositorioExameFisico extends RepositorioGenerico implements IRepositorio
         }
     }
 
-    public function listar($fetchType)
+    public function listar($pessoa, $fetchType)
     {
         $sql = "USE " . $this->getNomeBanco();   
+        $tipoUsuario = get_class($pessoa);
         $listaExamesFisicos = array();
         
         if($this->getConexao()->query($sql) === TRUE)
         {         
-            $sqlListaExamesFisicos = "SELECT * FROM examefisico";
+            $sqlListaExamesFisicos = "SELECT * FROM examefisico WHERE id".$tipoUsuario." ='".$pessoa->getIdPessoa()."'";
             
             try
             {
