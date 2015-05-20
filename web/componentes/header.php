@@ -3,7 +3,7 @@
 
 <head>
 <title>Netfitness</title>
-<meta charset="UTF-8">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
 <link rel="stylesheet" type="text/css" href="css/style.css" media="all">
 <link href='http://fonts.googleapis.com/css?family=Amaranth' rel='stylesheet' type='text/css'>
