@@ -51,7 +51,7 @@ class  ExpressoesRegulares {
                 throw new Exception(Excecoes::senhaInvalida($objeto->getSenha()));
             }
 
-            if(($objeto->getEndereco() === null) && ($objeto->getEndereco() === ""))
+            if(($objeto->getEndereco() === null) || !conferirEndereco($objeto->getEndereco()))
             {
                 throw new Exception(Excecoes::enderecoInvalido($objeto->getEndereco()));
             }
@@ -213,6 +213,21 @@ class  ExpressoesRegulares {
             return false;
         }
     }   
+    
+    public static function conferirEndereco($endereco){
+        
+        //$regularTelefone = "/^\([0-9]{3}\) [0-9]{4}-[0-9]{4}$/";
+        //$regularTelefone = "/^(\(11\) [9][0-9]{4}-[0-9]{4})|(\(1[2-9]\) [5-9][0-9]{3}-[0-9]{4})|(\([2-9][1-9]\) [5-9][0-9]{3}-[0-9]{4})$/";        
+        //'/^(0[1-2][1-9]9\d{8})$/'
+        //$regularTelefone = "/^[0-9]{3}-[0-9]{4}-[0-9]{4}$/";
+        $regularEndereco = "~[a-zA-Z0-9 áÁãÃâÂàÀéÉêÊíÍóÓõÕôÔúÚçÇ/&().,:;<>_-]{3,50}$~";        
+              
+        if(preg_match($regularEndereco, $endereco)){
+            return true;
+        }else{
+            return false;
+        }   
+    }
     
     public static function conferirTelefone($telefone){
         
