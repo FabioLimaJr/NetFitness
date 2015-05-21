@@ -31,7 +31,7 @@ include ('componentes/header.php');
     
     <div id="logo"><a href="index.php"><img src="images/logo.png" alt=""></a></div>
 
-    <?php include ('componentes/menuInstrutor.php') ?>  
+    <?php include ('componentes/menuAluno.php') ?>  
     <?php include ('componentes/leftIcons.php') ?>
     <?php include ('componentes/signature.php'); ?>   
     

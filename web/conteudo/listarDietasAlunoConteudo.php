@@ -23,6 +23,7 @@ catch (Exception $exc)
 <h1 class="title">Listar Dietas</h1>
     <div class="line"></div>
     Telefone:<?php echo $aluno->getTelefone() ?> | Email:<?php echo $aluno->getEmail() ?> | Endereço:<?php echo $aluno->getEndereco() ?>
+    <div style="float:right"><image height = "80" src="<?php echo IMAGE_PATH_ALUNOS."/".$aluno->getFoto() ?>"> </div>
     <div class="intro" style="margin-bottom:50px"></div>
     
     
