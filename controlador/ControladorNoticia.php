@@ -25,9 +25,9 @@ class ControladorNoticia {
 
     public function inserir($noticia){
         
-        if ($noticia->getTitulo() == null && $noticia->getTitulo() == "") {
+        if ($noticia->getTitulo() == null || $noticia->getTitulo() == "") {
             throw new Exception(Excecoes::tituloInvalida($noticia->getTitulo()));
-        }else if ($noticia->getDescricao() == null && $noticia->getDescricao() == "") {
+        }else if ($noticia->getDescricao() == null || $noticia->getDescricao() == "") {
             throw new Exception(Excecoes::descricaoInvalida($noticia->getDescricao()));
         }else if(!ExpressoesRegulares::conferirDescricao($noticia->getDescricao())){
             throw new Exception(Excecoes::descricaoInvalida($noticia->getDescricao()));
@@ -37,9 +37,9 @@ class ControladorNoticia {
     }
     
     public function alterar($noticia){              
-        if ($noticia->getTitulo() == null && $noticia->getTitulo() == "") {
+        if ($noticia->getTitulo() == null || $noticia->getTitulo() == "") {
             throw new Exception(Excecoes::tituloInvalida($noticia->getTitulo()));
-        }else if ($noticia->getDescricao() == null && $noticia->getDescricao() == "") {
+        }else if ($noticia->getDescricao() == null || $noticia->getDescricao() == "") {
             throw new Exception(Excecoes::descricaoInvalida($noticia->getDescricao()));
         }else if(!ExpressoesRegulares::conferirDescricao($noticia->getDescricao())){
             throw new Exception(Excecoes::descricaoInvalida($noticia->getDescricao()));

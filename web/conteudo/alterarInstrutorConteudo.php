@@ -98,31 +98,31 @@ catch (Exception $exc)
                          <li class="form-row text-input-row">
                         <label>Nome</label>
                         <input type="text" name="nome" value="<?php 
-                        if(isset($instrutorRetornado)) echo $instrutorRetornado->getNome() ?>" class="text-input" style="white: 300px">
+                        if(isset($instrutorRetornado)) echo $instrutorRetornado->getNome() ?>" class="text-input" style="width: 300px">
                     </li>
 
                         <li class="form-row text-input-row">
                           <label>CPF</label>
                           <input type="text" name="cpf" value="<?php 
-                        if(isset($instrutorRetornado)) echo $instrutorRetornado->getCpf() ?>" class="text-input" style="white: 300px">
+                        if(isset($instrutorRetornado)) echo $instrutorRetornado->getCpf() ?>" class="text-input" style="width: 300px">  &nbsp;&nbsp;<span style="color: #c4c4c4">Ex. 111.111.111-11</span>
                     </li>
                     
                     <li class="form-row text-input-row">
                           <label>Endereço</label>
                           <input type="text" name="endereco" value="<?php 
-                        if(isset($instrutorRetornado)) echo $instrutorRetornado->getEndereco() ?>" class="text-input" style="white: 300px">
+                        if(isset($instrutorRetornado)) echo $instrutorRetornado->getEndereco() ?>" class="text-input" style="width: 300px">
                     </li>
                         
                      <li class="form-row text-input-row">
                           <label>Telefone</label>
                           <input type="text" name="telefone" value="<?php 
-                        if(isset($instrutorRetornado)) echo $instrutorRetornado->getTelefone() ?>" class="text-input" style="white: 300px">
+                        if(isset($instrutorRetornado)) echo $instrutorRetornado->getTelefone() ?>" class="text-input" style="width: 300px"> <span style="color: #c4c4c4">&nbsp;&nbsp;Ex. (DD) 1111-1111</span>
                     </li>
                     
                      <li class="form-row text-input-row">
                           <label>E-mail</label>
                           <input type="text" name="email" value="<?php 
-                        if(isset($instrutorRetornado)) echo $instrutorRetornado->getEmail() ?>" class="text-input" style="white: 300px">
+                        if(isset($instrutorRetornado)) echo $instrutorRetornado->getEmail() ?>" class="text-input" style="width: 300px">
                     </li>           
 
                    <li class="button-row" style="margin-top: 50px">

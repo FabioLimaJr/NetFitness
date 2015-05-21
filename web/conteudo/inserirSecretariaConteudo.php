@@ -45,7 +45,7 @@ Nome: <?php echo $coordenador->getNome() ?> | Telefone:<?php echo $coordenador->
 
                 <li class="form-row text-input-row">
                   <label>CPF</label>
-                  <input type="text" name="cpf" value="<?php if(isset($secretaria)) echo $secretaria->getCpf() ?>" class="text-input" style="width: 300px">
+                  <input type="text" name="cpf" value="<?php if(isset($secretaria)) echo $secretaria->getCpf() ?>" class="text-input" style="width: 300px">  &nbsp;&nbsp;<span style="color: #c4c4c4">Ex. 111.111.111-11</span>
                 </li>
 
                 <li class="form-row text-input-row">
@@ -55,7 +55,7 @@ Nome: <?php echo $coordenador->getNome() ?> | Telefone:<?php echo $coordenador->
             
                 <li class="form-row text-input-row">
                   <label>Telefone</label>
-                  <input type="text" name="telefone" value="<?php if(isset($secretaria)) echo $secretaria->getTelefone() ?>" class="text-input" style="width: 300px">
+                  <input type="text" name="telefone" value="<?php if(isset($secretaria)) echo $secretaria->getTelefone() ?>" class="text-input" style="width: 300px"> <span style="color: #c4c4c4">&nbsp;&nbsp;Ex. (DD) 1111-1111</span>
                 </li>
 
                 <li class="form-row text-input-row">
