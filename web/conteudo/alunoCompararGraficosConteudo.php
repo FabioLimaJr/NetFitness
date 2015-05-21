@@ -107,98 +107,104 @@ $mensagem = "";
                 if(count($_POST)<=6)
                 {
                     $listaExamesFisicos = $fachada->listarExamesFisicos($_SESSION['Aluno'], EAGER);
-
-
-
-                    foreach ($listaExamesFisicos as $exameFisico)
+                    
+                    if(sizeof($listaExamesFisicos)!=0)
                     {
-                        $dataConvertida = Texto::convertDataFormat("d-m-Y", "j/n/y", Texto::dataInvert($exameFisico->getData()));            
+
+                        foreach ($listaExamesFisicos as $exameFisico)
+                        {
+                            $dataConvertida = Texto::convertDataFormat("d-m-Y", "j/n/y", Texto::dataInvert($exameFisico->getData()));            
+                            if(isset($_POST['peso']))
+                            {
+                                $listaPeso[$dataConvertida] = $exameFisico->getPeso();
+                            }
+                            if(isset($_POST['imc']))
+                            {
+                                $listaIMC[$dataConvertida] = $exameFisico->getImc();    
+                            }
+                            if(isset($_POST['torax']))
+                            {
+                                $listaCircTorax[$dataConvertida] = $exameFisico->getCircTorax();    
+                            }
+                            if(isset($_POST['abdomen']))
+                            {
+                                $listaCircAbdomen[$dataConvertida] = $exameFisico->getCircAbdomen();    
+                            }
+                            if(isset($_POST['braco']))
+                            {
+                                $listaCircBraco[$dataConvertida] = $exameFisico->getCircBraco();    
+                            }
+                            if(isset($_POST['antebraco']))
+                            {
+                                $listaCircAntebraco[$dataConvertida] = $exameFisico->getCircAntebraco();    
+                            }
+                            if(isset($_POST['coxa']))
+                            {
+                                 $listaCircCoxa[$dataConvertida] = $exameFisico->getCircCoxa();    
+                            }
+                            if(isset($_POST['panturrilha']))
+                            {
+                                 $listaCircPanturrilha[$dataConvertida] = $exameFisico->getCircPanturrilha();    
+                            }
+
+                           // array_push ($matrixDados, )    
+                        }
+
                         if(isset($_POST['peso']))
                         {
-                            $listaPeso[$dataConvertida] = $exameFisico->getPeso();
+                            array_push($matrixDados, $listaPeso);
+                            array_push($legendas, "Peso");
                         }
                         if(isset($_POST['imc']))
                         {
-                            $listaIMC[$dataConvertida] = $exameFisico->getImc();    
+                            array_push($matrixDados, $listaIMC);
+                            array_push($legendas, "IMC");
                         }
                         if(isset($_POST['torax']))
                         {
-                            $listaCircTorax[$dataConvertida] = $exameFisico->getCircTorax();    
+                            array_push($matrixDados, $listaCircTorax);
+                            array_push($legendas, "Torax");
                         }
                         if(isset($_POST['abdomen']))
                         {
-                            $listaCircAbdomen[$dataConvertida] = $exameFisico->getCircAbdomen();    
+                            array_push($matrixDados, $listaCircAbdomen);
+                            array_push($legendas, "Abdomen");
                         }
                         if(isset($_POST['braco']))
                         {
-                            $listaCircBraco[$dataConvertida] = $exameFisico->getCircBraco();    
+                            array_push($matrixDados, $listaCircBraco);
+                            array_push($legendas, "Braco");
                         }
                         if(isset($_POST['antebraco']))
                         {
-                            $listaCircAntebraco[$dataConvertida] = $exameFisico->getCircAntebraco();    
+                            array_push($matrixDados, $listaCircAntebraco);
+                            array_push($legendas, "Antebraco");
                         }
                         if(isset($_POST['coxa']))
                         {
-                             $listaCircCoxa[$dataConvertida] = $exameFisico->getCircCoxa();    
+                            array_push($matrixDados, $listaCircCoxa);
+                            array_push($legendas, "Coxa");
                         }
                         if(isset($_POST['panturrilha']))
                         {
-                             $listaCircPanturrilha[$dataConvertida] = $exameFisico->getCircPanturrilha();    
+                            array_push($matrixDados, $listaCircPanturrilha);
+                            array_push($legendas, "Panturrilha");
                         }
+                        ?>
+                        <div style="margin-bottom: 50px">
+                            <image style="margin-bottom:50px;" src='../ferramentas/grafica/grafico.php?titulo=Comp. Graficos&largura=730&altura=350&dados=<?php echo serialize($matrixDados) ?>&legendas=<?php echo serialize($legendas)?>&comp=true'/>
 
-                       // array_push ($matrixDados, )    
+                        </div>
+                        <?php
                     }
-
-                    if(isset($_POST['peso']))
+                    else 
                     {
-                        array_push($matrixDados, $listaPeso);
-                        array_push($legendas, "Peso");
+                         $mensagem = "O aluno não realizou nenhum exame físico.";
                     }
-                    if(isset($_POST['imc']))
-                    {
-                        array_push($matrixDados, $listaIMC);
-                        array_push($legendas, "IMC");
-                    }
-                    if(isset($_POST['torax']))
-                    {
-                        array_push($matrixDados, $listaCircTorax);
-                        array_push($legendas, "Torax");
-                    }
-                    if(isset($_POST['abdomen']))
-                    {
-                        array_push($matrixDados, $listaCircAbdomen);
-                        array_push($legendas, "Abdomen");
-                    }
-                    if(isset($_POST['braco']))
-                    {
-                        array_push($matrixDados, $listaCircBraco);
-                        array_push($legendas, "Braco");
-                    }
-                    if(isset($_POST['antebraco']))
-                    {
-                        array_push($matrixDados, $listaCircAntebraco);
-                        array_push($legendas, "Antebraco");
-                    }
-                    if(isset($_POST['coxa']))
-                    {
-                        array_push($matrixDados, $listaCircCoxa);
-                        array_push($legendas, "Coxa");
-                    }
-                    if(isset($_POST['panturrilha']))
-                    {
-                        array_push($matrixDados, $listaCircPanturrilha);
-                        array_push($legendas, "Panturrilha");
-                    }
-                    ?>
-                    <div style="margin-bottom: 50px">
-                        <image style="margin-bottom:50px;" src='../ferramentas/grafica/grafico.php?titulo=Comp. Graficos&largura=730&altura=350&dados=<?php echo serialize($matrixDados) ?>&legendas=<?php echo serialize($legendas)?>&comp=true'/>
-
-                    </div>
-                    <?php
                 }
                 else 
                 {
-                    $mensagem = "O número máximo de gráficos que é possível comparar é 5.";
+                    $mensagem = "O número máximo de gráficos que é possível comparar é 5.";                  
                 }
             }
             else

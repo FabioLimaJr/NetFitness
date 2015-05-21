@@ -18,17 +18,24 @@ try
 {
     $listaExamesFisicos = $fachada->listarExamesFisicos($_SESSION['Aluno'], EAGER);
   
-    foreach ($listaExamesFisicos as $exameFisico)
+    if(sizeof($listaExamesFisicos)!=0)
     {
-        $dataConvertida = Texto::convertDataFormat("d-m-Y", "j/n/y", Texto::dataInvert($exameFisico->getData()));
-        $listaPeso[$dataConvertida] = $exameFisico->getPeso();
-        $listaIMC[$dataConvertida] = $exameFisico->getImc();
-        $listaCircTorax[$dataConvertida] = $exameFisico->getCircTorax();
-        $listaCircAbdomen[$dataConvertida] = $exameFisico->getCircAbdomen();
-        $listaCircBraco[$dataConvertida] = $exameFisico->getCircBraco();
-        $listaCircAntebraco[$dataConvertida] = $exameFisico->getCircAntebraco();
-        $listaCircCoxa[$dataConvertida] = $exameFisico->getCircCoxa();
-        $listaCircPanturrilha[$dataConvertida] = $exameFisico->getCircPanturrilha();
+        foreach ($listaExamesFisicos as $exameFisico)
+        {
+            $dataConvertida = Texto::convertDataFormat("d-m-Y", "j/n/y", Texto::dataInvert($exameFisico->getData()));
+            $listaPeso[$dataConvertida] = $exameFisico->getPeso();
+            $listaIMC[$dataConvertida] = $exameFisico->getImc();
+            $listaCircTorax[$dataConvertida] = $exameFisico->getCircTorax();
+            $listaCircAbdomen[$dataConvertida] = $exameFisico->getCircAbdomen();
+            $listaCircBraco[$dataConvertida] = $exameFisico->getCircBraco();
+            $listaCircAntebraco[$dataConvertida] = $exameFisico->getCircAntebraco();
+            $listaCircCoxa[$dataConvertida] = $exameFisico->getCircCoxa();
+            $listaCircPanturrilha[$dataConvertida] = $exameFisico->getCircPanturrilha();
+        }
+    }
+    else
+    {
+       $mensagem = "O aluno não realizou nenhum exame físico.";    
     }
    
 } 
@@ -54,6 +61,9 @@ catch (Exception $exc)
    
     <div class="clear"></div>
     <div class="line"></div>
+    
+    <?php if(sizeof($listaExamesFisicos)!=0)
+    {  ?>
 
     <div style="margin-bottom: 50px">
         <image style="margin-bottom:50px;" src='../ferramentas/grafica/grafico.php?titulo=Peso&largura=730&altura=200&dados=<?php echo serialize($listaPeso) ?>'/>
@@ -65,6 +75,14 @@ catch (Exception $exc)
         <image style="margin-bottom:50px;" src='../ferramentas/grafica/grafico.php?titulo=Circunferencia Coxa&largura=730&altura=200&dados=<?php echo serialize($listaCircCoxa) ?>'/>
         <image style="margin-bottom:50px;" src='../ferramentas/grafica/grafico.php?titulo=Circunferencia Panturrilha&largura=730&altura=200&dados=<?php echo serialize($listaCircPanturrilha) ?>'/>
     </div>
-
     
-    <?php include('componentes/footerOne.php') ?>
+    <?php
+    }
+     if($mensagem!="") { ?>
+    
+        <h3>Mensagem</h3>
+        <p><?php echo $mensagem ?></p>
+    
+    <?php }
+    
+    include('componentes/footerOne.php') ?>
