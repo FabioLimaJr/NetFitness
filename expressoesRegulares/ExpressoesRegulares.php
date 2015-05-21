@@ -184,7 +184,7 @@ class  ExpressoesRegulares {
         //$regularNome = "(^[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$";        
         //$regularNome = "^[aA-zZ]+((\s[aA-zZ]+)+)?$";
         
-        $regularNome = "/[a-zA-Z ]{6,12}$/";
+        $regularNome = "/[a-zA-Z áÁãÃâÂàÀéÉêÊíÍóÓõÕôÔúÚçÇ-]{3,30}$/";
         
         if(preg_match($regularNome, $nome)){
             return true;
@@ -233,7 +233,7 @@ class  ExpressoesRegulares {
         
         //$regularLogin = "/^[a-zA-Z]{1}[0-9a-zA-Z]+/g";
         
-        $regularLogin = "/^[A-Za-z]{1}[A-Za-z0-9]{5,31}$/";
+        $regularLogin = "/[a-zA-Z0-9@_.-]{8,16}$/";
         
         if(preg_match($regularLogin, $login)){
             return true;
@@ -248,7 +248,8 @@ class  ExpressoesRegulares {
         //$regularSenha = "/^\S*(?=\S{8,})(?=\S*[az])(?=\S*[AZ])(?=\S*[\d])\S*$/";
         //$regularSenha = "/^(?=.*\d)(?!.*\s).{4,8}$/";
         
-        $regularSenha = '$\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$';
+        //$regularSenha = '$\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$';
+        $regularSenha = "/[a-zA-Z0-9@_.-]{8,16}$/";
         
         if(preg_match($regularSenha, $senha)){
             return true;
@@ -261,7 +262,7 @@ class  ExpressoesRegulares {
         //$regularNome = "(^[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+((\s[\'\.\^\~\´\`\\áÁ\\àÀ\\ãÃ\\âÂ\\éÉ\\èÈ\\êÊ\\íÍ\\ìÌ\\óÓ\\òÒ\\õÕ\\ôÔ\\úÚ\\ùÙ\\çÇaA-zZ]+)+)?$";        
         //$regularNome = "^[aA-zZ]+((\s[aA-zZ]+)+)?$";
         
-        $regularDescricao = "/[a-zA-Z ]{0,500}$/";
+        $regularDescricao = "/[a-zA-Z0-9 áÁãÃâÂàÀéÉêÊíÍóÓõÕôÔúÚçÇ?=/!$%&()*+.,:;#@<>£^_|-]{3,500}$/";
         
         if(preg_match($regularDescricao, $descricao)){
             return true;
