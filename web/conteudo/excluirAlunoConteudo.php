@@ -1,7 +1,7 @@
 <?php 
 
 $camposPreenchidos = false;
-$fachada = new Fachada();
+//$fachada = new Fachada();
 $fachada = Fachada::getInstance();
 $mensagem ="";
  

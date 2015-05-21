@@ -1,5 +1,5 @@
 <?php 
-$fachada = new Fachada();
+//$fachada = new Fachada();
 $fachada = Fachada::getInstance();
 $mensagem ="";
 $camposPreenchidos = false;
