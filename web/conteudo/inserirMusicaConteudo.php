@@ -42,17 +42,17 @@
 
                         <li class="form-row text-input-row">
                             <label>Titulo</label>
-                            <input type="text" name="titulo" value="<?php if(isset($musica)) echo $musica->getTitulo() ?>" class="text-input" style="white: 300px">
+                            <input type="text" name="titulo" value="<?php if(isset($musica)) echo $musica->getTitulo() ?>" class="text-input" style="width: 300px">
                         </li>
                         
                         <li class="form-row text-input-row">
                             <label>Categoria</label>
-                            <input type="text" name="categoria" value="<?php if(isset($musica)) echo $musica->getCategoria() ?>" class="text-input" style="white: 300px">
+                            <input type="text" name="categoria" value="<?php if(isset($musica)) echo $musica->getCategoria() ?>" class="text-input" style="width: 300px">
                         </li>
                         
                         <li class="form-row text-input-row">
                             <label>Artista/Banda</label>
-                            <input type="text" name="artista" value="<?php if(isset($musica)) echo $musica->getArtista() ?>" class="text-input" style="white: 300px">
+                            <input type="text" name="artista" value="<?php if(isset($musica)) echo $musica->getArtista() ?>" class="text-input" style="width: 300px">
                         </li>
                                         
                         <li class="button-row" style="margin-top: 50px">                        

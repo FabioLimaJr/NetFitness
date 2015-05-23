@@ -1,19 +1,13 @@
 <?php 
 include ('../classesBasicas/Aluno.php');
-include ('../classesBasicas/Musica.php');
-include ('../classesBasicas/Nutricionista.php');
-include ('../classesBasicas/Secretaria.php');
-include ('../classesBasicas/Dieta.php');
-include ('../classesBasicas/Alimento.php');
 include ('../classesBasicas/Instrutor.php');
-include ('../classesBasicas/Treino.php');
-include ('../classesBasicas/Exercicio.php');
-include ('../classesBasicas/Pagamento.php');
+include ('../classesBasicas/ExameFisico.php');
+include ('../ferramentas/texto/Texto.php');
 session_start();
 
-if(isset($_SESSION['Aluno']))
+if(isset($_SESSION['Instrutor']))
 {
-    $aluno = $_SESSION['Aluno'];
+    $instrutor = $_SESSION['Instrutor'];
 }
 else
 {
@@ -24,6 +18,7 @@ include ('../fachada/Fachada.php');
 include ('componentes/header.php');
 ?>
 
+
 <body>
 <div id="wrapper">
     
@@ -31,7 +26,7 @@ include ('componentes/header.php');
     
     <div id="logo"><a href="index.php"><img src="images/logo.png" alt=""></a></div>
 
-    <?php include ('componentes/menuAluno.php') ?>  
+    <?php include ('componentes/menuInstrutor.php') ?>  
     <?php include ('componentes/leftIcons.php') ?>
     <?php include ('componentes/signature.php'); ?>   
     
@@ -39,7 +34,7 @@ include ('componentes/header.php');
      
   <div id="content">
   
-     <?php include('conteudo/listarTreinosAlunoConteudo.php'); ?>
+     <?php include('conteudo/instrutorCompararGraficosConteudo.php'); ?>
     
   </div><!-- end content -->
   

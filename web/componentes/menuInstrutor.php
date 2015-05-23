@@ -9,6 +9,8 @@
             <li><a href="#">Excluir</a></li>
             <li><a href="#">Alterar</a></li>
             <li><a href="#">Listar</a></li>
+            <li><a href="instrutorVisualizarGraficos.php">Visualizar Gráficos</a></li>
+            <li><a href="instrutorCompararGraficos.php">Comparar Gráficos</a></li>
           </ul>
         </li>
         <li><a href="#">Exercício</a>

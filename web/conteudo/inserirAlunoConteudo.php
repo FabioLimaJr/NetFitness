@@ -45,7 +45,7 @@
          <fieldset>
            <ol>
 
-              <li class="form-row text-input-row">
+              <li class="form-row text-input-row" style="width: 300px">
                  <label>Sexo</label>
                  <input type="radio" name="sexo" value="m" style="margin-top: 10px" checked>Masculino
                  <input type="radio" name="sexo" value="f">Feminino
@@ -58,7 +58,7 @@
 
              <li class="form-row text-input-row">
                <label>Cpf</label>
-               <input type="text" name="cpf" value="<?php if(isset($aluno)) echo $aluno->getCpf() ?>" class="text-input" style="width: 300px">
+               <input type="text" name="cpf" value="<?php if(isset($aluno)) echo $aluno->getCpf() ?>" class="text-input" style="width: 300px">  &nbsp;&nbsp;<span style="color: #c4c4c4">Ex. 111.111.111-11</span>
              </li>
 
              <li class="form-row text-input-row">
@@ -68,7 +68,7 @@
 
              <li class="form-row text-input-row">
                <label>Telefone</label>
-               <input type="text" name="telefone" value="<?php if(isset($aluno)) echo $aluno->getTelefone() ?>" class="text-input" style="width: 300px">
+               <input type="text" name="telefone" value="<?php if(isset($aluno)) echo $aluno->getTelefone() ?>" class="text-input" style="width: 300px"> <span style="color: #c4c4c4">&nbsp;&nbsp;Ex. (DD) 1111-1111</span>
              </li>
 
              <li class="form-row text-input-row">

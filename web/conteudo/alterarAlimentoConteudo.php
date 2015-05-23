@@ -1,7 +1,7 @@
 <?php
 
 $camposPreenchidos = false;
-$fachada = new Fachada();
+//$fachada = new Fachada();
 $fachada = Fachada::getInstance();
 $mensagem = "";
 
@@ -103,27 +103,27 @@ Telefone:<?php echo $nutricionista->getTelefone() ?> | Email:<?php echo $nutrici
                     
                     <li class="form-row text-input-row" >
                         <label>Caloria</label>
-                        <input type="text" name="caloria" value="<?php if(isset($alimentoSelecionado)) echo $alimentoSelecionado->getCaloria() ?>" class="text-input" style="white: 300px">
+                        <input type="text" name="caloria" value="<?php if(isset($alimentoSelecionado)) echo $alimentoSelecionado->getCaloria() ?>" class="text-input" style="width: 300px">
                     </li>
                     
                     <li class="form-row text-input-row">
                         <label>Proteina</label>
-                        <input type="text" name="proteina" value="<?php if(isset($alimentoSelecionado)) echo $alimentoSelecionado->getProteina() ?>" class="text-input" style="white: 300px">
+                        <input type="text" name="proteina" value="<?php if(isset($alimentoSelecionado)) echo $alimentoSelecionado->getProteina() ?>" class="text-input" style="width: 300px">
                     </li>
                     
                     <li class="form-row text-input-row">
                         <label>Carboidrato</label>
-                        <input type="text" name="carboidrato" value="<?php if(isset($alimentoSelecionado)) echo $alimentoSelecionado->getCarboidrato() ?>" class="text-input" style="white: 300px">
+                        <input type="text" name="carboidrato" value="<?php if(isset($alimentoSelecionado)) echo $alimentoSelecionado->getCarboidrato() ?>" class="text-input" style="width: 300px">
                     </li>
                     
                     <li class="form-row text-input-row">
                         <label>Gordura</label>
-                        <input type="text" name="gordura" value="<?php if(isset($alimentoSelecionado)) echo $alimentoSelecionado->getGordura() ?>" class="text-input" style="white: 300px">
+                        <input type="text" name="gordura" value="<?php if(isset($alimentoSelecionado)) echo $alimentoSelecionado->getGordura() ?>" class="text-input" style="width: 300px">
                     </li>      
                     
                     <li class="form-row text-input-row">
                         <label>Quantidade</label>
-                        <input type="text" name="qtdAlimento" value="<?php if(isset($alimentoSelecionado)) echo $alimentoSelecionado->getQtdAlimento() ?>" class="text-input" style="white: 300px">
+                        <input type="text" name="qtdAlimento" value="<?php if(isset($alimentoSelecionado)) echo $alimentoSelecionado->getQtdAlimento() ?>" class="text-input" style="width: 300px">
                     </li>
                     
                     <li class="button-row" style="margin-top: 50px">

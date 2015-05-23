@@ -54,7 +54,7 @@ if(!$camposPreenchidos){
                 <ol>
                     <li class="form-row text-input-row">
                         <label>Titulo</label>
-                        <input type="text" name="titulo" value="<?php if(isset($dica)) echo $dica->getTitulo() ?>" class="text-input" style="white: 300px">
+                        <input type="text" name="titulo" value="<?php if(isset($dica)) echo $dica->getTitulo() ?>" class="text-input" style="width: 300px">
                     </li>
                     
                     <li class="form-row text-input-row">

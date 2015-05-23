@@ -42,17 +42,18 @@
 
                 <li class="form-row text-input-row">
                     <label>Titulo</label>
-                    <input type="text" name="titulo" value="<?php if(isset($noticia)) echo $noticia->getTitulo() ?>" class="text-input" style="white: 300px">
+                    <input type="text" name="titulo" value="<?php if(isset($noticia)) echo $noticia->getTitulo() ?>" class="text-input" style="width: 300px">
                 </li>
                     
                 <li class="form-row text-input-row">
                     <label>Descrição</label>
-                    <textarea class="text-input" name="descricao" value="<?php if(isset($noticia)) echo $noticia->getDescricao() ?>" style="width:500px; height: 100px"></textarea>
+                    <textarea class="text-input" name="descricao" value="<?php if(isset($noticia)) echo $noticia->getDescricao() ?>" style="width:300px; height: 100px"></textarea>
                 </li>
                     
                 <li class="form-row text-input-row">
                     <label>Data</label>
                     <input type="text" name="data" id="dataPicked" value="<?php if(isset($noticia)) echo ExpressoesRegulares::inverterData($noticia->getData()) ?>" class="text-input" style="white: 300px">
+                    <input type="text" name="data" value="<?php if(isset($noticia)) echo ExpressoesRegulares::inverterData($noticia->getData()) ?>" class="text-input" style="width: 300px">
                 </li>
                    
                     <li class="button-row" style="margin-top: 50px">                        

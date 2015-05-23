@@ -1,20 +1,30 @@
 <?php 
-include ('../classesBasicas/Treino.php');
-include ('../classesBasicas/Exercicio.php');
-include ('../classesBasicas/ExameFisico.php');
-include ('../classesBasicas/Coordenador.php');
 include ('../classesBasicas/Aluno.php');
 include ('../classesBasicas/Musica.php');
+include ('../classesBasicas/Coordenador.php');
 include ('../classesBasicas/Nutricionista.php');
 include ('../classesBasicas/Instrutor.php');
 include ('../classesBasicas/Secretaria.php');
-include ('../classesBasicas/Dieta.php');
-include ('../classesBasicas/Alimento.php');
-include ('../classesBasicas/Dica.php');
+include ('../ferramentas/upload/Upload.php');
+require ('../ferramentas/mail/PHPMailerAutoload.php');
+
+session_start();
+
+if(isset($_SESSION['Aluno']))
+{
+    $aluno = $_SESSION['Aluno'];
+}
+else
+{
+    header('location: erroAcesso.php');
+}
 include ('../expressoesRegulares/ExpressoesRegulares.php');
 include ('../fachada/Fachada.php');
-include ('componentes/header.php');
+include ('componentes/headerData.php');
+
 ?>
+
+
 <body>
 <div id="wrapper">
     
@@ -22,15 +32,15 @@ include ('componentes/header.php');
     
     <div id="logo"><a href="index.php"><img src="images/logo.png" alt=""></a></div>
 
-    <?php include ("componentes/menu.php");
-     include ('componentes/leftIcons.php'); 
-     include ('componentes/signature.php'); ?>   
+    <?php include ('componentes/menuAluno.php') ?>  
+    <?php include ('componentes/leftIcons.php') ?>
+    <?php include ('componentes/signature.php'); ?>   
     
   </div><!-- end sidebar -->
      
   <div id="content">
   
-     <?php include('conteudo/visualizarDicaConteudo.php'); ?>
+     <?php include('conteudo/alunoSelecionaMusicaConteudo.php'); ?>
     
   </div><!-- end content -->
   
@@ -40,4 +50,3 @@ include ('componentes/header.php');
 
 </body>
 </html>
-

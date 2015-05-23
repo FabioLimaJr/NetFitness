@@ -1,6 +1,6 @@
 <?php 
 
-$fachada = new Fachada();
+//$fachada = new Fachada();
 $fachada = Fachada::getInstance();
 $mensagem ="";
 $camposPreenchidos = false;
@@ -98,31 +98,31 @@ catch (Exception $exc)
                          <li class="form-row text-input-row">
                         <label>Nome</label>
                         <input type="text" name="nome" value="<?php 
-                        if(isset($secretariaRetornada)) echo $secretariaRetornada->getNome() ?>" class="text-input" style="white: 300px">
+                        if(isset($secretariaRetornada)) echo $secretariaRetornada->getNome() ?>" class="text-input" style="width: 300px">
                     </li>
 
                         <li class="form-row text-input-row">
                           <label>CPF</label>
                           <input type="text" name="cpf" value="<?php 
-                        if(isset($secretariaRetornada)) echo $secretariaRetornada->getCpf() ?>" class="text-input" style="white: 300px">
+                        if(isset($secretariaRetornada)) echo $secretariaRetornada->getCpf() ?>" class="text-input" style="width: 300px">  &nbsp;&nbsp;<span style="color: #c4c4c4">Ex. 111.111.111-11</span>
                     </li>
                     
                     <li class="form-row text-input-row">
                           <label>Endereço</label>
                           <input type="text" name="endereco" value="<?php 
-                        if(isset($secretariaRetornada)) echo $secretariaRetornada->getEndereco() ?>" class="text-input" style="white: 300px">
+                        if(isset($secretariaRetornada)) echo $secretariaRetornada->getEndereco() ?>" class="text-input" style="width: 300px">
                     </li>
                         
                      <li class="form-row text-input-row">
                           <label>Telefone</label>
                           <input type="text" name="telefone" value="<?php 
-                        if(isset($secretariaRetornada)) echo $secretariaRetornada->getTelefone() ?>" class="text-input" style="white: 300px">
+                        if(isset($secretariaRetornada)) echo $secretariaRetornada->getTelefone() ?>" class="text-input" style="width: 300px"> <span style="color: #c4c4c4">&nbsp;&nbsp;Ex. (DD) 1111-1111</span>
                     </li>
                     
                      <li class="form-row text-input-row">
                           <label>E-mail</label>
                           <input type="text" name="email" value="<?php 
-                        if(isset($secretariaRetornada)) echo $secretariaRetornada->getEmail() ?>" class="text-input" style="white: 300px">
+                        if(isset($secretariaRetornada)) echo $secretariaRetornada->getEmail() ?>" class="text-input" style="width: 300px">
                     </li>           
 
                    <li class="button-row" style="margin-top: 50px">
