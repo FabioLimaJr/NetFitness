@@ -108,7 +108,7 @@ Nome: <?php echo $secretaria->getNome() ?> | Telefone:<?php echo $secretaria->ge
                     
                     <li class="form-row text-input-row" >
                         <label>Data</label>
-                        <input type="text" disabled="disabled" name="data" value="<?php if(isset($noticiaRetornada)) echo (ExpressoesRegulares::inverterData($noticiaRetornada->getData())) ?>" class="text-input" style="white: 300px">
+                        <input type="text" id="dataPicked" name="data" value="<?php if(isset($noticiaRetornada)) echo (ExpressoesRegulares::inverterData($noticiaRetornada->getData())) ?>" class="text-input" style="white: 300px">
                     </li>
                     
                     <li class="button-row" style="margin-top:50px">

@@ -49,6 +49,21 @@
 			cellColorScheme:"aqua",
 			weekStartDay:0
 		});
+                
+                new JsDatePick({
+			useMode:2,
+			target:"dataPicked2",
+			dateFormat:"%d-%m-%Y",
+			selectedDate:{				
+				day:<?php echo date("d")?>,						
+				month:<?php echo date("m")?>,
+				year:<?php echo date("Y")?>
+			},
+			yearsRange:[1900,2050],
+			limitToToday:false,
+			cellColorScheme:"aqua",
+			weekStartDay:0
+		});
 	};
 </script>
 

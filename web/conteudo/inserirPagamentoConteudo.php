@@ -46,7 +46,7 @@
 
              <li class="form-row text-input-row">
                <label>DataVencimento</label>
-               <input type="text" name="dataVencimento" value="<?php if(isset($pagamento)) echo $pagamento->getDataVencimento() ?>" class="text-input" style="width: 300px">
+               <input type="text" id="dataPicked" maxlength="10" name="dataVencimento" value="" class="text-input" style="width: 300px">
              </li>
 
               <li class="form-row text-input-row">

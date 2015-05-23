@@ -52,7 +52,7 @@
                     
                 <li class="form-row text-input-row">
                     <label>Data</label>
-                    <input type="text" name="data" value="<?php if(isset($noticia)) echo ExpressoesRegulares::inverterData($noticia->getData()) ?>" class="text-input" style="white: 300px">
+                    <input type="text" name="data" id="dataPicked" value="<?php if(isset($noticia)) echo ExpressoesRegulares::inverterData($noticia->getData()) ?>" class="text-input" style="white: 300px">
                 </li>
                    
                     <li class="button-row" style="margin-top: 50px">                        
