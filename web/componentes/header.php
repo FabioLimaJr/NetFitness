@@ -25,6 +25,7 @@
 <script src="js/jquery.flexslider-min.js"></script>
 <script src="js/jquery.masonry.min.js"></script>
 <script src="js/jquery.slickforms.js"></script>
+<script src="js/imc.js"></script>
 <script type="text/javascript">
 
 

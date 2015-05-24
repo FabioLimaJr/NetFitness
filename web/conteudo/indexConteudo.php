@@ -47,26 +47,30 @@
     <div class="line"></div>
      <h2>Calcule seu IMC</h2>
     <div class="form-container" style="margin-bottom:50px">
-             <form class="forms"  method="post" >
+             <form class="forms" id="imcForm" name="imcForm" method="post" >
          <fieldset>
            <ol>
 
              <li class="form-row text-input-row">
                     <label>Peso</label>
-                    <input type="text" name="peso" value="" class="text-input" style="width: 70px">
+                    <input type="text" name="peso"  id="peso" class="text-input" style="width: 70px"> Ex: 56.10 Kilos
              </li>
              
              <li class="form-row text-input-row">
                     <label>Altura</label>
-                    <input type="text" name="altura" value="" class="text-input" style="width: 70px">
+                    <input type="text" name="altura" id="altura" class="text-input" style="width: 70px"> Ex: 1.80 Metros            
              </li>
-             <li class="button-row" style="margin-top:50px">
-               <input type="submit" value="Calcular" name="submit" class="btn-submit">
+             <li class="form-row text-input-row">
+                 <input name="Enviar" type="submit" value="Calcular" onclick="calcula_imc()" class="btn-submit">
+                    &nbsp;
+                  <input type="reset" value="Limpar Valores"  class="btn-submit">
+             
              </li>
            </ol>
-
-         </fieldset>
+              
+            </fieldset>
        </form>
+
        <div class="response"></div>
 
     
