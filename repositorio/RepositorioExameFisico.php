@@ -31,6 +31,15 @@ class RepositorioExameFisico extends RepositorioGenerico implements IRepositorio
             $sql = "INSERT INTO examefisico VALUES(NULL,'";
             $sql.= $dataSqlFormat."','";
             $sql.= $exameFisico->getDescricao(). "','";
+            $sql.= $exameFisico->getImc(). "','";
+            $sql.= $exameFisico->getAltura(). "',,";
+            $sql.= $exameFisico->getPeso(). "','";
+            $sql.= $exameFisico->getCircTorax(). "','";
+            $sql.= $exameFisico->getCircAbdomen(). "','";
+            $sql.= $exameFisico->getCircBraco(). "','";
+            $sql.= $exameFisico->getCircAntebraco(). "','";
+            $sql.= $exameFisico->getCircCoxa(). "','";
+            $sql.= $exameFisico->getCircPanturrilha(). "','";
             $sql.= $exameFisico->getAluno()->getIdPessoa(). "','";
             $sql.= $exameFisico->getInstrutor()->getIdPessoa(). "')";
             
