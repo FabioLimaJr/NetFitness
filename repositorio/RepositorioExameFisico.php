@@ -60,10 +60,36 @@ class RepositorioExameFisico extends RepositorioGenerico implements IRepositorio
         }
     }
  
-    public function alterar($exameFisico)
-    {
+      public function alterar($examefisico) {
         
+        $sql = "USE " . $this->getNomeBanco();
+        
+        if(@$this->getConexao()->query($sql) === TRUE){
+            
+            $sql = "UPDATE examefisico SET descricao = '".$examefisico->getDescricao()
+                                                 ."', imc = '".$examefisico->getImc()
+                                                 ."', peso = '".$examefisico->getPeso()
+                                                 ."', altura = '".$examefisico->getAltura()
+                                                 ."', circTorax = '".$examefisico->getCircTorax()
+                                                 ."', circAbdomen = '".$examefisico->getAbdomen()
+                                                 ."', circBraco = '".$examefisico->getBraco()
+                                                 ."', circAntebraco = '".$examefisico->getAntebraco()
+                                                 ."', circCoxa = '".$examefisico->getCoxa()
+                                                 ."', circPanturrilha = '".$examefisico->getPanturrilha()
+                                                 ."' WHERE idExameFisico = ".$examefisico->getIdExameFisico();
+            
+            if( mysqli_query($this->getConexao(), $sql)){
+                
+                //$this->fecharConexao();
+                return TRUE;
+            }else{
+                throw new Exception(Excecoes::alterarObjeto("Exame Físico: ".mysqli_error($this->getConexao())));
+            }
+        }else{
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+        }
     }
+
 
     public function excluir($exameFisico)
     {
