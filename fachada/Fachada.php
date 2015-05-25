@@ -347,6 +347,9 @@ class Fachada implements IFachada
         return $this->controladorExameFisico->listar($pessoa, $fetchType);
     }   
     
+     public function alterarExameFisico($exameFisico) {
+        return $this->controladorExameFisico->alterar($exameFisico);
+    }
     //Dica
     public function inserirDica($dica, $pessoa) {
         $this->controladorDica->inserir($dica, $pessoa);

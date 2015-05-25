@@ -93,7 +93,8 @@ interface IFachada
     public function inserirExameFisico($exameFisico);
     public function listarExamesFisicos($pessoa, $fetchType);
     public function detalharExameFisico($exameFisico, $fetchType);
-      
+    public function alterarExameFisico($exameFisico);
+
     //Dica
     public function inserirDica($dica, $pessoa);
     public function alterarDica($dica);
