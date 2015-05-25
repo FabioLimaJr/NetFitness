@@ -28,11 +28,11 @@ class RepositorioExameFisico extends RepositorioGenerico implements IRepositorio
             $arrayData = explode("-", $exameFisico->getData());
             $dataSqlFormat = $arrayData[2]."-".$arrayData[1]."-".$arrayData[0];
             
-            $sql = "INSERT INTO examefisico VALUES(NULL,'";
-            $sql.= $dataSqlFormat."','";
+            $sql = "INSERT INTO examefisico VALUES (NULL, '";
+            $sql.= $dataSqlFormat. "','";
             $sql.= $exameFisico->getDescricao(). "','";
             $sql.= $exameFisico->getImc(). "','";
-            $sql.= $exameFisico->getAltura(). "',,";
+            $sql.= $exameFisico->getAltura(). "','";
             $sql.= $exameFisico->getPeso(). "','";
             $sql.= $exameFisico->getCircTorax(). "','";
             $sql.= $exameFisico->getCircAbdomen(). "','";
