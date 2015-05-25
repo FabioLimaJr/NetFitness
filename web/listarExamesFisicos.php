@@ -7,6 +7,8 @@ include ('../classesBasicas/Secretaria.php');
 include ('../classesBasicas/Dieta.php');
 include ('../classesBasicas/Alimento.php');
 include ('../classesBasicas/Pagamento.php');
+include ('../classesBasicas/ExameFisico.php');
+include ('../classesBasicas/Instrutor.php');
 session_start();
 
 if(isset($_SESSION['Instrutor']))
