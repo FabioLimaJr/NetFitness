@@ -137,10 +137,8 @@ class RepositorioExameFisico extends RepositorioGenerico implements IRepositorio
                 $resultListaExamesFisicos = mysqli_query($this->getConexao(), $sqlListaExamesFisicos);
 
                 while ($rowListaExamesFisicos = mysqli_fetch_array($resultListaExamesFisicos)) 
-                {
-                    
+                {                    
                     $exameFisicoRetornado = new ExameFisico($rowListaExamesFisicos['idExameFisico']);               
-
                     if($fetchType === EAGER)
                     {                
                         $exameFisicoRetornado = $this->detalhar($exameFisicoRetornado, EAGER);
