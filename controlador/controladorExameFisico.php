@@ -42,12 +42,16 @@ class controladorExameFisico
         //conferir obejto
         return $this->getRepositorioExameFisico()->listar($pessoa, $fetchType);
     }
-    
+   
     public function detalhar($exameFisico, $fetchType)
     {
         //conferir obejto e fetchType
         return $this->getRepositorioExameFisico()->detalhar($exameFisico, $fetchType);
     }
-
+    public function alterar($exameFisico)
+    {
+        //conferir obejto e fetchType
+        return $this->getRepositorioExameFisico()->lterar($exameFisico);
+    }
 
 }
