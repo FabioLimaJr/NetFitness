@@ -58,7 +58,8 @@
                         if(isset($exameFisico)) echo $exameFisico->getDescricao() 
                 ?></textarea>
              </li>
-
+            
+           
              <li class="form-row text-input-row">
                <label>Aluno</label>
                <select name="idAluno" size="5" style="width: 500px">
@@ -89,6 +90,47 @@
              </li>
 
              
+                <li class="form-row text-input-row">
+                    <label>Altura</label>
+                    <input type="text" name="altura" value="<?php if(isset($exameFisico)) echo $exameFisico->getAltura() ?>" class="text-input" style="width: 100px"> Ex: 1.70 Metros
+             </li>
+               <li class="form-row text-input-row">
+                    <label>Peso</label>
+                    <input type="text" name="peso" value="<?php if(isset($exameFisico)) echo $exameFisico->getPeso() ?>" class="text-input" style="width: 100px"> Ex: 80.5 Kilos
+                </li>
+                
+                 <li class="form-row text-input-row">
+                    <label>IMC</label>
+                    <input type="text" name="imc" value="<?php if(isset($exameFisico)) echo $exameFisico->getImc() ?>" class="text-input" style="width: 100px"> Ex: 24.5
+             </li>
+                <h3 class="title">Circunferências:</h3>
+              
+                
+                <li class="form-row text-input-row">
+                    <label>Tórax</label>
+                    <input type="text" name="circTorax" value="<?php if(isset($exameFisico)) echo $exameFisico->getCircTorax() ?>" class="text-input" style="width: 100px"> Ex: 110 centimetros
+                </li>
+                <li class="form-row text-input-row">
+                    <label>Abdomen</label>
+                    <input type="text" name="circAbdomen" value="<?php if(isset($exameFisico)) echo $exameFisico->getCircAbdomen() ?>" class="text-input" style="width: 100px"> Ex: 110 centimetros
+                </li>
+                 <li class="form-row text-input-row">
+                    <label>Braço</label>
+                    <input type="text" name="circBraco" value="<?php if(isset($exameFisico)) echo $exameFisico->getCircBraco() ?>" class="text-input" style="width: 100px"> Ex: 110 centimetros
+                </li>
+                 <li class="form-row text-input-row">
+                    <label>Antebraço</label>
+                    <input type="text" name="circAntebraco" value="<?php if(isset($exameFisico)) echo $exameFisico->getCircAntebraco() ?>" class="text-input" style="width: 100px"> Ex: 110 centimetros
+                </li>
+                 <li class="form-row text-input-row">
+                    <label>Coxa</label>
+                    <input type="text" name="circCoxa" value="<?php if(isset($exameFisico)) echo $exameFisico->getCircCoxa() ?>" class="text-input" style="width: 100px"> Ex: 110 centimetros
+                </li>
+                 <li class="form-row text-input-row">
+                    <label>Panturrilha</label>
+                    <input type="text" name="circPanturrilha" value="<?php if(isset($exameFisico)) echo $exameFisico->getCircPanturrilha() ?>" class="text-input" style="width: 100px"> Ex: 110 centimetros
+                </li>
+               
 
              <li class="button-row" style="margin-top:50px">
                <input type="submit" value="Inserir" name="submit" class="btn-submit">
@@ -108,8 +150,10 @@
        $aluno = new Aluno($_POST['idAluno']);
        $aluno = $fachada->detalharAluno($aluno, LAZY);
        
-       
-       $exameFisico = new ExameFisico(null, $_POST['data'], $_POST['descricao'], $aluno, $_SESSION['Instrutor']);
+       $exameFisico = new ExameFisico(null, $_POST['data'], $_POST['descricao'], $_POST['imc'], $_POST['altura'], 
+                                      $_POST['peso'], $_POST['circTorax'], $_POST['circAbdomen'], $_POST['circBraco'], 
+                                      $_POST['circAntebraco'], $_POST['circCoxa'], $_POST['circPanturrilha'], 
+                                      $aluno, $_SESSION['Instrutor']);
        
        $_SESSION['ExameFisico'] = $exameFisico;
       

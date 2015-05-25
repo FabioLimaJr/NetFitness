@@ -51,7 +51,7 @@ class  ExpressoesRegulares {
                 throw new Exception(Excecoes::senhaInvalida($objeto->getSenha()));
             }
 
-            if(($objeto->getEndereco() === null) || !conferirEndereco($objeto->getEndereco()))
+            if(($objeto->getEndereco() === null) || !self::conferirEndereco($objeto->getEndereco()))
             {
                 throw new Exception(Excecoes::enderecoInvalido($objeto->getEndereco()));
             }

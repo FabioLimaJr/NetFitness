@@ -312,5 +312,55 @@ class RepositorioTreino extends RepositorioGenerico implements IRepositorioTrein
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
         }
     }
+    
+    
+    public function listarTreinosRealizados($aluno,$treino)
+    {
+        $sql = "USE " . $this->getNomeBanco();
+        $listaTreinosRealizados = array();
+        
+        if($this->getConexao()->query($sql) === true)
+        {
+            $sqlAlunoTreino = "SELECT * FROM alunotreino WHERE idAluno = '".$aluno->getIdAluno()."' AND ".
+                              "idTreino = '".$treino->getIdTreino()."'";
+            
+            try
+            {
+                $resultAlunoTreino = mysqli_query($this->getConexao(), $sqlAlunoTreino);
+                $rowAlunoTreino = mysqli_fetch_assoc($resultAlunoTreino);
+                $listaTreinosRealizados['dataVinculoTreino'] = $rowAlunoTreino['data'];
+                $listaTreinosRealizados['qtdTreinos'] = $rowAlunoTreino['qtdTreinos'];
+                $idAlunoTreino = $rowAlunoTreino['idAlunoTreino'];      
+                $listaTreinosRealizados['idAluno'] = $aluno->getIdAluno();
+                $listaTreinosRealizados['idTreino'] = $treino->getIdTreino();
+                $sqlTreinosRealizados = "SELECT * FROM dataalunotreino WHERE idAlunoTreino = '".$idAlunoTreino."'";  
+                $listaTreinosRealizados['datasTreinosRealizados'] = array();
+                
+                try
+                {
+                    $resultTreinoRealizados = mysqli_query($this->getConexao(), $sqlTreinosRealizados);
+             
+                    while ($rowTreinosRealizados = mysqli_fetch_array($resultTreinoRealizados))
+                    {   
+                        array_push($listaTreinosRealizados["datasTreinosRealizados"], $rowTreinosRealizados['data']);
+                    } 
+                    $listaTreinosRealizados['qtdTreinosRealizados'] = sizeof($listaTreinosRealizados['datasTreinosRealizados']);
+                    return $listaTreinosRealizados;
+                }
+                catch (Exception $exc) 
+                {
+                    throw new Exception($exc->getMessage());
+                }
+            } 
+            catch (Exception $ex) 
+            {
+                throw new Exception($exc->getMessage());
+            }          
+        }
+        else
+        {
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+        }
+    }
 
 }

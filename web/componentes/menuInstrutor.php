@@ -6,9 +6,9 @@
         <li><a href="#">Exame Fisico</a>
           <ul>
             <li><a href="inserirExameFisico.php">Inserir</a></li>
-            <li><a href="#">Excluir</a></li>
-            <li><a href="#">Alterar</a></li>
-            <li><a href="#">Listar</a></li>
+            <li><a href="excluirExameFisico.php">Excluir</a></li>
+            <li><a href="alterarExameFisico.php">Alterar</a></li>
+            <li><a href="listarExamesFisicos.php">Listar</a></li>
             <li><a href="instrutorVisualizarGraficos.php">Visualizar Gráficos</a></li>
             <li><a href="instrutorCompararGraficos.php">Comparar Gráficos</a></li>
           </ul>

@@ -28,9 +28,18 @@ class RepositorioExameFisico extends RepositorioGenerico implements IRepositorio
             $arrayData = explode("-", $exameFisico->getData());
             $dataSqlFormat = $arrayData[2]."-".$arrayData[1]."-".$arrayData[0];
             
-            $sql = "INSERT INTO examefisico VALUES(NULL,'";
-            $sql.= $dataSqlFormat."','";
+            $sql = "INSERT INTO examefisico VALUES (NULL, '";
+            $sql.= $dataSqlFormat. "','";
             $sql.= $exameFisico->getDescricao(). "','";
+            $sql.= $exameFisico->getImc(). "','";
+            $sql.= $exameFisico->getAltura(). "','";
+            $sql.= $exameFisico->getPeso(). "','";
+            $sql.= $exameFisico->getCircTorax(). "','";
+            $sql.= $exameFisico->getCircAbdomen(). "','";
+            $sql.= $exameFisico->getCircBraco(). "','";
+            $sql.= $exameFisico->getCircAntebraco(). "','";
+            $sql.= $exameFisico->getCircCoxa(). "','";
+            $sql.= $exameFisico->getCircPanturrilha(). "','";
             $sql.= $exameFisico->getAluno()->getIdPessoa(). "','";
             $sql.= $exameFisico->getInstrutor()->getIdPessoa(). "')";
             
@@ -44,6 +53,7 @@ class RepositorioExameFisico extends RepositorioGenerico implements IRepositorio
             {
                 throw new Exception(Excecoes::inserirObjeto("ExameFisico: ".  mysqli_error($this->getConexao())));
             }
+            
             
         }  else {
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco()."(".$this->getConexao()->error.")"));
@@ -127,10 +137,8 @@ class RepositorioExameFisico extends RepositorioGenerico implements IRepositorio
                 $resultListaExamesFisicos = mysqli_query($this->getConexao(), $sqlListaExamesFisicos);
 
                 while ($rowListaExamesFisicos = mysqli_fetch_array($resultListaExamesFisicos)) 
-                {
-
+                {                    
                     $exameFisicoRetornado = new ExameFisico($rowListaExamesFisicos['idExameFisico']);               
-
                     if($fetchType === EAGER)
                     {                
                         $exameFisicoRetornado = $this->detalhar($exameFisicoRetornado, EAGER);

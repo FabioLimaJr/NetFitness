@@ -11,7 +11,7 @@
  *
  * @author Daniele
  */
-class ExameFisico 
+class ExameFisico implements JsonSerializable
 {
     private $idExameFisico;
     private $data;
@@ -204,8 +204,10 @@ class ExameFisico
         $this->circPanturrilha = $circPanturrilha;
     }
 
+    public function jsonSerialize()
+    {
+        $vars = get_object_vars($this);
+        return $vars;
+    }
 
-
-
-    
 }
