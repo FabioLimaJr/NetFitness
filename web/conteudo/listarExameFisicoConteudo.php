@@ -44,7 +44,7 @@ catch (Exception $exc)
                     
                     <?php foreach ($listaExameFisico as $exameFisico){ ?>
                     <tr>
-                        <td><?php echo $exameFisico->getAluno().getNome() ?></td> 
+                        <td><?php echo $exameFisico->getAluno()->getNome() ?></td> 
                         <td><?php echo $exameFisico->getDescricao() ?></td>  
                         <td><?php echo ExpressoesRegulares::inverterData($exameFisico->getData()) ?></td> 
                         <td><?php echo $exameFisico->getIMC() ?></td> 
