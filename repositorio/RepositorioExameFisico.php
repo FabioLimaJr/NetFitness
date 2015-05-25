@@ -54,6 +54,7 @@ class RepositorioExameFisico extends RepositorioGenerico implements IRepositorio
                 throw new Exception(Excecoes::inserirObjeto("ExameFisico: ".  mysqli_error($this->getConexao())));
             }
             
+            
         }  else {
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco()."(".$this->getConexao()->error.")"));
         }
