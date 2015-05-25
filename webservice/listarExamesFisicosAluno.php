@@ -11,6 +11,7 @@ include ('../classesBasicas/Nutricionista.php');
 include ('../classesBasicas/Musica.php');
 include ('../classesBasicas/Pagamento.php');
 include ('../classesBasicas/ExameFisico.php');
+include ('../classesBasicas/Treino.php');
 include ('../fachada/Fachada.php');
 
 include ('../ferramentas/texto/Texto.php');

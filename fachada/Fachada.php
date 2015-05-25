@@ -238,7 +238,12 @@ class Fachada implements IFachada
     
      public function listarTreinoPorAluno($aluno, $fetchType){
          return $this->controladorTreino->listarTreinoPorAluno($aluno, $fetchType);
-     }
+    }
+    
+    public function listarTreinosRealizados($aluno, $treino)
+    {
+        return $this->controladorTreino->listarTreinosRealizados($aluno, $treino);
+    }
     
     
     //Opinião 
@@ -414,5 +419,7 @@ class Fachada implements IFachada
         $controlador = "controlador".get_class($pessoa);        
         return $this->$controlador->conferirLoginSenha($pessoa);
     }
+
+   
 
 }

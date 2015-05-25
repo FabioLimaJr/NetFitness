@@ -134,4 +134,9 @@ class ControladorTreino {
      public function listarTreinoPorAluno($aluno, $fetchType){
          return $this->getRepositorioTreino()->listarTreinoPorAluno($aluno, $fetchType);
      }
+     
+     public function listarTreinosRealizados($aluno, $treino)
+     {
+         return $this->getRepositorioTreino()->listarTreinosRealizados($aluno, $treino);
+     }
 }

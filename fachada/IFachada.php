@@ -53,6 +53,7 @@ interface IFachada
     public function detalharTreino($treino, $fetchType);
     public function vincularTreinoAlunos($treino, $listaAlunos, $qtdTreinos);
     public function listarTreinoPorAluno($aluno, $fetchType);
+    public function listarTreinosRealizados($aluno, $treino);
     
     //Opinião
     public function inserirOpiniao($opiniao);
