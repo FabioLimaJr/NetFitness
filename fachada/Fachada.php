@@ -60,7 +60,7 @@ class Fachada implements IFachada
         $this->controladorOpiniao = new ControladorOpiniao();
         $this->controladorPagamento = new ControladorPagamento();
         $this->controladorExameFisico = new ControladorExameFisico();
-        $this->controladorDica = new controladorDica();
+        $this->controladorDica = new ControladorDica();
         $this->controladorMusica = new ControladorMusica();
         $this->controladorNoticia = new ControladorNoticia();
     }
