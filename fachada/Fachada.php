@@ -60,7 +60,7 @@ class Fachada implements IFachada
         $this->controladorOpiniao = new ControladorOpiniao();
         $this->controladorPagamento = new ControladorPagamento();
         $this->controladorExameFisico = new ControladorExameFisico();
-        $this->controladorDica = new controladorDica();
+        $this->controladorDica = new ControladorDica();
         $this->controladorMusica = new ControladorMusica();
         $this->controladorNoticia = new ControladorNoticia();
     }
@@ -349,6 +349,9 @@ class Fachada implements IFachada
     
      public function alterarExameFisico($exameFisico) {
         return $this->controladorExameFisico->alterar($exameFisico);
+    }
+    public function excluirExameFisico($exameFisico) {
+        return $this->controladorExameFisico->excluir($exameFisico);
     }
     //Dica
     public function inserirDica($dica, $pessoa) {

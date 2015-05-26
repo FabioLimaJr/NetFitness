@@ -1,14 +1,12 @@
 <?php 
 include ('../classesBasicas/Aluno.php');
-include ('../classesBasicas/Musica.php');
-include ('../classesBasicas/Nutricionista.php');
 include ('../classesBasicas/Coordenador.php');
-include ('../classesBasicas/Secretaria.php');
-include ('../classesBasicas/Dieta.php');
-include ('../classesBasicas/Alimento.php');
-include ('../classesBasicas/Pagamento.php');
-include ('../classesBasicas/ExameFisico.php');
+include ('../classesBasicas/Nutricionista.php');
 include ('../classesBasicas/Instrutor.php');
+include ('../classesBasicas/Secretaria.php');
+include ('../classesBasicas/Exercicio.php');
+include ('../ClassesBasicas/ExameFisico.php');
+
 session_start();
 
 if(isset($_SESSION['Instrutor']))
@@ -23,7 +21,6 @@ include ('../expressoesRegulares/ExpressoesRegulares.php');
 include ('../fachada/Fachada.php');
 include ('componentes/header.php');
 ?>
-
 
 <body>
 <div id="wrapper">
@@ -40,7 +37,7 @@ include ('componentes/header.php');
      
   <div id="content">
   
-     <?php include('conteudo/listarExameFisicoConteudo.php'); ?>
+     <?php include('conteudo/excluirExameFisicoConteudo.php'); ?>
     
   </div><!-- end content -->
   
@@ -50,3 +47,4 @@ include ('componentes/header.php');
 
 </body>
 </html>
+

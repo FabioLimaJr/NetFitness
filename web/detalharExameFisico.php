@@ -6,14 +6,14 @@ include ('../classesBasicas/Coordenador.php');
 include ('../classesBasicas/Secretaria.php');
 include ('../classesBasicas/Dieta.php');
 include ('../classesBasicas/Alimento.php');
-include ('../classesBasicas/Pagamento.php');
 include ('../classesBasicas/ExameFisico.php');
 include ('../classesBasicas/Instrutor.php');
+
 session_start();
 
 if(isset($_SESSION['Instrutor']))
 {
-    $instrutor = $_SESSION['Instrutor'];
+    $coordenador = $_SESSION['Instrutor'];
 }
 else
 {
@@ -32,7 +32,7 @@ include ('componentes/header.php');
     
     <div id="logo"><a href="index.php"><img src="images/logo.png" alt=""></a></div>
 
-    <?php include ('componentes/menuInstrutor.php') ?>  
+    <?php include ('componentes/menuCoordenador.php') ?>  
     <?php include ('componentes/leftIcons.php') ?>
     <?php include ('componentes/signature.php'); ?>   
     
@@ -40,7 +40,7 @@ include ('componentes/header.php');
      
   <div id="content">
   
-     <?php include('conteudo/listarExameFisicoConteudo.php'); ?>
+     <?php include('conteudo/detalharSecretariaConteudo.php'); ?>
     
   </div><!-- end content -->
   
@@ -50,3 +50,4 @@ include ('componentes/header.php');
 
 </body>
 </html>
+

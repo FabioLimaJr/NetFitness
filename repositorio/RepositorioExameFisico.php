@@ -60,15 +60,57 @@ class RepositorioExameFisico extends RepositorioGenerico implements IRepositorio
         }
     }
  
-    public function alterar($exameFisico)
-    {
+      public function alterar($examefisico) {
         
+        $sql = "USE " . $this->getNomeBanco();
+        
+        if(@$this->getConexao()->query($sql) === TRUE){
+            
+            $sql = "UPDATE examefisico SET descricao = '".$examefisico->getDescricao()
+                                                 ."', imc = '".$examefisico->getImc()
+                                                 ."', peso = '".$examefisico->getPeso()
+                                                 ."', altura = '".$examefisico->getAltura()
+                                                 ."', circTorax = '".$examefisico->getCircTorax()
+                                                 ."', circAbdomen = '".$examefisico->getCircAbdomen()
+                                                 ."', circBraco = '".$examefisico->getCircBraco()
+                                                 ."', circAntebraco = '".$examefisico->getCircAntebraco()
+                                                 ."', circCoxa = '".$examefisico->getCircCoxa()
+                                                 ."', circPanturrilha = '".$examefisico->getCircPanturrilha()
+                                                 ."' WHERE idExameFisico = ".$examefisico->getIdExameFisico();
+            
+            if( mysqli_query($this->getConexao(), $sql)){
+                
+                //$this->fecharConexao();
+                return TRUE;
+            }else{
+                throw new Exception(Excecoes::alterarObjeto("Exame Físico: ".mysqli_error($this->getConexao())));
+            }
+        }else{
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+        }
     }
 
-    public function excluir($exameFisico)
-    {
+
+    public function excluir($exameFisico) {
         
+        $sql = "USE " . $this->getNomeBanco();
+        
+        if(@$this->getConexao()->query($sql) === TRUE){
+            
+            $sql = "DELETE FROM examefisico WHERE idExameFisico = ".$exameFisico->getIdExameFisico();
+            
+            if( mysqli_query($this->getConexao(), $sql)){
+                
+                //$this->fecharConexao();
+                return TRUE;
+            }else{
+                throw new Exception(Excecoes::alterarObjeto("Exame Físico: ".mysqli_error($this->getConexao())));
+            }
+        }else{
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+        }
     }
+
     
     public function detalhar($exameFisico, $fetchType)
     {
