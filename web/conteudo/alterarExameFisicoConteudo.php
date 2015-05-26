@@ -91,19 +91,51 @@ Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->
 
                     <li class="form-row text-input-row">
                         <label>Aluno</label>
-                        <input type="text" name="aluno" value="<?php if(isset($exameFisicoRetornado)) echo $exameFisicoRetornado->getAluno()->getNome() ?>" class="text-input" style="width: 300px">
+                        <input type="text" name="aluno"  readonly value="<?php if(isset($exameFisicoRetornado)) echo $exameFisicoRetornado->getAluno()->getNome() ?>" class="text-input" style="width: 300px">
                     </li>
-
+                    <li class="form-row text-input-row">
+                        <label>Data</label>
+                        <input type="text" name="data"  readonly value="<?php if(isset($exameFisicoRetornado)) echo $exameFisicoRetornado->getData() ?>" class="text-input" style="width: 300px">
+                    </li>
                     <li class="form-row text-input-row">
                         <label>Descrição</label>
                         <input type="text" name="descricao" value="<?php if(isset($exameFisicoRetornado)) echo $exameFisicoRetornado->getDescricao() ?>" class="text-input" style="width: 300px">
                     </li>
-
-                    <li class="form-row text-input-row">
+                     <li class="form-row text-input-row">
                         <label>Altura</label>
                         <input type="text" name="altura" value="<?php if(isset($exameFisicoRetornado)) echo $exameFisicoRetornado->getAltura() ?>" class="text-input" style="width: 300px">
                     </li>
+                     <li class="form-row text-input-row">
+                        <label>Peso</label>
+                        <input type="text" name="peso" value="<?php if(isset($exameFisicoRetornado)) echo $exameFisicoRetornado->getPeso() ?>" class="text-input" style="width: 300px">
+                    </li>
+                <h3 class="title">Circunferências</h1>
 
+                    <li class="form-row text-input-row">
+                        <label>Torax</label>
+                        <input type="text" name="circTorax" value="<?php if(isset($exameFisicoRetornado)) echo $exameFisicoRetornado->getCircTorax() ?>" class="text-input" style="width: 300px">
+                    </li>
+                    <li class="form-row text-input-row">
+                        <label>Abdomen</label>
+                        <input type="text" name="circAbdomen" value="<?php if(isset($exameFisicoRetornado)) echo $exameFisicoRetornado->getCircAbdomen() ?>" class="text-input" style="width: 300px">
+                    </li>
+                     <li class="form-row text-input-row">
+                        <label>Braço</label>
+                        <input type="text" name="circBraco" value="<?php if(isset($exameFisicoRetornado)) echo $exameFisicoRetornado->getCircBraco() ?>" class="text-input" style="width: 300px">
+                    </li>
+                     <li class="form-row text-input-row">
+                        <label>Antebraço</label>
+                        <input type="text" name="circAntebraco" value="<?php if(isset($exameFisicoRetornado)) echo $exameFisicoRetornado->getCircAbdomen() ?>" class="text-input" style="width: 300px">
+                    </li>
+                     <li class="form-row text-input-row">
+                        <label>Coxa</label>
+                        <input type="text" name="circCoxa" value="<?php if(isset($exameFisicoRetornado)) echo $exameFisicoRetornado->getCircCoxa() ?>" class="text-input" style="width: 300px">
+                    </li>
+                     <li class="form-row text-input-row">
+                        <label>Panturrilha</label>
+                        <input type="text" name="circPanturrilha" value="<?php if(isset($exameFisicoRetornado)) echo $exameFisicoRetornado->getCircPanturrilha() ?>" class="text-input" style="width: 300px">
+                    </li>
+                                                 
                     <li class="button-row" style="margin-top:50px">
                         <input type="submit" value="Salvar Alterações" name="submit" class="btn-submit">
                     </li>
@@ -128,7 +160,7 @@ Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->
                  
              } catch (Exception $ex) {
                  
-                 $mensagem = $exc->getMessage();
+                 $mensagem = $ex->getMessage();
                  
              }
         }else{

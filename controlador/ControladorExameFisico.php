@@ -51,7 +51,12 @@ class ControladorExameFisico
     public function alterar($exameFisico)
     {
         //conferir obejto e fetchType
-        return $this->getRepositorioExameFisico()->lterar($exameFisico);
+        return $this->getRepositorioExameFisico()->alterar($exameFisico);
+    }
+    public function excluir($exameFisico)
+    {
+        //conferir obejto e fetchType
+        return $this->getRepositorioExameFisico()->excluir($exameFisico);
     }
 
 }
