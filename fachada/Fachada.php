@@ -350,6 +350,9 @@ class Fachada implements IFachada
      public function alterarExameFisico($exameFisico) {
         return $this->controladorExameFisico->alterar($exameFisico);
     }
+    public function excluirExameFisico($exameFisico) {
+        return $this->controladorExameFisico->excluir($exameFisico);
+    }
     //Dica
     public function inserirDica($dica, $pessoa) {
         $this->controladorDica->inserir($dica, $pessoa);
