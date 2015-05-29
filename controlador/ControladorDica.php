@@ -4,9 +4,7 @@
  *
  * @author Marcelo
  */
-
 include ($serverPath.'repositorio/RepositorioDica.php');
-
 class ControladorDica {
     private $repositorioDica;
     
@@ -18,11 +16,9 @@ class ControladorDica {
     function getRepositorioDica() {
         return $this->repositorioDica;
     }
-
     function setRepositorioDica($repositorioDica) {
         $this->repositorioDica = $repositorioDica;
     }
-
     public function inserir($dica, $pessoa) {
         if(!ExpressoesRegulares::conferirDescricao($dica->getDescricao())){
             throw new Exception(Excecoes::descricaoInvalida($dica->getDescricao()));
