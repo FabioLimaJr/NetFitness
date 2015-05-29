@@ -332,6 +332,7 @@ class RepositorioTreino extends RepositorioGenerico implements IRepositorioTrein
                 $listaTreinosRealizados['qtdTreinos'] = $rowAlunoTreino['qtdTreinos'];
                 $idAlunoTreino = $rowAlunoTreino['idAlunoTreino'];      
                 $listaTreinosRealizados['idAluno'] = $aluno->getIdAluno();
+                $listaTreinosRealizados['nomeTreino'] = $treino->getNome();
                 $listaTreinosRealizados['idTreino'] = $treino->getIdTreino();
                 $sqlTreinosRealizados = "SELECT * FROM dataalunotreino WHERE idAlunoTreino = '".$idAlunoTreino."'";  
                 $listaTreinosRealizados['datasTreinosRealizados'] = array();
