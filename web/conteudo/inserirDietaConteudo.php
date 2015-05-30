@@ -102,6 +102,7 @@
                       <th>Carb. (%)</th>
                       <th>Prot. (%)</th>
                       <th>Gord. (%)</th>
+                      <th>Qtd. (Gr)</th>
                       <th>Sel.</th>
                      </tr>
                       
@@ -112,7 +113,9 @@
                              <td> <?php echo $alimento->getCarboidrato() ?> </td>
                              <td> <?php echo $alimento->getProteina() ?> </td>
                              <td> <?php echo $alimento->getGordura() ?> </td>
+                             <td> <input type="text" name="qtd<?php echo $alimento->getIdAlimento() ?>"> </td>
                              <td> <input type="checkbox" name="alimento<?php echo $alimento->getIdAlimento() ?>" value="true"> </td>
+                             
                          </tr>
                       <?php } ?>
                      
@@ -155,7 +158,9 @@
                {
                     if ($idAlimento[1] == $alimento->getIdAlimento()) 
                     {  
+                        $alimento->setQtdAlimento($_POST['qtd'.$alimento->getIdAlimento()]);
                         array_push($listaAlimentosPrescritos, $alimento);
+                        
                         break;
                     }
                }

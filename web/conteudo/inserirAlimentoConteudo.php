@@ -64,13 +64,7 @@ if(!$camposPreenchidos){
                     <li class="form-row text-input-row">
                         <label>Gordura</label>
                         <input type="text" name="gordura" value="<?php if(isset($alimento)) echo $alimento->getGordura() ?>" class="text-input" style="width: 300px">
-                    </li>
-                    
-                    <li class="form-row text-input-row">
-                        <label>Quantidade</label>
-                        <input type="text" name="qtdAlimento" value="<?php if(isset($alimento)) echo $alimento->getQtdAlimento() ?>" class="text-input" style="width: 300px">
-                    </li> 
-                    
+                    </li>                    
                     <li class="button-row" style="margin-top: 50px">                        
                         <input type="submit" name="submit" value="Inserir" class="btn-submit">
                     </li>                    
@@ -87,7 +81,6 @@ if(!$camposPreenchidos){
                              $_POST['proteina'],
                              $_POST['carboidrato'],
                              $_POST['gordura'],
-                             $_POST['qtdAlimento'],
                              $nutricionista);
     
              $_SESSION['Nutricionista'] = $nutricionista; 

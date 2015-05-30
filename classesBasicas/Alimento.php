@@ -31,14 +31,13 @@ class Alimento {
         $this->setIdAlimento($idAlimento);
     }
     
-    function __construct8($idAlimento,$descricao, $caloria, $proteina, $carboidrato, $gordura, $qtdAlimento, $nutricionista) {
+    function __construct7($idAlimento,$descricao, $caloria, $proteina, $carboidrato, $gordura, $nutricionista) {
         $this->idAlimento = $idAlimento;
         $this->descricao = $descricao;
         $this->caloria = $caloria;
         $this->proteina = $proteina;
         $this->carboidrato = $carboidrato;
         $this->gordura = $gordura;
-        $this->qtdAlimento = $qtdAlimento;
         $this->nutricionista = $nutricionista;
     }
     
