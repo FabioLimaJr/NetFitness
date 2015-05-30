@@ -100,10 +100,10 @@ Nome: <?php echo $secretaria->getNome() ?> | Telefone:<?php echo $secretaria->ge
                         <label>Titulo</label>
                         <input type="text" name="titulo" value="<?php if(isset($noticiaRetornada)) echo $noticiaRetornada->getTitulo() ?>" class="text-input" style="width: 300px">
                     </li>
-                    
+                                        
                     <li class="form-row text-input-row">
-                        <label>Descrição</label>
-                        <input type="text" name="descricao" value="<?php if(isset($noticiaRetornada)) echo $noticiaRetornada->getDescricao() ?>" class="text-input" style="width: 300px">
+                    <label>Descrição</label>
+                    <textarea class="text-input" name="descricao" value="" style="width:300px; height: 100px"><?php if(isset($noticiaRetornada)) echo $noticiaRetornada->getDescricao() ?></textarea>
                     </li>
                     
                     <li class="form-row text-input-row" >
