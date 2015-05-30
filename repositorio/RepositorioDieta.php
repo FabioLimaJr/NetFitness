@@ -40,7 +40,8 @@ class RepositorioDieta extends RepositorioGenerico implements IRepositorioDieta
                     {
                         $sql3 = "INSERT INTO dietaalimento VALUES('";
                         $sql3.= $idDieta."','";
-                        $sql3.= $alimento->getIdAlimento()."')";
+                        $sql3.= $alimento->getIdAlimento()."','";
+                        $sql3.= $alimento->getQtdAlimento()."')";
 
                         if(!mysqli_query($this->getConexao(), $sql3))
                         {
@@ -182,7 +183,8 @@ class RepositorioDieta extends RepositorioGenerico implements IRepositorioDieta
                 {
                     $sql2 = "INSERT INTO dietaalimento VALUES('";
                     $sql2.= $idDieta."','";
-                    $sql2.= $alimento->getIdAlimento()."')";
+                    $sql2.= $alimento->getIdAlimento()."','";
+                    $sql2.= $alimento->getQtdAlimento()."')";
                     
                     if(!mysqli_query($this->getConexao(), $sql2))
                     {

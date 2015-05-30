@@ -28,7 +28,6 @@ class RepositorioAlimento extends RepositorioGenerico implements IRepositorioAli
             $sql.= $alimento->getProteina(). "','";
             $sql.= $alimento->getCarboidrato(). "','";
             $sql.= $alimento->getGordura(). "','";
-            $sql.= $alimento->getQtdAlimento(). "','";
             $sql.= $alimento->getNutricionista()->getIdNutricionista(). "')";
             
             
@@ -55,7 +54,6 @@ class RepositorioAlimento extends RepositorioGenerico implements IRepositorioAli
             $sql.= "', proteina = '".$alimento->getProteina();
             $sql.= "', carboidrato = '".$alimento->getCarboidrato();
             $sql.= "', gordura = '".$alimento->getGordura();
-            $sql.= "', qtdAlimento = '".$alimento->getQtdAlimento();
             $sql.= "'  WHERE IdAlimento = '".$alimento->getIdAlimento()."'";
             
             if(mysqli_query($this->getConexao(), $sql)){
@@ -148,8 +146,8 @@ class RepositorioAlimento extends RepositorioGenerico implements IRepositorioAli
                 $rowAlimento = mysqli_fetch_assoc($resultAlimento);
                 $alimentoRetornado = new Alimento($rowAlimento['idAlimento'], $rowAlimento['descricao'], 
                                                   $rowAlimento['caloria'], $rowAlimento['proteina'],
-                                                  $rowAlimento['carboidrato'], $rowAlimento['gordura'], 
-                                                  $rowAlimento['qtdAlimento'], null/*nutricionista*/);             
+                                                  $rowAlimento['carboidrato'], $rowAlimento['gordura'],
+                                                  null/*nutricionista*/);             
             }
             catch(Exception $exc)
             {
