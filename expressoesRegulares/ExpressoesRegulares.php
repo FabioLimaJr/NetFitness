@@ -102,6 +102,13 @@ class  ExpressoesRegulares {
             {
                 throw new Exception(Excecoes::objetoNulo("Aluno não inicializado"));
             }
+            foreach ($objeto->getListaAlimentos() as $alimento)
+            {
+                if(!is_numeric($alimento->getQtdAlimento()))
+                {
+                    throw new Exception(Excecoes::valorNumericoInvalido("alimento(Qtd)"));
+                }
+            }
             
         }
         else

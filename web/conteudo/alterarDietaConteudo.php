@@ -14,6 +14,10 @@ try
 {
     $listaDietas = $fachada->listarDietas($_SESSION['Nutricionista'], EAGER);
     $listaAlimentos = $fachada->listarAlimentos(LAZY);
+    if(sizeof($listaDietas)==0)
+    {
+        $mensagem = "Nenhum aluno recebeu a prescrição da dieta.";
+    }
 } 
 catch (Exception $exc)
 {
@@ -51,47 +55,44 @@ catch (Exception $exc)
                            <th>Nome Aluno</th> 
                            <th>Descrição Dieta</th>
                            <th>Alimentos</th>
+                           <th>Qtd</th>
                            <th>Selecionar</th>
-                         </tr>
-
-                         <?php foreach ($listaDietas as $dieta){ ?>
-                         <tr>
-                             <td><?php echo $dieta->getAluno()->getNome() ?></td> 
-                             <td><?php echo $dieta->getDescricao() ?></td>  
-                             
-                             <td><?php 
-                                 $sizeListaAlimentos = count($dieta->getListaAlimentos());
-                                 $count = 1;
-                                 foreach ($dieta->getListaAlimentos() as $alimento)
-                                 {
-                                     if($count == $sizeListaAlimentos)
-                                     {
-                                       echo $alimento->getDescricao();
-                                     }
-                                     else
-                                     {
-                                       echo $alimento->getDescricao().", ";  
-                                     }
-                                     
-                                     $count++;
-                                 }
-                             ?></td>
-                               
-                             <td><input type="radio" name="idDieta" value="<?php echo $dieta->getIdDieta() ?>"></td>
                          </tr>
 
                          <?php 
                          
+                         
+                         foreach ($listaDietas as $dieta)
+                         { 
+                           $numAlimentos = sizeof($dieta->getListaAlimentos());
+                           $nomeAluno = $dieta->getAluno()->getNome();
+                           $descDieta = $dieta->getDescricao();
+                           $idDieta = $dieta->getIdDieta();
+                           $first = true;
+                           
+                           foreach ($dieta->getListaAlimentos() as $alimento)
+                           {
+                         ?>
+                         
+                         
+                         <tr>
+                             <?php if($first){ ?><td rowspan="<?php echo $numAlimentos ?>"><?php echo $nomeAluno ?></td> 
+                             <td rowspan="<?php echo $numAlimentos ?>"><?php echo $descDieta ?></td><?php } ?>
+                             <td><?php echo $alimento->getDescricao() ?></td>
+                             <td><?php echo $alimento->getQtdAlimento() ?> </td>
+                             <?php if($first){ ?><td rowspan="<?php echo $numAlimentos ?>"><input type="radio" name="idDieta" value="<?php echo $idDieta ?>"></td><?php $first=false; } ?>
+                         </tr>
+                           <?php }                   
                     
                          } ?>
 
                </table>
              </li>
-
+             <?php if(sizeof($listaDietas)!=0) { ?>
              <li class="form-row text-input-row" style="text-align:center;margin-left:-100px">
                     <input type="submit" value="Alterar" name="submit" class="btn-submit">
-                    <input type="hidden" name="">
-             </li>       
+             </li>
+            <?php } ?>
         </ol>  
        </fieldset>
        </form>
@@ -128,6 +129,7 @@ catch (Exception $exc)
                  
                  
              }
+            
              
          
              $_SESSION['dietaRetornada']=$dietaRetornada;
@@ -162,6 +164,7 @@ catch (Exception $exc)
                                  <th>Carb. (%)</th>
                                  <th>Prot. (%)</th>
                                  <th>Gord. (%)</th>
+                                 <th>Qtd. <br/>(g)</th>
                                  <th>Sel.</th>
                                 </tr>
 
@@ -172,6 +175,7 @@ catch (Exception $exc)
                                         <td> <?php echo $alimentoSelecionado->getCarboidrato() ?> </td>
                                         <td> <?php echo $alimentoSelecionado->getProteina() ?> </td>
                                         <td> <?php echo $alimentoSelecionado->getGordura() ?> </td>
+                                        <td> <input style="width: 50px" type="text" value="<?php echo $alimentoSelecionado->getQtdAlimento() ?>" name="qtd<?php echo $alimentoSelecionado->getIdAlimento() ?>"> </td>
                                         <td> <input type="checkbox" name="alimento<?php echo $alimentoSelecionado->getIdAlimento() ?>" value="true" checked> </td>
                                     </tr>
                                  <?php } 
@@ -184,6 +188,7 @@ catch (Exception $exc)
                                             <td> <?php echo $alimentoNaoSelecionado->getCarboidrato() ?> </td>
                                             <td> <?php echo $alimentoNaoSelecionado->getProteina() ?> </td>
                                             <td> <?php echo $alimentoNaoSelecionado->getGordura() ?> </td>
+                                            <td> <input style="width: 50px" type="text" name="qtd<?php echo $alimentoNaoSelecionado->getIdAlimento() ?>"> </td>
                                         <td> <input type="checkbox" name="alimento<?php echo $alimentoNaoSelecionado->getIdAlimento() ?>" value="true"> </td>
                                         </tr>
                                     <?php
@@ -224,6 +229,7 @@ catch (Exception $exc)
                         {
                              if ($idAlimento[1] == $alimento->getIdAlimento()) 
                              {  
+                                 $alimento->setQtdAlimento($_POST['qtd'.$alimento->getIdAlimento()]);
                                  array_push($listaAlimentosPrescritos, $alimento);
                                  break;
                              }
@@ -252,8 +258,7 @@ catch (Exception $exc)
          }
          
     }
-    
-    if($camposPreenchidos && !isset($_POST['idDieta']) || isset($dietaAlterada)) { ?>
+    if($camposPreenchidos && !isset($_POST['idDieta']) || isset($dietaAlterada) || (sizeof($listaDietas)==0)) { ?>
     
         <h3>Mensagem</h3>
         <p><?php echo $mensagem ?></p>

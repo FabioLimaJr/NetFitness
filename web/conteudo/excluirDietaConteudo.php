@@ -13,7 +13,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
 try
 {
-    $listaDietas = $fachada->listarDietas($_SESSION['Nutricionista']);
+    $listaDietas = $fachada->listarDietas($_SESSION['Nutricionista'], EAGER);
+    if(sizeof($listaDietas)==0)
+    {
+        $mensagem = "Nenhum aluno recebeu a prescrição da dieta.";
+    }
     
 } 
 catch (Exception $exc)
@@ -40,40 +44,64 @@ catch (Exception $exc)
     <div style="margin-bottom: 50px">
         
  
-        <div class="form-container" style="margin-bottom:50px">
-         
-        <form class="forms" action="excluirDieta.php" method="post" >
+        <div class="form-container" style="margin-bottom:50px"><br/>
+         Dietas
+         <form class="forms" action="excluirDieta.php" method="post" style="margin-top:20px" >
          <fieldset>
             <ol>
 
 
              <li class="form-row text-input-row">
-               <label>Dietas</label>
-               <table style="width:100%">
-                    <tr>
-                      <th>Nome Aluno</th> 
-                      <th>Descrição Dieta</th>
-                      <th>Selecionar</th>
-                    </tr>
-                    
-                    <?php foreach ($listaDietas as $dieta){ ?>
-                    <tr>
-                        <td><?php echo $dieta->getAluno()->getNome() ?></td> 
-                        <td><?php echo $dieta->getDescricao() ?></td>  
-                        <td><input type="radio" name="idDieta" value="<?php echo $dieta->getIdDieta() ?>"></td>  
-                    </tr>
-                    <input type="hidden" name="nomeAluno<?php echo $dieta->getIdDieta() ?>" value="<?php echo $dieta->getAluno()->getNome() ?>">
-                    <?php } ?>
-                    
-                </table>
-             </li>
+               
+               <table style="width:100%;margin-bottom:50px">
+                         <tr>
+                           <th>Nome Aluno</th> 
+                           <th>Descrição Dieta</th>
+                           <th>Alimentos</th>
+                           <th>Qtd</th>
+                           <th>Selecionar</th>
+                         </tr>
 
-              <li class="button-row" style="margin-top:50px;margin-left: -100px;text-align: center">
+                         <?php 
+                         
+                         
+                         foreach ($listaDietas as $dieta)
+                         { 
+                           $numAlimentos = sizeof($dieta->getListaAlimentos());
+                           $nomeAluno = $dieta->getAluno()->getNome();
+                           $descDieta = $dieta->getDescricao();
+                           $idDieta = $dieta->getIdDieta();
+                           $first = true;
+                           
+                           foreach ($dieta->getListaAlimentos() as $alimento)
+                           {
+                         ?>
+                         
+                         
+                         <tr>
+                             <?php if($first){ ?><td rowspan="<?php echo $numAlimentos ?>"><?php echo $nomeAluno ?></td> 
+                             <td rowspan="<?php echo $numAlimentos ?>"><?php echo $descDieta ?></td><?php } ?>
+                             <td><?php echo $alimento->getDescricao() ?></td>
+                             <td><?php echo $alimento->getQtdAlimento() ?> </td>
+                             <?php if($first){ ?><td rowspan="<?php echo $numAlimentos ?>"><input type="radio" name="idDieta" value="<?php echo $idDieta ?>"></td><?php $first=false; } ?>
+                             
+                         </tr>
+                           <?php }  ?>           
+                           
+                        <?php } ?>
+                
+               </table>
+               
+             </li>
+             <?php if(sizeof($listaDietas)!=0) { ?> 
+             <li class="button-row" style="margin-top:50px;margin-left: -100px;text-align: center">
                <input type="submit" value="Excluir" name="submit" class="btn-submit">
              </li>
+             <?php } ?>
              
             </ol>
-
+            
+             
          </fieldset>
        </form>
         
@@ -87,8 +115,9 @@ catch (Exception $exc)
         try
         {
             $dieta = new Dieta($_POST['idDieta']);
+            $alunoSelecionado = $fachada->detalharDieta($dieta,EAGER)->getAluno();
             $fachada->excluirDieta($dieta);
-            $mensagem = "A dieta do aluno ".$_POST['nomeAluno'.$dieta->getIdDieta()]." foi excluida com sucesso.";
+            $mensagem = "A dieta do aluno ".$alunoSelecionado->getNome()." foi excluida com sucesso.";
         } 
         catch (Exception $exc)
         {
@@ -96,12 +125,12 @@ catch (Exception $exc)
         }
         
             
-        ?>
+             
+    } 
     
+    if($mensagem != "") { ?>
         <h3>Mensagem</h3>
         <p><?php echo $mensagem ?></p>
-    
-    <?php     
-    } 
+    <?php }
     
     include('componentes/footerOne.php') ?>
