@@ -37,7 +37,7 @@ catch (Exception $exc)
     <div style="float:right"><image height = "80" src="<?php echo IMAGE_PATH_ALUNOS."/".$aluno->getFoto() ?>"> </div>
     <div class="intro" style="margin-bottom:50px"></div>
     
-    
+   
     
     <h3>Usuário logado: <?php echo $aluno->getNome() ?></h3>
    
@@ -63,7 +63,7 @@ catch (Exception $exc)
 
                          <?php 
                          
-                         
+                         $idDieta = "";
                          foreach ($listaDietas as $dieta)
                          { 
                            $numAlimentos = sizeof($dieta->getListaAlimentos());
