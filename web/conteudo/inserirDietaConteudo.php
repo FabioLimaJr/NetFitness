@@ -3,6 +3,7 @@
  $fachada = Fachada::getInstance();
  $listaAlunosSemDieta = array();
  $mensagem = "";
+ $error = false;
  
   
  if($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -16,7 +17,7 @@
 
  $listaAlunos = $fachada->listarAlunos(EAGER);
  $listaAlimentos = $fachada->listarAlimentos(LAZY);
- 
+ $listaAlunosSelecionados = array();
  
 ?>
 
@@ -70,27 +71,20 @@
              </li>
 
              <li class="form-row text-input-row">
-               <label>Aluno</label>
-               <select name="idAluno" size="5" style="width: 500px">
+               <label>Alunos</label>
+               
+               <div style="border: 1px solid #ddd;width:480px; padding: 10px; padding-bottom: 0; height: auto; margin-left: 100px">
                    
-                   <?php
+                    <?php
                    $primeiro = true;
-                   $selecionado = "selected=\"selected\"";
+                   $selecionado = "checked";
                    foreach ($listaAlunosSemDieta as $aluno) 
                    {     
-                      ?>  
-                        <option <?php echo $selecionado ?> value="<?php echo $aluno->getIdAluno() ?>"><?php echo $aluno->getNome() ?></option>
-                        <?php 
-
-                         if($primeiro) 
-                         {
-                             $primeiro = false;
-                             $selecionado ="";
-                         }
-                    
-                   } ?>
-                   
-                </select>
+                   ?>
+                   <input <?php if($primeiro) {echo $selecionado; $primeiro = false; }?> type="checkbox" name="idAluno<?php echo $aluno->getIdAluno() ?>" value="ok" style="margin-bottom:20px;margin-right: 15px"><?php echo $aluno->getNome() ?><br/>
+                   <?php } ?>
+               </div>
+               
              </li>
              
              <li class="form-row text-input-row">
@@ -102,6 +96,7 @@
                       <th>Carb. (%)</th>
                       <th>Prot. (%)</th>
                       <th>Gord. (%)</th>
+                      <th>Qtd. <br/>(g)</th>
                       <th>Sel.</th>
                      </tr>
                       
@@ -112,7 +107,9 @@
                              <td> <?php echo $alimento->getCarboidrato() ?> </td>
                              <td> <?php echo $alimento->getProteina() ?> </td>
                              <td> <?php echo $alimento->getGordura() ?> </td>
+                             <td> <input style="width: 50px" type="text" name="qtd<?php echo $alimento->getIdAlimento() ?>"> </td>
                              <td> <input type="checkbox" name="alimento<?php echo $alimento->getIdAlimento() ?>" value="true"> </td>
+                             
                          </tr>
                       <?php } ?>
                      
@@ -140,48 +137,81 @@
     } 
     else
     {
-       $aluno = new Aluno($_POST['idAluno']);
-       $aluno = $fachada->detalharAluno($aluno, LAZY);
+       //$aluno = new Aluno($_POST['idAluno']);
+       //$aluno = $fachada->detalharAluno($aluno, LAZY);
        
-       $listaAlimentosPrescritos = array();
-      
-       foreach(array_keys($_POST) as $parametro)
-       {
-           if(strpos($parametro,'alimento') !== false)
-           {
-               $idAlimento = explode("alimento", $parametro);
-               
-               foreach($listaAlimentos as $alimento) 
-               {
-                    if ($idAlimento[1] == $alimento->getIdAlimento()) 
-                    {  
-                        array_push($listaAlimentosPrescritos, $alimento);
-                        break;
-                    }
-               }
-           }
-       }
-       
-     
-       $dieta = new Dieta(null, $_POST['descricao'], $listaAlimentosPrescritos, $_SESSION['Nutricionista'], $aluno);      
-       $_SESSION['Dieta'] = $dieta;
-       
-       try
-       {
-           $fachada->inserirDieta($dieta);
-           unset($_SESSION['Dieta']);
-           $mensagem = "A dieta do aluno ".$aluno->getNome()." foi inserida com sucesso.";
-       } 
-       catch (Exception $exc)
-       {
-           $mensagem = $exc->getMessage();
-       }
+        $listaAlimentosPrescritos = array();
 
-    }
+
+        
+        foreach (array_keys($_POST) as $parametro)
+        {
+            if(strpos($parametro,'idAluno') !== false)
+            {
+                $idAluno = explode('idAluno', $parametro);
+
+                array_push($listaAlunosSelecionados, $fachada->detalharAluno(new Aluno($idAluno[1]), LAZY));
+                
+            }
+        }
+
+       
+        if(sizeof($listaAlunosSelecionados) != 0)
+        {
+            foreach(array_keys($_POST) as $parametro)
+            {
+                if(strpos($parametro,'alimento') !== false)
+                {
+                    $idAlimento = explode("alimento", $parametro);
+
+                    foreach($listaAlimentos as $alimento) 
+                    {
+                         if ($idAlimento[1] == $alimento->getIdAlimento()) 
+                         {  
+                             $alimento->setQtdAlimento($_POST['qtd'.$alimento->getIdAlimento()]);
+                             array_push($listaAlimentosPrescritos, $alimento);
+
+                             break;
+                         }
+                    }
+                }
+            }
+
+
+            $mensagem = "As dietas dos alunos ";
+
+            foreach($listaAlunosSelecionados as $aluno)
+            {
+                $dieta = new Dieta(null, $_POST['descricao'], $listaAlimentosPrescritos, $_SESSION['Nutricionista'], $aluno);      
+                $_SESSION['Dieta'] = $dieta;
+
+                try
+                {
+                    $fachada->inserirDieta($dieta);
+
+                    $mensagem .= $aluno->getNome().", ";
+                } 
+                catch (Exception $exc)
+                {
+                    $mensagem = $exc->getMessage();
+                    $error = true;
+                }
+            }
+
+            if(!$error)
+            {
+                $mensagem.="foram inseridas com sucesso.<br/>";
+                unset($_SESSION['Dieta']);
+            }
+        }
+        else 
+        {
+            $mensagem = "Impossível prescrever as dietas, nenhum aluno foi selecionado.";
+        }
   
+    }
    
-   
-   if($camposPreenchidos || count($listaAlunosSemDieta)==0) { ?>
+   if($camposPreenchidos || count($listaAlunosSemDieta)==0 || (sizeof($listaAlunosSelecionados) == 0 && $camposPreenchidos)) { ?>
     
         <h3>Mensagem</h3>
         <p><?php echo $mensagem ?></p>

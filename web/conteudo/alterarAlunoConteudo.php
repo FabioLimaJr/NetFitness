@@ -136,7 +136,7 @@ catch (Exception $exc)
                     <li class="form-row text-input-row">
                         <label>Dt Nascimento</label>
                         <input type="text" id="dataPicked" name="dataNascimento" maxlength="10" name="data" value="<?php 
-                        if(isset($alunoRetornado)) echo $alunoRetornado->getDataNascimento() ?>" class="text-input" style="width: 300px">
+                        if(isset($alunoRetornado)) echo ExpressoesRegulares::inverterData ($alunoRetornado->getDataNascimento())  ?>" class="text-input" style="width: 300px">
                     </li>
 
                    <li class="button-row" style="margin-top: 50px">

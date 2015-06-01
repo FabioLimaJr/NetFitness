@@ -31,8 +31,7 @@ try {
                <th>Caloria</th>
                <th>Proteina</th>
                <th>Carboidrato</th>
-               <th>Gordura</th>
-               <th>Quantidade Alimento</th>
+               <th>Gordura</th>               
             </tr>
             
             <?php foreach ($listaAlimento as $alimento){ ?>
@@ -41,8 +40,7 @@ try {
                         <td><?php echo $alimento->getCaloria() ?></td>
                         <td><?php echo $alimento->getProteina() ?></td>
                         <td><?php echo $alimento->getCarboidrato() ?></td>
-                        <td><?php echo $alimento->getGordura() ?></td>
-                        <td><?php echo $alimento->getQtdAlimento() ?></td>
+                        <td><?php echo $alimento->getGordura() ?></td>                        
                     </tr>
                   
             <?php } ?>

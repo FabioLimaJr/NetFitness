@@ -18,7 +18,7 @@ class Excecoes
 
     public static function selecionarBanco($message)
     {
-        return "Erro em selecionar o banco de dados: ".$message."<br/>";
+        return "Erro ao selecionar o banco de dados: ".$message."<br/>";
     }
     
     public static function inserirObjeto($message)
@@ -59,43 +59,43 @@ class Excecoes
     //Metodos Referentes as Expressoes Regulares
     
     public static  function nomeInvalido($mensagem){
-        return "Nome Invalido,Favor Verifique o Nome do ".$mensagem." antes da inclusão<br/>";
+        return "Nome inválido, verifique o nome do ".$mensagem." antes da inclusão<br/>";
     }
     
     public static  function cpfInvalido($mensagem){
-        return "Cpf Invalido,Favor Verifique o Cpf do ".$mensagem." antes da inclusão<br/>";
+        return "Cpf inválido, verifique o cpf do ".$mensagem." antes da inclusão<br/>";
     }
     
     public static  function emailInvalido($mensagem){
-        return "Email Invalido,Favor Verifique o Email do ".$mensagem." antes da inclusão<br/>";
+        return "Email inválido, verifique o email do ".$mensagem." antes da inclusão<br/>";
     }
     
     public static  function telefoneInvalido($mensagem){
-        return "Telefone Invalido,Favor Verifique o Telefone do ".$mensagem." antes da inclusão<br/>";
+        return "Telefone inválido, verifique o telefone do ".$mensagem." antes da inclusão<br/>";
     }
     
     public static  function loginInvalido($mensagem){
-        return "Login Invalido,Favor Verifique o Login do ".$mensagem." antes da inclusão<br/>";
+        return "Login inválido, verifique o login do ".$mensagem." antes da inclusão<br/>";
     }
     
     public static  function senhaInvalida($mensagem){
-        return "Senha Invalido,Favor Verifique a Senha do ".$mensagem." antes da inclusão<br/>";
+        return "Senha inválida, verifique a senha do ".$mensagem." antes da inclusão<br/>";
     }
     
     public static  function enderecoInvalido($mensagem){
-        return "Endereço Invalido,Favor Verifique o Endereço do ".$mensagem." antes da inclusão<br/>";
+        return "Endereço inválido, verifique o endereço do ".$mensagem." antes da inclusão<br/>";
     }
     
     public static function usuarioInvalido(){
-        return "Login e Senha inválidos.";
+        return "Login e senha inválidos.";
     }
     
     public static  function descricaoInvalida($mensagem){
-        return "Descrição Invalida,Favor Verifique a Descrição do ".$mensagem." antes da inclusão<br/>";
+        return "Descrição inválida, verifique a descrição do ".$mensagem." antes da inclusão<br/>";
     }
     
     public static  function valorNumericoInvalido($mensagem){
-        return "Valor Numerico Invalido,Favor Verifique o Valor Numerico do ".$mensagem." antes da inclusão<br/>";
+        return "Valor mumérico inválido, verifique o valor numerico do ".$mensagem." antes da inclusão<br/>";
     }
     
     public static function dataInvalida($mensagem)
@@ -104,7 +104,7 @@ class Excecoes
     }
     
     public static  function tituloInvalida($mensagem){
-        return "Titulo Invalido,Favor Verifique o Titulo da ".$mensagem." antes da inclusão<br/>";
+        return "Titulo inválido, verifique o titulo da ".$mensagem." antes da inclusão<br/>";
     }
     
     public static  function arrayVazioInvalido($mensagem){

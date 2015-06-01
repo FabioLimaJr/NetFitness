@@ -40,7 +40,8 @@ class RepositorioDieta extends RepositorioGenerico implements IRepositorioDieta
                     {
                         $sql3 = "INSERT INTO dietaalimento VALUES('";
                         $sql3.= $idDieta."','";
-                        $sql3.= $alimento->getIdAlimento()."')";
+                        $sql3.= $alimento->getIdAlimento()."','";
+                        $sql3.= $alimento->getQtdAlimento()."')";
 
                         if(!mysqli_query($this->getConexao(), $sql3))
                         {
@@ -106,6 +107,7 @@ class RepositorioDieta extends RepositorioGenerico implements IRepositorioDieta
                     while ($rowDietaAlimento = mysqli_fetch_array($resultDietaAlimento)) 
                     {                     
                         $alimento = $this->detalharObjeto(new Alimento($rowDietaAlimento['idAlimento']), LAZY);
+                        $alimento->setQtdAlimento($rowDietaAlimento['qtdAlimento']);
                         array_push($listaAlimentosRetornados, $alimento);
                     }
                     $dietaRetornada->setListaAlimentos($listaAlimentosRetornados);
@@ -182,7 +184,8 @@ class RepositorioDieta extends RepositorioGenerico implements IRepositorioDieta
                 {
                     $sql2 = "INSERT INTO dietaalimento VALUES('";
                     $sql2.= $idDieta."','";
-                    $sql2.= $alimento->getIdAlimento()."')";
+                    $sql2.= $alimento->getIdAlimento()."','";
+                    $sql2.= $alimento->getQtdAlimento()."')";
                     
                     if(!mysqli_query($this->getConexao(), $sql2))
                     {

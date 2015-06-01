@@ -51,8 +51,7 @@ if(!$camposPreenchidos){
                         <th>Caloria</th>
                         <th>Proteina</th>
                         <th>Carboidrato</th>
-                        <th>Gordura</th>
-                        <th>Quantidade Alimento</th>
+                        <th>Gordura</th>                        
                         <th>Selecione</th>
                     </tr>
                     
@@ -62,8 +61,7 @@ if(!$camposPreenchidos){
                         <td><?php echo $alimento->getCaloria();?></td>
                         <td><?php echo $alimento->getProteina();?></td>
                         <td><?php echo $alimento->getCarboidrato();?></td>
-                        <td><?php echo $alimento->getGordura();?></td>
-                        <td><?php echo $alimento->getQtdAlimento();?></td>
+                        <td><?php echo $alimento->getGordura();?></td>                        
                         <td><input type="radio" name="idAlimento" value="<?php echo $alimento->getIdAlimento()?>"></td>                        
                     </tr>
                     <input type="hidden" name="nomeNutricionista<?php echo $alimento->getIdAlimento() ?>" value="<?php echo $_SESSION['Nutricionista']->getNome() ?>">

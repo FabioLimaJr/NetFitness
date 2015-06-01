@@ -72,17 +72,15 @@ class RepositorioAluno extends RepositorioPessoa implements IRepositorioAluno
             if (!$this->alterarPessoa($aluno)){
                 throw new Exception(Excecoes::alterarObjeto("Aluno: " . mysqli_error($this->getConexao())));
             } 
-            else{
-                /*$sql = "UPDATE aluno SET idSecretaria= '".$aluno->getSecretaria()->getIdSecretaria() . "'";
-                $sql.= ", sexo = '".$aluno->getSexo();
-                $sql.= ", opiniao = '".$aluno->getOpiniao();
-                $sql.= "' WHERE idAluno= '".$aluno->getIdAluno();*/
-                
+            else
+            {                
                 $sql = "UPDATE aluno SET sexo = '".$aluno->getSexo()."'";
-                $sql.= ", idMusica = '".$aluno->getMusica()->getIdMusica()."'";
+                if($aluno->getMusica()!=null)
+                {
+                    $sql.= ", idMusica = '".$aluno->getMusica()->getIdMusica()."'";
+                }
                 $sql.= ", dataNascimento = '".ExpressoesRegulares::inverterData($aluno->getDataNascimento())."'";
                 $sql.= " WHERE idAluno= '".$aluno->getIdAluno()."'";
-                //falta alterar as demais listas atreladas se for preciso
                 
                 if (!mysqli_query($this->getConexao(), $sql)){
                     throw new Exception(Excecoes::alterarObjeto("Aluno: " . mysqli_error($this->getConexao())));
