@@ -107,6 +107,7 @@ class RepositorioDieta extends RepositorioGenerico implements IRepositorioDieta
                     while ($rowDietaAlimento = mysqli_fetch_array($resultDietaAlimento)) 
                     {                     
                         $alimento = $this->detalharObjeto(new Alimento($rowDietaAlimento['idAlimento']), LAZY);
+                        $alimento->setQtdAlimento($rowDietaAlimento['qtdAlimento']);
                         array_push($listaAlimentosRetornados, $alimento);
                     }
                     $dietaRetornada->setListaAlimentos($listaAlimentosRetornados);

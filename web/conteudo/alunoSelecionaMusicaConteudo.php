@@ -45,6 +45,7 @@ if(!$camposPreenchidos){
       <form class="forms" action="alunoSelecionaMusica.php" method="post" >
       <fieldset>      
        <ol>
+           <li>
     <table style="width: 100%">
             <tr>
                <th>Titulo</th>
@@ -64,10 +65,11 @@ if(!$camposPreenchidos){
             <?php } ?>  
             
     </table>
-       </ol>
+           </li>
           <li class="button-row" style="margin-top: 50px;margin-left: -100px;text-align: center">
               <input type="submit" value="Selecionar" name="submit" class="btn-submit">
           </li>
+          </ol>
       </fieldset>
       </form>
     
@@ -75,7 +77,9 @@ if(!$camposPreenchidos){
 <?php }else {
         try {
             $musicaSelecionada = new Musica($_POST['idMusica']);
-            $_SESSION['Aluno']->setMusica($musicaSelecionada);
+            $aluno = $fachada->detalharAluno($_SESSION['Aluno'], LAZY);
+            $aluno->setDataNascimento(ExpressoesRegulares::inverterData($aluno->getDataNascimento()));
+            $aluno->setMusica($musicaSelecionada);
             $fachada->alterarAluno($aluno);
 
             $mensagem = "Musica Selecionada com sucesso.";
