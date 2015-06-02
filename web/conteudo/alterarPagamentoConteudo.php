@@ -64,6 +64,7 @@ Telefone:<?php echo $secretaria->getTelefone() ?> | Email:<?php echo $secretaria
                                   $pagamento->setDataPagamento(ExpressoesRegulares::inverterData($pagamento->getDataPagamento())); 
                                }
                             ?>
+                            
                             <td><?php echo $pagamento->getAluno()->getNome() ?></td>
                             <td><?php echo $pagamento->getValor() ?></td>
                             <td><?php echo $pagamento->getDataVencimento() ?></td>
@@ -106,12 +107,12 @@ Telefone:<?php echo $secretaria->getTelefone() ?> | Email:<?php echo $secretaria
 
                     <li class="form-row text-input-row">
                     <label>DataVencimento</label>                               
-                    <input type="text" name="dataVencimento" value="<?php if(isset($pagamentoRetornado)) echo (ExpressoesRegulares::inverterData($pagamentoRetornado->getDataVencimento())) ?>" class="text-input" style="width: 300px">
+                    <input type="text" id="dataPicked" maxlength="10" name="dataVencimento" value="<?php if(isset($pagamentoRetornado)) echo ExpressoesRegulares::inverterData($pagamentoRetornado->getDataVencimento()) ?>" class="text-input" style="width: 300px">
                     </li>
                     
                     <li class="form-row text-input-row">
                     <label>DataPagamento</label>
-                    <input type="text" name="dataPagamento" value="<?php if(isset($pagamentoRetornado)) echo $pagamentoRetornado->getDataPagamento() ?>" class="text-input" style="width: 300px">
+                    <input type="text" id="dataPicked2" maxlength="10" name="dataPagamento" value="<?php if(isset($pagamentoRetornado)) echo ExpressoesRegulares::inverterData($pagamentoRetornado->getDataPagamento()) ?>" class="text-input" style="width: 300px">
                     </li>
                     
                     <li class="button-row" style="margin-top:50px">

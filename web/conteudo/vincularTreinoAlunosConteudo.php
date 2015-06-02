@@ -157,6 +157,7 @@ Nome: <?php echo $instrutor->getNome() ?> | Telefone:<?php echo $instrutor->getT
                 try{
                     
                     $treinoRetornado = $_SESSION['treinoRetornado'];
+                    //echo $_POST['data'];
                     $treinoRetornado->setData($_POST['data']);
                     
                     $fachada->vincularTreinoAlunos($treinoRetornado, $alunosSelecionados, $qtdTreinos);
