@@ -101,9 +101,9 @@ Nome: <?php echo $instrutor->getNome() ?> | Telefone:<?php echo $instrutor->getT
                     {
                         //$postSerie = "serie".$idExercicio;
                         $exercicio->setSeries($_POST['series'.$exercicio->getIdExercicio()]);
-                        echo $exercicio->getSeries();
+                        
                         $exercicio->setRepeticoes($_POST['repeticoes'.$exercicio->getIdExercicio()]);
-                        echo $exercicio->getRepeticoes();
+                        
                         array_push($listaExerciciosSelecionados, $exercicio);
                         break;
                     }
