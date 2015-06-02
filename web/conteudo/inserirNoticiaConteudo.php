@@ -76,14 +76,12 @@
                                     ExpressoesRegulares::inverterData($_POST['data']));
 
              $_SESSION['Secretaria'] = $secretaria; 
-            // var_dump($_SESSION['Aluno']);
-
+            
              try
              {
                 $fachada->inserirNoticia($noticia);
                 $mensagem = "Parabéns, a Noticia foi incluida com sucesso!";
-                unset($_SESSION['Secretaria']);
-
+                
              }
              catch(Exception $exc)
              {
