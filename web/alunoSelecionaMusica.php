@@ -5,6 +5,10 @@ include ('../classesBasicas/Coordenador.php');
 include ('../classesBasicas/Nutricionista.php');
 include ('../classesBasicas/Instrutor.php');
 include ('../classesBasicas/Secretaria.php');
+include ('../classesBasicas/Dieta.php');
+include ('../classesBasicas/Alimento.php');
+include ('../classesBasicas/Pagamento.php');
+include ('../classesBasicas/Treino.php');
 include ('../ferramentas/upload/Upload.php');
 require ('../ferramentas/mail/PHPMailerAutoload.php');
 

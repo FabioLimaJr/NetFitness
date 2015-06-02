@@ -1,9 +1,11 @@
 <?php 
 $camposPreenchidos = false;
-//$fachada = new Fachada();
+$fachada = new Fachada();
 $fachada = Fachada::getInstance();
 $mensagem ="";
+$checked ="";
 $listaMusicas = array();
+
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $camposPreenchidos = true;
@@ -12,6 +14,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 try
 {
     $listaMusicas = $fachada->listarMusicas(EAGER);
+    $detalharAluno = $fachada->detalharAluno($aluno,EAGER);
 } 
 catch (Exception $exc)
 {
@@ -54,12 +57,22 @@ if(!$camposPreenchidos){
                <th>Selecione</th>
             </tr>
             
-            <?php foreach ($listaMusicas as $musica){ ?>
+            <?php foreach ($listaMusicas as $musica){ 
+                if($detalharAluno->getMusica()->getIdMusica() != null){
+                    if($detalharAluno->getMusica()->getIdMusica() == $musica->getIdMusica()){
+                        $checked = "checked";
+                    }else{
+                        $checked = "";
+                    }
+                }
+                
+            
+                ?>
                     <tr>
                         <td><?php echo $musica->getTitulo() ?></td>
                         <td><?php echo $musica->getCategoria() ?></td>
                         <td><?php echo $musica->getArtista() ?></td>
-                        <td><input type="radio" name="idMusica" value="<?php echo $musica->getIdMusica()?>"></td>
+                        <td><input <?php echo $checked ?> type="radio" name="idMusica" value="<?php echo $musica->getIdMusica()?>"></td>
                     </tr>
                   
             <?php } ?>  
