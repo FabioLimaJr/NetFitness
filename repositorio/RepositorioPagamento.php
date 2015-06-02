@@ -31,8 +31,8 @@ class RepositorioPagamento extends RepositorioPessoa implements IRepositorioPaga
             
             $sql = "INSERT INTO pagamento VALUES( null,"
                     .$pagamento->getValor().", null,'"
-                    //.$pagamento->getDataPagamento().",'"
-                    .$pagamento->getDataVencimento()."',"
+                   // .ExpressoesRegulares::inverterData($pagamento->getDataPagamento())."','"
+                    .ExpressoesRegulares::inverterData($pagamento->getDataVencimento())."',"
                     .$pagamento->getSecretaria()->getIdSecretaria().","
                     .$pagamento->getAluno()->getIdAluno(). ")";
             
@@ -58,8 +58,8 @@ class RepositorioPagamento extends RepositorioPessoa implements IRepositorioPaga
         if(@$this->getConexao()->query($sql) === TRUE){
             
             $sql = "UPDATE pagamento SET valor = '".$pagamento->getValor()
-                                                 ."', dataPagamento = '".$pagamento->getDataPagamento()
-                                                 ."', dataVencimento = '".$pagamento->getDataVencimento()
+                                                 ."', dataPagamento = '".ExpressoesRegulares::inverterData($pagamento->getDataPagamento())
+                                                 ."', dataVencimento = '".ExpressoesRegulares::inverterData($pagamento->getDataVencimento())
                                                  ."' WHERE idPagamento = '".$pagamento->getIdPagamento()."'";
                        
             if( mysqli_query($this->getConexao(), $sql)){

@@ -59,9 +59,13 @@ Telefone:<?php echo $secretaria->getTelefone() ?> | Email:<?php echo $secretaria
                             <?php 
                                if($pagamento->getDataVencimento() != NULL){
                                   $pagamento->setDataVencimento(ExpressoesRegulares::inverterData($pagamento->getDataVencimento())); 
+                               }else{
+                                  $pagamento->setDataVencimento(" ");
                                }
                                if($pagamento->getDataPagamento() != NULL){
                                   $pagamento->setDataPagamento(ExpressoesRegulares::inverterData($pagamento->getDataPagamento())); 
+                               }else{
+                                  $pagamento->setDataPagamento(" ");
                                }
                             ?>
                             
@@ -112,7 +116,7 @@ Telefone:<?php echo $secretaria->getTelefone() ?> | Email:<?php echo $secretaria
                     
                     <li class="form-row text-input-row">
                     <label>DataPagamento</label>
-                    <input type="text" id="dataPicked2" maxlength="10" name="dataPagamento" value="<?php if(isset($pagamentoRetornado)) echo ExpressoesRegulares::inverterData($pagamentoRetornado->getDataPagamento()) ?>" class="text-input" style="width: 300px">
+                    <input type="text" id="dataPicked2" maxlength="10" name="dataPagamento" value="<?php if($pagamento->getDataPagamento() != NULL) if(isset($pagamentoRetornado)) echo ExpressoesRegulares::inverterData($pagamentoRetornado->getDataPagamento()) ?>" class="text-input" style="width: 300px">
                     </li>
                     
                     <li class="button-row" style="margin-top:50px">
@@ -140,8 +144,8 @@ Telefone:<?php echo $secretaria->getTelefone() ?> | Email:<?php echo $secretaria
                  
              $pagamentoAlterado = new Pagamento($_SESSION['pagamentoRetornado']->getIdPagamento(),
                                                 $_POST['valor'],
-                                                ExpressoesRegulares::inverterData($_POST['dataVencimento']),
-                                                ExpressoesRegulares::inverterData($_POST['dataPagamento']),
+                                                $_POST['dataVencimento'],
+                                                $_POST['dataPagamento'],
                                                 $_SESSION['Secretaria'],
                                                 $_SESSION['pagamentoRetornado']->getAluno());    
                  

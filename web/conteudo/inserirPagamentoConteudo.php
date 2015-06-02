@@ -85,8 +85,7 @@
       <?php 
     } 
     else
-    {  
-        echo 'Id Aluno: '.$_POST['idAluno'];
+    {          
         $alunoSelecionado = new Aluno($_POST['idAluno']);
         //$alunoSelecionado->setIdAluno($_POST['aluno']);
         $pagamento = new Pagamento(null, 
@@ -104,7 +103,7 @@
              {
                 $fachada->inserirPagamento($pagamento);
                 $mensagem = "Parabéns, o pagamento foi inserido com sucesso!";
-                unset($_SESSION['Secretaria']);
+                
 
              }
              catch(Exception $exc)
@@ -116,4 +115,9 @@
   
    
    ?> 
-        
+           <h3>Mensagem</h3>
+    <p><?php echo $mensagem ?></p>
+
+    
+    
+    <?php include('componentes/footerOne.php') ?> 
