@@ -88,14 +88,9 @@
                 $mensagem = $exc->getMessage();
              }
     }
-  
-   
-   
    ?> 
     
     <h3>Mensagem</h3>
     <p><?php echo $mensagem ?></p>
 
-    
-    
     <?php include('componentes/footerOne.php') ?>
