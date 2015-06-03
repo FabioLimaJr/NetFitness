@@ -15,8 +15,16 @@
   </div><!-- end sidebar -->
      
   <div id="content">
-  
-     <?php include('conteudo/indexConteudo.php'); ?>
+     
+     <?php 
+     
+        session_start();
+        
+     if(isset($_SESSION)){
+         session_destroy();         
+     }
+     
+     include('conteudo/indexConteudo.php'); ?>
     
   </div><!-- end content -->
   
