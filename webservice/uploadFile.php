@@ -1,5 +1,5 @@
 <?php
-include ('../fachada/fachada.php');
+include ('../fachada/Fachada.php');
 include ('../classesBasicas/Aluno.php');
 include ('../ferramentas/upload/Upload.php');
 include ('../expressoesRegulares/ExpressoesRegulares.php');
