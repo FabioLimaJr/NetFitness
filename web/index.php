@@ -1,4 +1,6 @@
-<?php include ('componentes/header.php') ?>
+<?php 
+session_start();
+include ('componentes/header.php') ?>
 
 
 <body>
@@ -18,7 +20,7 @@
      
      <?php 
      
-        session_start();
+        
         
      if(isset($_SESSION)){
          session_destroy();         
