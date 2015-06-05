@@ -79,6 +79,7 @@ class RepositorioAluno extends RepositorioPessoa implements IRepositorioAluno
                 {
                     $sql.= ", idMusica = '".$aluno->getMusica()->getIdMusica()."'";
                 }
+                $sql.=", foto = '".$aluno->getFoto()."'";
                 $sql.= ", dataNascimento = '".ExpressoesRegulares::inverterData($aluno->getDataNascimento())."'";
                 $sql.= " WHERE idAluno= '".$aluno->getIdAluno()."'";
                 

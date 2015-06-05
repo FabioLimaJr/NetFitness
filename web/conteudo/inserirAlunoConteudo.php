@@ -110,8 +110,11 @@
     } 
     else
     {
-             $sufixo_foto = substr($_FILES['foto']['name'], -4);
-             $nome_foto = substr($_FILES['foto']['name'],0,-4)."_".substr(md5(rand()), 0, 5);
+             $sufixo_foto = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
+             //$nome_foto = substr($_FILES['foto']['name'],0,-4)."_".substr(md5(rand()), 0, 5);
+             //$nome_foto = str_replace(" ", "_", $nome_foto);
+             
+             $nome_foto = pathinfo($_FILES['foto']['name'], PATHINFO_FILENAME)."_".substr(md5(rand()), 0, 5);
              $nome_foto = str_replace(" ", "_", $nome_foto);
              
              $aluno = new Aluno(null, $_POST['nome'], $_POST['cpf'], 
@@ -120,7 +123,7 @@
                                 $_POST['email'],$_POST['sexo'], 
                                 $_POST['dataNascimento'], $secretaria, 
                                 null/*$musica*/, null/*$dieta*/, null/*$listaPagamentos*/, 
-                                null/*$listaTreinos*/, $nome_foto.$sufixo_foto );
+                                null/*$listaTreinos*/, $nome_foto.".".$sufixo_foto );
 
              $_SESSION['Aluno'] = $aluno; 
 
