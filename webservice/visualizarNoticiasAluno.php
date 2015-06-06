@@ -28,14 +28,22 @@ if(isset($_POST['idAluno']) && isset($_POST['senha']) && isset($_POST['login']))
         $aluno = new Aluno($_POST['idAluno']);
         $resposta = array();
         $listaNoticias = array();
+        //$listaSecretarias = array();
 
         try
         {
             $resposta['mensagem'] = "notNull";
             $alunoRetornado = $fachada->detalharAluno($aluno, EAGER);
-            $listaNoticias = $fachada->listarNoticia();
+            //$listaSecretarias = $fachada->listarSecretarias(LAZY);
+          
+            foreach ($fachada->listarSecretarias(LAZY) as $sec){
+                foreach ($fachada->listarNoticia($sec, LAZY) as $not){
+                    array_push($listaNoticias, $not);
+                }
+            }
+            
             $resposta['listaNoticias'] = $listaNoticias;
-            echo json_encode((array)$resposta);
+            echo json_encode($resposta);
         } 
         catch (Exception $ex) 
         {
