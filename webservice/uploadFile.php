@@ -27,7 +27,8 @@ if(isset($_POST['idAluno']) && isset($_POST['senha']) && isset($_POST['login']))
 
             if ($fotoUpload->processed) 
             {
-                $resposta['mensagem'] = "Foto atualizada com sucesso.";           
+                $resposta['mensagem'] = "Foto atualizada com sucesso.";    
+                $resposta['nomeFoto'] = $fotoUpload->file_dst_name;
                 $nomeFotoUpload = $fotoUpload->file_dst_name;
 
                 $alunoRetornado = $fachada->detalharAluno(new Aluno($_POST['idAluno']), LAZY);
