@@ -33,7 +33,8 @@ if(isset($_POST['idAluno']) && isset($_POST['senha']) && isset($_POST['login']))
         {
             $resposta['mensagem'] = "notNull";
             $alunoRetornado = $fachada->detalharAluno($aluno, EAGER);
-            $resposta['listaNoticias'] = $fachada->listarNoticia();
+            $listaNoticias = $fachada->listarNoticia();
+            $resposta['listaNoticias'] = $listaNoticias;
             echo json_encode((array)$resposta);
         } 
         catch (Exception $ex) 
