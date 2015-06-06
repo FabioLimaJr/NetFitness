@@ -6,7 +6,7 @@ $mensagem ="";
 
 try {
     
-    $listaOpinioes = $fachada->listarOpinioes($_SESSION['Aluno']);
+    $listaOpinioes = $fachada->listarOpinioes(LAZY);
     
 } catch (Exception $exc) {
     echo $exc->getMessage();

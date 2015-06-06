@@ -15,7 +15,7 @@
  
  try{
      
-     $listaOpinioes = $fachada->listarOpinioes($_SESSION['Aluno']);
+     $listaOpinioes = $fachada->listarOpinioes(LAZY);
      
  } catch (Exception $ex) {
      $mensagem = $ex->getMessage();
@@ -31,7 +31,7 @@ Nome: <?php echo $aluno->getNome() ?> | Telefone:<?php echo $aluno->getTelefone(
          
 </div>
   
-<h3>Inserir Opinião</h3>
+<h3>Alterar Opinião</h3>
    
 <div class="clear"></div>
 <div class="line"></div>
@@ -57,7 +57,7 @@ Nome: <?php echo $aluno->getNome() ?> | Telefone:<?php echo $aluno->getTelefone(
                         
                         <tr>
                             <td><?php echo $opiniao->getDescricao() ?></td> 
-                            <td><?php echo $opiniao->getDataPostagem() ?></td>    
+                            <td><?php echo ExpressoesRegulares::inverterData($opiniao->getDataPostagem()) ?></td>    
                             <td><input type="radio" name="idOpiniao" value="<?php echo $opiniao->getIdOpiniao() ?>"></td>
                         </tr>
                         <?php 
@@ -83,7 +83,7 @@ Nome: <?php echo $aluno->getNome() ?> | Telefone:<?php echo $aluno->getTelefone(
              
              $opiniao = new Opiniao($_POST['idOpiniao']);
              //$exercicio->setIdExercicio($_POST['idExercicio']);
-             $opiniaoRetornada = $fachada->detalharOpiniao($opiniao);
+             $opiniaoRetornada = $fachada->detalharOpiniao($opiniao, LAZY);
              //var_dump($opiniaoRetornada);
              //echo $opiniaoRetornada->getDescricao();
              $_SESSION['opiniaoRetornada'] = $opiniaoRetornada;
@@ -97,7 +97,7 @@ Nome: <?php echo $aluno->getNome() ?> | Telefone:<?php echo $aluno->getTelefone(
 
                     <li class="form-row text-input-row">
                         <label>Descrição</label>
-                        <textarea class="text-input" name="descricao" value="<?php if(isset($opiniaoRetornada)) echo $opiniaoRetornada->getDescricao() ?>" style="width:500px; height: 100px"></textarea>
+                        <textarea class="text-input" name="descricao" value="" style="width:500px; height: 100px"><?php if(isset($opiniaoRetornada)) echo $opiniaoRetornada->getDescricao() ?></textarea>
                     </li>
 
                     <li class="form-row text-input-row">

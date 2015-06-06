@@ -259,12 +259,12 @@ class Fachada implements IFachada
         return $this->controladorOpiniao->alterar($opiniao);
     }
     
-    public function detalharOpiniao($opiniao){
-        return $this->controladorOpiniao->detalhar($opiniao);
+    public function detalharOpiniao($opiniao, $fetchType){
+        return $this->controladorOpiniao->detalhar($opiniao, $fetchType);
     }
 
-    public function listarOpinioes($aluno) {
-        return $this->controladorOpiniao->listar($aluno);
+    public function listarOpinioes($fetchType) {
+        return $this->controladorOpiniao->listar($fetchType);
     }
     
     

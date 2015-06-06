@@ -69,15 +69,14 @@
                                     $_POST['data'], 
                                     $aluno);
 
-             var_dump($opiniao);
+             
              $_SESSION['Opiniao'] = $opiniao; 
 
              try
              {
                 $fachada->inserirOpiniao($opiniao);
                 $mensagem = "Parabéns, a opiniao do aluno ".$aluno->getNome()." foi incluido com sucesso!";
-                unset($_SESSION['Opiniao']);
-
+                
              }
              catch(Exception $exc)
              {

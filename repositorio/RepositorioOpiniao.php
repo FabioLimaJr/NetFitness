@@ -23,7 +23,7 @@ class RepositorioOpiniao extends RepositorioGenerico implements IRepositorioOpin
             $sql = "INSERT INTO opiniao VALUES('";
             $sql.= NULL. "','";
             $sql.= $opiniao->getDescricao()."','";
-            $sql.= $opiniao->getDataPostagem()."','";
+            $sql.= ExpressoesRegulares::inverterData($opiniao->getDataPostagem())."','";
             $sql.= $opiniao->getAluno()->getIdAluno(). "')";
             
             if(mysqli_query($this->getConexao(), $sql)){
@@ -45,7 +45,7 @@ class RepositorioOpiniao extends RepositorioGenerico implements IRepositorioOpin
         
         if (@$this->getConexao()->query($sql) === TRUE)
         {
-            $sql = "UPDATE opiniao SET descricao = '".$opiniao->getDescricao()."' WHERE idOpiniao = ".$opiniao->getIdOpiniao();
+            $sql = "UPDATE opiniao SET descricao = '".$opiniao->getDescricao()."', dataPostagem ='".ExpressoesRegulares::inverterData($opiniao->getDataPostagem())."' WHERE idOpiniao = ".$opiniao->getIdOpiniao();
             
             if (!mysqli_query($this->getConexao(), $sql)) 
                 {

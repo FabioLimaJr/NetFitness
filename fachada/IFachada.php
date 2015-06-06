@@ -59,7 +59,8 @@ interface IFachada
     public function inserirOpiniao($opiniao);
     public function alterarOpiniao($opiniao);
     public function excluirOpiniao($opiniao);
-    public function listarOpinioes($aluno);
+    public function listarOpinioes($fetchType);
+    public function detalharOpiniao($opiniao, $fetchType);
      
     //Alimento
     public function inserirAlimento($alimento);

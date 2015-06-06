@@ -1,7 +1,7 @@
 <?php
 
 $camposPreenchidos = false;
-//$fachada = new Fachada();
+$fachada = new Fachada();
 $fachada = Fachada::getInstance();
 $mensagem = "";
 
@@ -11,7 +11,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 try {
     
-    $listaOpinioes = $fachada->listarOpinioes($_SESSION['Aluno']);
+    $listaOpinioes = $fachada->listarOpinioes(EAGER);
     
 } catch (Exception $exc) {
 
