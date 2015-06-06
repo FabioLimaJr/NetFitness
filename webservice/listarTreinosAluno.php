@@ -30,7 +30,7 @@ if(isset($_POST['idAluno']) && isset($_POST['senha']) && isset($_POST['login']))
         
         try
         {
-            $resposta['mensagem'] = "notNull";
+            
             $alunoRetornado = $fachada->detalharAluno($aluno, EAGER);
             $listaTreinos = $alunoRetornado->getListaTreinos();
             
@@ -38,8 +38,19 @@ if(isset($_POST['idAluno']) && isset($_POST['senha']) && isset($_POST['login']))
             {
                 array_push($listaTreinosRetornados, $fachada->detalharTreino($treino, EAGER));        
             }
-                
-            $resposta['listaTreinos'] = $listaTreinosRetornados;
+            
+            if(sizeof($listaTreinos)==0)
+            {
+                $resposta['mensagem'] =  "O aluno não tem nenhum treino vinculado";
+                $resposta['listaTreinos'] = "null";
+            }
+            else
+            {
+                $resposta['mensagem'] = "notNull";
+                $resposta['listaTreinos'] = $listaTreinosRetornados;
+            }
+            
+           
             echo json_encode((array)$resposta);
         } 
         catch (Exception $ex) 
