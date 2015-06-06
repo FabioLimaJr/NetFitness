@@ -5,7 +5,8 @@
  *
  * @author Marcelo
  */
-class Noticia {
+class Noticia implements JsonSerializable
+{
    
     private $idNoticia;
     private $titulo;
@@ -76,4 +77,11 @@ class Noticia {
     function setData($data) {
         $this->data = $data;
     }
+
+    public function jsonSerialize()
+    {
+        $vars = get_object_vars($this);
+        return $vars;
+    }
+
 }
