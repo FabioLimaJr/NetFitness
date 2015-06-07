@@ -1,7 +1,14 @@
 <div id="menu" class="menu-v">
+<?
+session_start();
+if($_GET["logout"]){
+    session_destroy();
+    header("location: index.php");
+    exit;
+}
+?>
       <ul>
-          
-        <li><a href="index.php" class="active">Sair</a>
+        <li><a href="index.php?logout=1" class="active">Sair</a>
         </li>
         <li><a href="#">Exame Fisico</a>
           <ul>
