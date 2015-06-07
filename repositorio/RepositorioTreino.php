@@ -363,5 +363,52 @@ class RepositorioTreino extends RepositorioGenerico implements IRepositorioTrein
             throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
         }
     }
+    
+    public function atualizarDatasTreinosRealizados($aluno, $treino, $qtdTreinos)
+    {
+        date_default_timezone_set('America/Recife');
+        $sql = "USE " . $this->getNomeBanco();
+        $listaDatasTreinos = array();
+        
+        for($i=0; $i<$qtdTreinos; $i++)
+        {
+            $date = new DateTime();
+            array_push($listaDatasTreinos, $date->format('Y-m-d'));
+        }
+        
+        if($this->getConexao()->query($sql) === true)
+        {
+            $sqlAlunoTreino = "SELECT * FROM alunotreino WHERE idAluno = '".$aluno->getIdAluno()."' AND ".
+                              "idTreino = '".$treino->getIdTreino()."'";
+            try
+            {
+                $resultAlunoTreino = mysqli_query($this->getConexao(), $sqlAlunoTreino);
+                $rowAlunoTreino = mysqli_fetch_assoc($resultAlunoTreino);
+                $idAlunoTreino = $rowAlunoTreino['idAlunoTreino'];   
+                
+                foreach($listaDatasTreinos as $data)
+                {
+                    $sqlDataTreino = "INSERT INTO dataalunotreino VALUES('".$idAlunoTreino."','".$data."')";
+                
+                    try
+                    {
+                        $resultDataTreino = mysqli_query($this->getConexao(), $sqlDataTreino);
+                    } 
+                    catch (Exception $ex) 
+                    {
+                        throw new Exception($exc->getMessage());
+                    }
+                }
+            }
+            catch(Exception $exc)
+            {
+                 throw new Exception($exc->getMessage());
+            }
+        }
+        else
+        {
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+        }
+    }
 
 }

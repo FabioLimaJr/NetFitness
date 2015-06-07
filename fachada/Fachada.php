@@ -245,6 +245,10 @@ class Fachada implements IFachada
         return $this->controladorTreino->listarTreinosRealizados($aluno, $treino);
     }
     
+    public function atualizarDatasTreinosRealizados($aluno, $treino, $qtdTreinos)
+    {
+        $this->controladorTreino->atualizarDatasTreinosRealizados($aluno, $treino, $qtdTreinos);
+    }
     
     //Opinião 
     public function inserirOpiniao($opiniao) {
@@ -353,6 +357,8 @@ class Fachada implements IFachada
     public function excluirExameFisico($exameFisico) {
         return $this->controladorExameFisico->excluir($exameFisico);
     }
+    
+    
     //Dica
     public function inserirDica($dica, $pessoa) {
         $this->controladorDica->inserir($dica, $pessoa);
