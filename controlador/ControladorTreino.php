@@ -139,9 +139,4 @@ class ControladorTreino {
      {
          return $this->getRepositorioTreino()->listarTreinosRealizados($aluno, $treino);
      }
-     
-     public function atualizarDatasTreinosRealizados($aluno, $treino, $qtdTreinos)
-     {
-         $this->getRepositorioTreino()->atualizarDatasTreinosRealizados($aluno, $treino, $qtdTreinos);
-     }
 }

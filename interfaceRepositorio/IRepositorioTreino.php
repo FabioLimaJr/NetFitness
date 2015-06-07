@@ -13,6 +13,5 @@ interface IRepositorioTreino {
     public function vincularTreinoAlunos($treino, $listaAlunos, $qtdTreinos);
     public function listarTreinoPorAluno($aluno, $fetchType);
     public function listarTreinosRealizados($aluno, $treino);
-    public function atualizarDatasTreinosRealizados($aluno, $treino, $qtdTreinos);
     
 }
