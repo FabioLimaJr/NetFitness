@@ -13,4 +13,4 @@ define("SMTP_AUTH",true);
 define ("DB_NAME", "netfitness");
 define ("DB_SERVER_NAME", "localhost");
 define ("DB_USER_NAME", "root");
-define ("DB_USER_PASSWORD", "123456");
+define ("DB_USER_PASSWORD", "");

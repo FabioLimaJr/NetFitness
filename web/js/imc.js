@@ -1,7 +1,6 @@
 function calcula_imc(){
-var altura = document.imcForm.altura.value;
-var peso = document.imcForm.peso.value;
-
+var altura = document.getElementById("altura").value;
+var peso = document.getElementById("peso").value;
 
 var quadrado = peso/(altura * altura);
 var calculo = quadrado.toFixed(2);
