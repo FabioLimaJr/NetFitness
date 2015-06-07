@@ -6,6 +6,8 @@ include ('../classesBasicas/Coordenador.php');
 include ('../classesBasicas/Secretaria.php');
 include ('../classesBasicas/Dieta.php');
 include ('../classesBasicas/Alimento.php');
+include ('../classesBasicas/Instrutor.php');
+include ('../classesBasicas/Treino.php');
 session_start();
 
 if(isset($_SESSION['Coordenador']))
@@ -47,3 +49,4 @@ include ('componentes/header.php');
 
 </body>
 </html>
+

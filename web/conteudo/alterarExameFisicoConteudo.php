@@ -125,7 +125,7 @@ Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->
                     </li>
                      <li class="form-row text-input-row">
                         <label>Antebraço</label>
-                        <input type="text" name="circAntebraco" value="<?php if(isset($exameFisicoRetornado)) echo $exameFisicoRetornado->getCircAbdomen() ?>" class="text-input" style="width: 300px">
+                        <input type="text" name="circAntebraco" value="<?php if(isset($exameFisicoRetornado)) echo $exameFisicoRetornado->getCircAntebraco() ?>" class="text-input" style="width: 300px">
                     </li>
                      <li class="form-row text-input-row">
                         <label>Coxa</label>
@@ -151,7 +151,11 @@ Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->
              
              if($_POST['submit'] == 'Salvar Alterações'){
                  
-             $exameFisicoAlterado = new ExameFisico($_SESSION['exameFisicoRetornado']->getIdExameFisico(), $_POST['aluno'], $_POST['descricao'], $_POST['altura']);
+             $exameFisicoAlterado = new ExameFisico($_SESSION['exameFisicoRetornado']->getIdExameFisico(), $_POST['aluno'], 
+                                                    $_POST['descricao'], $_POST['altura'], $POST['peso'], 
+                                                    $POST['circTorax'], $POST['circAbdomen'], $POST['circBraco'], 
+                                                    $POST['circAntebraco'], $POST['circCoxa'], 
+                                                    $POST['circPanturrilha']);
              
              try{
                  

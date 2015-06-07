@@ -24,13 +24,13 @@ catch (Exception $exc)
 <h1 class="title">Detalhar Nutricionista</h1>
   <div class="line"></div>
     
-        Telefone:<?php //echo $coordenador->getTelefone() ?> | Email:<?php //echo $coordenador->getEmail() ?> | Endereço:<?php //echo $coordenador->getEndereco() ?>
+        Telefone:<?php echo $coordenador->getTelefone() ?> | Email:<?php echo $coordenador->getEmail() ?> | Endereço:<?php echo $coordenador->getEndereco() ?>
 
     <div class="intro" style="margin-bottom:50px"></div>
     
     
     
-    <h3>Usuário logado: <?php //echo $coordenador->getNome() ?></h3>
+    <h3>Usuário logado: <?php echo $coordenador->getNome() ?></h3>
    
    
     <div class="clear"></div>
@@ -47,24 +47,21 @@ catch (Exception $exc)
                <table style="width:100%;margin-bottom:50px">
                          <tr>
                            <th>Nome Nutricionista</th> 
+                           <th>CPF</th>
                            <th>CRN</th>
-                           <th>Telefone</th>
-                           <th>Email</th>
                            <th>Selecionar</th>
                          </tr>
 
                          <?php foreach ($listaNutricionistas as $nutricionista){ ?>
                          <tr>
                              <td><?php echo $nutricionista->getNome() ?></td> 
-                             <td><?php echo $nutricionista->getCrn() ?></td>
-                             <td><?php echo $nutricionista->getTelefone() ?></td>
-                             <td><?php echo $nutricionista->getEmail() ?></td>
+                             <td><?php echo $nutricionista->getCpf() ?></td>
+                              <td><?php echo $nutricionista->getCrn() ?></td>
                              <td><input type="radio" name="idNutricionista" value="<?php echo $nutricionista->getIdNutricionista() ?>"></td>
                          </tr>
 
                          <?php 
-                         
-                    
+                        
                          } ?>
 
                </table>
@@ -78,62 +75,61 @@ catch (Exception $exc)
        </fieldset>
        </form>
     </div>
-    <?php }
-    else
-    {
-        if(count($_POST)>1)
-        {
-            //Detalhar
-            try
-            {
-                $nutricionista = new Nutricionista($_POST['idNutricionista']);
-                $nutricionistaRetornada = $fachada->detalharNutricionista($nutricionista, EAGER);
-               // var_dump($dietaRetornada);
-                ?>
-                     <div style="margin-bottom: 50px">
+    <?php 
+           
+        }else{
+            
+            if(count($_POST)>1){
+                
+                try{
+                    
+                    $nutricionista = new Nutricionista($_POST['idNutricionista']);
+                   $nutricionistaRetornado = $fachada->detalharNutricionista($nutricionista, LAZY);
+                    
+                    ?>
+                    
+                    <div style="margin-bottom: 50px">
         
                         <table style="width:100%">
                                     <tr>
                                         <td>Nome da Nutricionista</td>
-                                        <td>CNR</td>
+                                        <td>CPF</td>
+                                        <td>CRN</td>
+                                        <td>Endereço</td>
                                         <td>Telefone</td>
+                                        <td>Login</td>
                                         <td>Email</td>
-                                      
                                     </tr>
-                                   
-                                     <?php foreach ($listaNutricionistas as $nutricionistaRetornada){ ?>
-                         <tr>
-                             <td><?php echo $nutricionistaRetornada->getNome() ?></td> 
-                             <td><?php echo $nutricionistaRetornada->getCrn() ?></td>
-                             <td><?php echo $nutricionistaRetornada->getTelefone() ?></td>
-                             <td><?php echo $nutricionistaRetornada->getEmail() ?></td>
-                         </tr>
-
-                         <?php 
-                         
-                    
-                         } ?>
+                                  
+                                    <tr>
+                                        <td><?php echo $nutricionistaRetornado->getNome() ?></td> 
+                                        <td><?php echo $nutricionistaRetornado->getCpf() ?></td>
+                                        <td><?php echo $nutricionistaRetornado->getCrn() ?></td>
+                                        <td><?php echo $nutricionistaRetornado->getEndereco() ?></td>
+                                        <td><?php echo $nutricionistaRetornado->getTelefone() ?></td>
+                                        <td><?php echo $nutricionistaRetornado->getLogin() ?></td>
+                                        <td><?php echo $nutricionistaRetornado->getEmail() ?></td>
+                                    </tr>
 
                         </table>
                     </div>
                 <?php
                 
-            } 
-            catch (Exception $exc) 
-            {
-               $mensagem = $exc->getMessage();
-               ?> <h3>Mensagem</h3>
-              <p><?php echo $mensagem ?></p> <?php
+                } catch (Exception $ex) {
+
+                    $mensagem = $ex->getMessage();
+                    ?> <h3>Mensagem</h3>
+                    <p><?php echo $mensagem ?></p> <?php
+              
+                }
+                
+            }else{
+                
+                $mensagem = "Não foi selecionada o nutricionista";
+                ?> <h3>Mensagem</h3>
+                <p><?php echo $mensagem ?></p> <?php
             }
         }
-        else 
-        {
-            $mensagem = "Não foi selecionada a dieta";
-            ?> <h3>Mensagem</h3>
-             <p><?php echo $mensagem ?></p> <?php
-        }
-       
-    }
-     
-    
-    include('componentes/footerOne.php') ?>
+        
+        include('componentes/footerOne.php') ?>
+

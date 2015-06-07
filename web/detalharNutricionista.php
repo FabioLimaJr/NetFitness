@@ -5,13 +5,13 @@ include ('../classesBasicas/Nutricionista.php');
 include ('../classesBasicas/Coordenador.php');
 include ('../classesBasicas/Secretaria.php');
 include ('../classesBasicas/Dieta.php');
-include ('../classesBasicas/Dica.php');
 include ('../classesBasicas/Alimento.php');
+include ('../classesBasicas/Instrutor.php');
 session_start();
 
 if(isset($_SESSION['Coordenador']))
 {
-    $nutricionista = $_SESSION['Coordenador'];
+    $coordenador = $_SESSION['Coordenador'];
 }
 else
 {
@@ -48,3 +48,4 @@ include ('componentes/header.php');
 
 </body>
 </html>
+

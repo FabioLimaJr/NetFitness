@@ -1,5 +1,5 @@
 <h1 class="title">Bem Vindos</h1>
-    <div class="line"></div>
+<div class="line"></div>
     <div class="intro">A NetFitness, foi eleita a melhor acadêmia em satisfação do cliente, pela revista FitCertifield.</div>
     <div id="slider">
       <div class="flexslider">
@@ -47,7 +47,7 @@
     <div class="line"></div>
      <h2>Calcule seu IMC</h2>
     <div class="form-container" style="margin-bottom:50px">
-             <form class="forms" id="imcForm" name="imcForm" method="post" >
+             <form class="forms" id="imcForm" name="imcForm" method="" >
          <fieldset>
            <ol>
 

@@ -22,7 +22,7 @@ catch (Exception $exc)
 
 ?>
 
-<h1 class="title">Alterar Nutricionistas</h1>
+<h1 class="title">Alterar Nutricionista</h1>
     <div class="line"></div>
     
     Telefone:<?php echo $coordenador->getTelefone() ?> | Email:<?php echo $coordenador->getEmail() ?> | Endereço:<?php echo $coordenador->getEndereco() ?>
@@ -34,7 +34,7 @@ catch (Exception $exc)
     <div class="clear"></div>
     <div class="line"></div>
     
-    <?php 
+<?php 
      if(!$camposPreenchidos) 
      { ?>
 
@@ -48,27 +48,24 @@ catch (Exception $exc)
                          <tr>
                            <th>Nome</th> 
                            <th>CPF</th>
-                           <th>Endetreço</th>
+                            <th>CRN</th>
                            <th>Telefone</th>
                            <th>E-mail</th>
-                           <th>CRN</th>
                            <th>Selecionar</th>
                          </tr>
 
                          <?php foreach ($listaNutricionistas as $nutricionista){ ?>
                          <tr>
-                             <td><?php echo $nutricionista->getNome() ?></td> 
-                             <td><?php echo $nutricionista->getCpf() ?></td> 
-                              <td><?php echo $nutricionista->getEndereco() ?></td>  
-                             <td><?php echo $nutricionista->getTelefone() ?></td>
-                             <td><?php echo $nutricionista->getEmail() ?></td>
-                             <td><?php echo $nutricionista->getCRN() ?></td>
-                             <td><input type="radio" name="idNutricionista" value="<?php echo $nutricionista->getIdNutricionista() ?>"></td>
+                            <td><?php echo $nutricionista->getNome() ?></td> 
+                            <td><?php echo $nutricionista->getCpf() ?></td>
+                            <td><?php echo $nutricionista->getCrn() ?></td>
+                            <td><?php echo $nutricionista->getTelefone() ?></td>
+                            <td><?php echo $nutricionista->getEmail() ?></td>
+                            <td><input type="radio" name="idNutricionista" value="<?php echo $nutricionista->getIdNutricionista() ?>"></td>
                          </tr>
 
                          <?php 
                          
-                    
                          } ?>
 
                </table>
@@ -83,26 +80,18 @@ catch (Exception $exc)
        </form>
     </div>
     <?php 
-    }
-    else
-    {
-         if(isset($_POST['idNutricionista']))
-         {
-            if($_POST['submit']=="Alterar")
-              {
-            $listaNutricionistaRetornada = $_SESSION['listaNutricionistas'];
-            $nutricionistaSelecionada = null;
-                        
-             foreach ($listaNutricionistaRetornada as $nutricionista)
-             {
-                 if ($nutricionista->getIdNutricionista()==$_POST['idNutricionista']){
-                 $nutricionistaSelecionada = $nutricionista;
-                 break;
-                     }
-             }
-                  
-             ?>
-    
+    }else{
+        
+        if(isset($_POST['idNutricionista'])){
+            
+            if($_POST['submit']=="Alterar"){
+                
+                $nutricionista = new Nutricionista($_POST['idNutricionista']);
+                $nutricionistaRetornado = $fachada->detalharNutricionista($nutricionista, LAZY);
+                $_SESSION['nutricionistaRetornado'] = $nutricionistaRetornado;
+                
+                ?>
+                
                 <div class="form-container" style="margin-bottom:50px">
                     <form class="forms" action="alterarNutricionista.php" method="POST" >
                     <fieldset>
@@ -111,42 +100,41 @@ catch (Exception $exc)
                          <li class="form-row text-input-row">
                         <label>Nome</label>
                         <input type="text" name="nome" value="<?php 
-                        if(isset($nutricionistaSelecionada)) echo $nutricionistaSelecionada->getNome() ?>" class="text-input" style="width: 300px">
+                        if(isset($nutricionistaRetornado)) echo $nutricionistaRetornado->getNome() ?>" class="text-input" style="width: 300px">
                     </li>
 
                         <li class="form-row text-input-row">
                           <label>CPF</label>
                           <input type="text" name="cpf" value="<?php 
-                        if(isset($nutricionistaSelecionada)) echo $nutricionistaSelecionada->getCpf() ?>" class="text-input" style="width: 300px">  &nbsp;&nbsp;<span style="color: #c4c4c4">Ex. 111.111.111-11</span>
+                        if(isset($nutricionistaRetornado)) echo $nutricionistaRetornado->getCpf() ?>" class="text-input" style="width: 300px">  &nbsp;&nbsp;<span style="color: #c4c4c4">Ex. 111.111.111-11</span>
                     </li>
-                    
+                     <li class="form-row text-input-row">
+                          <label>CRN</label>
+                          <input type="text" name="crn" value="<?php 
+                        if(isset($nutricionistaRetornado)) echo $nutricionistaRetornado->getCrn() ?>" class="text-input" style="width: 300px">  &nbsp;&nbsp;<span style="color: #c4c4c4">Ex. 111.111.111-11</span>
+                    </li>
+                                    
                     <li class="form-row text-input-row">
                           <label>Endereço</label>
                           <input type="text" name="endereco" value="<?php 
-                        if(isset($nutricionistaSelecionada)) echo $nutricionistaSelecionada->getEndereco() ?>" class="text-input" style="width: 300px">
+                        if(isset($nutricionistaRetornado)) echo $nutricionistaRetornado->getEndereco() ?>" class="text-input" style="width: 300px">
                     </li>
                         
                      <li class="form-row text-input-row">
                           <label>Telefone</label>
                           <input type="text" name="telefone" value="<?php 
-                        if(isset($nutricionistaSelecionada)) echo $nutricionistaSelecionada->getTelefone() ?>" class="text-input" style="width: 300px"> <span style="color: #c4c4c4">&nbsp;&nbsp;Ex. (DD) 1111-1111</span>
+                        if(isset($nutricionistaRetornado)) echo $nutricionistaRetornado->getTelefone() ?>" class="text-input" style="width: 300px"> <span style="color: #c4c4c4">&nbsp;&nbsp;Ex. (DD) 1111-1111</span>
                     </li>
                     
                      <li class="form-row text-input-row">
                           <label>E-mail</label>
                           <input type="text" name="email" value="<?php 
-                        if(isset($nutricionistaSelecionada)) echo $nutricionistaSelecionada->getEmail() ?>" class="text-input" style="width: 300px">
-                    </li>
-                    
-                     <li class="form-row text-input-row">
-                          <label>CRN</label>
-                          <input type="text" name="crn" value="<?php 
-                        if(isset($nutricionistaSelecionada)) echo $nutricionistaSelecionada->getCrn() ?>" class="text-input" style="width: 300px">
+                        if(isset($nutricionistaRetornado)) echo $nutricionistaRetornado->getEmail() ?>" class="text-input" style="width: 300px">
                     </li>           
 
                    <li class="button-row" style="margin-top: 50px">
                         <input type="hidden" name="idNutricionista" value="<?php echo $_POST['idNutricionista'] ?>">
-                        <input type="submit" name="submit" value="Confirmar" class="btn-submit">
+                        <input type="submit" name="submit" value="Salvar Alterações" class="btn-submit">
                     </li> 
                       </ol>
             </fieldset>
@@ -154,33 +142,36 @@ catch (Exception $exc)
     </div>
                 
              <?php
-         }
-        else
-     {
-          $nutricionista = new Nutricionista($_POST['idNutricionista'], 
-                             $_POST['nome'], 
-                             $_POST['cpf'],
-                             $_POST['endereco'],
-                             $_POST['telefone'],
-                             $_POST['email'],
-                             $_POST['crn'],
-                             $_SESSION['Coordenador']);
-    
-                try
-                {
-                    $fachada->alterarNutricionista($nutricionista);
-                    $mensagem = "O Registro foi alterado com Sucesso!";
-                } 
-                catch (Exception $exc)
-                {
-                    $mensagem = $exc->getMessage();
-                }
-     }
-                    
+         }else{
+             //$idInstrutor, $coordenador, $listaDietas, $listaDicas, $nome, $cpf, $endereco, $senha, $telefone, $email, $login
+             $nutricionistaAlterado = new Nutricionista($_POST['idNutricionista'], 
+                                        $coordenador, 
+                                        $_POST['crn'],
+                                        null, 
+                                        null, 
+                                        $_POST['nome'], 
+                                        $_POST['cpf'], 
+                                        $_POST['endereco'], 
+                                        $_SESSION['nutricionistaRetornado']->getSenha(), 
+                                        $_POST['telefone'], 
+                                        $_POST['email'], 
+                                        $_SESSION['nutricionistaRetornado']->getLogin());
+             
+             try{
+                 
+                 $fachada->alterarNutricionista($nutricionistaAlterado);
+                 $mensagem = "O(A) nutricionista foi alterado(a) com sucesso!!";
+                 
+             } catch (Exception $ex) {
+                 
+                 $mensagem = $ex->getMessage();
+                 
+              }
+            }
+        }
     }
-    }
     
-    if(isset($_POST['submit']) && $_POST['submit']=="Confirmar"){ ?>
+    if(isset($_POST['submit']) && $_POST['submit']=="Salvar Alterações"){ ?>
     
         <h3>Mensagem</h3>
         <p><?php echo $mensagem ?></p>
@@ -188,3 +179,4 @@ catch (Exception $exc)
     <?php } 
     
     include('componentes/footerOne.php') ?>
+
