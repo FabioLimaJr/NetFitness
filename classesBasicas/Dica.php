@@ -4,7 +4,7 @@
  *
  * @author Marcelo
  */
-class Dica 
+class Dica implements JsonSerializable
 {
     private $idDica;
     private $descricao;
@@ -55,4 +55,11 @@ class Dica
     function setTitulo($titulo) {
         $this->titulo = $titulo;
     }
+
+    public function jsonSerialize() {
+        
+        $vars = get_object_vars($this);
+        return $vars;
+    }
+
 }

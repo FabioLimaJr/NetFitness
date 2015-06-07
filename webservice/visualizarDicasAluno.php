@@ -20,6 +20,9 @@
 
 if(isset($_POST['idAluno']) && isset($_POST['senha']) && isset($_POST['login']))
 {
+    //---------------------
+    $fachada = new Fachada();
+    //----------------------
     $fachada = Fachada::getInstance();
     $aluno = new Aluno($_POST['login'],$_POST['senha']);
     
@@ -33,8 +36,19 @@ if(isset($_POST['idAluno']) && isset($_POST['senha']) && isset($_POST['login']))
         {
             $resposta['mensagem'] = "notNull";
             $alunoRetornado = $fachada->detalharAluno($aluno, EAGER);
-            $resposta['listaDicas'] = $fachada->listarDicas();
-            echo json_encode((array)$resposta);
+            
+            foreach($fachada->listarInstrutores(LAZY) as $instrutor){
+                foreach ($fachada->listarDietas($instrutor, LAZY) as $dicaIns){
+                    array_push($listaDicas, $dicaIns);
+                }
+            }
+            foreach ($fachada->listarNutricionistas(LAZY) as $nutricionista){
+                foreach ($fachada->listarDicas($nutricionista, LAZY) as $dicaNut){
+                    array_push($listaDicas, $dicaNut);
+                }
+            }
+            $resposta['listaDicas'] = $listaDicas;
+            echo json_encode($resposta);
         } 
         catch (Exception $ex) 
         {
