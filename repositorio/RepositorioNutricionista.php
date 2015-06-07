@@ -57,29 +57,31 @@ class RepositorioNutricionista extends RepositorioPessoa implements IRepositorio
         }
     } 
     
-    public function alterar($nutricionista) {
-        
-        $sql = " USE " . $this->getNomeBanco();
-        
-        if($this->getConexao()->query($sql) === true){
+      public function alterar($nutricionista) 
+    {
 
-            $sql = "UPDATE nutricionista SET nome = '".$nutricionista->getNome();
-            $sql.= "', cpf = '".$nutricionista->getCpf();
-            $sql.= "', endereco = '".$nutricionista->getEndereco();
-            $sql.= "', telefone = '".$nutricionista->getTelefone();
-            $sql.= "', email = '".$nutricionista->getEmail();
-            $sql.= "', crn = '".$nutricionista->getCrn();
+        $sql = "USE " . $this->getNomeBanco();
 
-            $sql.= "'  WHERE idNutricionista = '".$nutricionista->getIdNutricionista()."'";
+        if (@$this->getConexao()->query($sql) === TRUE) 
+        {
+
+            $this->getConexao()->autocommit(FALSE); 
             
-            if(mysqli_query($this->getConexao(), $sql)){
-               // $this->fecharConexao();
-            }else{
-                throw new Exception(Excecoes::alterarObjeto("Nutricionista: ". mysqli_error($this->getConexao())));
-            }
-            
-        }else{
-            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco()."(".$this->getConexao()->erro.")"));
+            if (!$this->alterarPessoa($nutricionista)) 
+            {
+                $this->getConexao()->rollback();
+                throw new Exception(Excecoes::alterarObjeto("Nutricionsta " . mysqli_error($this->getConexao())));
+            } 
+            else 
+            {
+
+                $this->getConexao()->commit();
+                
+                }
+        } 
+        else 
+        {
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
         }
     }
 
