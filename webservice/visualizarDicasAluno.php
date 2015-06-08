@@ -38,12 +38,12 @@ if(isset($_POST['idAluno']) && isset($_POST['senha']) && isset($_POST['login']))
             $alunoRetornado = $fachada->detalharAluno($aluno, EAGER);
             
             foreach($fachada->listarInstrutores(LAZY) as $instrutor){
-                foreach ($fachada->listarDietas($instrutor, LAZY) as $dicaIns){
+                foreach ($fachada->listarDicas($instrutor) as $dicaIns){
                     array_push($listaDicas, $dicaIns);
                 }
             }
             foreach ($fachada->listarNutricionistas(LAZY) as $nutricionista){
-                foreach ($fachada->listarDicas($nutricionista, LAZY) as $dicaNut){
+                foreach ($fachada->listarDicas($nutricionista) as $dicaNut){
                     array_push($listaDicas, $dicaNut);
                 }
             }
