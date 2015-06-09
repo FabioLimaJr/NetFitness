@@ -8,7 +8,6 @@
     include ('../classesBasicas/Secretaria.php');   
     include ('../fachada/Fachada.php');
     
-    
     if(isset($_POST['senha'])&&isset($_POST['login']))
     {
         $fachada = Fachada::getInstance();

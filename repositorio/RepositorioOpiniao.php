@@ -20,8 +20,7 @@ class RepositorioOpiniao extends RepositorioGenerico implements IRepositorioOpin
         
         if($this->getConexao()->query($sql) === true){
             
-            $sql = "INSERT INTO opiniao VALUES('";
-            $sql.= NULL. "','";
+            $sql = "INSERT INTO opiniao VALUES(null,'";
             $sql.= $opiniao->getDescricao()."','";
             $sql.= ExpressoesRegulares::inverterData($opiniao->getDataPostagem())."','";
             $sql.= $opiniao->getAluno()->getIdAluno(). "')";
@@ -31,7 +30,7 @@ class RepositorioOpiniao extends RepositorioGenerico implements IRepositorioOpin
                 //$this->fecharConexao();
            
             }else{
-                throw new Exception(Excecoes::inserirObjeto("Opiniao: ".  mysql_errno($this->getConexao())));
+                throw new Exception(Excecoes::inserirObjeto("Opiniao: ".  mysqli_error($this->getConexao())));
             }
             
         }  else {
