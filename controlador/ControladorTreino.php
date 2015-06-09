@@ -122,7 +122,11 @@ class ControladorTreino {
 
         }
         
-        if(!ExpressoesRegulares::conferirData($treino->getData()))
+        if(trim($treino->getData())=="")
+        {
+            throw new Exception(Excecoes::dataInvalida("Treino"));
+        }
+        elseif(!ExpressoesRegulares::conferirData($treino->getData()))
         {
             throw new Exception(Excecoes::dataInvalida("Treino"));
         }
@@ -143,5 +147,10 @@ class ControladorTreino {
      public function atualizarDatasTreinosRealizados($aluno, $treino, $qtdTreinos)
      {
          $this->getRepositorioTreino()->atualizarDatasTreinosRealizados($aluno, $treino, $qtdTreinos);
+     }
+     
+     public function excluirVinculoTreinoAluno($aluno, $treino)
+     {
+         $this->getRepositorioTreino()->excluirVinculoTreinoAluno($aluno, $treino);
      }
 }

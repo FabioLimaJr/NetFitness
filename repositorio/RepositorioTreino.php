@@ -411,4 +411,29 @@ class RepositorioTreino extends RepositorioGenerico implements IRepositorioTrein
         }
     }
 
+    public function excluirVinculoTreinoAluno($aluno, $treino)
+    {
+        $sql = "USE " . $this->getNomeBanco();
+       
+        if($this->getConexao()->query($sql) === true)
+        {
+            $queryAlunoTreino = "DELETE FROM alunotreino WHERE idAluno = '".$aluno->getIdAluno()."' AND"
+                              . " idTreino = '".$treino->getIdTreino()."'";
+            
+            try
+            {
+                mysqli_query($this->getConexao(), $queryAlunoTreino);               
+            } 
+            catch (Exception $ex)
+            {
+                throw new Exception($ex->getMessage());
+            }
+           
+        }
+        else
+        {
+            throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+        }
+    }
+
 }

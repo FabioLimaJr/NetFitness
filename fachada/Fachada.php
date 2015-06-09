@@ -250,6 +250,11 @@ class Fachada implements IFachada
         $this->controladorTreino->atualizarDatasTreinosRealizados($aluno, $treino, $qtdTreinos);
     }
     
+    public function excluirVinculoTreinoAluno($aluno, $treino)
+    {
+        $this->controladorTreino->excluirVinculoTreinoAluno($aluno, $treino);
+    }
+    
     //Opinião 
     public function inserirOpiniao($opiniao) {
         return $this->controladorOpiniao->inserir($opiniao);
@@ -432,6 +437,6 @@ class Fachada implements IFachada
         return $this->$controlador->conferirLoginSenha($pessoa);
     }
 
-   
+    
 
 }
