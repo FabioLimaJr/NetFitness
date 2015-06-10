@@ -66,7 +66,7 @@ class RepositorioExameFisico extends RepositorioGenerico implements IRepositorio
         
         if(@$this->getConexao()->query($sql) === TRUE){
             
-            $sql = "UPDATE examefisico SET data ='".$examefisico->getData()
+            $sql = "UPDATE examefisico SET data = '".$examefisico->getData()
                                                  ."', descricao = '".$examefisico->getDescricao()
                                                  ."', imc = '".$examefisico->getImc()
                                                  ."', altura = '".$examefisico->getAltura()
