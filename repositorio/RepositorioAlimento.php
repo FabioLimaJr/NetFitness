@@ -21,8 +21,8 @@ class RepositorioAlimento extends RepositorioGenerico implements IRepositorioAli
         
         if($this->getConexao()->query($sql) === true){
 
-            $sql = "INSERT INTO alimento VALUES('";
-            $sql.= "NULL','";
+            $sql = "INSERT INTO alimento VALUES(";
+            $sql.= "NULL,'";
             $sql.= $alimento->getDescricao(). "','";
             $sql.= $alimento->getCaloria(). "','";
             $sql.= $alimento->getProteina(). "','";
