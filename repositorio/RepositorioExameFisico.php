@@ -66,17 +66,18 @@ class RepositorioExameFisico extends RepositorioGenerico implements IRepositorio
         
         if(@$this->getConexao()->query($sql) === TRUE){
             
-            $sql = "UPDATE examefisico SET descricao = '".$examefisico->getDescricao()
+            $sql = "UPDATE examefisico SET data ='".$examefisico->getData()
+                                                 ."', descricao = '".$examefisico->getDescricao()
                                                  ."', imc = '".$examefisico->getImc()
-                                                 ."', peso = '".$examefisico->getPeso()
                                                  ."', altura = '".$examefisico->getAltura()
+                                                 ."', peso = '".$examefisico->getPeso()
                                                  ."', circTorax = '".$examefisico->getCircTorax()
                                                  ."', circAbdomen = '".$examefisico->getCircAbdomen()
                                                  ."', circBraco = '".$examefisico->getCircBraco()
                                                  ."', circAntebraco = '".$examefisico->getCircAntebraco()
                                                  ."', circCoxa = '".$examefisico->getCircCoxa()
                                                  ."', circPanturrilha = '".$examefisico->getCircPanturrilha()
-                                                 ."' WHERE idExameFisico = ".$examefisico->getIdExameFisico();
+                                                 ."' WHERE idExameFisico = '".$examefisico->getIdExameFisico()."'";
             
             if( mysqli_query($this->getConexao(), $sql)){
                 
