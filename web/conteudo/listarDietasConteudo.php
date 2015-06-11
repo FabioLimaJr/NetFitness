@@ -5,6 +5,14 @@ $fachada = Fachada::getInstance();
 $mensagem ="";
 $camposPreenchidos = false;
 $error = false;
+$arrayHide = array();
+
+
+function ordenarPorAluno($a, $b)
+{
+    return strcmp($b->getAluno()->getNome(), $a->getAluno()->getNome());
+}
+
 
 if($_SERVER['REQUEST_METHOD'] == 'POST')
 {
@@ -17,6 +25,26 @@ try
     if(sizeof($listaDietas)==0)
     {
         $mensagem = "Nenhum aluno recebeu a prescrição da dieta.";
+    }
+    else
+    {
+        usort($listaDietas, "ordenarPorAluno");
+        
+        $idAlunoCheck = 10000; 
+        $count = 0;
+        foreach ($listaDietas as $dieta)
+        {
+            if($idAlunoCheck != $dieta->getAluno()->getIdAluno() )
+            {
+                $arrayHide[$count] = false;
+                $idAlunoCheck = $dieta->getAluno()->getIdAluno();
+            }
+            else 
+            { 
+                $arrayHide[$count] = true;        
+            }
+            $count++;
+        }
     }
 } 
 catch (Exception $exc)
@@ -59,6 +87,9 @@ catch (Exception $exc)
                          <?php 
                          
                          
+                         $idAluno = $listaDietas[0]->getAluno()->getIdAluno();
+                         $count = 0;
+                         
                          foreach ($listaDietas as $dieta)
                          { 
                            $numAlimentos = sizeof($dieta->getListaAlimentos());
@@ -66,21 +97,33 @@ catch (Exception $exc)
                            $descDieta = $dieta->getDescricao();
                            $idDieta = $dieta->getIdDieta();
                            $first = true;
-                           
+                           /*
+                           if($dieta->getAluno()->getIdAluno()!=$idAluno)
+                           {
+                               $idAluno = $dieta->getAluno()->getIdAluno();
+                               $hide = false;
+                           }
+                           */
+                                   
                            foreach ($dieta->getListaAlimentos() as $alimento)
                            {
                          ?>
                          
-                         
-                         <tr>
-                             <?php if($first){ ?><td rowspan="<?php echo $numAlimentos ?>"><?php echo $nomeAluno ?></td> 
-                             <td rowspan="<?php echo $numAlimentos ?>"><?php echo $descDieta ?></td><?php } ?>
+
+                         <tr <?php if($arrayHide[$count]) 
+                             { 
+                             ?> class="hideAluno<?php echo $dieta->getAluno()->getIdAluno() ?>" style="background-color:#E4F2F5" <?php                             
+                             } ?> >
+                             
+                             <?php if($first){ ?><td rowspan="<?php echo $numAlimentos ?>"><?php echo $nomeAluno ?> <?php if(!$arrayHide[$count]){ ?> &nbsp;&nbsp;<div id="click<?php echo $dieta->getAluno()->getIdAluno() ?>" style="color:darkorange"<a href="#">mais +</a></div> <?php } ?></td> 
+                             <td  rowspan="<?php echo $numAlimentos ?>"><?php echo $descDieta ?></td><?php } ?>
                              <td><?php echo $alimento->getDescricao() ?></td>
                              <td><?php echo $alimento->getQtdAlimento() ?> </td>
                              <?php if($first){ ?><td rowspan="<?php echo $numAlimentos ?>"><input type="radio" name="idDieta" value="<?php echo $idDieta ?>"></td><?php $first=false; } ?>
                          </tr>
+
                            <?php }                   
-                    
+                    $count++;
                          } ?>
 
                </table>
@@ -190,3 +233,49 @@ catch (Exception $exc)
     }
     
     include('componentes/footerOne.php') ?>
+
+<?php if(count($_POST)<= 1) 
+{ ?>
+ 
+    <script>
+       <?php 
+        for ($count = 0; $count<sizeof($arrayHide); $count++) {
+       
+           if($arrayHide[$count]==false) {
+               $idAluno = $listaDietas[$count]->getAluno()->getIdAluno();
+           ?> 
+            $('.hideAluno<?php echo $idAluno ?>').fadeOut(0);
+            
+            
+            $('#click<?php echo $idAluno ?>').click(function(event) 
+            { 
+            
+                if ($('.hideAluno<?php echo $idAluno ?>').is(':visible')) 
+                {  
+                    $('.hideAluno<?php echo $idAluno ?>').fadeOut(500, 
+                        function () 
+                        {
+                          $('#click<?php echo $idAluno ?>').html("mais +");   
+                          $('#click<?php echo $idAluno ?>').css('color', 'darkorange');
+                        }                    
+                    );
+                }
+                else
+                {
+                    $('.hideAluno<?php echo $idAluno ?>').fadeIn(500,
+                        function () 
+                        {
+                          $('#click<?php echo $idAluno ?>').html("menos -");                         
+                          $('#click<?php echo $idAluno ?>').css('color', '#3D8CD1');
+                        } 
+                     );
+                }
+                     
+            });
+            
+            $('#click<?php echo $idAluno ?>').css('cursor', 'pointer');
+            
+          <?php }
+        } ?> 
+      </script>      
+<?php } ?>
