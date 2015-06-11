@@ -21,10 +21,10 @@ include ('componentes/header.php') ?>
      <?php 
      
         
-        
+        /*
      if(isset($_SESSION)){
          session_destroy();         
-     }
+     }*/
      
      include('conteudo/indexConteudo.php'); ?>
     
