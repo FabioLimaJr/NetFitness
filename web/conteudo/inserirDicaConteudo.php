@@ -82,7 +82,7 @@ if(!$camposPreenchidos){
         try{
             $fachada->inserirDica($dica, $pessoa);
             $mensagem = "Parabéns, a dica foi inserida com sucesso!";
-            unset($_SESSION['Nutricionista']);
+            
 
         }catch(Exception $exc){
                 $mensagem = $exc->getMessage();
@@ -94,7 +94,7 @@ if(!$camposPreenchidos){
         try{
             $fachada->inserirDica($dica, $pessoa);
             $mensagem = "Parabéns, a dica foi inserida com sucesso!";
-            unset($_SESSION['Instrutor']);
+            
 
         }catch(Exception $exc){
                 $mensagem = $exc->getMessage();
