@@ -132,7 +132,7 @@
         }
         else
         {
-            $mensagem = "Todos os alunos já têm uma dieta prescrita";
+            $mensagem = "Todos os alunos já têm uma dieta prescrita, ou não tem aluno cadastrado";
         }
     } 
     else
