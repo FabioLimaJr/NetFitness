@@ -1,6 +1,6 @@
 <h1 class="title">Impossível acessar a página</h1>
     <div class="line"></div>
-    <div class="intro" style="margin-bottom:50px">Nullam id dolor id nibh ultricies vehicula ut id elit. Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</div>
+    <div class="intro" style="margin-bottom:50px">A NetFitness, foi eleita a melhor acadêmia em satisfação do cliente, pela revista FitCertifield.</div>
     
     
     
