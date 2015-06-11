@@ -148,6 +148,20 @@ catch (Exception $exc)
             {
                 $dieta = new Dieta($_POST['idDieta']);
                 $dietaRetornada = $fachada->detalharDieta($dieta, EAGER);
+                
+                $gorduraTotal = 0;
+                $proteinaTotal = 0;
+                $carboidratoTotal = 0;
+                $caloriaTotal = 0;
+                
+                foreach ($dietaRetornada->getListaAlimentos() as $alimento)
+                {
+                    $gorduraTotal += $alimento->getGordura()/100*$alimento->getQtdAlimento();
+                    $proteinaTotal += $alimento->getProteina()/100*$alimento->getQtdAlimento();
+                    $carboidratoTotal += $alimento->getCarboidrato()/100*$alimento->getQtdAlimento();
+                    $caloriaTotal += $alimento->getCaloria()/100*$alimento->getQtdAlimento(); 
+                }
+                
                // var_dump($dietaRetornada);
                 ?>
                      <div style="margin-bottom: 50px">
@@ -157,10 +171,10 @@ catch (Exception $exc)
                                         <td>Nome Aluno</td>
                                         <td>Descrição Dieta</td>
                                         <td>Alimentos</td>
-                                        <td>Cal.(%)</td>
-                                        <td>Prot.(%)</td>
-                                        <td>Carb.(%)</td>
-                                        <td>Gord.(%)</td>
+                                        <td>Cal.(gx100)</td>
+                                        <td>Prot.(gx100)</td>
+                                        <td>Carb.(gx100)</td>
+                                        <td>Gord.(gx100)</td>
                                         <td>Qtd.(g)</td>
                                     </tr>
                                     <?php if($dietaRetornada->getListaAlimentos()!=null)
@@ -206,6 +220,11 @@ catch (Exception $exc)
                                     <?php } ?>
                                   
                         </table>
+                         <br/><br/>
+                         Gordura total : <?php echo $gorduraTotal ?> g <br/><br/>
+                         Proteina total : <?php echo $proteinaTotal ?> g <br/><br/>
+                         Carboidrato total : <?php echo $carboidratoTotal ?> g <br/><br/><br/>
+                         <b>Caloria total: <?php echo $caloriaTotal ?></b>
                     </div>
                 <?php
                 
