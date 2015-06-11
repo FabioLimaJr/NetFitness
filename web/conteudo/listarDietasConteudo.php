@@ -112,8 +112,8 @@ catch (Exception $exc)
 
                          <tr <?php if($arrayHide[$count]) 
                              { 
-                             ?> class="hideAluno<?php echo $dieta->getAluno()->getIdAluno() ?>" style="background-color:#E4F2F5" <?php                             
-                             } ?> >
+                             ?> class="hideAluno<?php echo $dieta->getAluno()->getIdAluno() ?>" style="background-color:#fff" <?php                             
+                             } else {?> style="background-color:#f2f2f2" <?php } ?> >
                              
                              <?php if($first){ ?><td rowspan="<?php echo $numAlimentos ?>"><?php echo $nomeAluno ?> <?php if(!$arrayHide[$count]){ ?> &nbsp;&nbsp;<div id="click<?php echo $dieta->getAluno()->getIdAluno() ?>" style="color:darkorange"<a href="#">mais +</a></div> <?php } ?></td> 
                              <td  rowspan="<?php echo $numAlimentos ?>"><?php echo $descDieta ?></td><?php } ?>
@@ -238,6 +238,7 @@ catch (Exception $exc)
 { ?>
  
     <script>
+   $(document).ready(function(){
        <?php 
         for ($count = 0; $count<sizeof($arrayHide); $count++) {
        
@@ -277,5 +278,6 @@ catch (Exception $exc)
             
           <?php }
         } ?> 
+       });         
       </script>      
 <?php } ?>
