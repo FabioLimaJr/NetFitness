@@ -136,7 +136,7 @@ catch (Exception $exc)
                                         <td>Prot.(gx100)</td>
                                         <td>Carb.(gx100)</td>
                                         <td>Gord.(gx100)</td>
-                                        <td>Qtd.(gx100)</td>
+                                        <td>Qtd.(g)</td>
                                     </tr>
                                     <?php if($dietaRetornada->getListaAlimentos()!=null)
                                     { ?>
