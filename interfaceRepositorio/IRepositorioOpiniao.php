@@ -11,4 +11,5 @@ interface IRepositorioOpiniao {
     public function excluir($opiniao);
     public function detalhar($opiniao, $fetchType);
     public function listar($fetchType);
+    public function listarPorAluno($aluno, $fetchType);
 }

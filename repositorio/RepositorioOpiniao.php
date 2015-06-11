@@ -85,6 +85,50 @@ class RepositorioOpiniao extends RepositorioGenerico implements IRepositorioOpin
                 
     }
     
+    public function listarPorAluno($aluno, $fetchType)
+    {
+        $listaOpinioes = array();
+
+        $sql = "USE " . $this->getNomeBanco();
+
+        if($this->getConexao()->query($sql) === TRUE)
+        {
+            $sqlOpiniao = "SELECT * FROM opiniao WHERE idAluno = '".$aluno->getIdAluno()."'";
+
+            try
+            {
+                $resultOpiniao = mysqli_query($this->getConexao(), $sqlOpiniao);
+
+                while ($rowOpiniao = mysqli_fetch_array($resultOpiniao)) 
+                {      
+                    $opiniaoRetornada = new Opiniao($rowOpiniao['idOpiniao']);
+
+                    if($fetchType == EAGER)
+                    {  
+                        $opiniaoRetornada = $this->detalhar($opiniaoRetornada, EAGER);                  
+                    }
+                    else 
+                    {
+                        $opiniaoRetornada = $this->detalhar($opiniaoRetornada, LAZY);    
+                    }            
+
+                    array_push($listaOpinioes, $opiniaoRetornada);
+
+                }
+            }
+            catch (Exception $exc)
+            {
+                throw new Exception($exc->getMessage());
+            }           
+
+            return($listaOpinioes);                    
+        }
+        else 
+        {
+           throw new Exception(Excecoes::selecionarBanco($this->getNomeBanco() . " (" . $this->getConexao()->error) . ")");
+        }
+    }
+    
     public function listar($fetchType)
     {
         

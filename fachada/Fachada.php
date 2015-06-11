@@ -276,6 +276,9 @@ class Fachada implements IFachada
         return $this->controladorOpiniao->listar($fetchType);
     }
     
+    public function listarOpinioesPorAluno($aluno, $fetchType) {
+        return $this->controladorOpiniao->listarPorAluno($aluno, $fetchType);
+    }
     
     //Alimento
     public function inserirAlimento($alimento) {

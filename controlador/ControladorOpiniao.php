@@ -50,6 +50,10 @@ class ControladorOpiniao {
         return $this->repositorioOpiniao->listar($fetchType); 
     }
     
+    public function listarPorAluno($aluno, $fetchType){
+        return $this->repositorioOpiniao->listarPorAluno($aluno, $fetchType); 
+    }
+    
     public function detalhar($opiniao, $fetchType)
     {
         return $this->repositorioOpiniao->detalhar($opiniao, $fetchType);
