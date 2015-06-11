@@ -1,7 +1,7 @@
 <?php
  $camposPreenchidos = false;
  $fachada = Fachada::getInstance();
- $listaAlunosSemDieta = array();
+ //$listaAlunosSemDieta = array();
  $mensagem = "";
  $error = false;
  
@@ -44,7 +44,7 @@
     if(!$camposPreenchidos)
     {   
         
-        
+        /*
         foreach($listaAlunos as $aluno)
         {
           
@@ -53,8 +53,8 @@
                 array_push($listaAlunosSemDieta, $aluno);
             }
         }
-        
-        if(count($listaAlunosSemDieta)!=0)
+        */
+        if(count($listaAlunos)!=0)
         {
         ?> 
          <div class="form-container" style="margin-bottom:50px">
@@ -78,7 +78,7 @@
                     <?php
                    $primeiro = true;
                    $selecionado = "checked";
-                   foreach ($listaAlunosSemDieta as $aluno) 
+                   foreach ($listaAlunos as $aluno) 
                    {     
                    ?>
                    <input <?php if($primeiro) {echo $selecionado; $primeiro = false; }?> type="checkbox" name="idAluno<?php echo $aluno->getIdAluno() ?>" value="ok" style="margin-bottom:20px;margin-right: 15px"><?php echo $aluno->getNome() ?><br/>
@@ -211,7 +211,7 @@
   
     }
    
-   if($camposPreenchidos || count($listaAlunosSemDieta)==0 || (sizeof($listaAlunosSelecionados) == 0 && $camposPreenchidos)) { ?>
+   if($camposPreenchidos || count($listaAlunos)==0 || (sizeof($listaAlunosSelecionados) == 0 && $camposPreenchidos)) { ?>
     
         <h3>Mensagem</h3>
         <p><?php echo $mensagem ?></p>
