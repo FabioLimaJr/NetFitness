@@ -58,7 +58,7 @@ catch (Exception $exc)
                            <th>Descrição Dieta</th>
                            <th>Alimentos</th>
                            <th>Qtd</th>
-                         <!--  <th>Selecionar</th> -->
+                           <th>Selecionar</th> 
                          </tr>
 
                          <?php 
@@ -82,14 +82,14 @@ catch (Exception $exc)
                              <td rowspan="<?php echo $numAlimentos ?>"><?php echo $descDieta ?></td><?php } ?>
                              <td><?php echo $alimento->getDescricao() ?></td>
                              <td><?php echo $alimento->getQtdAlimento() ?> </td>
-                             <!--<?php if($first){ ?><td rowspan="<?php echo $numAlimentos ?>"><input type="radio" name="idDieta" value="<?php echo $idDieta ?>"></td><?php $first=false; } ?>-->
+                             <?php if($first){ ?><td rowspan="<?php echo $numAlimentos ?>"><input type="radio" name="idDieta" value="<?php echo $idDieta ?>"></td><?php $first=false; } ?>
                          </tr>
                            <?php }                   
                     
                          } ?>
 
                </table>
-                <input type="hidden" name="idDieta" value="<?php echo $idDieta ?>">
+                
              </li>
               <?php if(sizeof($listaDietas)!=0) { ?>
              <li class="form-row text-input-row" style="text-align:center;margin-left:-100px">
@@ -111,7 +111,19 @@ catch (Exception $exc)
             {
                 $dieta = new Dieta($_POST['idDieta']);
                 $dietaRetornada = $fachada->detalharDieta($dieta, EAGER);
-               // var_dump($dietaRetornada);
+                $gorduraTotal = 0;
+                $proteinaTotal = 0;
+                $carboidratoTotal = 0;
+                $caloriaTotal = 0;
+                
+                foreach ($dietaRetornada->getListaAlimentos() as $alimento)
+                {
+                    $gorduraTotal += $alimento->getGordura()/100*$alimento->getQtdAlimento();
+                    $proteinaTotal += $alimento->getProteina()/100*$alimento->getQtdAlimento();
+                    $carboidratoTotal += $alimento->getCarboidrato()/100*$alimento->getQtdAlimento();
+                    $caloriaTotal += $alimento->getCaloria()/100*$alimento->getQtdAlimento(); 
+                }
+                
                 ?>
                      <div style="margin-bottom: 50px">
         
@@ -120,11 +132,11 @@ catch (Exception $exc)
                                         <td>Nome Aluno</td>
                                         <td>Descrição Dieta</td>
                                         <td>Alimentos</td>
-                                        <td>Cal.(%)</td>
-                                        <td>Prot.(%)</td>
-                                        <td>Carb.(%)</td>
-                                        <td>Gord.(%)</td>
-                                        <td>Qtd.(g)</td>
+                                        <td>Cal. (gx100)</td>
+                                        <td>Prot.(gx100)</td>
+                                        <td>Carb.(gx100)</td>
+                                        <td>Gord.(gx100)</td>
+                                        <td>Qtd.(gx100)</td>
                                     </tr>
                                     <?php if($dietaRetornada->getListaAlimentos()!=null)
                                     { ?>
@@ -169,6 +181,13 @@ catch (Exception $exc)
                                     <?php } ?>
                                   
                         </table>
+                         
+                          <br/><br/>
+                         Gordura total : <?php echo $gorduraTotal ?> g <br/><br/>
+                         Proteina total : <?php echo $proteinaTotal ?> g <br/><br/>
+                         Carboidrato total : <?php echo $carboidratoTotal ?> g <br/><br/><br/>
+                         <b>Caloria total: <?php echo $caloriaTotal ?></b>
+                         
                     </div>
                 <?php
                 
