@@ -10,14 +10,17 @@ include ('../classesBasicas/Dica.php');
 session_start();
 
 $pessoa="";
-if($_SESSION['tipoUsuario'] == "Nutricionista")
+if(isset($_SESSION['tipoUsuario']))
 {
-     $pessoa = $_SESSION['Nutricionista'];
-   
-}
-elseif(($_SESSION['tipoUsuario'] == "Instrutor"))
-{
-     $pessoa = $_SESSION['Instrutor'];
+    if($_SESSION['tipoUsuario'] == "Nutricionista")
+    {
+         $pessoa = $_SESSION['Nutricionista'];
+
+    }
+    elseif(($_SESSION['tipoUsuario'] == "Instrutor"))
+    {
+         $pessoa = $_SESSION['Instrutor'];
+    }
 }
 else
 {
