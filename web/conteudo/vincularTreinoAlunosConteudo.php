@@ -56,7 +56,23 @@ Nome: <?php echo $instrutor->getNome() ?> | Telefone:<?php echo $instrutor->getT
                              <td><?php echo $treino->getNome() ?></td> 
                              <td><?php echo $treino->getDescricao() ?></td>  
                              <td>
-                                 Falta lista de Exercicios
+                                 <?php 
+                                 $sizeListaExercicios = count($treino->getListaExercicios());
+                                 $count = 1;
+                                 foreach ($treino->getListaExercicios() as $exercicio)
+                                 {
+                                     if($count == $sizeListaExercicios)
+                                     {
+                                       echo $exercicio->getNome();
+                                     }
+                                     else
+                                     {
+                                       echo $exercicio->getNome().", ";  
+                                     }
+                                     
+                                     $count++;
+                                 }
+                             ?>
                              </td>  
                              <td><input type="radio" name="idTreino" value="<?php echo $treino->getIdTreino() ?>"></td>
                          </tr>
