@@ -45,11 +45,11 @@
                         <label>Músculo</label>
                         <input type="text" name="musculo" value="<?php if(isset($exercicio)) echo $exercicio->getMusculo() ?>" class="text-input" style="width: 300px">
                     </li>
-
+                    
                     <li class="form-row text-input-row">
-                        <label>Descrição</label>
-                        <input type="text" name="descricao" value="<?php if(isset($exercicio)) echo $exercicio->getDescricao() ?>" class="text-input" style="width: 300px">
-                    </li>
+                    <label>Descrição</label>
+                      <textarea class="text-input" name="descricao" value="<?php if(isset($exercicio)) echo $exercicio->getDescricao() ?>" style="width:300px; height: 100px"></textarea>
+                   </li>
 
                     <li class="button-row" style="margin-top:50px">
                         <input type="submit" value="Inserir" name="submit" class="btn-submit">
