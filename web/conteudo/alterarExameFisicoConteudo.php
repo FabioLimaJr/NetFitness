@@ -95,11 +95,15 @@ Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->
                     </li>
                     <li class="form-row text-input-row">
                         <label>Data</label>
-                        <input type="text" name="data"  readonly value="<?php if(isset($exameFisicoRetornado)) echo $exameFisicoRetornado->getData() ?>" class="text-input" style="width: 300px">
+                        <input type="text" name="data"  readonly value="<?php if(isset($exameFisicoRetornado)) echo ExpressoesRegulares::inverterData ($exameFisicoRetornado->getData()) ?>" class="text-input" style="width: 300px">
                     </li>
                     <li class="form-row text-input-row">
                         <label>Descrição</label>
                         <input type="text" name="descricao" value="<?php if(isset($exameFisicoRetornado)) echo $exameFisicoRetornado->getDescricao() ?>" class="text-input" style="width: 300px">
+                    </li>
+                    <li class="form-row text-input-row">
+                        <label>IMC</label>
+                        <input type="text" name="imc" value="<?php if(isset($exameFisicoRetornado)) echo $exameFisicoRetornado->getImc() ?>" class="text-input" style="width: 300px">
                     </li>
                      <li class="form-row text-input-row">
                         <label>Altura</label>
@@ -109,7 +113,7 @@ Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->
                         <label>Peso</label>
                         <input type="text" name="peso" value="<?php if(isset($exameFisicoRetornado)) echo $exameFisicoRetornado->getPeso() ?>" class="text-input" style="width: 300px">
                     </li>
-                <h3 class="title">Circunferências</h1>
+                <h3 class="title">Circunferências</h3>
 
                     <li class="form-row text-input-row">
                         <label>Torax</label>
@@ -150,12 +154,21 @@ Telefone:<?php echo $instrutor->getTelefone() ?> | Email:<?php echo $instrutor->
          }else{
              
              if($_POST['submit'] == 'Salvar Alterações'){
-                 
-             $exameFisicoAlterado = new ExameFisico($_SESSION['exameFisicoRetornado']->getIdExameFisico(), $_POST['aluno'], 
-                                                    $_POST['descricao'], $_POST['altura'], $POST['peso'], 
-                                                    $POST['circTorax'], $POST['circAbdomen'], $POST['circBraco'], 
-                                                    $POST['circAntebraco'], $POST['circCoxa'], 
-                                                    $POST['circPanturrilha']);
+ 
+             $exameFisicoAlterado = new ExameFisico();
+             $exameFisicoAlterado->setIdExameFisico($_SESSION['exameFisicoRetornado']->getIdExameFisico());
+             $exameFisicoAlterado->setData($_POST['data']);
+             $exameFisicoAlterado->setDescricao($_POST['descricao']);
+             $exameFisicoAlterado->setImc($_POST['imc']);
+             $exameFisicoAlterado->setAltura($_POST['altura']);
+             $exameFisicoAlterado->setPeso($_POST['peso']);
+             $exameFisicoAlterado->setCircTorax($_POST['circTorax']);
+             $exameFisicoAlterado->setCircAbdomen($_POST['circAbdomen']);
+             $exameFisicoAlterado->setCircBraco($_POST['circBraco']);
+             $exameFisicoAlterado->setCircAntebraco($_POST['circAntebraco']);
+             $exameFisicoAlterado->setCircCoxa($_POST['circCoxa']);
+             $exameFisicoAlterado->setCircPanturrilha($_POST['circPanturrilha']);
+                     
              
              try{
                  
