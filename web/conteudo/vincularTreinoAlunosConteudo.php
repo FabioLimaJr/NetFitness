@@ -26,7 +26,7 @@ Nome: <?php echo $instrutor->getNome() ?> | Telefone:<?php echo $instrutor->getT
     
 <div class="intro" style="margin-bottom:50px"></div>
 
-<h3>Inserir Treino</h3>
+<h3>Selecionar Treino</h3>
 
 <div class="clear"></div>
 <div class="line"></div>
