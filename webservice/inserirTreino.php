@@ -64,19 +64,22 @@ if(isset($_POST['listaExercicios']) && isset($_POST['senha']) && isset($_POST['l
             $fachada->inserirTreino($treino);   
             $resposta['mensagem'] = "Treino inserido com sucesso";
             $resposta['listaExercicios'] ="null";
+            $resposta['listaTreinos'][0] = $treino;
             echo json_encode($resposta);
         } 
         catch (Exception $ex) 
         {
             $resposta['mensagem'] = Texto::brReplace($ex->getMessage());
             $resposta['listaExercicios'] ="null";
+            $resposta['listaTreinos'][0] = $treino;
             echo json_encode($resposta);
         }
     }  
     else
     {
         $resposta['mensagem'] = Excecoes::loginSenhaInvalidos();
-        $resposta['listaTreinos'] = "null";
+       $resposta['listaTreinos'][0] = $treino;
+         $resposta['listaExercicios'] ="null";
         echo json_encode($resposta);
     }
 }
