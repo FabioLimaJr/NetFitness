@@ -9,7 +9,7 @@ session_start();
 
 if(isset($_SESSION['Aluno']))
 {
-    $secretaria = $_SESSION['Aluno'];
+    $aluno = $_SESSION['Aluno'];
 }
 else
 {
