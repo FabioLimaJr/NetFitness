@@ -18,6 +18,7 @@
             <li><a href="alterarMusica.php">Alterar</a></li>
             <li><a href="excluirMusica.php">Excluir</a></li>
             <li><a href="listarMusica.php">Listar</a></li>
+            <li><a href="classificacaoMusicas.php">Classificação</a></li>
           </ul>
         </li>
         <li><a href="#">Pagamento</a>

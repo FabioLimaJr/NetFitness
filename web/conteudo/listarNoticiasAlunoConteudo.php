@@ -25,10 +25,10 @@ $listaNoticiasRetornadas = array_merge($listaNoticiasRetornadas, $liastaNoticias
 
 <h1 class="title">Visualizar Noticias</h1>
     <div class="line"></div>
-    Telefone:<?php echo $secretaria->getTelefone() ?> | Email:<?php echo $secretaria->getEmail() ?> | Endereço:<?php echo $secretaria->getEndereco() ?>
+    Telefone:<?php echo $aluno->getTelefone() ?> | Email:<?php echo $aluno->getEmail() ?> | Endereço:<?php echo $aluno->getEndereco() ?>
     <div class="intro" style="margin-bottom:50px"></div>
 
-<h3>Usuário logado: <?php echo $secretaria->getNome() ?></h3>
+<h3>Usuário logado: <?php echo $aluno->getNome() ?></h3>
    
     <div class="clear"></div>
     <div class="line"></div>
