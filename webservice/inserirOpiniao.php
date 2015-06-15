@@ -14,7 +14,7 @@ if(isset($_POST['idAluno']) && isset($_POST['senha']) && isset($_POST['login']) 
     $resposta = array();
     
     $aluno = new Aluno($_POST['login'], $_POST['senha']);
-    $resposta = "";
+    $resposta = array();
     
     if($fachada->conferirLoginSenha($aluno))
     {
@@ -26,10 +26,12 @@ if(isset($_POST['idAluno']) && isset($_POST['senha']) && isset($_POST['login']) 
         {
             $fachada->inserirOpiniao($opiniao);
             $resposta['mensagem'] = "Opinião inserida com sucesso";
+            echo json_encode($resposta);
         } 
         catch (Exception $ex) 
         {
             $resposta['mensagem'] = "Impossível inserir a opinião: ".$ex->getMessage();
+            echo json_encode($resposta);
         }
     }
     else
